@@ -8,11 +8,6 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
-console.log('test')
-if (true) {
-    // useless comment
-    console.log('big mac is better')
-}
 
 const App = () => {
 	return (
