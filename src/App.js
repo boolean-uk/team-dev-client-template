@@ -11,7 +11,7 @@ import Welcome from "./pages/welcome";
 console.log('test')
 if (true) {
     // useless comment
-    console.log('hello')
+    console.log('big mac is better')
 }
 
 const App = () => {
