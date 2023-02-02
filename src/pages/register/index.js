@@ -14,6 +14,25 @@ const Register = () => {
 		setFormData({ ...formData, [name]: value });
 	};
 
+	const handelSubmit = () => {
+		const validateEmail = (email) => {
+			if (email.length > 254) return false
+			
+			const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+			return regex.test(email)
+		}
+
+		const validatePassword = (password) => {
+			const regex = /^(?=.*[\d])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/
+			return regex.test(password)
+		}
+
+		validateEmail(formData.email) ? console.log('Valid Email') : console.log('Invalid Email')
+		validatePassword(formData.password) ? console.log('Valid Password') : console.log('Invalid Password')
+		
+		//onRegister(formData.email, formData.password)
+	}
+
 	return (
 		<div className="bg-blue register credentialpage">
 			<CredentialsCard
@@ -42,7 +61,7 @@ const Register = () => {
 					</form>
 					<Button
 						text="Sign up"
-						onClick={() => onRegister(formData.email, formData.password)}
+						onClick={() => handelSubmit()}
 						classes="green width-full"
 					/>
 				</div>
