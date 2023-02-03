@@ -4,11 +4,14 @@ import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
+// we might need to turn the "Like" and "Comment div into a button"
+// import Button from "../../components/button";
+
 
 // TESTING LIVECODING, HI CHRIS
 // HELLO KAT :)
 //likes are currently hardcoded. needs to be added on server side?
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({ name, date, content, comments = ["cool post"], likes = 0 }) => {
     const { openModal, setModal } = useModal()
 
     const userInitials = name.match(/\b(\w)/g)
@@ -41,7 +44,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
                         {/* add svgs to the left. make clickable */}
-                        <div className="onHover">
+                        <div>
                             <img src="" alt="<3 " />
                             Like
                         </div>

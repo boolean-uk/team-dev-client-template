@@ -19,8 +19,9 @@ const Posts = () => {
         }
     }
     fetch(`http://localhost:4000/posts`, options)
-    .then(res=>res.json())
-    .then(data=>console.log("data", data))
+        .then(res => res.json())
+    // .then(data=>console.log("data", data))
+
 
     useEffect(() => {
         getPosts().then(setPosts)
@@ -29,8 +30,8 @@ const Posts = () => {
     return (
         <>
             {posts.map(post => {
-                //post.comments = [hardcore stuff for now with id and content]
-                //swap it to API stuff when its available                
+                //post.comments = [hardcode stuff for now with id and content] We can edit this 
+                //once the ticket in trello has been moved to "Done"              
                 return <Post
                     key={post.id}
                     name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}

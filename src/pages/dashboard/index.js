@@ -33,6 +33,7 @@ const Dashboard = () => {
 				<Card>
 					<div className="create-post-input">
 						<div className="profile-icon">
+							{/* will need to unhardcode */}
 							<p>AJ</p>
 						</div>
 						<Button text="What's on your mind?" onClick={showModal} />
