@@ -30,7 +30,6 @@ const AuthProvider = ({ children }) => {
         }
 
         localStorage.setItem('token', res.data.token)
-
 		setToken(res.token)
 		navigate(location.state?.from?.pathname || "/")
 	};
@@ -48,8 +47,6 @@ const AuthProvider = ({ children }) => {
 		} 
 		else if (res.status === 'success') {
 			const res = await login(email, password)
-			console.log(res)
-			console.log(res.data.token)
 			setToken(res.data.token)
 			navigate("/verification")
 		}
