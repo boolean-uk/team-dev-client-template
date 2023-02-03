@@ -3,6 +3,7 @@ import Button from "../../components/button";
 import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
+import { validateEmail, validatePassword } from "../../utils/validation";
 import "./register.css";
 
 const Register = () => {
@@ -19,18 +20,6 @@ const Register = () => {
 
 	const handelSubmit = () => {
 		setIsEmailTaken(false)
-
-		const validateEmail = (email) => {
-			if (email.length > 254) return false
-			
-			const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-			return regex.test(email)
-		}
-
-		const validatePassword = (password) => {
-			const regex = /^(?=.*[\d])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/
-			return regex.test(password)
-		}
 
 		if (validateEmail(formData.email) && validatePassword(formData.password)) {
 			const waitForRegisterStatus = async () => {
