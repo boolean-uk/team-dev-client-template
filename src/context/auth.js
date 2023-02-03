@@ -25,13 +25,11 @@ const AuthProvider = ({ children }) => {
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
-
         if (!res.data.token) {
             return navigate("/login")
         }
 
         localStorage.setItem('token', res.data.token)
-
 		setToken(res.token)
 		navigate(location.state?.from?.pathname || "/")
 	};
@@ -43,9 +41,15 @@ const AuthProvider = ({ children }) => {
 
     const handleRegister = async (email, password) => {
         const res = await register(email, password)
-		setToken(res.data.token)
-
-        navigate("/verification")
+		
+		if(res.status === 'fail') {
+			return res
+		} 
+		else if (res.status === 'success') {
+			const res = await login(email, password)
+			setToken(res.data.token)
+			navigate("/verification")
+		}
     }
 
     const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
