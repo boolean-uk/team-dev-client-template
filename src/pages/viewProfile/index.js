@@ -24,8 +24,16 @@ function ViewProfile() {
   // https://team-dev-server-c8-c9.fly.dev/users/{id}
   // If the response is 400+ then display an error message.
   // Error message will be: Cannot view profile
+  const token = localStorage.getItem('token')
+  const options = {
+    headers:{
+      "Authorization": "Bearer " + token
+    }
+  }
+
 useEffect(() => {
-  fetch(`http://localhost:4000/users/{id}`)
+  console.log("checking options",options)
+  fetch(`http://localhost:4000/users/{id}`,options)
   .then (response => response.json())
   .then ((data) => {
     console.log("checking Data", data)
