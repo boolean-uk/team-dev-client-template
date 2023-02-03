@@ -2,49 +2,35 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
-import useAuth from "../../hooks/useAuth";
-import jwt_decode from "jwt-decode";
 
-const CreatePostModal = () => {
+const CreatePostModal = (user, userId) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
     const [message, setMessage] = useState(null)
     const [text, setText] = useState('')
 
-    const { token } = useAuth()
-    const { userId } = jwt_decode(token)
-
-    const options = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer" + token
-        }}
-    fetch(`http://localhost:4000/users/${userId}`, options)
-        .then(res=>res.json())
-        .then(data=>console.log(data))
-
     const newPost = {
         "userId": userId,
         "user": {
             "id": userId,
-            "email": "",
-            "role": "",
-            "cohortId": "",
+            "email": user.email,
+            "role": user.role,
+            "cohortId": user.cohort_id,
             "profile": {
                 "id": userId,
                 "userId": userId,
-                "firstName": "",
-                "lastName": "",
-                "bio": "",
-                "githubUrl": ""
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "bio": user.biography,
+                "githubUrl": user.githubUrl
             }
         },
         "content": text,
         "createdAt": "",
         "updatedAt": ""
     }
+    console.log(newPost)
 
     const onChange = (e) => {
         setText(e.target.value)
@@ -63,7 +49,7 @@ const CreatePostModal = () => {
         <>
             <section className="create-post-user-details">
                 <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
+                <div className="post-user-name"><p>{user.firstName}{user.lastName}</p></div>
             </section>
 
             <section>

@@ -6,6 +6,8 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
+import useAuth from "../../hooks/useAuth";
+import jwt_decode from "jwt-decode";
 import "./style.css";
 
 const Dashboard = () => {
@@ -21,11 +23,26 @@ const Dashboard = () => {
 	// Create a function to run on user interaction
 	const showModal = () => {
 		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+		setModal("Create a post", <CreatePostModal user={user} userId={userId}/>); // CreatePostModal is just a standard React component, nothing special
 
 		// Open the modal!
 		openModal();
 	};
+
+	let user = {}
+	const { token } = useAuth()
+    const { userId } = jwt_decode(token)
+	console.log(token)
+    const options = {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }}
+    fetch(`http://localhost:4000/users/${userId}`, options)
+        .then(res=>res.json())
+        .then(data=>{user = data})
+	console.log(user)
 
 	return (
 		<>
