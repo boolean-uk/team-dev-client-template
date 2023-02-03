@@ -11,6 +11,9 @@ import jwt_decode from "jwt-decode";
 import "./style.css";
 
 const Dashboard = () => {
+	const { token } = useAuth()
+    const { userId } = jwt_decode(token)
+
 	const [searchVal, setSearchVal] = useState('');
 
 	const onChange = (e) => {
@@ -29,20 +32,38 @@ const Dashboard = () => {
 		openModal();
 	};
 
-	let user = {}
-	const { token } = useAuth()
-    const { userId } = jwt_decode(token)
-	console.log(token)
-    const options = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        }}
-    fetch(`http://localhost:4000/users/${userId}`, options)
-        .then(res=>res.json())
-        .then(data=>{user = data})
-	console.log(user)
+	const [user, setUser] = useState()
+	// const fetchUserById = () => {
+	// 	const options = {
+	// 		headers: {
+	// 			"Accept": "application/json",
+	// 			"Content-Type": "application/json",
+	// 			"Authorization": "Bearer " + token
+	// 		}}
+	// 	fetch(`http://localhost:4000/users/${userId}`, options)
+	// 		.then(res=>res.json())
+	// 		.then(data=>setUser(data.data.user))
+	// }
+	async function fetchUserDataById() {
+		const res = await fetch(
+			`http://localhost:4000/users/${userId}`, {
+				method: 'GET',
+				headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + token
+				}
+			}
+		)
+		if (!res.ok){
+			throw new Error(`ERROR! status: ${res.status}`)
+		}
+		const data = await res.json()
+		setUser(data)
+		console.log(data)
+	}
+	fetchUserDataById()
+
 
 	return (
 		<>
@@ -52,7 +73,9 @@ const Dashboard = () => {
 						<div className="profile-icon">
 							<p>AJ</p>
 						</div>
-						<Button text="What's on your mind?" onClick={showModal} />
+						<Button text="What's on your mind?" onClick={()=>{
+							showModal()
+						}} />
 					</div>
 				</Card>
 

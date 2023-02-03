@@ -14,16 +14,16 @@ const CreatePostModal = (user, userId) => {
         "userId": userId,
         "user": {
             "id": userId,
-            "email": user.email,
-            "role": user.role,
-            "cohortId": user.cohort_id,
+            "email": user.user.email,
+            "role": user.user.role,
+            "cohortId": user.user.cohort_id,
             "profile": {
                 "id": userId,
                 "userId": userId,
-                "firstName": user.firstName,
-                "lastName": user.lastName,
-                "bio": user.biography,
-                "githubUrl": user.githubUrl
+                "firstName": user.user.firstName,
+                "lastName": user.user.lastName,
+                "bio": user.user.biography,
+                "githubUrl": user.user.githubUrl
             }
         },
         "content": text,
