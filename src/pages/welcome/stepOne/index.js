@@ -20,15 +20,15 @@ const StepOne = ({ data, setData }) => {
                     </p>
                 </div>
                 <div className="welcome-form-inputs">
-                    <TextInput onChange={setData} value={data.firstName} name="firstName" label={"First name"} />
-                    <TextInput onChange={setData} value={data.lastName} name="lastName" label={"Last name"} />
+                    <TextInput onChange={setData} value={data.firstName} name="firstName" label={"First name *"} />
+                    <TextInput onChange={setData} value={data.lastName} name="lastName" label={"Last name *"} />
                     <TextInput
                         onChange={setData}
                         value={data.githubUsername}
                         name="githubUsername"
                         label={"Github Username"}
                     />
-                    <p className="text-blue1">*Required</p>
+                    <p className="text-blue1">* Required</p>
                 </div>
             </Form>
         </>
