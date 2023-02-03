@@ -25,7 +25,6 @@ const AuthProvider = ({ children }) => {
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
-
         if (!res.data.token) {
             return navigate("/login")
         }
@@ -43,9 +42,17 @@ const AuthProvider = ({ children }) => {
 
     const handleRegister = async (email, password) => {
         const res = await register(email, password)
-		setToken(res.data.token)
-
-        navigate("/verification")
+		
+		if(res.status === 'fail') {
+			return res
+		} 
+		else if (res.status === 'success') {
+			const res = await login(email, password)
+			console.log(res)
+			console.log(res.data.token)
+			setToken(res.data.token)
+			navigate("/verification")
+		}
     }
 
     const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {

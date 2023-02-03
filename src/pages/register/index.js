@@ -10,14 +10,16 @@ const Register = () => {
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const [isEmailValid, setIsEmailValid] = useState(null)
 	const [isPasswordValid, setIsPasswordValid] = useState(null)
+	const [isEmailTaken, setIsEmailTaken] = useState(null)
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handelSubmit = (e) => {
-		e.preventDefault()
+	const handelSubmit = () => {
+		setIsEmailTaken(false)
+
 		const validateEmail = (email) => {
 			if (email.length > 254) return false
 			
@@ -30,11 +32,16 @@ const Register = () => {
 			return regex.test(password)
 		}
 
+		if (validateEmail(formData.email) && validatePassword(formData.password)) {
+			const waitForRegisterStatus = async () => {
+				const res = await onRegister(formData.email, formData.password)
+				res.status === 'fail' ? setIsEmailTaken(true) : setIsEmailTaken(false)
+			}
+			waitForRegisterStatus()
+		}
+
 		validateEmail(formData.email) ? setIsEmailValid(true) : setIsEmailValid(false)
 		validatePassword(formData.password) ? setIsPasswordValid(true) : setIsPasswordValid(false)
-		
-		console.log('email', formData.email, 'password', formData.password)
-		if (isEmailValid && isPasswordValid) onRegister(formData.email, formData.password)
 	}
 
 	return (
@@ -60,6 +67,11 @@ const Register = () => {
 								Please enter a valid Email e.g: <span className="example">example@email.com</span>
 							</p>
 						}
+						{isEmailTaken === true &&
+							<p className="error-message">
+								Email is already taken.	
+							</p>
+						}
 						<TextInput
 							value={formData.password}
 							onChange={onChange}
@@ -75,7 +87,7 @@ const Register = () => {
 					</form>
 					<Button
 						text="Sign up"
-						onClick={(e) => handelSubmit(e)}
+						onClick={() => handelSubmit()}
 						classes="green width-full"
 					/>
 				</div>
