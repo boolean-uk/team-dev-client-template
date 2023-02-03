@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Stepper from "../../components/stepper";
 import useAuth from "../../hooks/useAuth";
 import StepOne from "./stepOne";
@@ -10,8 +9,6 @@ const Welcome = () => {
 	const { onCreateProfile } = useAuth();
     const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
     
-    const navigate = useNavigate()
-
 	const [profile, setProfile] = useState({
 		firstName: "",
 		lastName: "",
@@ -43,11 +40,9 @@ const Welcome = () => {
 	};
 
 	const onComplete = () => {
-        if(profile.firstName.length > 0 && profile.lastName.length > 0){
-            onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
-        } else {
-            navigate('/welcome')
-        }
+
+        onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+
 	};
 
 	return (
