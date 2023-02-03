@@ -48,3 +48,9 @@
 .post-interactions-container p {
     text-align: right;
 }
+
+.onHover:hover {
+    background-color: #f5faff;
+    border-radius: 5px;
+    cursor: pointer;
+}

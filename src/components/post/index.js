@@ -7,6 +7,7 @@ import "./style.css"
 
 // TESTING LIVECODING, HI CHRIS
 // HELLO KAT :)
+//likes are currently hardcoded. needs to be added on server side?
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     const { openModal, setModal } = useModal()
 
@@ -27,7 +28,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
                         <p>{name}</p>
                         <small>{date}</small>
                     </div>
-                    
+
                     <div className="edit-icon">
                         <p onClick={showModal}>...</p>
                     </div>
@@ -39,12 +40,22 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div>Like</div>
-                        <div>Comment</div>
+                        {/* add svgs to the left. make clickable */}
+                        <div className="onHover">
+                            <img src="" alt="<3 " />
+                            Like
+                        </div>
+                        <div className="onHover">
+                            <img src="" alt="SVG " />
+                            {/* does the text also need to be clickable? */}
+                            Comment
+                        </div>
                     </div>
 
+                    {/* <p>{likes}</p> */}
+                    {/* long hand likes */}
                     <p>{!likes && 'Be the first to like this'}</p>
-                    
+
                 </section>
 
                 <section>

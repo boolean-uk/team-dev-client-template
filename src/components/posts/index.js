@@ -33,7 +33,7 @@ const Posts = () => {
                 //swap it to API stuff when its available                
                 return <Post
                     key={post.id}
-                    name={`${post.author.firstName} ${post.author.lastName}`}
+                    name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}
                     date={post.createdAt}
                     content={post.content}
                     comments={post.comments}
