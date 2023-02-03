@@ -8,7 +8,6 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
-console.log("Kat was here")
 
 const App = () => {
 	return (

@@ -5,9 +5,22 @@ import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./register.css";
 
+
 const Register = () => {
 	const { onRegister } = useAuth();
 	const [formData, setFormData] = useState({ email: "", password: "" });
+
+	const { token } = useAuth()
+    const options = {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer" + token
+        }
+    }
+    fetch(`http://localhost:4000/posts`, options)
+        .then(res=>res.json())
+        .then(data=>console.log(data))
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
@@ -28,7 +41,7 @@ const Register = () => {
 						<TextInput
 							value={formData.email}
 							onChange={onChange}
-                            type="email"
+							type="email"
 							name="email"
 							label={"Email *"}
 						/>

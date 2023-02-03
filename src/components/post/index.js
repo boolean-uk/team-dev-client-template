@@ -5,6 +5,8 @@ import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
 
+// TESTING LIVECODING, HI CHRIS
+// HELLO KAT :)
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     const { openModal, setModal } = useModal()
 
