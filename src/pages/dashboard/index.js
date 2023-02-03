@@ -38,8 +38,8 @@ const Dashboard = () => {
 						<Button text="What's on your mind?" onClick={showModal} />
 					</div>
 				</Card>
-
-				<Posts />
+{/* This causes crash - redirects us to /posts - 401 error message */}
+				{/* <Posts /> */}
 			</main>
 
 			<aside>

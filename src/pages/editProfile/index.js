@@ -25,6 +25,9 @@ const EditProfile = () => {
   const ProfileImg = () => {
     return <img src={profile.image} alt="profileImg"></img>;
   };
+  const handleChange = () => {
+    
+  }
 
   return (
     <>
@@ -33,37 +36,41 @@ const EditProfile = () => {
         <div>
           <ProfileCircle
             initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
-          ></ProfileCircle>
+          />
           <h2>
             {profile.firstName} {profile.lastName}
           </h2>
           <p>{profile.specialism}</p>
         </div>
 
-        <Form>
+        <form>
           <div>
             <h2>Basic Info</h2>
-            <Button text={ProfileImg}></Button>
+            <Button text={ProfileImg}/>
             <TextInput
               label="First Name*"
               name="first-name"
               value={profile.firstName}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Last Name*"
               name="last-name"
               value={profile.lastName}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Username*"
               name="user-name"
               value={profile.userName}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="GitHub Username*"
               name="gitHubUserName"
               value={profile.githubUsername}
-            ></TextInput>
+              onChange={handleChange}
+            />
           </div>
 
           <div>
@@ -73,18 +80,21 @@ const EditProfile = () => {
               name="email"
               value={profile.email}
               type="email"
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Mobile*"
               name="phone"
               value={profile.phone}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Password*"
               name="password"
               value={profile.password}
               type="password"
-            ></TextInput>
+              onChange={handleChange}
+            />
           </div>
           <div>
             <h2>Training Info</h2>
@@ -92,35 +102,40 @@ const EditProfile = () => {
               label="Role*"
               name="role"
               value={profile.role}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Specialism*"
               name="specialism"
               value={profile.specialism}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Cohort*"
               name="cohort"
               value={profile.cohort}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="Start Date*"
               name="start-date"
               value={profile.startDate}
-            ></TextInput>
+              onChange={handleChange}
+            />
             <TextInput
               label="End Date*"
               name="end-date"
               value={profile.endDate}
-            ></TextInput>
+              onChange={handleChange}
+            />
           </div>
           <div>
             <h2>Bio</h2>
-            <TextInput label="Bio" name="bio" value={profile.bio}></TextInput>
+            <TextInput label="Bio" name="bio" value={profile.bio} onChange={handleChange}/>
           </div>
-        </Form>
-        <Button text="Cancel"></Button>
-        <Button text="Save"></Button>
+        </form>
+        <Button text="Cancel"/>
+        <Button text="Save"/>
       </Card>
     </>
   );
