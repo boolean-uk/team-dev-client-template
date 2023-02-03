@@ -8,6 +8,7 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
+import ViewProfile from "./pages/viewProfile"
 
 if (true) {
   // Random
@@ -41,6 +42,8 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route 
+            path = "viewProfile/:id" element = { <ViewProfile />} />
           </Routes>
         </ModalProvider>
       </AuthProvider>
