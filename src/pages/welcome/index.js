@@ -20,7 +20,6 @@ const Welcome = () => {
     useEffect(() => {
         
         if(profile.firstName.length > 0 && profile.lastName.length > 0) {
-            console.log("should be false")
             setNextBtnDisabled(false)
         } else {
             setNextBtnDisabled(true)
