@@ -9,7 +9,7 @@ import "./style.css"
 import { useState } from "react"
 
 //likes are currently hardcoded. needs to be added on server side?
-const Post = ({ name, date, content, comments = ["1", "2"], likes }) => {
+const Post = ({ name, date, content, comments = ["Cool post"], likes }) => {
     const { openModal, setModal } = useModal()
     const userInitials = name.match(/\b(\w)/g)
 
@@ -41,7 +41,7 @@ const Post = ({ name, date, content, comments = ["1", "2"], likes }) => {
                 </section>
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
-                    <div className="post-interactions">
+                    <div id="likeButton" className="post-interactions">
                         {/* make appropriate click events: linked to liked API */}
                         <div className="onHover">
                             <button className={isLiked === true ? true : false}
@@ -55,7 +55,7 @@ const Post = ({ name, date, content, comments = ["1", "2"], likes }) => {
                             </button>
                         </div>
                         <div className="onHover">
-                            <button className="postButton"
+                            <button id="commentButton" className="postButton"
 
                                 onClick={() => {
                                     console.log("clicked to comment!")

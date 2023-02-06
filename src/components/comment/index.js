@@ -17,11 +17,12 @@ const Comment = ({ name, content }) => {
     }
     return (
         <>
-            {/* <h6>{name}</h6>
-            <p>{content}</p> */}
+
             <div className="eachComment">
                 <ProfileCircle />
                 <div className="comment">
+                    {/* <h6>{name}</h6>
+                     <p>{content}</p> */}
                     <h6>Joey Tribbiani</h6>
                     <p>Cool post</p>
                 </div>
