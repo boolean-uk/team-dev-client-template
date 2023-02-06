@@ -4,14 +4,8 @@ import Button from "../button";
 import "./style.css";
 import { useState } from "react";
 
-const Stepper = ({ header, children, onComplete, nextBtnDisabled }) => {
+const Stepper = ({ header, children, onComplete, nextBtnDisabled = false }) => {
     const [currentStep, setCurrentStep] = useState(0)
-
-    let buttonDisabled = false
-    if(nextBtnDisabled !== undefined){
-        buttonDisabled = nextBtnDisabled
-    }
-
 
     const onBackClick = () => {
         if (currentStep > 0) {
@@ -39,7 +33,7 @@ const Stepper = ({ header, children, onComplete, nextBtnDisabled }) => {
 
             <div className="stepper-buttons">
                 <Button text="Back" classes="offwhite" onClick={onBackClick} />
-                <Button text={currentStep === children.length-1 ? 'Submit' : 'Next'} classes="blue" onClick={onNextClick} disabled={buttonDisabled} />
+                <Button text={currentStep === children.length-1 ? 'Submit' : 'Next'} classes="blue" onClick={onNextClick} disabled={nextBtnDisabled} />
             </div>
         </Card>
 	);
