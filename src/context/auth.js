@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
 
         if (storedToken) {
             setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/profile/edit")
+            navigate(location.state?.from?.pathname || "/")
         }
     }, [location.state?.from?.pathname, navigate])
 

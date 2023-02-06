@@ -1,18 +1,32 @@
+.editContainer {}
+
 form {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 
 }
+
 .basicInfoSection {
     grid-area: "basicInfo";
 
 }
+
 .contactInfoSection {
     grid-area: "contactInfo";
 }
+
 .trainingInfoSection {
     grid-area: "trainingInfo";
 
 }
+
 .bioSection {
     grid-area: "bio";
+}
+
+.profile-header {
+    grid-area: "profile-header";
 }

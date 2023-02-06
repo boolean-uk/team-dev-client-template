@@ -5,6 +5,7 @@ import Button from "../../components/button";
 import ProfileCircle from "../../components/profileCircle";
 import Card from "../../components/card";
 import { useNavigate } from "react-router-dom";
+import "./style.css"; 
 
 
 const initialProfile = {
@@ -67,15 +68,16 @@ const EditProfile = () => {
 
   return (
     <>
+    <div className="editContainer">
       <h1>Profile</h1>
       <Card>
-        <div>
+        <div className="profile-header">
           <ProfileCircle
             initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
           />
-          <h2>
+          <h4>
             {profile.firstName} {profile.lastName}
-          </h2>
+          </h4>
           <p>{profile.specialism}</p>
         </div>
 
@@ -173,6 +175,7 @@ const EditProfile = () => {
         <button>Cancel</button>
         <button >Save</button>
       </Card>
+      </div>
       
     </>
   );
