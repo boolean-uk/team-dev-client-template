@@ -8,10 +8,15 @@ import "./style.css"
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     const { openModal, setModal } = useModal()
 
+    const setContent = (text) =>
+    {
+        content = text;
+    }
+
     const userInitials = name.match(/\b(\w)/g)
 
     const showModal = () => {
-        setModal('Edit post', <EditPostModal content={content}/>)
+        setModal('Edit post', <EditPostModal content={content} setContent={setContent}/>)
         openModal()
     }
 
