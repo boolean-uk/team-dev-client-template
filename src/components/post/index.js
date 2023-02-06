@@ -17,7 +17,7 @@ const Post = ({ name, date, content, comments = ["cool post"], likes = 0 }) => {
 
     const userInitials = name.match(/\b(\w)/g)
 
-    const showModal = () => {###############################################
+    const showModal = () => {
         setModal('Edit post', <EditPostModal />)
         openModal()
     }
@@ -44,14 +44,23 @@ const Post = ({ name, date, content, comments = ["cool post"], likes = 0 }) => {
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        {/* add svgs to the left. make clickable */}
+                        {/* make clickable */}
                         <div className="onHover">
-                            <LikeIcon />
-                            Like
+                            <button className="postButton" onClick={()=> {
+                                console.log("clicked Like!")
+                            }}>
+                                <LikeIcon />
+                                Like
+                            </button>
                         </div>
                         <div className="onHover">
-                            <CommentIcon />
-                            Comment
+                            <button className="postButton"
+                            onClick={()=> {
+                                console.log("clicked to comment!")
+                            }}>
+                                <CommentIcon />
+                                Comment
+                            </button>
                         </div>
                     </div>
 

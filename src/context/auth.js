@@ -14,23 +14,23 @@ const AuthProvider = ({ children }) => {
 	const location = useLocation()
 	const [token, setToken] = useState(null)
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('token')
+    // useEffect(() => {
+    //     const storedToken = localStorage.getItem('token')
 
-        if (storedToken) {
-            setToken(storedToken)
-            const { userId } = jwt_decode(storedToken)
-            const getUserInfo = async () => {
-                const res = await get(`users/${userId}`)
-                if (!res.data.firstName || !res.data.lastName) {
-                    navigate('/welcome')
-                } else {
-                    navigate(location.state?.from?.pathname || "/")
-                }
-            }
-            getUserInfo()
-        }
-    }, [location.state?.from?.pathname, navigate])
+    //     if (storedToken) {
+    //         setToken(storedToken)
+    //         const { userId } = jwt_decode(storedToken)
+    //         const getUserInfo = async () => {
+    //             const res = await get(`users/${userId}`)
+    //             if (!res.data.firstName || !res.data.lastName) {
+    //                 navigate('/welcome')
+    //             } else {
+    //                 navigate(location.state?.from?.pathname || "/")
+    //             }
+    //         }
+    //         getUserInfo()
+    //     }
+    // }, [location.state?.from?.pathname, navigate])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
