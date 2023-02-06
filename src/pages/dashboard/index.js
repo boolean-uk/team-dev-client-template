@@ -9,6 +9,7 @@ import useModal from "../../hooks/useModal";
 import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode";
 import "./style.css";
+import { useEffect } from "react";
 
 const Dashboard = () => {
 	const { token } = useAuth()
@@ -44,6 +45,8 @@ const Dashboard = () => {
 	// 		.then(res=>res.json())
 	// 		.then(data=>setUser(data.data.user))
 	// }
+	// fetchUserById()
+	useEffect(()=>
 	async function fetchUserDataById() {
 		const res = await fetch(
 			`http://localhost:4000/users/${userId}`, {
@@ -61,8 +64,8 @@ const Dashboard = () => {
 		const data = await res.json()
 		setUser(data)
 		console.log(data)
-	}
-	fetchUserDataById()
+	})
+
 
 
 	return (
