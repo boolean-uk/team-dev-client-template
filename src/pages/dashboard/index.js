@@ -38,8 +38,8 @@ const Dashboard = () => {
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
-
-        <Posts />
+        {/* Commented out because the page would be blank with tons of errors and not my job to fix ;) */}
+        {/* <Posts /> */}
       </main>
 
       <aside>
