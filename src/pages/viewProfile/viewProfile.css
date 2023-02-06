@@ -1,0 +1,32 @@
+
+.viewProfile-container {
+display: grid;
+grid-template-columns: 151px 2fr ;
+grid-template-rows: 96px auto;
+background-color: #F0F5FA;
+height: 100vh;
+}
+
+.profile-details {
+    display: grid;
+    grid-template:
+    "profile-header   profile-header" 100px
+    "profile-contact  profile-bio"   1fr
+    "profile-training profile-training" 1fr /
+    500px                500px;
+    height:100vh;
+    margin:40px
+} 
+
+.profile-header {
+    grid-area:profile-header
+}
+.profile-contact {
+    grid-area:profile-contact
+}
+.profile-bio {
+    grid-area:profile-bio
+}
+.profile-training {
+    grid-area:profile-training
+}
