@@ -16,7 +16,7 @@ const initialState = {
 function ViewProfile() {
   // STATES
   const [profile, setProfile] = useState(initialState);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // These are the initial values, which will be changed after a successfull data request from server
   // Create useEffect to fetch the data
@@ -24,7 +24,6 @@ function ViewProfile() {
   // If the response is 400+ then display an error message.
   // Error message will be: Cannot view profile
 
-  // const { token } = useAuth();
   const token = localStorage.getItem("token");
 
   const options = {
@@ -32,20 +31,13 @@ function ViewProfile() {
       Authorization: "Bearer " + token,
     },
   };
-  // useEffect(() => {
-  /* console.log(token);
-    if (!token) {
-    //   navigate("/login");
-    } */
-  // });
-
-  //   console.log("THE PROFILE DATA => ", profile);
 
   useEffect(() => {
     // if (profile)
     if (!token) {
       console.log("ERROR!!");
     } else {
+      navigate("/viewprofile");
       fetch(`http://localhost:4000/users/1`, options)
         .then((response) => response.json())
         .then((responseData) => {
@@ -55,18 +47,21 @@ function ViewProfile() {
           console.log("newProfileData: ", newProfileData);
           const updatedProfileData = { ...profile, newProfileData };
           // newProfileData.push();
+
           setProfile(updatedProfileData);
           console.log("NEW DATA: ", profile);
         });
     }
-  });
+  }, []);
 
-  console.log("THE PROFILE DATA => ", profile);
+  //   console.log("THE PROFILE DATA => ", profile);
+
+  // console.log("THE PROFILE DATA => ", profile);
   return (
     <>
       {/* create the jsx for the all details */}
       <div className="">
-        <p>{profile.firstName}</p>
+        <p>Something</p>
       </div>
     </>
   );
