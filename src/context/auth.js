@@ -4,7 +4,7 @@ import Header from "../components/header";
 import Modal from "../components/modal";
 import Navigation from "../components/navigation";
 import useAuth from "../hooks/useAuth";
-import { createProfile, login, register } from "../service/apiClient";
+import { createProfile, get, login, register } from "../service/apiClient";
 import jwt_decode from "jwt-decode"
 
 const AuthContext = createContext()
@@ -19,19 +19,26 @@ const AuthProvider = ({ children }) => {
 
         if (storedToken) {
             setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/")
+            const { userId } = jwt_decode(storedToken)
+            const getUserInfo = async () => {
+                const res = await get(`users/${userId}`)
+                if (!res.data.firstName || !res.data.lastName) {
+                    navigate('/welcome')
+                } else {
+                    navigate(location.state?.from?.pathname || "/")
+                }
+            }
+            getUserInfo()
         }
     }, [location.state?.from?.pathname, navigate])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
-
         if (!res.data.token) {
             return navigate("/login")
         }
 
         localStorage.setItem('token', res.data.token)
-
 		setToken(res.token)
 		navigate(location.state?.from?.pathname || "/")
 	};
@@ -43,9 +50,15 @@ const AuthProvider = ({ children }) => {
 
     const handleRegister = async (email, password) => {
         const res = await register(email, password)
-		setToken(res.data.token)
-
-        navigate("/verification")
+		
+		if(res.status === 'fail') {
+			return res
+		} 
+		else if (res.status === 'success') {
+			const res = await login(email, password)
+			setToken(res.data.token)
+			navigate("/verification")
+		}
     }
 
     const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
