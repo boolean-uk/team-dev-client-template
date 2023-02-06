@@ -1,6 +1,7 @@
 import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
+import ErrorMessage from "../../../components/errorMessage"
 
 const StepOne = ({ data, setData }) => {
     return (
@@ -23,14 +24,14 @@ const StepOne = ({ data, setData }) => {
                     <div>
                         <TextInput onChange={setData} value={data.firstName} name="firstName" label={"First name *"} />
                             {!data.firstName.length &&
-                                <p className="error-message"> Please enter your First Name. </p>
+                                <ErrorMessage message={"Please enter your First Name."} />
                             }
                     </div>
                     <div>
                         <TextInput onChange={setData} value={data.lastName} name="lastName" label={"Last name *"} />
-                        {!data.lastName.length &&
-                            <p className="error-message"> Please enter your Last Name. </p>
-                    }
+                            {!data.lastName.length &&
+                                <ErrorMessage message={"Please enter your Last Name."} />
+                            }
                     </div>
                     <TextInput
                         onChange={setData}
