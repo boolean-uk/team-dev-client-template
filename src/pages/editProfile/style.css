@@ -1,0 +1,18 @@
+form {
+    display: grid;
+
+}
+.basicInfoSection {
+    grid-area: "basicInfo";
+
+}
+.contactInfoSection {
+    grid-area: "contactInfo";
+}
+.trainingInfoSection {
+    grid-area: "trainingInfo";
+
+}
+.bioSection {
+    grid-area: "bio";
+}

@@ -22,59 +22,53 @@ const initialProfile = {
 // create function to return JSX of the profile image to pass to the add img button
 
 const EditProfile = () => {
-//   const [profile, setProfile] = useState(initialProfile);
-//   const [formState, setFormState] = useState([]);
-//   const navigate = useNavigate()
-//   // const {id} = useParams()
-//   const ProfileImg = () => {
-//     return <img src={profile.image} alt="profileImg"></img>;
-//   };
+  const [profile, setProfile] = useState(initialProfile);
+  const [formState, setFormState] = useState([]);
+  const navigate = useNavigate()
+  // const {id} = useParams()
+  const ProfileImg = () => {
+    return <img src={profile.image} alt="profileImg"></img>;
+  };
 
-  // const handleChange = (event) => {
-  //   const value = event.target.value
-  //   const name = event.target.name
-  //   const newFormState = {...formState}
-  //   newFormState[name] = value
-  //   setFormState(newFormState) 
-  // }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault()
-  //   console.log("form submitted")
-  //   const editedProfile = formState
-  //   const editedProfileJSON = JSON.stringify(editedProfile)
+  const handleChange = (event) => {
+    const value = event.target.value
+    const name = event.target.name
+    const newFormState = {...formState}
+    newFormState[name] = value
+    setFormState(newFormState) 
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("form submitted")
+    const editedProfile = formState
+    const editedProfileJSON = JSON.stringify(editedProfile)
 
-  //   const options = {
-  //     method: "PATCH",
-  //     body: editedProfileJSON,
-  //     headers: {
-  //       "Content-Type" : "application/json"
-  //     }
-  //   }
-  //   fetch(`https://team-dev-server-c8-c9.fly.dev/users/`, options )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("edited profile:", data)
-  //     })
-  // }
+    const options = {
+      method: "PATCH",
+      body: editedProfileJSON,
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    }
+    fetch(`https://team-dev-server-c8-c9.fly.dev/users/`, options )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("edited profile:", data)
+      })
+  }
   
 // create function to return JSX of the profile image to pass to the add img button
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   // navigate("/profile/edit")
-  //   console.log("viewing edit page") 
-  // }, [])
+    // navigate("/profile/edit")
+    console.log("viewing edit page") 
+  }, [])
   
 
   return (
     <>
       <h1>Profile</h1>
-      
-    </>
-  );
-};
-export default EditProfile;
-
-/*<Card>
+      <Card>
         <div>
           <ProfileCircle
             initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
@@ -86,7 +80,7 @@ export default EditProfile;
         </div>
 
         <form>
-          <div>
+          <section className="basicInfoSection">
             <h2>Basic Info</h2>
              <Button text={ProfileImg}/> 
             <TextInput
@@ -113,9 +107,9 @@ export default EditProfile;
               value={profile.githubUsername}
               onChange={handleChange}
             />
-          </div>
+          </section>
 
-          <div>
+          <section className="contactInfoSection">
             <h2>Contact Info</h2>
             <TextInput
               label="Email*"
@@ -137,8 +131,8 @@ export default EditProfile;
               type="password"
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </section>
+          <section className="trainingInfoSection">
             <h2>Training Info</h2>
             <TextInput
               label="Role*"
@@ -170,12 +164,19 @@ export default EditProfile;
               value={profile.endDate}
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </section>
+          <section className="bioSection">
             <h2>Bio</h2>
             <TextInput label="Bio" name="bio" value={profile.bio} onChange={handleChange}/>
-          </div>
+          </section>
         </form>
         <button>Cancel</button>
         <button >Save</button>
-      </Card> */
+      </Card>
+      
+    </>
+  );
+};
+export default EditProfile;
+
+/* */
