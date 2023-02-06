@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
             const { userId } = jwt_decode(storedToken)
             const getUserInfo = async () => {
                 const res = await get(`users/${userId}`)
-                if (!res.data.firstName || !res.data.lastName) {
+                if (!res.data.user.firstName || !res.data.user.lastName) {
                     navigate('/welcome')
                 } else {
                     navigate(location.state?.from?.pathname || "/")
