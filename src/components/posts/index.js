@@ -4,9 +4,6 @@ import { getPosts } from "../../service/apiClient";
 import useAuth from "../../hooks/useAuth";
 
 
-// TESTING LIVECODING, HI CHRIS
-
-
 const Posts = () => {
     const [posts, setPosts] = useState([])
 
@@ -20,28 +17,39 @@ const Posts = () => {
     }
     fetch(`http://localhost:4000/posts`, options)
         .then(res => res.json())
-    // .then(data=>console.log("data", data))
 
 
     useEffect(() => {
         getPosts().then(setPosts)
     }, [])
     // console.log("posts", posts)
-    return (
-        <>
-            {posts.map(post => {
-                //post.comments = [hardcode stuff for now with id and content] We can edit this 
-                //once the ticket in trello has been moved to "Done"              
-                return <Post
-                    key={post.id}
-                    name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}
-                    date={post.createdAt}
-                    content={post.content}
-                    comments={post.comments}
-                />
-            })}
-        </>
-    )
+
+
+    if (posts.length < 1) {
+        return (
+            <>
+            <p>There are no posts yet...</p>
+            </>
+        )
+    }
+    else {
+        return (
+            <>
+                {posts.map(post => {              
+                    return <Post
+                        key={post.id}
+                        name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}
+                        date={post.createdAt}
+                        content={post.content}
+                        comments={post.comments}
+                    />
+                })}
+            </>
+        )
+    }
+
+
+   
 }
 
 export default Posts
