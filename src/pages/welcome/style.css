@@ -43,7 +43,5 @@
 	gap: 24px;
 }
 .welcome-form-inputs .error-message {
-    color: red;
-    opacity: .75;
     padding: 0 0 0 15px;
 }
