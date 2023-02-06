@@ -10,6 +10,7 @@ import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode";
 import "./style.css";
 import { useEffect } from "react";
+import {get} from "../../service/apiClient"
 
 const Dashboard = () => {
 	const { token } = useAuth()
@@ -34,38 +35,14 @@ const Dashboard = () => {
 	};
 
 	const [user, setUser] = useState()
-	// const fetchUserById = () => {
-	// 	const options = {
-	// 		headers: {
-	// 			"Accept": "application/json",
-	// 			"Content-Type": "application/json",
-	// 			"Authorization": "Bearer " + token
-	// 		}}
-	// 	fetch(`http://localhost:4000/users/${userId}`, options)
-	// 		.then(res=>res.json())
-	// 		.then(data=>setUser(data.data.user))
-	// }
-	// fetchUserById()
-	useEffect(()=>
-	async function fetchUserDataById() {
-		const res = await fetch(
-			`http://localhost:4000/users/${userId}`, {
-				method: 'GET',
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json",
-					"Authorization": "Bearer " + token
-				}
-			}
-		)
-		if (!res.ok){
-			throw new Error(`ERROR! status: ${res.status}`)
+	useEffect(()=>{
+		const getUserInfo = async () => {
+			const res = await get(`users/${userId}`)
+			setUser(res.data)
 		}
-		const data = await res.json()
-		setUser(data)
-		console.log(data)
-	})
-
+		getUserInfo()
+	}, [userId])
+	console.log(user)
 
 
 	return (
