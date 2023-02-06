@@ -8,13 +8,17 @@ const EditPostModal = ({content}) => {
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
 
+    const updatePost = () => {
+
+    }
+
     const onChange = (e) => {
         setText(e.target.value)
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
-
+        updatePost();
         setTimeout(() => {
             setMessage(null)
             closeModal()
