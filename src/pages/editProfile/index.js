@@ -1,9 +1,12 @@
-import { useState, useParams } from "react";
+import { useState, useParams, useEffect} from "react";
 import Form from "../../components/form";
 import TextInput from "../../components/form/textInput";
 import Button from "../../components/button";
 import ProfileCircle from "../../components/profileCircle";
 import Card from "../../components/card";
+import { useNavigate } from "react-router-dom";
+
+
 const initialProfile = {
   firstName: "person",
   lastName: "personlastname",
@@ -21,13 +24,45 @@ const initialProfile = {
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
   const [formState, setFormState] = useState([]);
-
+  const navigate = useNavigate()
+  // const {id} = useParams()
   const ProfileImg = () => {
     return <img src={profile.image} alt="profileImg"></img>;
   };
-  const handleChange = () => {
-    
+
+  const handleChange = (event) => {
+    const value = event.target.value
+    const name = event.target.name
+    const newFormState = {...formState}
+    newFormState[name] = value
+    setFormState(newFormState) 
   }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("form submitted")
+    const editedProfile = formState
+    const editedProfileJSON = JSON.stringify(editedProfile)
+
+    const options = {
+      method: "PATCH",
+      body: editedProfileJSON,
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    }
+    fetch(`https://team-dev-server-c8-c9.fly.dev/users/`, options )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("edited profile:", data)
+      })
+  }
+  
+// create function to return JSX of the profile image to pass to the add img button
+  useEffect(() => {
+    
+    navigate("/profile/edit")
+    console.log("viewing edit page") 
+  }, [])
 
   return (
     <>
@@ -46,7 +81,7 @@ const EditProfile = () => {
         <form>
           <div>
             <h2>Basic Info</h2>
-            <Button text={ProfileImg}/>
+            {/* <Button text={ProfileImg}/> */}
             <TextInput
               label="First Name*"
               name="first-name"
@@ -134,8 +169,8 @@ const EditProfile = () => {
             <TextInput label="Bio" name="bio" value={profile.bio} onChange={handleChange}/>
           </div>
         </form>
-        <Button text="Cancel"/>
-        <Button text="Save"/>
+        <button>Cancel</button>
+        <button >Save</button>
       </Card>
     </>
   );

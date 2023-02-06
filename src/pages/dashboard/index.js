@@ -6,6 +6,7 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
+
 import "./style.css";
 
 const Dashboard = () => {
@@ -40,6 +41,7 @@ const Dashboard = () => {
 				</Card>
 {/* This causes crash - redirects us to /posts - 401 error message */}
 				{/* <Posts /> */}
+				
 			</main>
 
 			<aside>
