@@ -11,7 +11,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     const userInitials = name.match(/\b(\w)/g)
 
     const showModal = () => {
-        setModal('Edit post', <EditPostModal />)
+        setModal('Edit post', <EditPostModal content={content}/>)
         openModal()
     }
 

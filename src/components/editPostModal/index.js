@@ -3,10 +3,10 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const EditPostModal = () => {
+const EditPostModal = ({content}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
-    const [text, setText] = useState('')
+    const [text, setText] = useState(content)
 
     const onChange = (e) => {
         setText(e.target.value)
