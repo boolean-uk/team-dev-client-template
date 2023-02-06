@@ -9,7 +9,10 @@ import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 
+console.log("this is a test")
+
 const App = () => {
+    
 	return (
 		<>
 			<AuthProvider>
