@@ -4,7 +4,7 @@ import Header from "../components/header";
 import Modal from "../components/modal";
 import Navigation from "../components/navigation";
 import useAuth from "../hooks/useAuth";
-import { createProfile, login, register } from "../service/apiClient";
+import { createProfile, get, login, register } from "../service/apiClient";
 import jwt_decode from "jwt-decode"
 
 const AuthContext = createContext()
@@ -19,7 +19,16 @@ const AuthProvider = ({ children }) => {
 
         if (storedToken) {
             setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/")
+            const { userId } = jwt_decode(storedToken)
+            const getUserInfo = async () => {
+                const res = await get(`users/${userId}`)
+                if (!res.data.user.firstName || !res.data.user.lastName) {
+                    navigate('/welcome')
+                } else {
+                    navigate(location.state?.from?.pathname || "/")
+                }
+            }
+            getUserInfo()
         }
     }, [location.state?.from?.pathname, navigate])
 
