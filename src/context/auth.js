@@ -31,6 +31,7 @@ const AuthProvider = ({ children }) => {
 
         localStorage.setItem('token', res.data.token)
 		setToken(res.token)
+		console.log("redirecting", location.state?.from?.pathname )
 		navigate(location.state?.from?.pathname || "/")
 	};
 

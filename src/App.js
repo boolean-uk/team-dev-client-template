@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 import EditProfile from "./pages/editProfile";
+import Test from "./test";
 
 const App = () => {
 	return (
@@ -16,14 +17,17 @@ const App = () => {
 			<AuthProvider>
                 <ModalProvider>
                     <Routes>
-                        <Route path="login" element={<Login />} />
-                        <Route path="register" element={<Register />} />
-                        <Route path="loading" element={<Loading />} />
-                        <Route path="verification" element={<Verification />} />
-                        <Route path="profile/edit" element={<EditProfile />}/>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/loading" element={<Loading />} />
+                        <Route path="/verification" element={<Verification />} />
+                        <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>}/>
+                        <Route path="/test" element={<Test/>} />
 
                         <Route
                             index
+                            path="/"
+                            exact
                             element={
                                 <ProtectedRoute>
                                     <Dashboard />
