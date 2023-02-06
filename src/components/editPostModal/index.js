@@ -2,14 +2,15 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
+import { updatePost } from "../../service/apiClient"
 
-const EditPostModal = ({content}) => {
+const EditPostModal = ({content, setContent}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
 
     const updatePost = () => {
-
+        setContent(text);
     }
 
     const onChange = (e) => {
