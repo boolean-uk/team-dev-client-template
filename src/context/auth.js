@@ -25,12 +25,12 @@ const AuthProvider = ({ children }) => {
                 if (!res.data.user.firstName || !res.data.user.lastName) {
                     navigate('/welcome')
                 } else {
-                    navigate(location.state?.from?.pathname || "/")
+                    navigate(location.pathname || "/")
                 }
             }
             getUserInfo()
         }
-    }, [location.state?.from?.pathname, navigate])
+    }, [location.pathname, navigate])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
         localStorage.setItem('token', res.data.token)
 		setToken(res.token)
-		navigate(location.state?.from?.pathname || "/")
+		navigate(location.pathname || "/")
 	};
 
 	const handleLogout = () => {
