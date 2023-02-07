@@ -39,8 +39,7 @@ const Posts = () => {
             <>
                 {
                     posts.map(post => {
-                        { setTimeFormat = new Date(post.createdAt).toString().substring(0,21)
-                        console.log("setTimeFormat", setTimeFormat)}
+                        { setTimeFormat = new Date(post.createdAt).toString().substring(0, 21) }
                         return <Post
                             key={post.id}
                             name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}

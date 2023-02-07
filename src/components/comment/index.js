@@ -21,10 +21,10 @@ const Comment = ({ name, content }) => {
             <div className="eachComment">
                 <ProfileCircle />
                 <div className="comment">
-                    {/* <h6>{name}</h6>
-                     <p>{content}</p> */}
-                    <h6>Joey Tribbiani</h6>
-                    <p>Cool post</p>
+                    <h6>{name}</h6>
+                     <p>{content}</p>
+                    {/* <h6>Joey Tribbiani</h6>
+                    <p>Cool post</p> */}
                 </div>
 
                 <div className="edit-icon add-margins">

@@ -8,8 +8,7 @@ import ProfileCircle from "../profileCircle"
 import "./style.css"
 import { useState } from "react"
 
-//likes are currently hardcoded. needs to be added on server side?
-const Post = ({ name, date, content, comments = ["Cool post"], likes }) => {
+const Post = ({ name, date, content, comments, likes }) => {
     const { openModal, setModal } = useModal()
     const userInitials = name.match(/\b(\w)/g)
 
@@ -40,28 +39,31 @@ const Post = ({ name, date, content, comments = ["Cool post"], likes }) => {
                     <p>{content}</p>
                 </section>
 
-                <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
+                <section className={`post-interactions-container border-top 
+                `
+                // ${comments.length ? 'border-bottom' : null}
+                }>
                     <div id="likeButton" className="post-interactions">
                         {/* make appropriate click events: linked to liked API */}
                         <div className="onHover">
-                            <button className={isLiked === true ? true : false}
+                            <button className= {isLiked.toString()}
+                            // {isLiked === true ? true : false}
                                 onClick={() => {
-                                    console.log("clicked Like!")
                                     setIsLiked(!isLiked)
                                     console.log("isLiked", isLiked)
                                 }}>
                                 <LikeIcon isLiked={isLiked}/>
-                                <span>Like</span>
+                                <p>Like</p>
                             </button>
                         </div>
                         <div className="onHover">
                             <button id="commentButton" className="postButton"
 
                                 onClick={() => {
-                                    console.log("clicked to comment!")
+                                    //TODO: click event
                                 }}>
                                 <CommentIcon />
-                                <span>Comment</span>
+                                <p>Comment</p>
                             </button>
                         </div>
                     </div>
@@ -71,7 +73,7 @@ const Post = ({ name, date, content, comments = ["Cool post"], likes }) => {
                 </section>
 
                 <section>
-                    {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
+                    {/* {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)} */}
                 </section>
             </article>
         </Card >
