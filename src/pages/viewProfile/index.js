@@ -3,13 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/button";
 import Header from "../../components/header";
 import Navigation from "../../components/navigation";
-import useAuth from "../../hooks/useAuth";
-import ProfileIcon from "../../assets/icons/profileIcon";
 import "../../pages/viewProfile/viewProfile.css";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
-
-// import "./src/dashboard/style.css"
+import { useParams } from "react-router-dom";
 
 const initialState = {
   id: "",
@@ -26,7 +23,8 @@ function ViewProfile() {
   // STATES
   const [profile, setProfile] = useState(initialState);
   const navigate = useNavigate();
-
+  const {id} = useParams()
+  console.log("checking params:", id)
   // These are the initial values, which will be changed after a successfull data request from server
   // Create useEffect to fetch the data
   // https://team-dev-server-c8-c9.fly.dev/users/{id}
@@ -45,8 +43,8 @@ function ViewProfile() {
     if (!token) {
       console.log("ERROR!!");
     } else {
-      navigate("/viewprofile");
-      fetch(`http://localhost:4000/users/2`, options)
+      navigate(`/profile/${id}`);
+      fetch(`http://localhost:4000/users/${id}`, options)
         .then((response) => response.json())
         .then((responseData) => {
           console.log("checking Data", responseData);
@@ -55,16 +53,14 @@ function ViewProfile() {
           setProfile(responseData.data.user);
         });
     }
-  }, []);
+  }, [id]);
 
   // console.log("THE PROFILE DATA => ", profile);
   return (
     <>
       {/* create the jsx for the all details */}
 
-      <div className="viewProfile-container">
-        <Header />
-        <Navigation />
+      <div>
         <div className="card-container">
           <Card>
             <div className="profile-details">

@@ -22,7 +22,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/viewprofile">
+          <NavLink to="/profile/1">
             <ProfileIcon />
             <p>Profile</p>
           </NavLink>
