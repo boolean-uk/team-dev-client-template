@@ -19,10 +19,10 @@ const initialState = {
   githubUrl: "",
 };
 // TODO:
-// update the other details in the initial state and update it on jsx too.
+// update the hard-coded details in the initial state and update it on jsx too. (when server team updates data)
 // fix the card and background in the browser.
 // add the onclick event to the "edit" button.
-// fix the  routing.
+// fix the routing (Benji says that it's not our problem)
 
 function ViewProfile() {
   // STATES
@@ -60,105 +60,111 @@ function ViewProfile() {
     }
   }, [id]);
 
+  const goToEditPage = () => {
+    // This will work once we have files for edit page
+    navigate(`/profile/edit/${id}`);
+  };
+
   // console.log("THE PROFILE DATA => ", profile);
   return (
     <>
       {/* create the jsx for the all details */}
+      <div className="card-container">
+        <Card>
+          <div className="profile-details">
+            <div className="profile-header">
+              <h2>
+                <ProfileCircle
+                  initials={`${profile.firstName[0]}${profile.lastName[0]}`}
+                />
+              </h2>
+              <h2>
+                {profile.firstName} {profile.lastName}
+              </h2>
+            </div>
 
-      <div>
-        <div className="card-container">
-          <Card>
-            <div className="profile-details">
-              <div className="profile-header">
-                <h2>
-                  <ProfileCircle
-                    initials={`${profile.firstName[0]}${profile.lastName[0]}`}
-                  />
-                </h2>
-                <h2>
-                  {profile.firstName} {profile.lastName}
-                </h2>
+            <div className="profile-contact">
+              <h3>Contact details</h3>
+
+              <div>
+                <h4>Email </h4>
+                <p>{profile.email}</p>
               </div>
 
-              <div className="profile-contact">
-                <h3>Contact details</h3>
-
-                <div>
-                  <h4>Email </h4>
-                  <p>{profile.email}</p>
-                </div>
-
-                <div>
-                  <h4>Mobile Number</h4>
-                  <p>+123456789</p>
-                </div>
-
-                <div>
-                  <h4>Github Username</h4>
-                  <p>{profile.githubUrl}</p>
-                </div>
+              <div>
+                <h4>Mobile Number</h4>
+                <p>+123456789</p>
               </div>
 
-              <div className="profile-bio">
-                <h3>Biography</h3>
-                <p> {profile.biography}</p>
-              </div>
-
-              <div className="profile-training">
-                {profile.role === "STUDENT" && (
-                  <div>
-                    <h3>Training info</h3>
-                  </div>
-                )}
-                {profile.role === "TEACHER" && (
-                  <div>
-                    <h3>Professional info</h3>
-                  </div>
-                )}
-
-                <div>
-                  <h4>Role</h4>
-                  <p>{profile.role}</p>
-                </div>
-                <div>
-                  <h4>Specialism</h4>
-                  <p>Software Developer</p>
-                </div>
-
-                {profile.role === "STUDENT" && (
-                  <>
-                    <div>
-                      <h4>Cohort</h4>
-                      <p>Cohort 9</p>
-                    </div>
-                    <div>
-                      <h4>Start Date</h4>
-                      <p>November 2022</p>
-                    </div>
-                    <div>
-                      <h4>End Date</h4>
-                      <p>May 2023</p>
-                    </div>
-                  </>
-                )}
-
-                {profile.role === "TEACHER" && (
-                  <div>
-                    <h4>Job Title</h4>
-                    <p>CSS Grids Intructor</p>
-                  </div>
-                )}
-              </div>
-
-              {/* add the onclick event for the button it is going to popen the edit page */}
-              <div className="edit-button">
-                {profile.role === "TEACHER" && (
-                  <Button text="Edit" classes="green width-full" />
-                )}
+              <div>
+                <h4>Github Username</h4>
+                <p>{profile.githubUrl}</p>
               </div>
             </div>
-          </Card>
-        </div>
+
+            <div className="profile-bio">
+              <h3>Biography</h3>
+              <p> {profile.biography}</p>
+            </div>
+
+            <div className="profile-training">
+              {profile.role === "STUDENT" && (
+                <div>
+                  <h3>Training info</h3>
+                </div>
+              )}
+              {profile.role === "TEACHER" && (
+                <div>
+                  <h3>Professional info</h3>
+                </div>
+              )}
+
+              <div>
+                <h4>Role</h4>
+                <p>{profile.role}</p>
+              </div>
+              <div>
+                <h4>Specialism</h4>
+                <p>Software Developer</p>
+              </div>
+
+              {profile.role === "STUDENT" && (
+                <>
+                  <div>
+                    <h4>Cohort</h4>
+                    <p>Cohort 9</p>
+                  </div>
+                  <div>
+                    <h4>Start Date</h4>
+                    <p>November 2022</p>
+                  </div>
+                  <div>
+                    <h4>End Date</h4>
+                    <p>May 2023</p>
+                  </div>
+                </>
+              )}
+
+              {profile.role === "TEACHER" && (
+                <div>
+                  <h4>Job Title</h4>
+                  <p>CSS Grids Intructor</p>
+                </div>
+              )}
+            </div>
+
+            {/* add the onclick event for the button it is going to popen the edit page */}
+            <div className="edit-button">
+              {profile.role === "TEACHER" && (
+                <Button
+                  text="Edit"
+                  classes="green width-full"
+                  onClick={goToEditPage}
+                />
+              )}
+            </div>
+          </div>
+        </Card>
       </div>
     </>
   );
