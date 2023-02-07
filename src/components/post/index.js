@@ -5,18 +5,13 @@ import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
-
-    const setContent = (text) =>
-    {
-        content = text;
-    }
 
     const userInitials = name.match(/\b(\w)/g)
 
     const showModal = () => {
-        setModal('Edit post', <EditPostModal content={content} setContent={setContent}/>)
+        setModal('Edit post', <EditPostModal content={content} id={id}/>)
         openModal()
     }
 
