@@ -50,6 +50,21 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
+                <section>
+                    <div>
+                        {/* profile circle of user */}
+                    </div>
+                    <div>
+                        <form className="commentPost">
+                            <input
+                                type="text"
+                                value={text}
+                            />
+                            {/* submit icon */}
+                        </form>
+                        
+                    </div>
+                </section>
             </article>
         </Card>
     )
