@@ -5,7 +5,9 @@ import Button from "../../components/button";
 import ProfileCircle from "../../components/profileCircle";
 import Card from "../../components/card";
 import { useNavigate } from "react-router-dom";
+import useModal from "../../hooks/useModal";
 import "./style.css"; 
+import SaveChangesModal from "../../components/saveChangesModal"
 
 
 const initialProfile = {
@@ -24,12 +26,27 @@ const initialProfile = {
 
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
-  const [formState, setFormState] = useState([]);
+  const [formState, setFormState] = useState(profile);
   const navigate = useNavigate()
   // const {id} = useParams()
   const ProfileImg = () => {
     return <img src={profile.image} alt="profileImg"></img>;
   };
+  const { openModal, setModal } = useModal();
+
+  // Model -----
+  // Create a function to run on user interaction
+  // Use setModal to set the header of the modal and the component the modal should render
+  // Pass handleSubmit function
+  // If save is pressed on modal - run handleSubmit then navigate back to profile page 
+  // if cancel - navigate back to edit
+  // if don't save - navigate back to profile page
+
+  const showModal = () => {
+    setModal(<SaveChangesModal handleSubmit={handleSubmit} />);
+    // Open the modal!
+    openModal();
+};
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -75,10 +92,12 @@ const EditProfile = () => {
           <ProfileCircle
             initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
           />
+          <div className="profile-header-text">
           <h4>
             {profile.firstName} {profile.lastName}
           </h4>
-          <p>{profile.specialism}</p>
+          <p>{profile.specialism}this is the specialism</p>
+          </div>
         </div>
 
         <form>
@@ -88,64 +107,42 @@ const EditProfile = () => {
             <TextInput
               label="First Name*"
               name="first-name"
-              value={profile.firstName}
+              value={formState.firstName}
               onChange={handleChange}
             />
             <TextInput
               label="Last Name*"
               name="last-name"
-              value={profile.lastName}
+              value={formState.lastName}
               onChange={handleChange}
             />
             <TextInput
               label="Username*"
               name="user-name"
-              value={profile.userName}
+              value={formState.userName}
               onChange={handleChange}
             />
             <TextInput
               label="GitHub Username*"
               name="gitHubUserName"
-              value={profile.githubUsername}
+              value={formState.githubUsername}
               onChange={handleChange}
             />
           </section>
 
-          <section className="contactInfoSection">
-            <h2>Contact Info</h2>
-            <TextInput
-              label="Email*"
-              name="email"
-              value={profile.email}
-              type="email"
-              onChange={handleChange}
-            />
-            <TextInput
-              label="Mobile*"
-              name="phone"
-              value={profile.phone}
-              onChange={handleChange}
-            />
-            <TextInput
-              label="Password*"
-              name="password"
-              value={profile.password}
-              type="password"
-              onChange={handleChange}
-            />
-          </section>
+          
           <section className="trainingInfoSection">
             <h2>Training Info</h2>
             <TextInput
               label="Role*"
               name="role"
-              value={profile.role}
+              value={formState.role}
               onChange={handleChange}
             />
             <TextInput
               label="Specialism*"
               name="specialism"
-              value={profile.specialism}
+              value={formState.specialism}
               onChange={handleChange}
             />
             <TextInput
@@ -163,17 +160,42 @@ const EditProfile = () => {
             <TextInput
               label="End Date*"
               name="end-date"
-              value={profile.endDate}
+              value={formState.endDate}
+              onChange={handleChange}
+            />
+          </section>
+          <section className="contactInfoSection">
+            <h2>Contact Info</h2>
+            <TextInput
+              label="Email*"
+              name="email"
+              value={formState.email}
+              type="email"
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Mobile*"
+              name="phone"
+              value={formState.phone}
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Password*"
+              name="password"
+              value={formState.password}
+              type="password"
               onChange={handleChange}
             />
           </section>
           <section className="bioSection">
             <h2>Bio</h2>
-            <TextInput label="Bio" name="bio" value={profile.bio} onChange={handleChange}/>
+            <textarea label="Bio" name="bio" value={formState.bio} multiline={true} editable numberOfLines={4} onChange={handleChange}/>
           </section>
+        <Button text={"Cancel"} classes="offwhite width-full"/>
+        <Button text={"save"} onClick={showModal} classes="blue width-full" />
         </form>
-        <button>Cancel</button>
-        <button >Save</button>
+        {/* <button>Cancel</button>
+        <button >Save</button> */}
       </Card>
       </div>
       
