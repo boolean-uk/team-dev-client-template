@@ -61,8 +61,8 @@ const CreatePostModal = (props) => {
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p>{initials}</p></div>
-                <div className="post-user-name"><p>{`${props.user.firstName} ${props.user.lastName}`}</p></div>
+                <div className="profile-icon"><p>{`${initials}`}</p></div>
+                <div className="post-user-name"><p>{`${name}`}</p></div>
             </section>
 
             <section>

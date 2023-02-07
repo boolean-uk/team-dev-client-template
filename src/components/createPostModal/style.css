@@ -12,11 +12,9 @@ textarea {
     border-radius: 8px;
     padding: 16px;
 }
-.error
-{
+.error {
     color: red;
 }
-.success
-{
+.success {
     color: green;
 }
