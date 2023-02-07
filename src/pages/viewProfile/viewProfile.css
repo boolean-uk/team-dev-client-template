@@ -9,7 +9,7 @@
 .profile-details {
   display: grid;
   grid-template:
-    "profile-header   profile-header" 55px
+    "profile-header   profile-header" 90px
     "profile-contact  profile-bio" 300px
     "profile-training profile-training" 500px /
     /* "edit-button      edit-button" 90px / */
@@ -21,10 +21,6 @@
 .profile-contact,
 .profile-training {
   grid-template-rows: 50px repeat(auto-fit, 90px);
-}
-
-.profile-header {
-  grid-area: profile-header;
 }
 .profile-contact {
   grid-area: profile-contact;
@@ -50,4 +46,10 @@
 
 .card-container {
   margin: 30px;
+}
+
+.profile-header {
+  grid-area: profile-header;
+  display: grid;
+  grid-template-columns: 75px 1fr;
 }

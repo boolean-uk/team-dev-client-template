@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import ProfileIcon from "../../assets/icons/profileIcon";
 import "../../pages/viewProfile/viewProfile.css";
 import Card from "../../components/card";
+import ProfileCircle from "../../components/profileCircle";
 
 // import "./src/dashboard/style.css"
 
@@ -45,7 +46,7 @@ function ViewProfile() {
       console.log("ERROR!!");
     } else {
       navigate("/viewprofile");
-      fetch(`http://localhost:4000/users/1`, options)
+      fetch(`http://localhost:4000/users/2`, options)
         .then((response) => response.json())
         .then((responseData) => {
           console.log("checking Data", responseData);
@@ -67,11 +68,13 @@ function ViewProfile() {
         <div className="card-container">
           <Card>
             <div className="profile-details">
-              {/* headings to add  */}
-              {/* write the user name */}
               <div className="profile-header">
                 <h2>
-                  <ProfileIcon />
+                  <ProfileCircle
+                    initials={`${profile.firstName[0]}${profile.lastName[0]}`}
+                  />
+                </h2>
+                <h2>
                   {profile.firstName} {profile.lastName}
                 </h2>
               </div>
