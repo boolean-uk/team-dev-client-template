@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const storedToken = localStorage.getItem('token')
 
-        if (storedToken) {
+        if (storedToken && !token) {
             setToken(storedToken)
             const { userId } = jwt_decode(storedToken)
             const getUserInfo = async () => {
@@ -25,12 +25,12 @@ const AuthProvider = ({ children }) => {
                 if (!res.data.user.firstName || !res.data.user.lastName) {
                     navigate('/welcome')
                 } else {
-                    navigate(location.state?.from?.pathname || "/")
+                    navigate(location.pathname || "/")
                 }
             }
             getUserInfo()
         }
-    }, [location.state?.from?.pathname, navigate])
+    }, [location.pathname])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
@@ -39,8 +39,8 @@ const AuthProvider = ({ children }) => {
         }
 
         localStorage.setItem('token', res.data.token)
-		setToken(res.token)
-		navigate(location.state?.from?.pathname || "/")
+		setToken(res.data.token)
+		navigate("/")
 	};
 
 	const handleLogout = () => {
