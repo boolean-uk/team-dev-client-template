@@ -2,18 +2,29 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
+import { updatePost } from "../../service/apiClient"
 
-const EditPostModal = () => {
+const EditPostModal = ({content, id, setContent}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
-    const [text, setText] = useState('')
+    const [text, setText] = useState(content)
+    const [isError, setIsError ] = useState(false)
 
     const onChange = (e) => {
         setText(e.target.value)
     }
 
-    const onSubmit = () => {
-        setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+    async function onSubmit ()  {
+        const updateResult = await updatePost(id, text)
+        if(updateResult.status === "fail"){
+            setIsError(true)
+            setMessage('Error : ' + updateResult.message)
+        }
+        else{
+            setIsError(false)
+            setContent(text)
+            setMessage('Update successfull! Closing modal in 2 seconds...')
+        }
 
         setTimeout(() => {
             setMessage(null)
@@ -41,7 +52,7 @@ const EditPostModal = () => {
                 />
             </section>
 
-            {message && <p>{message}</p>}
+            {message && <p className={isError ? 'error' : 'success'}>{message}</p>}
         </>
     )
 }

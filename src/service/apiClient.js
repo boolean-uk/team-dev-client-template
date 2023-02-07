@@ -17,6 +17,10 @@ async function getPosts() {
     return res.data.posts
 }
 
+async function updatePost(postID, content) {
+    return await patch(`posts/${postID}`, {content}, true)
+}
+
 async function post(endpoint, data, auth = true) {
     return await request('POST', endpoint, data, auth)
 }
@@ -53,7 +57,9 @@ async function request(method, endpoint, data, auth = true) {
 export {
     login,
     getPosts,
+    updatePost,
     register,
     createProfile,
-    get
+    get,
+    post
 }
