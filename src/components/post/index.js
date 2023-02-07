@@ -58,7 +58,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                         <form className="commentPost">
                             <input
                                 type="text"
-                                value={text}
+                                // value={text}
                             />
                             {/* submit icon */}
                         </form>
