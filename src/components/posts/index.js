@@ -6,6 +6,7 @@ const Posts = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
+        
         getPosts().then(setPosts)
     }, [])
 
@@ -18,6 +19,7 @@ const Posts = () => {
                         date={post.createdAt}
                         content={post.content}
                         comments={post.comments}
+                        id={post.id}
                     />
             })}
         </>

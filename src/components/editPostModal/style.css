@@ -12,3 +12,12 @@ textarea {
     border-radius: 8px;
     padding: 16px;
 }
+
+.error
+{
+    color: red;
+}
+.success
+{
+    color: green;
+}

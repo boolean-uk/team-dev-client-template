@@ -11,6 +11,7 @@ import Welcome from "./pages/welcome";
 console.log("Kat was here")
 
 const App = () => {
+    
 	return (
 		<>
 			<AuthProvider>
