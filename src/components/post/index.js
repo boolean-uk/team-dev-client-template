@@ -1,6 +1,7 @@
 import LikeIcon from "../../assets/icons/likeIcon"
 import CommentIcon from "../../assets/icons/commentIcon"
 import useModal from "../../hooks/useModal"
+import { useState, useEffect } from "react"
 import Card from "../card"
 import Comment from "../comment"
 import EditPostModal from "../editPostModal"
@@ -8,14 +9,16 @@ import ProfileCircle from "../profileCircle"
 import "./style.css"
 import { useState } from "react"
 
-const Post = ({ name, date, content, comments, likes }) => {
+const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
+    const [postContent, setContent] = useState(content)
+
     const userInitials = name.match(/\b(\w)/g)
 
     const [isLiked, setIsLiked] = useState(false)
 
     const showModal = () => {
-        setModal('Edit post', <EditPostModal />)
+        setModal('Edit post', <EditPostModal content={content} id={id} setContent={setContent}/>)
         openModal()
     }
 
@@ -36,7 +39,7 @@ const Post = ({ name, date, content, comments, likes }) => {
                 </section>
 
                 <section className="post-content">
-                    <p>{content}</p>
+                    <p>{postContent}</p>
                 </section>
 
                 <section className={`post-interactions-container border-top 
