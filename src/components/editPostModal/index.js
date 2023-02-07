@@ -9,9 +9,6 @@ const EditPostModal = ({content, setContent}) => {
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
 
-    const updatePost = () => {
-        setContent(text);
-    }
 
     const onChange = (e) => {
         setText(e.target.value)
