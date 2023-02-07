@@ -1,4 +1,5 @@
 import useModal from "../../hooks/useModal"
+import { useState, useEffect } from "react"
 import Card from "../card"
 import Comment from "../comment"
 import EditPostModal from "../editPostModal"
@@ -7,11 +8,12 @@ import "./style.css"
 
 const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
+    const [postContent, setContent] = useState(content)
 
     const userInitials = name.match(/\b(\w)/g)
 
     const showModal = () => {
-        setModal('Edit post', <EditPostModal content={content} id={id}/>)
+        setModal('Edit post', <EditPostModal content={content} id={id} setContent={setContent}/>)
         openModal()
     }
 
@@ -32,7 +34,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                 </section>
 
                 <section className="post-content">
-                    <p>{content}</p>
+                    <p>{postContent}</p>
                 </section>
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>

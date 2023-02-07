@@ -4,7 +4,7 @@ import './style.css'
 import Button from '../button'
 import { updatePost } from "../../service/apiClient"
 
-const EditPostModal = ({content, id}) => {
+const EditPostModal = ({content, id, setContent}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
@@ -14,10 +14,13 @@ const EditPostModal = ({content, id}) => {
         setText(e.target.value)
     }
 
-    const onSubmit = () => {
+    async function onSubmit ()  {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
-        console.log(id);
-        updatePost(id, text);
+        let test = await updatePost(id, text)
+        if(test.status == "fail")
+            console.log(test.message)
+        else
+            setContent(text)
         setTimeout(() => {
             setMessage(null)
             closeModal()
