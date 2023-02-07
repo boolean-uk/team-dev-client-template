@@ -24,7 +24,7 @@ const Register = () => {
 		if (validateEmail(formData.email) && validatePassword(formData.password)) {
 			const waitForRegisterStatus = async () => {
 				const res = await onRegister(formData.email, formData.password)
-				res.status === 'fail' ? setIsEmailTaken(true) : setIsEmailTaken(false)
+				res === 'fail' ? setIsEmailTaken(true) : setIsEmailTaken(false)
 			}
 			waitForRegisterStatus()
 		}
