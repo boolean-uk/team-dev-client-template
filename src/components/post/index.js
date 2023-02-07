@@ -7,7 +7,6 @@ import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
-import { useState } from "react"
 
 const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
@@ -76,7 +75,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                 </section>
 
                 <section>
-                    {/* {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)} */}
+                    {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
             </article>
         </Card >

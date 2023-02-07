@@ -14,18 +14,6 @@ const Register = () => {
 	const [isPasswordValid, setIsPasswordValid] = useState(null)
 	const [isEmailTaken, setIsEmailTaken] = useState(null)
 
-	const { token } = useAuth()
-    const options = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer" + token
-        }
-    }
-    fetch(`http://localhost:4000/posts`, options)
-        .then(res=>res.json())
-        .then(data=>console.log(data))
-
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });

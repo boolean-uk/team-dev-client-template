@@ -10,7 +10,7 @@ const Login = () => {
 	const [formData, setFormData] = useState({ email: "", password: "" });
 
 	const { token } = useAuth()
-	console.log("token", token)
+	// console.log("token", token)
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
