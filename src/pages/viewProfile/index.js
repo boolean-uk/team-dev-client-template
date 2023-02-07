@@ -17,7 +17,15 @@ const initialState = {
   lastName: "",
   biography: "",
   githubUrl: "",
+
 };
+// TODO:
+// update the other details in the initial state and update it on jsx too.
+// fix the card and background in the browser.
+// add the onclick event to the "edit" button.
+// fix the  routing. 
+
+
 
 function ViewProfile() {
   // STATES
@@ -53,8 +61,9 @@ function ViewProfile() {
           setProfile(responseData.data.user);
         });
     }
+   
   }, [id]);
-
+ 
   // console.log("THE PROFILE DATA => ", profile);
   return (
     <>
@@ -63,6 +72,7 @@ function ViewProfile() {
       <div>
         <div className="card-container">
           <Card>
+      
             <div className="profile-details">
               <div className="profile-header">
                 <h2>
@@ -130,7 +140,7 @@ function ViewProfile() {
 
               {/* add the onclick event for the button it is going to popen the edit page */}
               <div className="edit-button">
-                <Button text="Edit" classes="green width-full" />
+              { profile.role === "TEACHER" && <Button text="Edit" classes="green width-full" />}
               </div>
             </div>
           </Card>
