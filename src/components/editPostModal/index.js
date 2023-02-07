@@ -17,8 +17,10 @@ const EditPostModal = ({content, id, setContent}) => {
     async function onSubmit ()  {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
         let test = await updatePost(id, text)
-        if(test.status == "fail")
-            console.log(test.message)
+        if(test.status == "fail"){
+            console.log(test.message);
+            alert(test.message)
+        }
         else
             setContent(text)
         setTimeout(() => {
