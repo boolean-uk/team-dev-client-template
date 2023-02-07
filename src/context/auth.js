@@ -50,24 +50,26 @@ const AuthProvider = ({ children }) => {
 
     const handleRegister = async (email, password) => {
         const res = await register(email, password)
-		
-		if(res.status === 'fail') {
-			return res
+		const status = res.status
+
+		if(status === 'fail') {
+			return status
 		} 
-		else if (res.status === 'success') {
+		else if (status === 'success') {
 			const res = await login(email, password)
 			setToken(res.data.token)
 			navigate("/verification")
+			return status
 		}
     }
 
     const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
         const { userId } = jwt_decode(token)
+		localStorage.setItem('token', token)
 
         await createProfile(userId, firstName, lastName, githubUrl, bio)
-
-        localStorage.setItem('token', token)
-        navigate('/')
+		
+        navigate('/') 
     }
 
 	const value = {
