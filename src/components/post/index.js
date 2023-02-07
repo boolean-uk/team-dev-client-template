@@ -4,18 +4,29 @@ import Card from "../card"
 import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
+import ArrowRightIcon from "../../assets/icons/arrowRightIcon"
 import "./style.css"
+
+const commentInitialState ={
+    text: ""
+}
 
 const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
     const [postContent, setContent] = useState(content)
-
+    const [formState, setFormState] = useState(commentInitialState)
     const userInitials = name.match(/\b(\w)/g)
 
     const showModal = () => {
         setModal('Edit post', <EditPostModal content={content} id={id} setContent={setContent}/>)
         openModal()
     }
+
+    const commentContent = () => {
+        
+    }
+
+
 
     return (
         <Card>
@@ -50,17 +61,23 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
-                <section>
+                <section className="commentForm">
                     <div>
                         {/* profile circle of user */}
+                        <ProfileCircle initials={userInitials} />
                     </div>
                     <div>
                         <form className="commentPost">
                             <input
                                 type="text"
+                                required
+                                placeholder="Add a comment..."
                                 // value={text}
+
                             />
-                            {/* submit icon */}
+                            <button id="commentSubmitArrow" name="submit">
+                                <ArrowRightIcon />
+                            </button>
                         </form>
                         
                     </div>
