@@ -8,7 +8,7 @@ const EditPostModal = ({content, id, setContent}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
-
+    const [isError, setIsError ] = useState(false)
 
     const onChange = (e) => {
         setText(e.target.value)
@@ -17,10 +17,15 @@ const EditPostModal = ({content, id, setContent}) => {
     async function onSubmit ()  {
         const updateResult = await updatePost(id, text)
         if(updateResult.status == "fail"){
+            setIsError(true)
             setMessage('Error : ' + updateResult.message)
         }
-        else
+        else{
+            setIsError(false)
             setContent(text)
+            setMessage('Update successfull! Closing modal in 2 seconds...')
+        }
+
         setTimeout(() => {
             setMessage(null)
             closeModal()
@@ -47,7 +52,7 @@ const EditPostModal = ({content, id, setContent}) => {
                 />
             </section>
 
-            {message && <p>{message}</p>}
+            {message && <p className={isError ? 'error' : 'success'}>{message}</p>}
         </>
     )
 }
