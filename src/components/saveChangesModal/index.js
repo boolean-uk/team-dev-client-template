@@ -1,25 +1,59 @@
 // Start point taken from createPostModal
 
-import { useState } from "react"
+import { useState, } from "react"
+import { useNavigate } from "react-router-dom"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
+import Toast from '../toast'
 
-const SaveChangesModal = () => {
+const SaveChangesModal = ({ formState }) => {
+
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
-
+    const navigate = useNavigate()
     console.log("modal is working")
 
-    const onSubmit = (event) => {
-        if (event.target.value = "cancel") {
-            console.log("cancel working")
-        } if (event.target.value === "dontSave") {
-            console.log("don't save working")
-        } if (event.target.value === "save") {
-            console.log("save working")
-        }
+    const handleDontSave = () => {
+        closeModal()
+        navigate("/profile")
     }
+
+    const handleCancel = () => {
+        closeModal()
+        navigate("/profile/edit")
+    }
+
+    const handleSave = () => {
+        handleSubmit()
+        closeModal()
+        navigate("/profile/edit")
+        return (
+            <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
+        )
+    }
+    const handleSubmit = () => {
+
+        console.log("form submitted")
+        const editedProfile = formState
+        const editedProfileJSON = JSON.stringify(editedProfile)
+
+        const options = {
+            method: "PATCH",
+            body: editedProfileJSON,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+
+        fetch(`https://team-dev-server-c8-c9.fly.dev/users/`, options)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("edited profile:", data)
+            })
+
+    }
+
 
     return (
         <>
@@ -30,19 +64,17 @@ const SaveChangesModal = () => {
 
             <section className="save-changes-actions">
                 <Button
-                    onClick={onSubmit}
+                    onClick={handleDontSave}
                     text='dont save'
-                    value="dontSave"
                     classes="offwhite width-full"
                 />
                 <Button
-                    onClick={onSubmit}
-                    value="cancel"
+                    onClick={handleCancel}
                     text='cancel'
                     classes="offwhite width-full"
                 />
                 <Button
-                    onClick={onSubmit}
+                    onClick={handleSave}
                     value="save"
                     text='save'
                     classes="blue width-full"

@@ -40,7 +40,7 @@ const Dashboard = () => {
 					</div>
 				</Card>
 {/* This causes crash - redirects us to /posts - 401 error message */}
-				{/* <Posts /> */}
+				<Posts />
 				
 			</main>
 
