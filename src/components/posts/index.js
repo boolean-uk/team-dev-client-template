@@ -22,34 +22,40 @@ const Posts = () => {
     useEffect(() => {
         getPosts().then(setPosts)
     }, [])
-    // console.log("posts", posts)
+    console.log("posts", posts)
 
+    let setTimeFormat = ''
 
     if (posts.length < 1) {
         return (
             <>
-            <p>There are no posts yet...</p>
+                <p>There are no posts yet...</p>
             </>
         )
     }
     else {
         return (
+
             <>
-                {posts.map(post => {              
-                    return <Post
-                        key={post.id}
-                        name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}
-                        date={post.createdAt}
-                        content={post.content}
-                        comments={post.comments}
-                    />
-                })}
+                {
+                    posts.map(post => {
+                        { setTimeFormat = new Date(post.createdAt).toString().substring(0,21)
+                        console.log("setTimeFormat", setTimeFormat)}
+                        return <Post
+                            key={post.id}
+                            name={`${post.author.profile.firstName} ${post.author.profile.lastName}`}
+                            date={setTimeFormat}
+                            content={post.content}
+                            comments={post.comments}
+                        />
+                    })
+                }
             </>
         )
     }
 
 
-   
+
 }
 
 export default Posts
