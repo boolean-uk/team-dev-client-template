@@ -16,7 +16,7 @@ const EditPostModal = ({content, id, setContent}) => {
 
     async function onSubmit ()  {
         const updateResult = await updatePost(id, text)
-        if(updateResult.status == "fail"){
+        if(updateResult.status === "fail"){
             setIsError(true)
             setMessage('Error : ' + updateResult.message)
         }

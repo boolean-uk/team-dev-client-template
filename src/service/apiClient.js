@@ -60,5 +60,6 @@ export {
     updatePost,
     register,
     createProfile,
-    get
+    get,
+    post
 }
