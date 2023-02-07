@@ -12,6 +12,7 @@ import EditProfile from "./pages/editProfile";
 import Test from "./test";
 
 const App = () => {
+    
 	return (
 		<>
 			<AuthProvider>

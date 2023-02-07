@@ -22,6 +22,10 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text" }) => {
 						name={name}
 						value={input}
 						className="passwordreveal"
+						onChange={(e) => {
+							onChange(e);
+							setInput(e.target.value);
+						}}
 					/>
 				)}
 				<button
