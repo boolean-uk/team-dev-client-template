@@ -2,68 +2,51 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
-import useAuth from "../../hooks/useAuth";
-import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
-import {get} from "../../service/apiClient"
+import {post} from "../../service/apiClient"
 
-const CreatePostModal = () => {
+const CreatePostModal = (props) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
-    const { token } = useAuth()
-    const { userId } = jwt_decode(token)
 
     const [message, setMessage] = useState(null)
     const [text, setText] = useState('')
-    const [user, setUser] = useState({
-        "userId": "",
+    const [isError, setIsError ] = useState(false)
+
+    const newPost = {
+        "userId": props.userId,
         "user": {
-            "id": "",
-            "email": "",
-            "role": "",
-            "cohortId": "",
+            "id": props.userId,
+            "email": props.user.email,
+            "role": props.user.role,
+            "cohortId": props.user.cohort_id,
             "profile": {
-                "id": "",
-                "userId": "",
-                "firstName": "",
-                "lastName": "",
-                "bio": "",
-                "githubUrl": ""
+                "id": props.userId,
+                "userId": props.userId,
+                "firstName": props.user.firstName,
+                "lastName": props.user.lastName,
+                "bio": props.user.biography,
+                "githubUrl": props.user.githubUrl
             }
         },
         "content": text,
         "createdAt": "",
         "updatedAt": ""
-    })
-
-    // const newPost = {
-    //     "userId": userId,
-    //     "user": {
-    //         "id": userId,
-    //         "email": user.email,
-    //         "role": user.role,
-    //         "cohortId": user.cohort_id,
-    //         "profile": {
-    //             "id": userId,
-    //             "userId": userId,
-    //             "firstName": user.firstName,
-    //             "lastName": user.lastName,
-    //             "bio": user.biography,
-    //             "githubUrl": user.githubUrl
-    //         }
-    //     },
-    //     "content": text,
-    //     "createdAt": "",
-    //     "updatedAt": ""
-    // }
-    // console.log(newPost)
+    }
 
     const onChange = (e) => {
         setText(e.target.value)
     }
 
-    const onSubmit = () => {
-        setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+    async function onSubmit ()  {
+        const postResult = await post("posts", newPost)
+        if(postResult.status === "fail"){
+            setIsError(true)
+            setMessage('Error : ' + postResult.message)
+        }
+        else{
+            setIsError(false)
+            setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+        }
 
         setTimeout(() => {
             setMessage(null)
@@ -71,22 +54,15 @@ const CreatePostModal = () => {
         }, 2000)
     }
 
-	useEffect(()=>{
-		const getUserInfo = async () => {
-			const res = await get(`users/${userId}`)
-			setUser(res.data.user)
-		}
-        getUserInfo()
-	}, [userId])
-	console.log(user)
 
-    // const userInitials = user.user.name.match(/\b(\w)/g)
+    const name = `${props.user.firstName} ${props.user.lastName}`
+    const initials = name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
 
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p></p></div>
-                <div className="post-user-name"><p>{`${user.firstName} ${user.lastName}`}</p></div>
+                <div className="profile-icon"><p>{initials}</p></div>
+                <div className="post-user-name"><p>{`${props.user.firstName} ${props.user.lastName}`}</p></div>
             </section>
 
             <section>
@@ -102,7 +78,7 @@ const CreatePostModal = () => {
                 />
             </section>
 
-            {message && <p>{message}</p>}
+            {message && <p className={isError ? 'error' : 'success'}>{message}</p>}
         </>
     )
 }

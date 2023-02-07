@@ -7,11 +7,41 @@ import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
+import useAuth from "../../hooks/useAuth";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
+import {get} from "../../service/apiClient"
 
 const Dashboard = () => {
-
+	const { token } = useAuth()
+    const { userId } = jwt_decode(token)
 
 	const [searchVal, setSearchVal] = useState('');
+	const [user, setUser] = useState({
+        "userId": "",
+        "user": {
+            "id": "",
+            "email": "",
+            "role": "",
+            "cohortId": "",
+            "profile": {
+                "id": "",
+                "userId": "",
+                "firstName": "",
+                "lastName": "",
+                "bio": "",
+                "githubUrl": ""
+            }
+        }
+    })
+
+	useEffect(()=>{
+		const getUserInfo = async () => {
+			const res = await get(`users/${userId}`)
+			setUser(res.data.user)
+		}
+        getUserInfo()
+	}, [userId])
 
 	const onChange = (e) => {
 		setSearchVal(e.target.value);
@@ -23,7 +53,7 @@ const Dashboard = () => {
 	// Create a function to run on user interaction
 	const showModal = () => {
 		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal/>); // CreatePostModal is just a standard React component, nothing special
+		setModal("Create a post", <CreatePostModal user={user} />); // CreatePostModal is just a standard React component, nothing special
 
 		// Open the modal!
 		openModal();
