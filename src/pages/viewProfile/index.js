@@ -17,22 +17,19 @@ const initialState = {
   lastName: "",
   biography: "",
   githubUrl: "",
-
 };
 // TODO:
 // update the other details in the initial state and update it on jsx too.
 // fix the card and background in the browser.
 // add the onclick event to the "edit" button.
-// fix the  routing. 
-
-
+// fix the  routing.
 
 function ViewProfile() {
   // STATES
   const [profile, setProfile] = useState(initialState);
   const navigate = useNavigate();
-  const {id} = useParams()
-  console.log("checking params:", id)
+  const { id } = useParams();
+  console.log("checking params:", id);
   // These are the initial values, which will be changed after a successfull data request from server
   // Create useEffect to fetch the data
   // https://team-dev-server-c8-c9.fly.dev/users/{id}
@@ -61,9 +58,8 @@ function ViewProfile() {
           setProfile(responseData.data.user);
         });
     }
-   
   }, [id]);
- 
+
   // console.log("THE PROFILE DATA => ", profile);
   return (
     <>
@@ -72,7 +68,6 @@ function ViewProfile() {
       <div>
         <div className="card-container">
           <Card>
-      
             <div className="profile-details">
               <div className="profile-header">
                 <h2>
@@ -110,37 +105,56 @@ function ViewProfile() {
               </div>
 
               <div className="profile-training">
-                <h3>Training info</h3>
+                {profile.role === "STUDENT" && (
+                  <div>
+                    <h3>Training info</h3>
+                  </div>
+                )}
+                {profile.role === "TEACHER" && (
+                  <div>
+                    <h3>Professional info</h3>
+                  </div>
+                )}
 
                 <div>
                   <h4>Role</h4>
                   <p>{profile.role}</p>
                 </div>
-
                 <div>
                   <h4>Specialism</h4>
                   <p>Software Developer</p>
                 </div>
 
-                <div>
-                  <h4>Cohort</h4>
-                  <p>Cohort 9</p>
-                </div>
+                {profile.role === "STUDENT" && (
+                  <>
+                    <div>
+                      <h4>Cohort</h4>
+                      <p>Cohort 9</p>
+                    </div>
+                    <div>
+                      <h4>Start Date</h4>
+                      <p>November 2022</p>
+                    </div>
+                    <div>
+                      <h4>End Date</h4>
+                      <p>May 2023</p>
+                    </div>
+                  </>
+                )}
 
-                <div>
-                  <h4>Start Date</h4>
-                  <p>November 2022</p>
-                </div>
-
-                <div>
-                  <h4>End Date</h4>
-                  <p>May 2023</p>
-                </div>
+                {profile.role === "TEACHER" && (
+                  <div>
+                    <h4>Job Title</h4>
+                    <p>CSS Grids Intructor</p>
+                  </div>
+                )}
               </div>
 
               {/* add the onclick event for the button it is going to popen the edit page */}
               <div className="edit-button">
-              { profile.role === "TEACHER" && <Button text="Edit" classes="green width-full" />}
+                {profile.role === "TEACHER" && (
+                  <Button text="Edit" classes="green width-full" />
+                )}
               </div>
             </div>
           </Card>
