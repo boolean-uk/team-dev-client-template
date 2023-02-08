@@ -63,7 +63,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                 </section>
                 <section className="commentForm">
                     <div>
-                        {/* profile circle of user */}
+                        {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}
                         <ProfileCircle initials={userInitials} />
                     </div>
                     <div>
