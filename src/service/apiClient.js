@@ -14,7 +14,7 @@ async function createProfile(userId, firstName, lastName, githubUrl, bio) {
 
 async function getPosts() {
     const res = await get('posts')
-    return res.data.posts
+    return res.data.posts.json()
 }
 
 async function updatePost(postID, content) {

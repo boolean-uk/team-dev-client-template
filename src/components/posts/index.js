@@ -7,22 +7,32 @@ import useAuth from "../../hooks/useAuth";
 const Posts = () => {
     const [posts, setPosts] = useState([])
 
-    const { token } = useAuth()
-    const options = {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        }
-    }
-    fetch(`http://localhost:4000/posts`, options)
-        .then(res => res.json())
+    // const { token } = useAuth()
+
+    // console.log("token:", token)
+    // const options = {
+    //     headers: {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json",
+    //         "Authorization": "Bearer " + token
+    //     }
+    // }
+    // fetch(`http://localhost:4000/posts`, options)
+    //     .then(res => res.json())
 
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        getPosts().then(setPosts)
-    }, [])
+    //     get("posts").then(setPosts)
+    // }, [])
+    useEffect(() => {
+        const getAllPosts = async () => {
+          const res = await getPosts();
+          setPosts(res.data);
+        };
+        getAllPosts();
+      }, []);
+    
     console.log("posts", posts)
 
     let setTimeFormat = ''
