@@ -8,12 +8,8 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
-<<<<<<< HEAD
-import EditProfile from "./pages/editProfile";
-import Test from "./test";
-=======
 import Search from "./pages/Search";
->>>>>>> main
+import EditProfile from "./pages/editProfile";
 
 const App = () => {
     
@@ -27,7 +23,6 @@ const App = () => {
                         <Route path="/loading" element={<Loading />} />
                         <Route path="/verification" element={<Verification />} />
                         <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>}/>
-                        <Route path="/test" element={<Test/>} />
 
                         <Route
                             index
