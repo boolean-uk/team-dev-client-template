@@ -28,17 +28,17 @@ const initialProfile = {
 
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
-  const [formState, setFormState] = useState(initialProfile);
+  const [formState, setFormState] = useState(profile);
   const navigate = useNavigate()
   // const {id} = useParams()
   const id = 1
   const ProfileImg = () => {
-    if (profile.image === "") {
+    if (profile.profileImageUrl === "") {
       return <ProfileCircle
         initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
       />
     }
-    else { return <img className="profile-icon" src={profile.image} alt="profileImg"></img>; }
+    else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile image"></img>); }
 
   };
   const { openModal, setModal } = useModal();
@@ -85,7 +85,7 @@ const EditProfile = () => {
         setFormState(data.data.user)
       });
   }, [id])
-// {https://team-dev-server-c8-c9.fly.dev/users/{id}}
+
 console.log(profile)
 
 return (
@@ -114,37 +114,37 @@ return (
             </div>
             <TextInput
               label="First Name*"
-              name="first-name"
+              name="firstName"
               value={formState.firstName}
               onChange={handleChange}
             />
             <TextInput
               label="Last Name*"
-              name="last-name"
+              name="lastName"
               value={formState.lastName}
               onChange={handleChange}
             />
             <TextInput
               label="Username*"
-              name="user-name"
+              name="userName"
               value={formState.userName}
               onChange={handleChange}
             />
             <TextInput
               label="GitHub Username*"
-              name="gitHubUserName"
-              value={formState.githubUsername}
+              name="githubUrl"
+              value={formState.githubUrl}
               onChange={handleChange}
             />
           </section>
 
-          {profile.role === "student" ?
+          {profile.role === "STUDENT" ?
             <section className="trainingInfoSection text-input-containers">
               <h2>Training Info</h2>
               <TextInput
                 label="Role*"
                 name="role"
-                value={formState.role}
+                value={formState.role.toLocaleLowerCase()}
                 onChange={handleChange}
               />
               <TextInput
@@ -155,8 +155,8 @@ return (
               />
               <TextInput
                 label="Cohort*"
-                name="cohort"
-                value={profile.cohort}
+                name="cohort_id"
+                value={profile.cohort_id}
                 onChange={handleChange}
               />
               <TextInput
@@ -178,7 +178,7 @@ return (
               <TextInput
                 label="Role*"
                 name="role"
-                value={profile.cohort}
+                value={profile.cohort_id}
                 onChange={handleChange}
               />
               <TextInput
@@ -189,7 +189,7 @@ return (
               />
               <TextInput
                 label="Job Title*"
-                name="jobtitle"
+                name="jobTitle"
                 value={formState.specialism}
                 onChange={handleChange}
               />
@@ -220,7 +220,7 @@ return (
           </section>
           <section className="bioSection">
             <h2>Bio</h2>
-            <textarea label="Bio" name="bio" value={formState.bio} editable rows={20} maxLength="300" onChange={handleChange} />
+            <textarea label="Bio" name="biography" value={formState.biography} editable rows={20} maxLength="300" onChange={handleChange} />
             <label htmlFor="bio" >{formState.biography.length}/300</label>
           </section>
           <section className="footer">

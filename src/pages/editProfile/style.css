@@ -29,6 +29,7 @@ form {
 .contactInfoSection {
     grid-area: "contactInfo";
     display: grid;
+    grid-template-rows: 60px 100px 100px 80px;
 }
 
 .trainingInfoSection {
@@ -36,8 +37,6 @@ form {
     display: grid;
     grid-template-rows: repeat(6, 1fr);
     gap: 20px;
-
-
 }
 
 .bioSection {
@@ -58,7 +57,7 @@ form {
 }
 .headshot-container {
     display: grid;
-    grid-template-columns: repeat(2, 150px);
+    grid-template-columns: 60px 150px;
     align-items: center;
 }
 .footer{
@@ -74,4 +73,7 @@ form {
     gap: 20px;
     padding-top: 10px;
     border-top: 1px lightgray solid;
+}
+textarea {
+    margin-top: 35px;
 }
