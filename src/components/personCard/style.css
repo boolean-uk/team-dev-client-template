@@ -1,0 +1,33 @@
+@import url(../../styles/_globals.css);
+
+.personCard {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    font-size: 30px;
+    padding: .5rem;
+    margin-top: 10px;
+    gap: .5rem;
+}
+.personCard:hover {
+    background-color: var(--color-blue7);
+}
+.personName {
+    font-weight: bold;
+}
+.cohortInfo {
+    color: var(--color-blue2);
+}
+.edit-icon p {
+    text-align: center;
+}
+.people {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.profile {
+    border-radius: 2px;
+}
+.profile:hover {
+    background-color: var(--color-offwhite);
+}

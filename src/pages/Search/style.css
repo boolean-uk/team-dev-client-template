@@ -1,0 +1,14 @@
+main.search {
+  padding: 30px;
+  background-color: rgb(245, 250, 255);
+}
+main.search .card {
+  padding: 12px 24px;
+}
+.people {
+  padding-bottom: 1rem;
+  color: var(--color-blue1);
+}
+.nofound {
+  text-align: center;
+}
