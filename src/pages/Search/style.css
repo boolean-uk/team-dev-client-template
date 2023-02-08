@@ -1,0 +1,11 @@
+main {
+  padding: 30px;
+  background-color: rgb(245, 250, 255);
+}
+.people {
+  padding: .5rem;
+  color: var(--color-blue1);
+}
+.nofound {
+  text-align: center;
+}
