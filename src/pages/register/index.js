@@ -6,6 +6,7 @@ import CredentialsCard from "../../components/credentials";
 import { validateEmail, validatePassword } from "../../utils/validation";
 import "./register.css";
 
+
 const Register = () => {
 	const { onRegister } = useAuth();
 	const [formData, setFormData] = useState({ email: "", password: "" });
@@ -47,7 +48,7 @@ const Register = () => {
 						<TextInput
 							value={formData.email}
 							onChange={onChange}
-                            type="email"
+							type="email"
 							name="email"
 							label={"Email *"}
 						/>
