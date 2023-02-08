@@ -1,21 +1,21 @@
 import FullLogo from "../../assets/fullLogo"
 import useAuth from "../../hooks/useAuth"
-import useOnOutsideClick from '../../hooks/useOnOutsideClick.js'
+import useOnOutsideClick from "../../hooks/useOnOutsideClick"
 import './style.css'
 import Card from "../card"
 import ProfileIcon from "../../assets/icons/profileIcon"
 import CogIcon from "../../assets/icons/cogIcon"
 import LogoutIcon from "../../assets/icons/logoutIcon"
 import { NavLink } from "react-router-dom"
-import { useState, useRef } from "react"
+import { useRef, useState } from "react"
 
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
-    const menuRef = useRef(null)
+    const menuRef =useRef(null)
 
-    useOnOutsideClick(menuRef, () => setIsMenuVisible(false))
-
+    useOnOutsideClick(menuRef,()=>setIsMenuVisible(false))
+     
     const onClickProfileIcon = () => {
         setIsMenuVisible(true)
     }
@@ -28,7 +28,7 @@ const Header = () => {
         <header>
             <FullLogo textColour="white" />
 
-            <div className="profile-icon" onClick={onClickProfileIcon}><p>AJ</p></div>
+            <div className="profile-icon" onClick={onClickProfileIcon} ><p>AJ</p></div>
 
             {isMenuVisible &&
                 <div className="user-panel" ref={menuRef}>

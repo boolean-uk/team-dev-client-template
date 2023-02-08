@@ -8,8 +8,12 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
+<<<<<<< HEAD
 import EditProfile from "./pages/editProfile";
 import Test from "./test";
+=======
+import Search from "./pages/Search";
+>>>>>>> main
 
 const App = () => {
     
@@ -40,6 +44,14 @@ const App = () => {
                             element={
                                 <ProtectedRoute disabledNav={true}>
                                     <Welcome />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route 
+                            path="search"
+                            element={
+                                <ProtectedRoute>
+                                    <Search/>
                                 </ProtectedRoute>
                             }
                         />

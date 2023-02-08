@@ -48,3 +48,15 @@
 .post-interactions-container p {
     text-align: right;
 }
+
+.onHover:hover {
+    background-color: #f5faff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.onHover > button {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+}
