@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 import ViewProfile from "./pages/viewProfile";
+import ErrorMessage from "./components/errorMessage";
 
 if (true) {
   // Random
@@ -31,6 +32,15 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <ViewProfile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`error-message`}
+              element={
+                <ProtectedRoute>
+                  <ErrorMessage />
                 </ProtectedRoute>
               }
             />
