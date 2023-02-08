@@ -52,7 +52,7 @@ const Search = () => {
 
   return (
     <>
-      <main>
+      <main className="search">
         <Card>
           <form onSubmit={handleSubmit}>
             <TextInput icon={<SearchIcon />} value={searchVal} name="Search" onChange={handleChange}/>
