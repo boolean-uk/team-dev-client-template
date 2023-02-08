@@ -7,6 +7,7 @@ import ProfileCircle from "../../components/profileCircle";
 import ErrorMessage from "../../components/errorMessage";
 import useAuth from "../../hooks/useAuth";
 import { emptyProfile } from "../../service/mockData";
+import { get } from "../../service/apiClient";
 
 // TODO:
 // update the hard-coded start date, end date and job title in the initial state and update it on jsx too. (when server team updates data)
@@ -19,26 +20,18 @@ function ViewProfile() {
   // GLOBAL VARIABLES
   const navigate = useNavigate();
   const { id } = useParams();
-  const { token, loggedInUserInfo } = useAuth();
+  const { loggedInUserInfo } = useAuth();
 
-  const options = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
-
+  // GET profile data. If res is undefined, then show error page
   useEffect(() => {
     navigate(`/profile/${id}`);
 
-    fetch(`http://localhost:4000/users/${id}`, options)
-      .then((response) => response.json())
-      .then((responseData) => {
-        setProfile(responseData.data.user);
-        if (responseData.status === "fail") {
-          setIsError(true);
-        }
-      });
-  }, [id]);
+    const profileData = async () => {
+      const res = await get(`users/${id}`);
+      res.data.user ? setProfile(res.data.user) : setIsError(true);
+    };
+    profileData();
+  }, [id, navigate]);
 
   const goToEditPage = () => {
     // This will work once we have files for edit page
