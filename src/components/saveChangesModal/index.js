@@ -49,10 +49,17 @@ const SaveChangesModal = ({ formState, id }) => {
         }
 
         fetch(`http://localhost:4000/users/${id}`, options)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("edited profile:", data)
-            })
+        .then((res) => res.json())
+        // console.log(res)
+        .then((data) => {
+            console.log("edited profile:", data.status)
+            if (data.status === "success") {
+                // do something
+            } else {
+                console.log("ERROR")
+            }
+        })
+        // .catch(err => {console.log("this is the response from catch",err)})
 
     }
 
