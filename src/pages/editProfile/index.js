@@ -6,6 +6,7 @@ import ProfileCircle from "../../components/profileCircle";
 import Card from "../../components/card";
 import { useNavigate } from "react-router-dom";
 import useModal from "../../hooks/useModal";
+
 import "./style.css";
 import SaveChangesModal from "../../components/saveChangesModal"
 
@@ -17,26 +18,27 @@ const initialProfile = {
   githubUsername: "githubuser5000",
   email: "test@test.com",
   phone: "4835798248",
-  bio: "this is the bio",
+  biography: "this is the bio",
   githubUrl: "www.github.com/something",
   password: "password",
   image: "",
-  role: "teacher",
+  role: "student",
 };
 // create function to return JSX of the profile image to pass to the add img button
 
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
-  const [formState, setFormState] = useState(profile);
+  const [formState, setFormState] = useState(initialProfile);
   const navigate = useNavigate()
   // const {id} = useParams()
+  const id = 1
   const ProfileImg = () => {
-    if (!profile.image) {
+    if (profile.image === "") {
       return <ProfileCircle
         initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
       />
     }
-    else { return <img src={profile.image} alt="profileImg"></img>; }
+    else { return <img className="profile-icon" src={profile.image} alt="profileImg"></img>; }
 
   };
   const { openModal, setModal } = useModal();
@@ -62,67 +64,81 @@ const EditProfile = () => {
     newFormState[name] = value
     setFormState(newFormState)
   }
-  
 
-  // create function to return JSX of the profile image to pass to the add img button
+
+  // Use Effect to handle fetch request
+  // Load Once
+  // Take ID from params to fetch data
+  // This might not be needed if we can pass information from the /profile page to here
+  const token = localStorage.getItem("token");
   useEffect(() => {
+    const options = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    fetch(`http://localhost:4000/users/${id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setProfile(data.data.user)
+        setFormState(data.data.user)
+      });
+  }, [id])
+// {https://team-dev-server-c8-c9.fly.dev/users/{id}}
+console.log(profile)
 
-    // navigate("/profile/edit")
-    console.log("viewing edit page")
-  }, [])
-
-
-  return (
-    <>
-      <div className="editContainer">
-        <h1>Profile</h1>
-        <Card>
-          <div className="profile-header">
-            <ProfileCircle
-              initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
-            />
-            <div className="profile-header-text">
-              <h4>
-                {profile.firstName} {profile.lastName}
-              </h4>
-              <p>{profile.specialism}this is the specialism</p>
-            </div>
+return (
+  <>
+    <div className="editContainer">
+      <h1>Profile</h1>
+      <Card>
+        <div className="profile-header">
+          <ProfileCircle
+            initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
+          />
+          <div className="profile-header-text">
+            <h4>
+              {profile.firstName} {profile.lastName}
+            </h4>
+            <p>{profile.specialism}this is the specialism</p>
           </div>
+        </div>
 
-          <form>
-            <section className="basicInfoSection text-input-containers">
-              <h2>Basic Info</h2>
-              <div className="headshot-container">
-                {/* <Button text={ProfileImg} /> */}
-                <p>Add headshot</p>
-              </div>
-              <TextInput
-                label="First Name*"
-                name="first-name"
-                value={formState.firstName}
-                onChange={handleChange}
-              />
-              <TextInput
-                label="Last Name*"
-                name="last-name"
-                value={formState.lastName}
-                onChange={handleChange}
-              />
-              <TextInput
-                label="Username*"
-                name="user-name"
-                value={formState.userName}
-                onChange={handleChange}
-              />
-              <TextInput
-                label="GitHub Username*"
-                name="gitHubUserName"
-                value={formState.githubUsername}
-                onChange={handleChange}
-              />
-            </section>
-             
-            { profile.role === "student" ?
+        <form>
+          <section className="basicInfoSection text-input-containers">
+            <h2>Basic Info</h2>
+            <div className="headshot-container">
+              <ProfileImg  />
+              <p>Add headshot</p>
+            </div>
+            <TextInput
+              label="First Name*"
+              name="first-name"
+              value={formState.firstName}
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Last Name*"
+              name="last-name"
+              value={formState.lastName}
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Username*"
+              name="user-name"
+              value={formState.userName}
+              onChange={handleChange}
+            />
+            <TextInput
+              label="GitHub Username*"
+              name="gitHubUserName"
+              value={formState.githubUsername}
+              onChange={handleChange}
+            />
+          </section>
+
+          {profile.role === "student" ?
             <section className="trainingInfoSection text-input-containers">
               <h2>Training Info</h2>
               <TextInput
@@ -165,60 +181,60 @@ const EditProfile = () => {
                 value={profile.cohort}
                 onChange={handleChange}
               />
-               <TextInput
+              <TextInput
                 label="Specialism*"
                 name="specialism"
                 value={formState.specialism}
                 onChange={handleChange}
               />
-               <TextInput
+              <TextInput
                 label="Job Title*"
                 name="jobtitle"
                 value={formState.specialism}
                 onChange={handleChange}
               />
             </section>
-            }
-            <section className="contactInfoSection">
-              <h2>Contact Info</h2>
-              <TextInput
-                label="Email*"
-                name="email"
-                value={formState.email}
-                type="email"
-                onChange={handleChange}
-              />
-              <TextInput
-                label="Mobile*"
-                name="phone"
-                value={formState.phone}
-                onChange={handleChange}
-              />
-              <TextInput
-                label="Password*"
-                name="password"
-                value={formState.password}
-                type="password"
-                onChange={handleChange}
-              />
-            </section>
-            <section className="bioSection">
-              <h2>Bio</h2>
-              <textarea label="Bio" name="bio" value={formState.bio} editable rows={20} maxLength="300" onChange={handleChange} />
-              <label htmlFor="bio" >{formState.bio.length}/300</label>
-            </section>
-            <section className="footer">
-              <p>Required*</p>
-              <Button text={"Cancel"} classes="offwhite width-full" />
-              <Button text={"save"} onClick={showModal} classes="blue width-full" />
-            </section>
-          </form>
-          
-        </Card>
-      </div>
+          }
+          <section className="contactInfoSection">
+            <h2>Contact Info</h2>
+            <TextInput
+              label="Email*"
+              name="email"
+              value={formState.email}
+              type="email"
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Mobile*"
+              name="phone"
+              value={formState.phone}
+              onChange={handleChange}
+            />
+            <TextInput
+              label="Password*"
+              name="password"
+              value={formState.password}
+              type="password"
+              onChange={handleChange}
+            />
+          </section>
+          <section className="bioSection">
+            <h2>Bio</h2>
+            <textarea label="Bio" name="bio" value={formState.bio} editable rows={20} maxLength="300" onChange={handleChange} />
+            <label htmlFor="bio" >{formState.biography.length}/300</label>
+          </section>
+          <section className="footer">
+            <p>Required*</p>
+            <Button text={"Cancel"} classes="offwhite width-full" />
+            <Button text={"save"} onClick={showModal} classes="blue width-full" />
+          </section>
+        </form>
 
-    </>
-  );
+      </Card>
+    </div>
+
+  </>
+);
 };
 export default EditProfile;
 
