@@ -5,100 +5,102 @@ import Modal from "../components/modal";
 import Navigation from "../components/navigation";
 import useAuth from "../hooks/useAuth";
 import { createProfile, get, login, register } from "../service/apiClient";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const navigate = useNavigate()
-	const location = useLocation()
-	const [token, setToken] = useState(null)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState(null);
+  const [loggedInUserInfo, setLoggedInUserInfo] = useState({});
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('token')
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
 
-        if (storedToken && !token) {
-            setToken(storedToken)
-            const { userId } = jwt_decode(storedToken)
-            const getUserInfo = async () => {
-                const res = await get(`users/${userId}`)
-                if (!res.data.user.firstName || !res.data.user.lastName) {
-                    navigate('/welcome')
-                } else {
-                    navigate(location.pathname || "/")
-                }
-            }
-            getUserInfo()
+    if (storedToken && !token) {
+      setToken(storedToken);
+      const { userId } = jwt_decode(storedToken);
+      const getUserInfo = async () => {
+        const res = await get(`users/${userId}`);
+        setLoggedInUserInfo(res.data.user);
+        if (!res.data.user.firstName || !res.data.user.lastName) {
+          navigate("/welcome");
+        } else {
+          navigate(location.pathname || "/");
         }
-    }, [location.pathname])
+      };
+      getUserInfo();
+    }
+  }, [location.pathname]);
 
-	const handleLogin = async (email, password) => {
-		const res = await login(email, password)
-        if (!res.data.token) {
-            return navigate("/login")
-        }
-
-        localStorage.setItem('token', res.data.token)
-		setToken(res.data.token)
-		navigate("/")
-	};
-
-	const handleLogout = () => {
-        localStorage.removeItem('token')
-		setToken(null)
-	};
-
-    const handleRegister = async (email, password) => {
-        const res = await register(email, password)
-		const status = res.status
-
-		if(status === 'fail') {
-			return status
-		} 
-		else if (status === 'success') {
-			const res = await login(email, password)
-			setToken(res.data.token)
-			navigate("/verification")
-			return status
-		}
+  const handleLogin = async (email, password) => {
+    const res = await login(email, password);
+    if (!res.data.token) {
+      return navigate("/login");
     }
 
-    const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-        const { userId } = jwt_decode(token)
-		localStorage.setItem('token', token)
+    localStorage.setItem("token", res.data.token);
+    setToken(res.data.token);
+    navigate("/");
+  };
 
-        await createProfile(userId, firstName, lastName, githubUrl, bio)
-		
-        navigate('/') 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  const handleRegister = async (email, password) => {
+    const res = await register(email, password);
+    const status = res.status;
+
+    if (status === "fail") {
+      return status;
+    } else if (status === "success") {
+      const res = await login(email, password);
+      setToken(res.data.token);
+      navigate("/verification");
+      return status;
     }
+  };
 
-	const value = {
-		token,
-		onLogin: handleLogin,
-		onLogout: handleLogout,
-        onRegister: handleRegister,
-        onCreateProfile: handleCreateProfile
-	};
+  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+    const { userId } = jwt_decode(token);
+    localStorage.setItem("token", token);
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    await createProfile(userId, firstName, lastName, githubUrl, bio);
+
+    navigate("/");
+  };
+
+  const value = {
+    token,
+    loggedInUserInfo,
+    onLogin: handleLogin,
+    onLogout: handleLogout,
+    onRegister: handleRegister,
+    onCreateProfile: handleCreateProfile,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 const ProtectedRoute = ({ children }) => {
-	const { token } = useAuth()
-	const location = useLocation()
+  const { token } = useAuth();
+  const location = useLocation();
 
-	if (!token) {
-		return <Navigate to={"/login"} replace state={{ from: location }} />
-	}
+  if (!token) {
+    return <Navigate to={"/login"} replace state={{ from: location }} />;
+  }
 
-	return (
-		<div className="container">
-			<Header />
-			<Navigation />
-            <Modal />
-			{children}
-		</div>
-	)
-}
+  return (
+    <div className="container">
+      <Header />
+      <Navigation />
+      <Modal />
+      {children}
+    </div>
+  );
+};
 
-export { AuthContext, AuthProvider, ProtectedRoute }
+export { AuthContext, AuthProvider, ProtectedRoute };

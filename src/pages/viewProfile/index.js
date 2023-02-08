@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/button";
 import "../../pages/viewProfile/viewProfile.css";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "../../components/button";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
-import { useParams } from "react-router-dom";
-import { get } from "../../service/apiClient";
-import jwt_decode from "jwt-decode";
 import ErrorMessage from "../../components/errorMessage";
+import useAuth from "../../hooks/useAuth";
 
 const initialState = {
   id: "",
@@ -26,21 +24,12 @@ const initialState = {
 function ViewProfile() {
   // STATES
   const [profile, setProfile] = useState(initialState);
-  const [loggedInUserInfo, setLoggedInUserInfo] = useState({});
   const [isError, setIsError] = useState(false);
 
   // GLOBAL VARIABLES
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem("token");
-
-  // Checks which user is logged in
-  const getUserInfo = async () => {
-    const { userId } = jwt_decode(token);
-    const res = await get(`users/${userId}`);
-    setLoggedInUserInfo(res.data.user);
-  };
-  // console.log("USER INFO: ", loggedInUserInfo);
+  const { token, loggedInUserInfo } = useAuth();
 
   const options = {
     headers: {
@@ -50,13 +39,11 @@ function ViewProfile() {
 
   useEffect(() => {
     navigate(`/profile/${id}`);
-    getUserInfo();
 
     fetch(`http://localhost:4000/users/${id}`, options)
       .then((response) => response.json())
       .then((responseData) => {
         setProfile(responseData.data.user);
-        console.log(responseData);
         if (responseData.status === "fail") {
           setIsError(true);
         }
@@ -65,7 +52,7 @@ function ViewProfile() {
 
   const goToEditPage = () => {
     // This will work once we have files for edit page
-    navigate(`/profile/edit/${id}`);
+    navigate(`/profile/${id}/edit`);
   };
 
   return (
@@ -116,6 +103,7 @@ function ViewProfile() {
                     <h3>Training info</h3>
                   </div>
                 )}
+
                 {profile.role === "TEACHER" && (
                   <div>
                     <h3>Professional info</h3>
@@ -126,6 +114,7 @@ function ViewProfile() {
                   <h4>Role</h4>
                   <p>{profile.role}</p>
                 </div>
+
                 <div>
                   <h4>Specialism</h4>
                   <p>{profile.specialism}</p>
@@ -156,13 +145,17 @@ function ViewProfile() {
                 )}
               </div>
               <div className="edit-button">
-                {(loggedInUserInfo.id === profile.id ||
-                  loggedInUserInfo.role === "TEACHER") && (
-                  <Button
-                    text="Edit"
-                    classes="green width-full"
-                    onClick={goToEditPage}
-                  />
+                {loggedInUserInfo !== undefined ? (
+                  (loggedInUserInfo.id === profile.id ||
+                    loggedInUserInfo.role === "TEACHER") && (
+                    <Button
+                      text="Edit"
+                      classes="green width-full"
+                      onClick={goToEditPage}
+                    />
+                  )
+                ) : (
+                  <></>
                 )}
               </div>
             </div>

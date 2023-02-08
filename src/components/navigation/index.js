@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import "./style.css";
 
 const Navigation = () => {
-  const { token } = useAuth();
+  const { token, loggedInUserInfo } = useAuth();
 
   if (!token) {
     return null;
@@ -22,7 +22,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to={`/profile/${loggedInUserInfo.id}`}>
             <ProfileIcon />
             <p>Profile</p>
           </NavLink>
