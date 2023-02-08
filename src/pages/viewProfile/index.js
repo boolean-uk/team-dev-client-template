@@ -20,35 +20,25 @@ const initialState = {
   specialism: "",
 };
 // TODO:
-// update the hard-coded details in the initial state and update it on jsx too. (when server team updates data)
-// fix the card and background in the browser.
-// add the onclick event to the "edit" button.
-// fix the routing (Benji says that it's not our problem)
+// update the hard-coded start date, end date and job title in the initial state and update it on jsx too. (when server team updates data)
 
 function ViewProfile() {
   // STATES
   const [profile, setProfile] = useState(initialState);
   const [loggedInUserInfo, setLoggedInUserInfo] = useState({});
 
-  console.log("USER INFO: ", loggedInUserInfo);
-
   // GLOBAL VARIABLES
   const navigate = useNavigate();
   const { id } = useParams();
   const token = localStorage.getItem("token");
 
-  // These are the initial values, which will be changed after a successfull data request from server
-  // Create useEffect to fetch the data
-  // https://team-dev-server-c8-c9.fly.dev/users/{id}
-  // If the response is 400+ then display an error message.
-  // Error message will be: Cannot view profile
-
+  // Checks which user is logged in
   const getUserInfo = async () => {
     const { userId } = jwt_decode(token);
     const res = await get(`users/${userId}`);
-    // console.log("RESPONSE: ", res.data.user.role);
     setLoggedInUserInfo(res.data.user);
   };
+  // console.log("USER INFO: ", loggedInUserInfo);
 
   const options = {
     headers: {
@@ -66,10 +56,6 @@ function ViewProfile() {
       fetch(`http://localhost:4000/users/${id}`, options)
         .then((response) => response.json())
         .then((responseData) => {
-          // console.log("checking Data", responseData);
-
-          // If successfull response, add the data to the state
-          // console.log("NEW DATA: ", profile);
           setProfile(responseData.data.user);
         });
     }
@@ -82,7 +68,6 @@ function ViewProfile() {
 
   return (
     <>
-      {/* create the jsx for the all details */}
       <div className="card-container">
         <Card>
           <div className="profile-details">
@@ -150,11 +135,11 @@ function ViewProfile() {
                   </div>
                   <div>
                     <h4>Start Date</h4>
-                    <p>N/A</p>
+                    <p>Hardcoded</p>
                   </div>
                   <div>
                     <h4>End Date</h4>
-                    <p>N/A</p>
+                    <p>Hardcoded</p>
                   </div>
                 </>
               )}
@@ -162,21 +147,10 @@ function ViewProfile() {
               {profile.role === "TEACHER" && (
                 <div>
                   <h4>Job Title</h4>
-                  <p>CSS Grids Intructor</p>
+                  <p>Hardcoded</p>
                 </div>
               )}
             </div>
-
-            {/* NOTE: Currently, the logged-in user is always a teacher (Rick Sanchez)
-                 therefore, the button will always be shown 
-                 (until server team adds function to login as student).
-                 
-                 You can comment out loggedInUserInfo.role === "TEACHER",
-                 to see 2 alternative results: 
-                 1) /profile/1 does NOT show edit button
-                 2) /profile/2 shows edit button
-                 */}
-
             <div className="edit-button">
               {(loggedInUserInfo.id === profile.id ||
                 loggedInUserInfo.role === "TEACHER") && (
