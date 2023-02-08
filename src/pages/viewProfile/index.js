@@ -6,24 +6,14 @@ import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import ErrorMessage from "../../components/errorMessage";
 import useAuth from "../../hooks/useAuth";
+import { emptyProfile } from "../../service/mockData";
 
-const initialState = {
-  id: "",
-  email: "",
-  role: "",
-  cohort_id: "",
-  firstName: "",
-  lastName: "",
-  biography: "",
-  githubUrl: "",
-  specialism: "",
-};
 // TODO:
 // update the hard-coded start date, end date and job title in the initial state and update it on jsx too. (when server team updates data)
 
 function ViewProfile() {
   // STATES
-  const [profile, setProfile] = useState(initialState);
+  const [profile, setProfile] = useState(emptyProfile);
   const [isError, setIsError] = useState(false);
 
   // GLOBAL VARIABLES
