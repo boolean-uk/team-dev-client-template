@@ -12,11 +12,12 @@ const initialState = {
   id: "",
   email: "",
   role: "",
-  cohortId: "",
+  cohort_id: "",
   firstName: "",
   lastName: "",
   biography: "",
   githubUrl: "",
+  specialism: "",
 };
 // TODO:
 // update the hard-coded details in the initial state and update it on jsx too. (when server team updates data)
@@ -106,7 +107,7 @@ function ViewProfile() {
 
               <div>
                 <h4>Mobile Number</h4>
-                <p>+123456789</p>
+                <p>{profile.phone}</p>
               </div>
 
               <div>
@@ -138,22 +139,22 @@ function ViewProfile() {
               </div>
               <div>
                 <h4>Specialism</h4>
-                <p>Software Developer</p>
+                <p>{profile.specialism}</p>
               </div>
 
               {profile.role === "STUDENT" && (
                 <>
                   <div>
                     <h4>Cohort</h4>
-                    <p>Cohort 9</p>
+                    <p>Cohort {profile.cohort_id}</p>
                   </div>
                   <div>
                     <h4>Start Date</h4>
-                    <p>November 2022</p>
+                    <p>N/A</p>
                   </div>
                   <div>
                     <h4>End Date</h4>
-                    <p>May 2023</p>
+                    <p>N/A</p>
                   </div>
                 </>
               )}
