@@ -1,3 +1,5 @@
+import LikeIcon from "../../assets/icons/likeIcon"
+import CommentIcon from "../../assets/icons/commentIcon"
 import useModal from "../../hooks/useModal"
 import { useState, useEffect } from "react"
 import Card from "../card"
@@ -11,6 +13,8 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const [postContent, setContent] = useState(content)
 
     const userInitials = name.match(/\b(\w)/g)
+
+    const [isLiked, setIsLiked] = useState(false)
 
     const showModal = () => {
         setModal('Edit post', <EditPostModal content={content} id={id} setContent={setContent}/>)
@@ -27,7 +31,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                         <p>{name}</p>
                         <small>{date}</small>
                     </div>
-                    
+
                     <div className="edit-icon">
                         <p onClick={showModal}>...</p>
                     </div>
@@ -37,21 +41,41 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                     <p>{postContent}</p>
                 </section>
 
-                <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
-                    <div className="post-interactions">
-                        <div>Like</div>
-                        <div>Comment</div>
+                <section className={`post-interactions-container border-top 
+                `
+
+                }>
+                    <div id="likeButton" className="post-interactions">
+                        <div className="onHover">
+                            <button className= {isLiked.toString()}
+                                onClick={() => {
+                                    setIsLiked(!isLiked)
+                                }}>
+                                <LikeIcon isLiked={isLiked}/>
+                                <p>Like</p>
+                            </button>
+                        </div>
+                        <div className="onHover">
+                            <button id="commentButton" className="postButton"
+
+                                onClick={() => {
+                                    //TODO: click event
+                                }}>
+                                <CommentIcon />
+                                <p>Comment</p>
+                            </button>
+                        </div>
                     </div>
 
-                    <p>{!likes && 'Be the first to like this'}</p>
-                    
+                    <p>{!likes && 'Be the first to like this' || likes}</p>
+
                 </section>
 
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
             </article>
-        </Card>
+        </Card >
     )
 }
 
