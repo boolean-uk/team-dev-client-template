@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 import ViewProfile from "./pages/viewProfile";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
@@ -51,6 +52,35 @@ const App = () => {
       </AuthProvider>
     </>
   );
+                        <Route
+                            index
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="welcome"
+                            element={
+                                <ProtectedRoute disabledNav={true}>
+                                    <Welcome />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route 
+                            path="search"
+                            element={
+                                <ProtectedRoute>
+                                    <Search/>
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Routes>
+                </ModalProvider>
+			</AuthProvider>
+		</>
+	);
 };
 
 export default App;
