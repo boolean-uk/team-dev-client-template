@@ -7,13 +7,13 @@ import './style.css'
 import Button from '../button'
 import Toast from '../toast'
 
-const SaveChangesModal = ({ formState }) => {
+const SaveChangesModal = ({ formState, id }) => {
 
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
     const navigate = useNavigate()
     console.log("modal is working")
-
+    const token = localStorage.getItem("token");
     const handleDontSave = () => {
         closeModal()
         navigate("/profile")
@@ -37,16 +37,18 @@ const SaveChangesModal = ({ formState }) => {
         console.log("form submitted")
         const editedProfile = formState
         const editedProfileJSON = JSON.stringify(editedProfile)
+        console.log("here is the edited profilejson > ", editedProfileJSON)
 
         const options = {
             method: "PATCH",
             body: editedProfileJSON,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token
             }
         }
 
-        fetch(`https://team-dev-server-c8-c9.fly.dev/users/`, options)
+        fetch(`http://localhost:4000/users/${id}`, options)
             .then((res) => res.json())
             .then((data) => {
                 console.log("edited profile:", data)

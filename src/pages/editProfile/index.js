@@ -10,7 +10,8 @@ import useModal from "../../hooks/useModal";
 import "./style.css";
 import SaveChangesModal from "../../components/saveChangesModal"
 
-
+import { get } from "../../service/apiClient";
+import jwt_decode from "jwt-decode";
 const initialProfile = {
   firstName: "person",
   lastName: "personlastname",
@@ -29,6 +30,9 @@ const initialProfile = {
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
   const [formState, setFormState] = useState(profile);
+  const [readOnly, setReadOnly] = useState(false)
+  const [passwordPermission, setPasswordPermission] = useState(true)
+  const [loggedInUserInfo, setLoggedInUserInfo] = useState("")
   const navigate = useNavigate()
   // const {id} = useParams()
   const id = 1
@@ -38,10 +42,17 @@ const EditProfile = () => {
         initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
       />
     }
-    else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile image"></img>); }
+    else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile Image"></img>); }
 
   };
   const { openModal, setModal } = useModal();
+
+  const getUserInfo = async () => {
+    const { userId } = jwt_decode(token);
+    const res = await get(`users/${userId}`);
+    console.log("RESPONSE: ", res.data.user);
+    setLoggedInUserInfo(res.data.user);
+  };
 
   // Model -----
   // Create a function to run on user interaction
@@ -52,7 +63,7 @@ const EditProfile = () => {
   // if don't save - navigate back to profile page
 
   const showModal = () => {
-    setModal(<SaveChangesModal formState={formState} />);
+    setModal(<SaveChangesModal id={id} formState={formState} />);
     // Open the modal!
     openModal();
   };
@@ -72,6 +83,14 @@ const EditProfile = () => {
   // This might not be needed if we can pass information from the /profile page to here
   const token = localStorage.getItem("token");
   useEffect(() => {
+    getUserInfo()
+    if(loggedInUserInfo.role === "STUDENT"){
+      setReadOnly(true)
+      console.log("this is the read onlystatus", readOnly)
+    } 
+    if(loggedInUserInfo.id === id){
+      setPasswordPermission(false)
+    }
     const options = {
       headers: {
         Authorization: "Bearer " + token,
@@ -83,10 +102,10 @@ const EditProfile = () => {
         console.log(data)
         setProfile(data.data.user)
         setFormState(data.data.user)
+        console.log("this is formstate", formState)
       });
   }, [id])
-
-console.log(profile)
+// {https://team-dev-server-c8-c9.fly.dev/users/{id}}
 
 return (
   <>
@@ -146,30 +165,35 @@ return (
                 name="role"
                 value={formState.role.toLocaleLowerCase()}
                 onChange={handleChange}
+                readOnly={readOnly}
               />
               <TextInput
                 label="Specialism*"
                 name="specialism"
                 value={formState.specialism}
                 onChange={handleChange}
+                readOnly={readOnly}
               />
               <TextInput
                 label="Cohort*"
                 name="cohort_id"
-                value={profile.cohort_id}
+                value={ formState.cohort_id}
                 onChange={handleChange}
+                readOnly={readOnly}
               />
               <TextInput
                 label="Start Date*"
                 name="start-date"
-                value={profile.startDate}
+                value={formState.startDate}
                 onChange={handleChange}
+                readOnly={readOnly}
               />
               <TextInput
                 label="End Date*"
                 name="end-date"
                 value={formState.endDate}
-                onChange={handleChange}
+                onChange={handleChange}   
+                readOnly={readOnly}
               />
             </section>
             :
@@ -178,7 +202,7 @@ return (
               <TextInput
                 label="Role*"
                 name="role"
-                value={profile.cohort_id}
+                value={profile.cohort}
                 onChange={handleChange}
               />
               <TextInput
@@ -216,6 +240,7 @@ return (
               value={formState.password}
               type="password"
               onChange={handleChange}
+              permission={passwordPermission}
             />
           </section>
           <section className="bioSection">
