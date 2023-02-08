@@ -43,10 +43,9 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
 
                 <section className={`post-interactions-container border-top 
                 `
-                // ${comments.length ? 'border-bottom' : null}
+
                 }>
                     <div id="likeButton" className="post-interactions">
-                        {/* TODO: make appropriate click events: linked to liked API */}
                         <div className="onHover">
                             <button className= {isLiked.toString()}
                                 onClick={() => {

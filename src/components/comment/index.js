@@ -7,9 +7,7 @@ import { useEffect } from "react"
 
 
 const Comment = ({ name, content }) => {
-    //fetch comments from api once it exists. talk to Server team
     const { openModal, setModal } = useModal()
-    // const [comment, setComment] = useEffect([])
 
     const showModal = () => {
         setModal('Edit post', <EditPostModal />)
@@ -23,8 +21,6 @@ const Comment = ({ name, content }) => {
                 <div className="comment">
                     <h6>{name}</h6>
                      <p>{content}</p>
-                    {/* <h6>Joey Tribbiani</h6>
-                    <p>Cool post</p> */}
                 </div>
 
                 <div className="edit-icon add-margins">
