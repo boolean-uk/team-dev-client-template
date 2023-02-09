@@ -1,14 +1,21 @@
+import { useState } from "react";
 import ProfileCircle from "../../components/profileCircle";
+import CascadingMenu from "../cascadingMenu";
 import './style.css'
 
 const PersonCard = ({ person, isTeacher }) => {
 
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
     const name = `${person.firstName} ${person.lastName}`
     const userInitials = name.match(/\b(\w)/g)
 
+    const handleClick = () => {
+        setIsMenuVisible(true)
+    }
+
     return (
         <li className="personCard">
-            <ProfileCircle initials={userInitials}/>
+            <ProfileCircle initials={userInitials} hasMenu={false}/>
 
             <div className="nameCohort">
                 <p className="personName">{name}</p>
@@ -34,8 +41,9 @@ const PersonCard = ({ person, isTeacher }) => {
                 }
             </div>
 
-            <div className="edit-icon">
+            <div className="edit-icon" onClick={handleClick}>
                 <p className="text-blue1">...</p>
+                {isMenuVisible && <CascadingMenu name={'searchMenu'} setIsMenuVisible={setIsMenuVisible} />}
             </div>
         </li>
     )

@@ -15,6 +15,7 @@
 .personCard button {
     min-width: max-content;
     border-radius: 2px;
+    cursor: pointer;
 }
 .personCard button:hover {
     background-color: var(--color-offwhite);
@@ -29,10 +30,15 @@
     display: flex;
     flex-direction: row;
 }
-.edit-icon p {
+.edit-icon {
     text-align: center;
+    position: relative;
+    cursor: pointer;
 }
 .people {
     text-align: left;
     margin-bottom: 10px;
+}
+.searchMenu {
+    transform: translate(-150%);
 }

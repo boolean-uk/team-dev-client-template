@@ -7,7 +7,7 @@ const ProfileCircle = ({ initials, hasMenu = true}) => {
 
     return (
         <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
-            {isMenuVisible && hasMenu && <CascadingMenu setIsMenuVisible={setIsMenuVisible} />}
+            {isMenuVisible && hasMenu && <CascadingMenu name={'profile-circle-menu'} setIsMenuVisible={setIsMenuVisible} />}
             
             <div className="profile-icon">
                 <p>{initials}</p>
