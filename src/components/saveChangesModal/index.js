@@ -1,4 +1,3 @@
-// Start point taken from createPostModal
 
 import { useState, } from "react"
 import { useNavigate } from "react-router-dom"
@@ -8,63 +7,82 @@ import Button from '../button'
 import Toast from '../toast'
 import { patch } from "../../service/apiClient";
 
-const SaveChangesModal = ({ formState, id }) => {
+const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
 
-    // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
     const navigate = useNavigate()
     console.log("modal is working")
     const token = localStorage.getItem("token");
     const handleDontSave = () => {
         closeModal()
-        navigate("/profile/:id")
+        navigate(`/profile/${id}`)
     }
 
     const handleCancel = () => {
         closeModal()
-        navigate("/profile/:id/edit")
+        navigate(`/profile/${id}/edit`)
     }
 
     const handleSave = () => {
         handleSubmit()
         closeModal()
-        navigate("/profile/:id/edit")
+        navigate(`/profile/${id}`)
         return (
             <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
         )
     }
     const handleSubmit = () => {
-        
         console.log("form submitted")
         const editedProfile = formState
-        const editedProfileJSON = JSON.stringify(editedProfile)
-        console.log("here is the edited profilejson > ", editedProfileJSON)
 
-        const options = {
-            method: "PATCH",
-            body: editedProfileJSON,
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token
+        // console.log("here is the edited profilejson > ", editedProfileJSON)
+
+        // const options = {
+        //     method: "PATCH",
+        //     body: editedProfileJSON,
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: "Bearer " + token
+        //     }
+        // }
+        const formDataPATCH = async () => {
+            const endpoint = `users/${id}`
+
+            // editedProfile.cohortId = editedProfile.cohort_id
+            // const data = JSON.stringify(editedProfile)
+            if (loggedInUserInfo.role === "STUDENT") {
+                const data = {
+                    email: editedProfile.email,
+                    password: editedProfile.password,
+                    firstName: editedProfile.firstName,
+                    lastName: editedProfile.lastName,
+                    biography: editedProfile.biography,
+                    githubUrl: editedProfile.githubUrl
+                }
             }
+            if (loggedInUserInfo.role === "TEACHER") {
+                const data = {
+                    email: editedProfile.email,
+                    password: editedProfile.password,
+                    firstName: editedProfile.firstName,
+                    lastName: editedProfile.lastName,
+                    biography: editedProfile.biography,
+                    githubUrl: editedProfile.githubUrl,
+                    role: editedProfile.role,
+                    cohortId: editedProfile.cohortId
+                }
+                console.log("here is the data", data)
+                console.log("this is the edited profile", editedProfile)
+
+                patch(endpoint, editedProfile)
+                    .catch((error) => { console.log(error) })
+
+            }
+            formDataPATCH()
+
+
         }
-
-        fetch(`http://localhost:4000/users/${id}`, options)
-        .then((res) => res.json())
-        // console.log(res)
-        .then((data) => {
-            console.log("edited profile:", data.status)
-            if (data.status === "success") {
-                // do something
-            } else {
-                console.log("ERROR")
-            }
-        })
-        // .catch(err => {console.log("this is the response from catch",err)})
-
     }
-
-
     return (
         <>
             <section className="save-changes-details">
@@ -92,6 +110,7 @@ const SaveChangesModal = ({ formState, id }) => {
             </section>
         </>
     )
+
 }
 
-export default SaveChangesModal
+export default SaveChangesModal;

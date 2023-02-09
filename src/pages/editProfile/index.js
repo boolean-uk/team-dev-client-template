@@ -14,6 +14,7 @@ import { get } from "../../service/apiClient";
 import jwt_decode from "jwt-decode";
 const initialProfile = {
   firstName: "person",
+  cohortId: 0,
   lastName: "personlastname",
   userName: "username",
   githubUsername: "githubuser5000",
@@ -35,6 +36,9 @@ const EditProfile = () => {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
+  const { openModal, setModal } = useModal();
+  const token = localStorage.getItem("token");
+  
   const ProfileImg = () => {
     if (profile.profileImageUrl === "") {
       return <ProfileCircle
@@ -44,7 +48,6 @@ const EditProfile = () => {
     else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile Image"></img>); }
 
   };
-  const { openModal, setModal } = useModal();
 
   const getUserInfo = async () => {
     const { userId } = jwt_decode(token);
@@ -55,20 +58,13 @@ const EditProfile = () => {
 
   const showModal = (event) => {
     event.preventDefault()
-    setModal(<SaveChangesModal id={id} formState={formState} />);
+    setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={id} formState={formState} />);
     openModal();
   };
   const cancelChanges = () => {
     navigate(-1)
   }
-  const controlPagePermission = () => {
-    if (loggedInUserInfo.role === "STUDENT" & loggedInUserInfo.id !== profile.id) {
-      setIsError(true)
-      return (
-        <ErrorMessage message={"User does not have permission to edit this profile "} />
-      )
-    }
-  }
+  
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -77,10 +73,22 @@ const EditProfile = () => {
     newFormState[name] = value
     setFormState(newFormState)
   }
+  const profileData = async () => {
+    const res = await get(`users/${id}`);
 
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    getUserInfo()
+    res.data.user ? setFormState(res.data.user) : setIsError(true);
+    res.data.user ? setProfile(res.data.user) : setIsError(true)
+    console.log("RESPONSE from GET: ", res.data.user)
+    // console.log("success or fail?", res.data.status)
+    console.log("this is form state", formState)
+    console.log("this is id", id)
+  };
+
+  const controlPagePermission = () => {
+    if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== profile.id) {
+      setIsError(true)
+      return console.log("controls are firing") 
+    }
     if (loggedInUserInfo.role === "STUDENT") {
       setReadOnly(true)
       console.log("this is the read onlystatus", readOnly)
@@ -89,25 +97,18 @@ const EditProfile = () => {
       setPasswordPermission(false)
 
     }
-    const profileData = async () => {
-      const res = await get(`users/${id}`);
-
-      res.data.user ? setFormState(res.data.user) : setIsError(true);
-      res.data.user ? setProfile(res.data.user) : setIsError(true)
-      console.log("RESPONSE from GET: ", res.data.user)
-      // console.log("success or fail?", res.data.status)
-      console.log("this is form state", formState)
-      console.log("this is id", id)
-    };
+  }
+  useEffect(() => {
+    getUserInfo()
     profileData()
-    console.log("this is the password permiossion", passwordPermission)
-    console.log("this is profile.id", profile.id)
+    
+    
     controlPagePermission()
+    console.log("this is the password permission", passwordPermission)
+    console.log("this is profile.id", profile.id)
 
   }, [id])
   console.log("this is the profile", profile)
-
-
 
   return (
     <>
@@ -180,8 +181,8 @@ const EditProfile = () => {
                   />
                   <TextInput
                     label="Cohort*"
-                    name="cohort_id"
-                    value={formState.cohort_id}
+                    name="cohortId"
+                    value={formState.cohortId}
                     onChange={handleChange}
                     readOnly={readOnly}
                   />
@@ -206,8 +207,8 @@ const EditProfile = () => {
                   <TextInput
                     label="Role*"
                     name="role"
-                    value={profile.cohort}
-                    onChange={handleChange}
+                    // value={profile.cohort}
+                    // onChange={handleChange}
                   />
                   <TextInput
                     label="Specialism*"
