@@ -47,40 +47,19 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="search"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </ModalProvider>
       </AuthProvider>
     </>
   );
-                        <Route
-                            index
-                            element={
-                                <ProtectedRoute>
-                                    <Dashboard />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="welcome"
-                            element={
-                                <ProtectedRoute disabledNav={true}>
-                                    <Welcome />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route 
-                            path="search"
-                            element={
-                                <ProtectedRoute>
-                                    <Search/>
-                                </ProtectedRoute>
-                            }
-                        />
-                    </Routes>
-                </ModalProvider>
-			</AuthProvider>
-		</>
-	);
 };
 
 export default App;
