@@ -12,22 +12,33 @@
 .personCard:hover {
     background-color: var(--color-blue7);
 }
+.personCard button {
+    min-width: max-content;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.personCard button:hover {
+    background-color: var(--color-offwhite);
+}
 .personName {
     font-weight: bold;
 }
 .cohortInfo {
     color: var(--color-blue2);
 }
-.edit-icon p {
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.edit-icon {
     text-align: center;
+    position: relative;
+    cursor: pointer;
 }
 .people {
     text-align: left;
     margin-bottom: 10px;
 }
-.profile {
-    border-radius: 2px;
-}
-.profile:hover {
-    background-color: var(--color-offwhite);
+.searchMenu {
+    transform: translate(-150%);
 }
