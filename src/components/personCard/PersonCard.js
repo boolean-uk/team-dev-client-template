@@ -17,6 +17,14 @@ const PersonCard = ({ person }) => {
             <button className="profile">
                 <p className="text-blue1">Profile</p>
             </button>
+            <button className="addNote">
+                
+                {person.role ==='TEACHER' && <p className="text-blue1"> Add note</p>}
+            </button>
+            <button className="moveToCohort"> 
+             
+              {person.role === 'TEACHER' &&  <p className="text-blue1"> Move to cohort</p> }
+            </button>
 
             <div className="edit-icon">
                 <p className="text-blue1">...</p>
