@@ -6,6 +6,7 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 import Toast from '../toast'
+import { patch } from "../../service/apiClient";
 
 const SaveChangesModal = ({ formState, id }) => {
 
@@ -16,24 +17,24 @@ const SaveChangesModal = ({ formState, id }) => {
     const token = localStorage.getItem("token");
     const handleDontSave = () => {
         closeModal()
-        navigate("/profile")
+        navigate("/profile/:id")
     }
 
     const handleCancel = () => {
         closeModal()
-        navigate("/profile/edit")
+        navigate("/profile/:id/edit")
     }
 
     const handleSave = () => {
         handleSubmit()
         closeModal()
-        navigate("/profile/edit")
+        navigate("/profile/:id/edit")
         return (
             <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
         )
     }
     const handleSubmit = () => {
-
+        
         console.log("form submitted")
         const editedProfile = formState
         const editedProfileJSON = JSON.stringify(editedProfile)

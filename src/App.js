@@ -23,7 +23,7 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
-            <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>}/>
+            <Route path="/profile/:id/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>}/>
             <Route
               path={`profile/:id`}
               element={

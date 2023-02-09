@@ -1,4 +1,5 @@
-import { useState, useParams, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Form from "../../components/form";
 import TextInput from "../../components/form/textInput";
 import Button from "../../components/button";
@@ -6,10 +7,9 @@ import ProfileCircle from "../../components/profileCircle";
 import Card from "../../components/card";
 import { useNavigate } from "react-router-dom";
 import useModal from "../../hooks/useModal";
-
+import ErrorMessage from "../../components/errorMessage";
 import "./style.css";
 import SaveChangesModal from "../../components/saveChangesModal"
-
 import { get } from "../../service/apiClient";
 import jwt_decode from "jwt-decode";
 const initialProfile = {
@@ -25,7 +25,6 @@ const initialProfile = {
   image: "",
   role: "student",
 };
-// create function to return JSX of the profile image to pass to the add img button
 
 const EditProfile = () => {
   const [profile, setProfile] = useState(initialProfile);
@@ -33,9 +32,9 @@ const EditProfile = () => {
   const [readOnly, setReadOnly] = useState(false)
   const [passwordPermission, setPasswordPermission] = useState(true)
   const [loggedInUserInfo, setLoggedInUserInfo] = useState("")
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate()
-  // const {id} = useParams()
-  const id = 1
+  const {id} = useParams()
   const ProfileImg = () => {
     if (profile.profileImageUrl === "") {
       return <ProfileCircle
@@ -54,19 +53,22 @@ const EditProfile = () => {
     setLoggedInUserInfo(res.data.user);
   };
 
-  // Model -----
-  // Create a function to run on user interaction
-  // Use setModal to set the header of the modal and the component the modal should render
-  // Pass handleSubmit function
-  // If save is pressed on modal - run handleSubmit then navigate back to profile page 
-  // if cancel - navigate back to edit
-  // if don't save - navigate back to profile page
-
-  const showModal = () => {
+  const showModal = (event) => {
+    event.preventDefault()
     setModal(<SaveChangesModal id={id} formState={formState} />);
-    // Open the modal!
     openModal();
   };
+  const cancelChanges = () => {
+    navigate(-1)
+  }
+  const controlPagePermission = () => {
+    if(loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== profile.id){
+      setIsError(true)
+      return(
+        <ErrorMessage message={"User does not have permission to edit this profile "}/>
+      )
+    } 
+  }
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -76,39 +78,40 @@ const EditProfile = () => {
     setFormState(newFormState)
   }
 
-
-  // Use Effect to handle fetch request
-  // Load Once
-  // Take ID from params to fetch data
-  // This might not be needed if we can pass information from the /profile page to here
   const token = localStorage.getItem("token");
   useEffect(() => {
     getUserInfo()
+    controlPagePermission()
     if(loggedInUserInfo.role === "STUDENT"){
       setReadOnly(true)
       console.log("this is the read onlystatus", readOnly)
     } 
-    if(loggedInUserInfo.id === id){
+    if(loggedInUserInfo.id === profile.id){
       setPasswordPermission(false)
+      
     }
-    const options = {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+    const profileData = async () => {
+      const res = await get(`users/${id}`);
+     
+      res.data.user ? setFormState(res.data.user) : setIsError(true);
+      res.data.user ? setProfile(res.data.user) : setIsError(true)
+      console.log("RESPONSE from GET: ", res.data.user)
+      console.log("success or fail?", res.data.status)
+      console.log("this is form state", formState)
+      console.log("this is the profile", profile)
+      console.log("this is id",id)
     };
-    fetch(`http://localhost:4000/users/${id}`, options)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setProfile(data.data.user)
-        setFormState(data.data.user)
-        console.log("this is formstate", formState)
-      });
+    profileData()
+    console.log("this is the password permiossion",passwordPermission)
+    
   }, [id])
-// {https://team-dev-server-c8-c9.fly.dev/users/{id}}
 
+
+  
 return (
   <>
+  {isError === true && <ErrorMessage message={"PROFILE NOT FOUND"} />}
+  {isError === false && (
     <div className="editContainer">
       <h1>Profile</h1>
       <Card>
@@ -124,7 +127,7 @@ return (
           </div>
         </div>
 
-        <form>
+        <form onSubmit={showModal}>
           <section className="basicInfoSection text-input-containers">
             <h2>Basic Info</h2>
             <div className="headshot-container">
@@ -250,14 +253,14 @@ return (
           </section>
           <section className="footer">
             <p>Required*</p>
-            <Button text={"Cancel"} classes="offwhite width-full" />
-            <Button text={"save"} onClick={showModal} classes="blue width-full" />
+            <Button text={"Cancel"} onClick={cancelChanges} classes="offwhite width-full" />
+            <Button text={"save"} type={"submit"} classes="blue width-full" />
           </section>
         </form>
 
       </Card>
     </div>
-
+  )}
   </>
 );
 };
