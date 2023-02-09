@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProfileCircle from "../../components/profileCircle";
-import CascadingMenu from "../cascadingMenu";
+import CascadingMenu from "../cascadingMenu"
 import './style.css'
 
 const PersonCard = ({ person, isTeacher }) => {
