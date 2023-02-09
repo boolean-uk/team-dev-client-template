@@ -1,0 +1,32 @@
+.comment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 16px 16px;
+
+    /* Neutral Blue 5 */
+    background: #E6EBF5;
+    border-radius: 8px;
+}
+
+.eachComment {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.add-margins,
+.comment {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+    background-color: #F0F5FA;
+    border-radius: solid black 2px
+}
+
+.postButton {
+    font-size: 18px;
+}
