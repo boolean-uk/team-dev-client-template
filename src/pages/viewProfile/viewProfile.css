@@ -1,0 +1,48 @@
+.profile-details {
+  display: grid;
+  grid-template:
+    "profile-header   profile-header" 90px
+    "profile-contact  profile-bio" 300px
+    "profile-training profile-training" 500px /
+    /* "edit-button      edit-button" 90px / */
+    500px 500px;
+  gap: 45px;
+  height: 139vh;
+  padding: 25px;
+}
+
+.profile-contact,
+.profile-training {
+  grid-template-rows: 50px repeat(auto-fit, 90px);
+}
+.profile-contact {
+  grid-area: profile-contact;
+  display: grid;
+}
+
+.profile-bio {
+  grid-area: profile-bio;
+}
+
+.profile-training {
+  grid-area: profile-training;
+  display: grid;
+}
+
+.edit-button {
+  /* grid-area: edit-button; */
+  width: 110px;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+.card-container {
+  margin: 30px;
+}
+
+.profile-header {
+  grid-area: profile-header;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+}
