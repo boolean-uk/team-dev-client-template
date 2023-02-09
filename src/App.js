@@ -8,49 +8,58 @@ import Verification from "./pages/verification";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
+import ViewProfile from "./pages/viewProfile";
 import Search from "./pages/Search";
 
 const App = () => {
-    
-	return (
-		<>
-			<AuthProvider>
-                <ModalProvider>
-                    <Routes>
-                        <Route path="login" element={<Login />} />
-                        <Route path="register" element={<Register />} />
-                        <Route path="loading" element={<Loading />} />
-                        <Route path="verification" element={<Verification />} />
+  return (
+    <>
+      <AuthProvider>
+        <ModalProvider>
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="loading" element={<Loading />} />
+            <Route path="verification" element={<Verification />} />
 
-                        <Route
-                            index
-                            element={
-                                <ProtectedRoute>
-                                    <Dashboard />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="welcome"
-                            element={
-                                <ProtectedRoute disabledNav={true}>
-                                    <Welcome />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route 
-                            path="search"
-                            element={
-                                <ProtectedRoute>
-                                    <Search/>
-                                </ProtectedRoute>
-                            }
-                        />
-                    </Routes>
-                </ModalProvider>
-			</AuthProvider>
-		</>
-	);
+            <Route
+              path={`profile/:id`}
+              element={
+                <ProtectedRoute>
+                  <ViewProfile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="welcome"
+              element={
+                <ProtectedRoute disabledNav={true}>
+                  <Welcome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="search"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </ModalProvider>
+      </AuthProvider>
+    </>
+  );
 };
 
 export default App;
