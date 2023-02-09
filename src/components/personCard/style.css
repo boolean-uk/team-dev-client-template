@@ -12,11 +12,22 @@
 .personCard:hover {
     background-color: var(--color-blue7);
 }
+.personCard button {
+    min-width: max-content;
+    border-radius: 2px;
+}
+.personCard button:hover {
+    background-color: var(--color-offwhite);
+}
 .personName {
     font-weight: bold;
 }
 .cohortInfo {
     color: var(--color-blue2);
+}
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
 }
 .edit-icon p {
     text-align: center;
@@ -24,10 +35,4 @@
 .people {
     text-align: left;
     margin-bottom: 10px;
-}
-.profile {
-    border-radius: 2px;
-}
-.profile:hover {
-    background-color: var(--color-offwhite);
 }
