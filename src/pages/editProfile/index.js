@@ -12,6 +12,7 @@ import SaveChangesModal from "../../components/saveChangesModal"
 import { get } from "../../service/apiClient";
 import { emptyProfile } from "../../service/mockData";
 import useAuth from "../../hooks/useAuth";
+import ProfileImg from "../../components/profileImage/ProfileImage";
 
 
 const EditProfile = () => {
@@ -25,15 +26,7 @@ const EditProfile = () => {
   const { openModal, setModal } = useModal();
   const { loggedInUserInfo } = useAuth();
 
-  const ProfileImg = () => {
-    if (profile.profileImageUrl === "") {
-      return <ProfileCircle
-        initials={`${profile.firstName[0]} ${profile.lastName[0]}`}
-      />
-    }
-    else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile Image"></img>); }
-
-  };
+ 
 
   const showModal = (event) => {
     event.preventDefault()
@@ -98,7 +91,7 @@ const EditProfile = () => {
               <section className="basicInfoSection text-input-containers">
                 <h2>Basic Info</h2>
                 <div className="headshot-container">
-                  <ProfileImg />
+                  <ProfileImg profile={profile} />
                   <p>Add headshot</p>
                 </div>
                 <TextInput
