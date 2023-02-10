@@ -12,6 +12,10 @@ import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { get } from "../../service/apiClient";
 
+import CohortList from "./CohortList";
+import TeacherList from "./TeacherList";
+import StudentList from "./StudentList"
+
 const Dashboard = () => {
   const { token } = useAuth();
   const { userId } = jwt_decode(token);
@@ -23,7 +27,7 @@ const Dashboard = () => {
       id: "",
       email: "",
       role: "",
-      cohortId: "",
+      cohort_id: "",
       profile: {
         id: "",
         userId: "",
@@ -34,7 +38,8 @@ const Dashboard = () => {
       },
     },
   });
-
+  // C.L caus I dont wanna refresh page
+console.log("user after fetchuser in dashboard index", user)
   useEffect(() => {
     const getUserInfo = async () => {
       const res = await get(`users/${userId}`);
@@ -91,9 +96,27 @@ const Dashboard = () => {
           </form>
         </Card>
 
-        <Card>
+        {/* student dash */}
+        {/* <Card>
           <h4>My Cohort</h4>
+        </Card> */}
+
+        {/* Teacher Dash */}
+        <Card>
+          <h4>Cohorts</h4>
+          <CohortList user={user}/>
         </Card>
+
+        <Card>
+          <h4>Students</h4>
+          <StudentList />
+        </Card>
+
+        <Card>
+          <h4>Teachers</h4>
+          <TeacherList />
+        </Card>
+
       </aside>
     </>
   );

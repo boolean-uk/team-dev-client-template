@@ -19,3 +19,11 @@ aside {
     max-width: 100% !important;
     background-color: var(--color-blue5);
 }
+
+.see-all-students-button {
+    line-height: 20px;
+    font-size: 15px;
+    width: 70px;
+    border-radius: 8px;
+    background: #F0F5FA;
+}
