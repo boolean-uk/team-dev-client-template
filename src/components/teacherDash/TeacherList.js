@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import ProfileCircle from "../../components/profileCircle";
+import ProfileCircle from "../profileCircle";
 
 import { get } from "../../service/apiClient";
 
@@ -22,16 +22,15 @@ const TeacherList = () => {
                 const userInitials = teacher.firstName.match(/\b(\w)/g) + teacher.lastName.match(/\b(\w)/g)
 
                 return (
-                    <section className="create-post-user-details lists-teacher-view">
+                    <section key={teacher.id} className="create-post-user-details lists-teacher-view">
                         <ProfileCircle
-                            // initials={initials}
                             initials={userInitials}
                         />
                         <p className="list-user-name">{teacher.firstName}{teacher.lastName}</p>
                         <div className="edit-icon">
                             <p>...</p>
                         </div>
-                    </section>
+                    </ section>
                 )
             })
             }

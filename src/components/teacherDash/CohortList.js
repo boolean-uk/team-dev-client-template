@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-
-import CohortCircle from "../../components/cohortCircle";
-import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import { get } from "../../service/apiClient";
+
+import CohortCircle from "../cohortCircle";
+import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 
 
 const CohortList = () => {
@@ -20,7 +20,7 @@ const CohortList = () => {
 return (
     <div>
       {cohorts &&
-        cohorts.map((cohort) => {
+        cohorts.map(cohort => {
           return (
             <section className="create-post-user-details lists-teacher-view">
               <div className="profile-icon-cohort bg-green">
@@ -36,7 +36,9 @@ return (
               </div>
             </section>
           );
-        })}
+        }
+        )
+      }
     </div>
   );
 }

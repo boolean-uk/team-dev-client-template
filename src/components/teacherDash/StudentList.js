@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import CascadingMenu from "../../components/cascadingMenu";
-import ProfileCircle from "../../components/profileCircle";
+import CascadingMenu from "../cascadingMenu";
+import ProfileCircle from "../profileCircle";
 import { get } from "../../service/apiClient";
 // import nameList from "placeholder"
 import "./style.css";
@@ -19,12 +19,11 @@ const StudentList = () => {
 
     return (
         <>
-            {/* <NameList />  */}
             {students.map(student => {
                 const userInitials = student.firstName.match(/\b(\w)/g) + student.lastName.match(/\b(\w)/g)
 
                 return (
-                    <section className="create-post-user-details lists-teacher-view">
+                    <section key={student.id} className="create-post-user-details lists-teacher-view">
 
                         <ProfileCircle initials={userInitials} />
                         <p className="list-user-name"> {student.firstName} {student.lastName}</p>

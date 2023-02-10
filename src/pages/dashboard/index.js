@@ -12,9 +12,7 @@ import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { get } from "../../service/apiClient";
 
-import CohortList from "./CohortList";
-import TeacherList from "./TeacherList";
-import StudentList from "./StudentList"
+import TeacherAside from "./teacherAside";
 
 const Dashboard = () => {
   const { token } = useAuth();
@@ -95,30 +93,23 @@ const Dashboard = () => {
           </form>
         </Card>
 
-        {user.role==="teacher" ?
-        console.log("teacher is logged in"):
-        console.log("student is logged in")}
-
-        {/* student dash */}
-        {/* <Card>
-          <h4>My Cohort</h4>
-        </Card> */}
-
-        {/* Teacher Dash */}
-        <Card>
-          <h4>Cohorts</h4>
-          <CohortList user={user}/>
-        </Card>
-
-        <Card>
-          <h4>Students</h4>
-          <StudentList />
-        </Card>
-
-        <Card>
-          <h4>Teachers</h4>
-          <TeacherList />
-        </Card>
+        {user.email === "teacher@test.com"
+          ?
+          (
+          <>
+            {console.log("teacher is logged in")}
+            <TeacherAside user={user} />
+          </>
+          )
+          :
+          (
+            <>
+              {console.log("student is logged in")}
+              <h4>Cohorts</h4>
+              <p>the list</p>
+            </>
+          )
+        }
 
       </aside>
     </>
