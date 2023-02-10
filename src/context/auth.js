@@ -42,6 +42,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem("token", res.data.token);
     setToken(res.data.token);
+    setLoggedInUserInfo(res.data.user)
     navigate("/");
     return res
   };
