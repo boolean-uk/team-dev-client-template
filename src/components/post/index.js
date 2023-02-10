@@ -13,10 +13,11 @@ const commentInitialState ={
     text: ""
 }
 
-const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
+
+const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
     const { openModal, setModal } = useModal()
-    const [postContent, setContent] = useState(content)
-    const [formState, setFormState] = useState(commentInitialState)
+    const [postContent, setContent] = useState(content)    
+    const [text, setText] = useState("")
     const userInitials = name.match(/\b(\w)/g)
 
     const [isLiked, setIsLiked] = useState(false)
@@ -26,16 +27,36 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
         openModal()
     }
 
+    const newComment = {
+        userId: props.userId,
+        user: {
+            id: props.userId,
+            // email: props.user.email,
+            // role: props.user.role,
+            // cohortId: props.user.cohort_id,
+            profile: {
+                id: props.userId,
+                userId: props.userId,
+                // firstName: props.user.firstName,
+                // lastName: props.user.lastName,
+                // bio: props.user.biography,
+                // githubUrl: props.user.githubUrl,
+            },
+        },
+        content: text,
+        createdAt: "",
+        updatedAt: "",
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        comments.push(newComment)
+        console.log(comments)        
+    }
+
     function handleChange(event) {
-        const inputValue = event.target.value
+        setText(event.target.value)
     }
-
-    const addComment = (text) => {
-        const newComments = [...formState, {text}]
-        setFormState(newComments)
-    }
-
-
 
     return (
         <Card>
@@ -101,10 +122,12 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                                 type="text"
                                 required
                                 placeholder="Add a comment..."
-                                value={text}
+                                onChange={handleChange}
+                                // value={text}
                             />
-                            <button id="commentSubmitArrow" name="submit">
+                            <button id="commentSubmitArrow" name="submit" onClick={handleSubmit}>
                                 <ArrowRightIcon />
+                                
                                 
                             </button>
                         </form>
