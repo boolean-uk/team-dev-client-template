@@ -37,12 +37,13 @@ const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
     if (!res.data.token) {
-      return navigate("/login");
+      return res;
     }
 
     localStorage.setItem("token", res.data.token);
     setToken(res.data.token);
     navigate("/");
+    return res
   };
 
   const handleLogout = () => {
