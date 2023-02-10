@@ -4,6 +4,7 @@ import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import { validateEmail, validatePassword } from "../../utils/validation";
+import ErrorMessage from "../../components/errorMessage";
 import "./register.css";
 
 
@@ -52,16 +53,8 @@ const Register = () => {
 							name="email"
 							label={"Email *"}
 						/>
-						{isEmailValid === false && 
-							<p className="error-message">
-								Please enter a valid Email e.g: <span className="example">example@email.com</span>
-							</p>
-						}
-						{isEmailTaken === true &&
-							<p className="error-message">
-								Email is already taken.	
-							</p>
-						}
+						{isEmailValid === false && <ErrorMessage message={'Please enter a valid Email e.g: example@email.com'} />}
+						{isEmailTaken === true && <ErrorMessage message={'Email is already taken.'} />}
 						<TextInput
 							value={formData.password}
 							onChange={onChange}
@@ -69,11 +62,7 @@ const Register = () => {
 							label={"Password *"}
 							type={"password"}
 						/>
-						{isPasswordValid === false &&
-							<p className="error-message">
-								Password must contain at least one uppercase letter, one number, one special character and be at least 8 characters long.
-							</p>
-						}
+						{isPasswordValid === false && <ErrorMessage message={'Password must contain at least one uppercase letter, one number, one special character and be at least 8 characters long.'} />}
 					</form>
 					<Button
 						text="Sign up"

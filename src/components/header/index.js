@@ -12,7 +12,8 @@ import { useRef, useState } from "react"
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
-    const menuRef =useRef(null)
+    const menuRef = useRef(null)
+    const { loggedInUserInfo: user } = useAuth()
 
     useOnOutsideClick(menuRef,()=>setIsMenuVisible(false))
      
@@ -35,12 +36,16 @@ const Header = () => {
                     <Card>
                         <section className="post-details">
                             <div className="profile-icon">
-                                <p>AJ</p>
+                                <p>{user.firstName[0].toUpperCase()}{user.lastName[0].toUpperCase()}</p>
                             </div>
 
                             <div className="post-user-name">
-                                <p>Alex Jameson</p>
-                                <small>Software Developer, Cohort 3</small>
+                                <p>{user.firstName} {user.lastName}</p>
+                                {user.role === 'TEACHER' ?
+                                    <small>Teacher</small>
+                                :
+                                    <small>Software Developer, Cohort {user.cohort_id}</small>
+                                }
                             </div>
                         </section>
 

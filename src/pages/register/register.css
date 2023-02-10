@@ -7,11 +7,3 @@
 	gap: 24px;
 	margin-bottom: 40px;
 }
-.register-form .error-message {
-	color: red;
-	opacity: .75;
-}
-.register-form .error-message .example {
-	color: inherit;
-	font-style: italic;
-}
