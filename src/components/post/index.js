@@ -26,8 +26,13 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
         openModal()
     }
 
-    const commentContent = () => {
-        
+    function handleChange(event) {
+        const inputValue = event.target.value
+    }
+
+    const addComment = (text) => {
+        const newComments = [...formState, {text}]
+        setFormState(newComments)
     }
 
 
@@ -96,11 +101,11 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                                 type="text"
                                 required
                                 placeholder="Add a comment..."
-                                // value={text}
-
+                                value={text}
                             />
                             <button id="commentSubmitArrow" name="submit">
                                 <ArrowRightIcon />
+                                
                             </button>
                         </form>
                         
