@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import SearchIcon from "../../assets/icons/searchIcon";
 import PersonCard from "../../components/personCard/PersonCard";
 import { get } from "../../service/apiClient"
+import useAuth from "../../hooks/useAuth"
 import "./style.css";
 
 const Search = () => {
   const [searchVal, setSearchVal] = useState('')
   const [people, setPeople] = useState(null)
   const [isPeopleFound, setIsPeopleFound] = useState(null)
+  const [isTeacher, setIsTeacher] = useState(null)
+  const { loggedInUserInfo } = useAuth()
+
+  useEffect(() => {
+    setIsTeacher(loggedInUserInfo.role === 'TEACHER')
+  },[])
 
   const handleChange = (e) => {
     const value = e.target.value
@@ -63,7 +70,7 @@ const Search = () => {
           <ul>
             {people?.map((person, index) => {
               return (
-                <PersonCard key={index} person={person}/>
+                <PersonCard key={index} person={person} isTeacher={isTeacher}/>
               )
             })}
             {isPeopleFound === false && <p className="nofound text-blue1">No users found</p>}
