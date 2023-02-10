@@ -2,6 +2,8 @@ import { useState } from "react";
 import ProfileCircle from "../../components/profileCircle";
 import CascadingMenu from "../cascadingMenu"
 import './style.css'
+ import { useNavigate } from "react-router-dom";
+
 
 const PersonCard = ({ person, isTeacher }) => {
 
@@ -12,6 +14,10 @@ const PersonCard = ({ person, isTeacher }) => {
     const handleClick = () => {
         setIsMenuVisible(true)
     }
+
+
+    const navigate = useNavigate()
+  
 
     return (
         <li className="personCard">
@@ -24,8 +30,9 @@ const PersonCard = ({ person, isTeacher }) => {
             </div>
 
             <div className="button-wrapper">
-                <button className="profile">
+                <button onClick={() => navigate(`/profile/${person.id}`)} className="profile">
                     <p className="text-blue1">Profile</p>
+                    
                 </button>
 
                 {isTeacher && 
