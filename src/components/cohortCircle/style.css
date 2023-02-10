@@ -19,4 +19,9 @@
     font-weight: 600;
     font-size: 1.1rem;
 }
+
+.horizontal-rule{
+    border-bottom: 2px solid #E6EBF5;
+    margin-bottom: 5px
+}
 /* smth */

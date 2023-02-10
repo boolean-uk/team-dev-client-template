@@ -17,8 +17,6 @@ const StudentList = () => {
         getUserInfo();
     }, []);
 
-    console.log("Students", students)
-
     return (
         <>
             {/* <NameList />  */}
@@ -37,6 +35,8 @@ const StudentList = () => {
                     </section>
                 )
             })}
+
+            <div className="horizontal-rule"></div>
 
             <button className="see-all-students-button">All Students</button>
 

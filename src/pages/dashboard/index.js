@@ -38,8 +38,7 @@ const Dashboard = () => {
       },
     },
   });
-  // C.L caus I dont wanna refresh page
-console.log("user after fetchuser in dashboard index", user)
+
   useEffect(() => {
     const getUserInfo = async () => {
       const res = await get(`users/${userId}`);
@@ -95,6 +94,10 @@ console.log("user after fetchuser in dashboard index", user)
             />
           </form>
         </Card>
+
+        {user.role==="teacher" ?
+        console.log("teacher is logged in"):
+        console.log("student is logged in")}
 
         {/* student dash */}
         {/* <Card>

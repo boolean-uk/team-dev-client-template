@@ -16,7 +16,6 @@ const CohortList = () => {
         getUserInfo();
       }, []);
 
-console.log("cohorts", cohorts)
 
 return (
     <div>
