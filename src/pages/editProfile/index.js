@@ -19,10 +19,11 @@ const EditProfile = () => {
   const [profile, setProfile] = useState(emptyProfile);
   const [formState, setFormState] = useState(profile);
   const [readOnly, setReadOnly] = useState(false)
-  const [passwordPermission, setPasswordPermission] = useState(true)
+  const [passwordPermission, setPasswordPermission] = useState(false)
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
+  const {userId, setUserId} = useState("")
   const { openModal, setModal } = useModal();
   const { loggedInUserInfo } = useAuth();
 
@@ -34,7 +35,7 @@ const EditProfile = () => {
     openModal();
   };
   const cancelChanges = () => {
-    navigate(-1)
+    navigate(`prfoile/${id}`)
   }
 
   const handleChange = (event) => {
@@ -52,21 +53,20 @@ const EditProfile = () => {
 
   const controlPagePermission = () => {
     if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== Number(id)) {
-      navigate(-1)
+      navigate(`profile/${id}`)
     }
     if (loggedInUserInfo.role === "STUDENT") {
       setReadOnly(true)
     }
-    if (loggedInUserInfo.id === Number(id)) {
-      setPasswordPermission(false)
+    if (loggedInUserInfo.id !== Number(id)) {
+      setPasswordPermission(true)
     }
   }
   useEffect(() => {
     profileData()
-  }, [id])
-  useEffect(() => {
     controlPagePermission()
-  }, [profile])
+  }, [id])
+
 
   return (
     <>

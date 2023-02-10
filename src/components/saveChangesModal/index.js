@@ -23,12 +23,12 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
 
     const handleSave = () => {
         handleSubmit()
-        if(isError === true){
-
-        }
-        else{
+        if(isError === false){
             closeModal()
             navigate(`/profile/${id}`)
+        }
+        if(isError === true){
+            console.log("there is an error")
         }
         return (
             <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
@@ -49,11 +49,10 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
             if (loggedInUserInfo.role === "TEACHER") {
                 data.role = editedProfile.role
                 data.cohortId = editedProfile.cohortId
-
-                patch(endpoint, editedProfile)
-                    .catch((error) => { setIsError(true) })
-
-            }
+              }
+            
+            patch(endpoint, editedProfile)
+                .catch((error) => { setIsError(true) })
         }
         formDataPATCH()
     }
