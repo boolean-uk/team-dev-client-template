@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Form from "../../components/form";
 import TextInput from "../../components/form/textInput";
 import Button from "../../components/button";
 import ProfileCircle from "../../components/profileCircle";
@@ -38,7 +37,7 @@ const EditProfile = () => {
   const { id } = useParams()
   const { openModal, setModal } = useModal();
   const token = localStorage.getItem("token");
-  
+
   const ProfileImg = () => {
     if (profile.profileImageUrl === "") {
       return <ProfileCircle
@@ -54,6 +53,7 @@ const EditProfile = () => {
     const res = await get(`users/${userId}`);
     console.log("RESPONSE: ", res.data.user);
     setLoggedInUserInfo(res.data.user);
+
   };
 
   const showModal = (event) => {
@@ -64,7 +64,7 @@ const EditProfile = () => {
   const cancelChanges = () => {
     navigate(-1)
   }
-  
+
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -79,21 +79,22 @@ const EditProfile = () => {
     res.data.user ? setFormState(res.data.user) : setIsError(true);
     res.data.user ? setProfile(res.data.user) : setIsError(true)
     console.log("RESPONSE from GET: ", res.data.user)
-    // console.log("success or fail?", res.data.status)
-    console.log("this is form state", formState)
     console.log("this is id", id)
   };
 
   const controlPagePermission = () => {
-    if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== profile.id) {
-      setIsError(true)
-      return console.log("controls are firing") 
-    }
+    console.log('Statement input', typeof loggedInUserInfo.id, typeof Number(id))
+    if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== Number(id)) {
+      // setIsError(true)
+      navigate(-1)
+      console.log("this is the logged in user role", )
+      console.log("controls are firing")
+      }
     if (loggedInUserInfo.role === "STUDENT") {
       setReadOnly(true)
       console.log("this is the read onlystatus", readOnly)
     }
-    if (loggedInUserInfo.id === profile.id) {
+    if (loggedInUserInfo.id === id) {
       setPasswordPermission(false)
 
     }
@@ -101,15 +102,13 @@ const EditProfile = () => {
   useEffect(() => {
     getUserInfo()
     profileData()
-    
-    
-    controlPagePermission()
-    console.log("this is the password permission", passwordPermission)
-    console.log("this is profile.id", profile.id)
-
+    console.log("this is ID", id)
+    console.log("this is the profile", profile)
   }, [id])
-  console.log("this is the profile", profile)
-
+  useEffect(() => {
+    controlPagePermission()    
+  }, [profile])
+  
   return (
     <>
       {isError === true && <ErrorMessage message={"PROFILE NOT FOUND"} />}
@@ -207,8 +206,8 @@ const EditProfile = () => {
                   <TextInput
                     label="Role*"
                     name="role"
-                    // value={profile.cohort}
-                    // onChange={handleChange}
+                  // value={profile.cohort}
+                  // onChange={handleChange}
                   />
                   <TextInput
                     label="Specialism*"
@@ -250,7 +249,7 @@ const EditProfile = () => {
               </section>
               <section className="bioSection">
                 <h2>Bio</h2>
-                <textarea label="Bio" name="biography" value={formState.biography} editable rows={20} maxLength="300" onChange={handleChange} />
+                <textarea label="Bio" name="biography" value={formState.biography} rows={20} maxLength="300" onChange={handleChange} />
                 <label htmlFor="bio" >{formState.biography.length}/300</label>
               </section>
               <section className="footer">
