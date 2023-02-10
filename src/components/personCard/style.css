@@ -35,10 +35,16 @@
     position: relative;
     cursor: pointer;
 }
+.moveToCohort {
+    position: relative;
+}
 .people {
     text-align: left;
     margin-bottom: 10px;
 }
 .searchMenu {
     transform: translate(-150%);
+}
+.moveMenu {
+    top: 50px;
 }
