@@ -26,7 +26,12 @@ const TeacherList = () => {
                         <ProfileCircle
                             initials={userInitials}
                         />
-                        <p className="list-user-name">{teacher.firstName}{teacher.lastName}</p>
+
+                        <div>
+                            <p className="list-user-name">{teacher.firstName}{teacher.lastName}</p>
+                            <p>{teacher.specialism === "" ? "Software Development" : `${teacher.specialism}`}</p>
+                        </div>
+
                         <div className="edit-icon">
                             <p>...</p>
                         </div>

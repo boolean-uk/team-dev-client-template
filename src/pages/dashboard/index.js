@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { get } from "../../service/apiClient";
 
 import TeacherAside from "./teacherAside";
+import StudentList from "../../components/teacherDash/StudentList";
 
 const Dashboard = () => {
   const { token } = useAuth();
@@ -96,17 +97,15 @@ const Dashboard = () => {
         {user.email === "teacher@test.com"
           ?
           (
-          <>
-            {console.log("teacher is logged in")}
-            <TeacherAside user={user} />
-          </>
+            <>
+              <TeacherAside user={user} />
+            </>
           )
           :
           (
             <>
-              {console.log("student is logged in")}
               <h4>Cohorts</h4>
-              <p>the list</p>
+              <p>NameList tbd</p>
             </>
           )
         }

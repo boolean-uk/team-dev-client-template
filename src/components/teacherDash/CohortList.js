@@ -16,7 +16,7 @@ const CohortList = () => {
         getUserInfo();
       }, []);
 
-
+console.log("cohorts", cohorts)
 return (
     <div>
       {cohorts &&
@@ -27,7 +27,10 @@ return (
                 <p><SquareBracketsIcon /></p>
               </div>
 
-              <div className="post-user-name">
+              <div >
+                <p>
+                  <strong>{cohort.specialism === "" ? "Software Development" : `${cohort.specialism}`}</strong>
+                  </p>
                 <p>Cohort {cohort.cohort_id === null ? "(null)" : `${cohort.cohort_id}`}</p>
               </div>
 

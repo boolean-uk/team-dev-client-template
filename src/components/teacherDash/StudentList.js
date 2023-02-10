@@ -26,7 +26,10 @@ const StudentList = () => {
                     <section key={student.id} className="create-post-user-details lists-teacher-view">
 
                         <ProfileCircle initials={userInitials} />
-                        <p className="list-user-name"> {student.firstName} {student.lastName}</p>
+                        <div>
+                            <p className="list-user-name"> {student.firstName} {student.lastName}</p>
+                            <p>{student.specialism === "" ? "Software Development" : `${student.specialism}`}</p>
+                        </div>
                         <div className="edit-icon">
                             <p>...</p>
                             {/* <CascadingMenu /> */}
