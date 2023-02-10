@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ProfileCircle from "../../components/profileCircle";
 import CascadingMenu from "../cascadingMenu"
+import Menu from "../menu"
+import MenuItem from "../menu/menuItem"
+import MonitorIcon from "../../assets/icons/monitorIcon"
+import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
+import CohortIconFill from "../../assets/icons/cohortIcon-fill"
 import './style.css'
- import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 const PersonCard = ({ person, isTeacher }) => {
 
     const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const [isMoveVisible, setIsMoveVisible] = useState(false)
     const name = `${person.firstName} ${person.lastName}`
     const userInitials = name.match(/\b(\w)/g)
 
@@ -42,8 +48,9 @@ const PersonCard = ({ person, isTeacher }) => {
                 }
 
                 {isTeacher &&  
-                    <button className="moveToCohort"> 
+                    <button className="moveToCohort" onClick={()=>setIsMoveVisible(true)}> 
                         <p className="text-blue1"> Move to cohort</p>
+                        {isMoveVisible && <MoveToCohortMenu setIsMoveVisible={setIsMoveVisible}/>}
                     </button>
                 }
             </div>
@@ -53,6 +60,33 @@ const PersonCard = ({ person, isTeacher }) => {
                 {isMenuVisible && <CascadingMenu name={'searchMenu'} setIsMenuVisible={setIsMenuVisible} />}
             </div>
         </li>
+    )
+}
+
+
+
+const MoveToCohortMenu = ({ setIsMoveVisible }) => {
+
+    const moveRef = useRef(null)
+
+    useOnOutsideClick(moveRef, ()=>setIsMoveVisible(false))
+
+    return (
+        <div ref={moveRef}>
+            <Menu className='moveMenu'>
+                <MenuItem icon={<SquareBracketsIcon />} text='Software Development'>
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 1' />
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 2' />
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 3' />
+                </MenuItem>
+
+                <MenuItem icon={<MonitorIcon />} text='Frontend Development'>
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 1' />
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 2' />
+                    <MenuItem icon={<CohortIconFill />} text='Cohort 3' />
+                </MenuItem>
+            </Menu>
+        </div>
     )
 }
 
