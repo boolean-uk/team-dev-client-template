@@ -24,7 +24,7 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
     const handleSave = () => {
         handleSubmit()
         if(isError === true){
-            
+
         }
         else{
             closeModal()
@@ -54,8 +54,8 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
                     .catch((error) => { setIsError(true) })
 
             }
-            formDataPATCH()
         }
+        formDataPATCH()
     }
     return (
         <>
