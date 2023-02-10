@@ -17,25 +17,24 @@ import ProfileImg from "../../components/profileImage/ProfileImage";
 
 const EditProfile = () => {
   const [profile, setProfile] = useState(emptyProfile);
-  const [formState, setFormState] = useState(profile);
+  const [formState, setFormState] = useState(emptyProfile);
   const [readOnly, setReadOnly] = useState(false)
   const [passwordPermission, setPasswordPermission] = useState(false)
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
-  const {userId, setUserId} = useState("")
+  const [userId, setUserId] = useState(id)
+
   const { openModal, setModal } = useModal();
   const { loggedInUserInfo } = useAuth();
 
- 
-
   const showModal = (event) => {
     event.preventDefault()
-    setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={id} formState={formState} />);
+    setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} formState={formState} />);
     openModal();
   };
   const cancelChanges = () => {
-    navigate(`prfoile/${id}`)
+    navigate(`profile/${userId}`)
   }
 
   const handleChange = (event) => {
@@ -46,26 +45,34 @@ const EditProfile = () => {
     setFormState(newFormState)
   }
   const profileData = async () => {
-    const res = await get(`users/${id}`);
+    const res = await get(`users/${userId}`);
     res.data.user ? setFormState(res.data.user) : setIsError(true);
     res.data.user ? setProfile(res.data.user) : setIsError(true)
   };
 
   const controlPagePermission = () => {
-    if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== Number(id)) {
-      navigate(`profile/${id}`)
+    if (!userId) {
+      return
+    }
+    if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== Number(userId)) {
+      navigate(`profile/${userId}`)
     }
     if (loggedInUserInfo.role === "STUDENT") {
       setReadOnly(true)
     }
-    if (loggedInUserInfo.id !== Number(id)) {
+    if (loggedInUserInfo.id !== Number(userId)) {
       setPasswordPermission(true)
     }
   }
   useEffect(() => {
+
+    if (id !== userId) {
+      setUserId(id)
+    }
     profileData()
     controlPagePermission()
-  }, [id])
+
+  }, [userId])
 
 
   return (
@@ -119,8 +126,8 @@ const EditProfile = () => {
                   onChange={handleChange}
                 />
               </section>
-
-              {profile.role === "STUDENT" ?
+           
+              {profile.role === ""||profile.role === "STUDENT" ?
                 <section className="trainingInfoSection text-input-containers">
                   <h2>Training Info</h2>
                   <TextInput
@@ -214,7 +221,7 @@ const EditProfile = () => {
               <section className="footer">
                 <p>Required*</p>
                 <Button text={"Cancel"} onClick={cancelChanges} classes="offwhite width-full" />
-                <Button text={"save"} type={"submit"} classes="blue width-full" />
+                <Button text={"save"} type={"submit"}  classes="blue width-full" />
               </section>
             </form>
 
