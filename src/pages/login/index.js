@@ -3,27 +3,22 @@ import Button from "../../components/button";
 import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
-import ErrorMessage from "../../components/errorMessage"
+import ErrorMessage from "../../components/errorMessage";
 import "./login.css";
 
 const Login = () => {
 	const { onLogin } = useAuth();
 	const [formData, setFormData] = useState({ email: "", password: "" });
-	const [error, setError] = useState(null)
-
-	const { token } = useAuth()
+	const [error, setError] = useState(null);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handleLogin = () => {
-		const attemptLogin = async () => {
-			const res = await onLogin(formData.email, formData.password)
-			res.status === 'fail' ? setError(true) : setError(false)
-		}
-		attemptLogin()
+    const handleLogin = async () => {
+        const res = await onLogin(formData.email, formData.password);
+        res.status === 'fail' ? setError(true) : setError(false);	
 	}
 
 

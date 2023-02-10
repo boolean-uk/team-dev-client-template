@@ -13,8 +13,7 @@ const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const menuRef = useRef(null)
-    const { loggedInUserInfo } = useAuth()
-    const user = loggedInUserInfo
+    const { loggedInUserInfo: user } = useAuth()
 
     useOnOutsideClick(menuRef,()=>setIsMenuVisible(false))
      
