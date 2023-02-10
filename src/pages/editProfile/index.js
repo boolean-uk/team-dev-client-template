@@ -10,33 +10,20 @@ import ErrorMessage from "../../components/errorMessage";
 import "./style.css";
 import SaveChangesModal from "../../components/saveChangesModal"
 import { get } from "../../service/apiClient";
-import jwt_decode from "jwt-decode";
-const initialProfile = {
-  firstName: "person",
-  cohortId: 0,
-  lastName: "personlastname",
-  userName: "username",
-  githubUsername: "githubuser5000",
-  email: "test@test.com",
-  phone: "4835798248",
-  biography: "this is the bio",
-  githubUrl: "www.github.com/something",
-  password: "password",
-  image: "",
-  role: "student",
-};
+import { emptyProfile } from "../../service/mockData";
+import useAuth from "../../hooks/useAuth";
+
 
 const EditProfile = () => {
-  const [profile, setProfile] = useState(initialProfile);
+  const [profile, setProfile] = useState(emptyProfile);
   const [formState, setFormState] = useState(profile);
   const [readOnly, setReadOnly] = useState(false)
   const [passwordPermission, setPasswordPermission] = useState(true)
-  const [loggedInUserInfo, setLoggedInUserInfo] = useState("")
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate()
   const { id } = useParams()
   const { openModal, setModal } = useModal();
-  const token = localStorage.getItem("token");
+  const { loggedInUserInfo } = useAuth();
 
   const ProfileImg = () => {
     if (profile.profileImageUrl === "") {
@@ -45,14 +32,6 @@ const EditProfile = () => {
       />
     }
     else { return (<img className="profile-icon" src={profile.profileImageUrl} alt="profile Image"></img>); }
-
-  };
-
-  const getUserInfo = async () => {
-    const { userId } = jwt_decode(token);
-    const res = await get(`users/${userId}`);
-    console.log("RESPONSE: ", res.data.user);
-    setLoggedInUserInfo(res.data.user);
 
   };
 
@@ -65,7 +44,6 @@ const EditProfile = () => {
     navigate(-1)
   }
 
-
   const handleChange = (event) => {
     const value = event.target.value
     const name = event.target.name
@@ -75,40 +53,28 @@ const EditProfile = () => {
   }
   const profileData = async () => {
     const res = await get(`users/${id}`);
-
     res.data.user ? setFormState(res.data.user) : setIsError(true);
     res.data.user ? setProfile(res.data.user) : setIsError(true)
-    console.log("RESPONSE from GET: ", res.data.user)
-    console.log("this is id", id)
   };
 
   const controlPagePermission = () => {
-    console.log('Statement input', typeof loggedInUserInfo.id, typeof Number(id))
     if (loggedInUserInfo.role === "STUDENT" && loggedInUserInfo.id !== Number(id)) {
-      // setIsError(true)
       navigate(-1)
-      console.log("this is the logged in user role", )
-      console.log("controls are firing")
-      }
+    }
     if (loggedInUserInfo.role === "STUDENT") {
       setReadOnly(true)
-      console.log("this is the read onlystatus", readOnly)
     }
-    if (loggedInUserInfo.id === id) {
+    if (loggedInUserInfo.id === Number(id)) {
       setPasswordPermission(false)
-
     }
   }
   useEffect(() => {
-    getUserInfo()
     profileData()
-    console.log("this is ID", id)
-    console.log("this is the profile", profile)
   }, [id])
   useEffect(() => {
-    controlPagePermission()    
+    controlPagePermission()
   }, [profile])
-  
+
   return (
     <>
       {isError === true && <ErrorMessage message={"PROFILE NOT FOUND"} />}
@@ -202,12 +168,12 @@ const EditProfile = () => {
                 </section>
                 :
                 <section className="proffesional-info-section">
-                  <h2>Proffessional Info</h2>
+                  <h2>Professional Info</h2>
                   <TextInput
                     label="Role*"
                     name="role"
-                  // value={profile.cohort}
-                  // onChange={handleChange}
+                    value={profile.cohort}
+                    onChange={handleChange}
                   />
                   <TextInput
                     label="Specialism*"
