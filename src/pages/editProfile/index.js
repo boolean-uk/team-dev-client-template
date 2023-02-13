@@ -31,7 +31,6 @@ const EditProfile = () => {
 
   const showModal = (event) => {
     event.preventDefault()
-    console.log("5. no password",noPassword, formState.password)
     if(!formState.password){
       setNopassword(true)    
     }
@@ -54,7 +53,6 @@ const EditProfile = () => {
   }
   const profileData = async () => {
     const res = await get(`users/${userId}`);
-    console.log("data from get request", res.data.user)
     res.data.user ? setFormState(res.data.user) : setIsError(true);
     res.data.user ? setProfile(res.data.user) : setIsError(true)
   };
@@ -74,7 +72,7 @@ const EditProfile = () => {
     }
   }
   useEffect(() => {
-    console.log("4. user effect triggerd")
+    
     if (id !== userId) {
       setUserId(id)
     }
@@ -221,7 +219,7 @@ const EditProfile = () => {
                   onChange={handleChange}
                   permission={passwordPermission}
                 />
-                {noPassword && <p>please add a password to submit changes</p>}
+                {noPassword && <ErrorMessage message={"Pleas add a password to submit changes"} />}
               </section>
               <section className="bioSection">
                 <h2>Bio</h2>

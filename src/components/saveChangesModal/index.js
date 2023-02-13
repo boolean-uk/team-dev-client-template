@@ -30,15 +30,11 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
         if(isError === true){
             console.log("there is an error")
         }
-        // return (
-        //     <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
-        // )
+      
     }
     const handleSubmit = async () => {
         const editedProfile = formState
-        const formDataPATCH = async () => {
-            console.log("1. form data patch this is the edited profile", editedProfile)
-           
+        const formDataPATCH = async () => {         
             const endpoint = `users/${id}`
             const data = {
                 email: editedProfile.email,
@@ -54,10 +50,8 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
                 data.role = editedProfile.role
                 data.cohortId = editedProfile.cohortId
               }
-            
-            console.log("3. data from editedprofile before patch", data)
-            patch(endpoint, data)
-               .catch((error) => {setIsError(true) })
+            const res = await patch(endpoint, data)
+            console.log(res)
         }
         formDataPATCH()
     }
