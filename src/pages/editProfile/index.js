@@ -34,7 +34,7 @@ const EditProfile = () => {
       setHasUserEnterdPassword(true)
     }
     else {
-      setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} editedProfile={formState} />);
+      setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} formState={formState} />);
       setHasUserEnterdPassword(false)
       openModal();
     }
@@ -154,7 +154,7 @@ const EditProfile = () => {
                   <TextInput
                     label="Cohort*"
                     name="cohortId"
-                    value={formState.cohortId}
+                    value={formState.cohort_id}
                     onChange={handleChange}
                     readOnly={readOnly}
                   />

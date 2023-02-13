@@ -6,7 +6,7 @@ import Button from '../button'
 import { patch } from "../../service/apiClient";
 import ErrorMessage from "../errorMessage";
 
-const SaveChangesModal = ({ editedProfile, id, loggedInUserInfo }) => {
+const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
     const [isError, setIsError] = useState(false)
     const { closeModal } = useModal()
     const navigate = useNavigate()
@@ -34,19 +34,20 @@ const SaveChangesModal = ({ editedProfile, id, loggedInUserInfo }) => {
     const handleSubmit = async () => {    
             const endpoint = `users/${id}`
             const data = {
-                email: editedProfile.email,
-                firstName: editedProfile.firstName,
-                lastName: editedProfile.lastName,
-                biography: editedProfile.biography,
-                githubUrl: editedProfile.githubUrl
+                email: formState.email,
+                firstName: formState.firstName,
+                lastName: formState.lastName,
+                biography: formState.biography,
+                githubUrl: formState.githubUrl
             }
-            if (!editedProfile.password) {
+            
+            if (formState.password) {
                 console.log("2. adding password")
-                data.password = editedProfile.password
+                data.password = formState.password
             }
             if (loggedInUserInfo.role === "TEACHER") {
-                data.role = editedProfile.role
-                data.cohortId = editedProfile.cohortId
+                data.role = formState.role
+                data.cohort_id = formState.cohort_id
             }
             console.log("1.handle submit, this is data",data)
             await patch(endpoint, data)
