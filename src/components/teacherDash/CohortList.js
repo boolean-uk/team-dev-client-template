@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react"
 import { get } from "../../service/apiClient";
 
-import CohortCircle from "../cohortCircle";
+import CascadingMenu from "../cascadingMenu";
+import useModal from "../../hooks/useModal";
+
 import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 
 
 const CohortList = () => {
-    const [cohorts, setCohorts] = useState([]);
+  const [cohorts, setCohorts] = useState([]);
 
-    useEffect(() => {
-        const getUserInfo = async () => {
-          const res = await get(`users?cohortId`);
-          setCohorts(res.data.users);
-        };
-        getUserInfo();
-      }, []);
+  const { openModal, setModal } = useModal();
 
-console.log("cohorts", cohorts)
-return (
+  const showModal = () => {
+    setModal("Create a post", <CascadingMenu className="cascading-menu-modal"/>); 
+    openModal();
+  };
+
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const res = await get(`users?cohortId`);
+      setCohorts(res.data.users);
+    };
+    getUserInfo();
+  }, []);
+
+  return (
     <div>
       {cohorts &&
         cohorts.map(cohort => {
@@ -30,11 +39,15 @@ return (
               <div >
                 <p>
                   <strong>{cohort.specialism === "" ? "Software Development" : `${cohort.specialism}`}</strong>
-                  </p>
+                </p>
                 <p>Cohort {cohort.cohort_id === null ? "(null)" : `${cohort.cohort_id}`}</p>
               </div>
 
-              <div className="edit-icon">
+              <div className="edit-icon"
+                onClick={() => {
+                  showModal();
+                }
+                }>
                 <p>...</p>
               </div>
             </section>
@@ -45,7 +58,7 @@ return (
     </div>
   );
 }
-    
+
 
 
 export default CohortList;

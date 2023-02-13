@@ -94,7 +94,7 @@ const Dashboard = () => {
           </form>
         </Card>
 
-        {user.email === "teacher@test.com"
+        {user.role === "TEACHER"
           ?
           (
             <>

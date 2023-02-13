@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
+import { get } from "../../service/apiClient";
+import useModal from "../../hooks/useModal";
+
 import CascadingMenu from "../cascadingMenu";
 import ProfileCircle from "../profileCircle";
-import { get } from "../../service/apiClient";
 // import nameList from "placeholder"
 import "./style.css";
 
-
 const StudentList = () => {
     const [students, setStudents] = useState([])
+   
+    const { openModal, setModal } = useModal();
+
+    const showModal = () => {
+      setModal("Create a post", <CascadingMenu className="cascading-menu-modal"/>); 
+      openModal();
+    };
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -30,9 +38,12 @@ const StudentList = () => {
                             <p className="list-user-name"> {student.firstName} {student.lastName}</p>
                             <p>{student.specialism === "" ? "Software Development" : `${student.specialism}`}</p>
                         </div>
-                        <div className="edit-icon">
+                        <div className="edit-icon"
+                            onClick={() => {
+                                showModal();
+                            }
+                            }>
                             <p>...</p>
-                            {/* <CascadingMenu /> */}
                         </div>
                     </section>
                 )
