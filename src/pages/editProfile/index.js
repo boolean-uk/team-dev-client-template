@@ -21,21 +21,21 @@ const EditProfile = () => {
   const [readOnly, setReadOnly] = useState(false)
   const [passwordPermission, setPasswordPermission] = useState(false)
   const [isError, setIsError] = useState(false);
-  const [noPassword, setNopassword] = useState(false)
+  const [hasUserEnterdPassword, setHasUserEnterdPassword] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
   const [userId, setUserId] = useState(id)
-
   const { openModal, setModal } = useModal();
   const { loggedInUserInfo } = useAuth();
 
   const showModal = (event) => {
     event.preventDefault()
-    if(!formState.password){
-      setNopassword(true)    
+    if (!formState.password) {
+      setHasUserEnterdPassword(true)
     }
-    else{
-      setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} formState={formState} />);
+    else {
+      setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} editedProfile={formState} />);
+      setHasUserEnterdPassword(false)
       openModal();
     }
   };
@@ -48,7 +48,7 @@ const EditProfile = () => {
     const name = event.target.name
     const newFormState = { ...formState }
     newFormState[name] = value
-    
+
     setFormState(newFormState)
   }
   const profileData = async () => {
@@ -72,7 +72,7 @@ const EditProfile = () => {
     }
   }
   useEffect(() => {
-    
+
     if (id !== userId) {
       setUserId(id)
     }
@@ -97,7 +97,7 @@ const EditProfile = () => {
                 <h4>
                   {profile.firstName} {profile.lastName}
                 </h4>
-                <p>{profile.specialism}this is the specialism</p>
+                <p>{profile.specialism}</p>
               </div>
             </div>
 
@@ -133,8 +133,8 @@ const EditProfile = () => {
                   onChange={handleChange}
                 />
               </section>
-           
-              {profile.role === ""||profile.role === "STUDENT" ?
+
+              {profile.role === "" || profile.role === "STUDENT" ?
                 <section className="trainingInfoSection text-input-containers">
                   <h2>Training Info</h2>
                   <TextInput
@@ -219,7 +219,7 @@ const EditProfile = () => {
                   onChange={handleChange}
                   permission={passwordPermission}
                 />
-                {noPassword && <ErrorMessage message={"Pleas add a password to submit changes"} />}
+                {hasUserEnterdPassword && <ErrorMessage message={"Please add a password to submit changes"} />}
               </section>
               <section className="bioSection">
                 <h2>Bio</h2>
@@ -229,7 +229,7 @@ const EditProfile = () => {
               <section className="footer">
                 <p>Required*</p>
                 <Button text={"Cancel"} onClick={cancelChanges} classes="offwhite width-full" />
-                <Button text={"save"} type={"submit"}  classes="blue width-full" />
+                <Button text={"save"} type={"submit"} classes="blue width-full" />
               </section>
             </form>
 

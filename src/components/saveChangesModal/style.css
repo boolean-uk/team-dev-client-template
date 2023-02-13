@@ -2,11 +2,6 @@
 .save-changes-details {
     display: inline;
 }
-
-.save-changes-details {
-
-}
-
 .save-changes-actions {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
