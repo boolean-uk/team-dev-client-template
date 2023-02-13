@@ -37,6 +37,7 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
     const handleSubmit = () => {
         const editedProfile = formState
         const formDataPATCH = async () => {
+            console.log("1. form data patch this is the edited profile", editedProfile)
             const endpoint = `users/${id}`
             const data = {
                 email: editedProfile.email,
@@ -51,8 +52,9 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
                 data.cohortId = editedProfile.cohortId
               }
             
-            patch(endpoint, editedProfile)
-                .catch((error) => { setIsError(true) })
+            patch(endpoint, data)
+               
+            .catch((error) => {setIsError(true) })
         }
         formDataPATCH()
     }
