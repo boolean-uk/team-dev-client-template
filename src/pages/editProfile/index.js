@@ -51,6 +51,7 @@ const EditProfile = () => {
 
     setFormState(newFormState)
   }
+
   const profileData = async () => {
     const res = await get(`users/${userId}`);
     res.data.user ? setFormState(res.data.user) : setIsError(true);
@@ -72,15 +73,12 @@ const EditProfile = () => {
     }
   }
   useEffect(() => {
-
     if (id !== userId) {
       setUserId(id)
     }
     profileData()
     controlPagePermission()
-
   }, [userId])
-
 
   return (
     <>
@@ -100,8 +98,7 @@ const EditProfile = () => {
                 <p>{profile.specialism}</p>
               </div>
             </div>
-
-            <form onSubmit={showModal}>
+            <form className="edit-profile-form" onSubmit={showModal}>
               <section className="basicInfoSection text-input-containers">
                 <h2>Basic Info</h2>
                 <div className="headshot-container">
@@ -133,7 +130,6 @@ const EditProfile = () => {
                   onChange={handleChange}
                 />
               </section>
-
               {profile.role === "" || profile.role === "STUDENT" ?
                 <section className="trainingInfoSection text-input-containers">
                   <h2>Training Info</h2>
@@ -232,7 +228,6 @@ const EditProfile = () => {
                 <Button text={"save"} type={"submit"} classes="blue width-full" />
               </section>
             </form>
-
           </Card>
         </div>
       )}
@@ -240,5 +235,3 @@ const EditProfile = () => {
   );
 };
 export default EditProfile;
-
-/* */

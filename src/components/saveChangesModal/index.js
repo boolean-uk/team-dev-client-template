@@ -27,7 +27,7 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
             navigate(`/profile/${id}`)
         }
         if (isError === true) {
-            console.log("there is an error")
+            console.log("Error saving profile, Please try again")
         }
 
     }
@@ -48,7 +48,6 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
                 data.role = formState.role
                 data.cohort_id = formState.cohort_id
             }
-            
             await patch(endpoint, data)
     }
     return (

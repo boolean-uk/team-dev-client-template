@@ -23,7 +23,6 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text", readOnly
 						type="text"
 						name={name}
 						value={input}
-
 						className="passwordreveal"
 						onChange={(e) => {
 							onChange(e);
