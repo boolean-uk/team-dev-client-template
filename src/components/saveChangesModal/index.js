@@ -42,14 +42,13 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
             }
             
             if (formState.password) {
-                console.log("2. adding password")
                 data.password = formState.password
             }
             if (loggedInUserInfo.role === "TEACHER") {
                 data.role = formState.role
                 data.cohort_id = formState.cohort_id
             }
-            console.log("1.handle submit, this is data",data)
+            
             await patch(endpoint, data)
     }
     return (
