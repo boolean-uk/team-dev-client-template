@@ -21,6 +21,7 @@ const EditProfile = () => {
   const [readOnly, setReadOnly] = useState(false)
   const [passwordPermission, setPasswordPermission] = useState(false)
   const [isError, setIsError] = useState(false);
+  const [noPassword, setNopassword] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
   const [userId, setUserId] = useState(id)
@@ -30,8 +31,14 @@ const EditProfile = () => {
 
   const showModal = (event) => {
     event.preventDefault()
-    setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} formState={formState} />);
-    openModal();
+    console.log("5. no password",noPassword, formState.password)
+    if(!formState.password){
+      setNopassword(true)    
+    }
+    else{
+      setModal(<SaveChangesModal loggedInUserInfo={loggedInUserInfo} id={userId} formState={formState} />);
+      openModal();
+    }
   };
   const cancelChanges = () => {
     navigate(`profile/${userId}`)
@@ -42,10 +49,12 @@ const EditProfile = () => {
     const name = event.target.name
     const newFormState = { ...formState }
     newFormState[name] = value
+    
     setFormState(newFormState)
   }
   const profileData = async () => {
     const res = await get(`users/${userId}`);
+    console.log("data from get request", res.data.user)
     res.data.user ? setFormState(res.data.user) : setIsError(true);
     res.data.user ? setProfile(res.data.user) : setIsError(true)
   };
@@ -65,7 +74,7 @@ const EditProfile = () => {
     }
   }
   useEffect(() => {
-
+    console.log("4. user effect triggerd")
     if (id !== userId) {
       setUserId(id)
     }
@@ -212,6 +221,7 @@ const EditProfile = () => {
                   onChange={handleChange}
                   permission={passwordPermission}
                 />
+                {noPassword && <p>please add a password to submit changes</p>}
               </section>
               <section className="bioSection">
                 <h2>Bio</h2>

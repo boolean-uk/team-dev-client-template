@@ -21,8 +21,8 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
         navigate(`/profile/${id}/edit`)
     }
 
-    const handleSave = () => {
-        handleSubmit()
+    const handleSave = async () => {
+        await handleSubmit()
         if(isError === false){
             closeModal()
             navigate(`/profile/${id}`)
@@ -30,31 +30,34 @@ const SaveChangesModal = ({ formState, id, loggedInUserInfo }) => {
         if(isError === true){
             console.log("there is an error")
         }
-        return (
-            <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
-        )
+        // return (
+        //     <Toast text="profile saved!" linkText="Edit" linkTo="/profile/edit" />
+        // )
     }
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const editedProfile = formState
         const formDataPATCH = async () => {
             console.log("1. form data patch this is the edited profile", editedProfile)
+           
             const endpoint = `users/${id}`
             const data = {
                 email: editedProfile.email,
-                password: editedProfile.password,
                 firstName: editedProfile.firstName,
                 lastName: editedProfile.lastName,
                 biography: editedProfile.biography,
                 githubUrl: editedProfile.githubUrl
-            }
+                }
+                if(editedProfile.password !== undefined){
+                    data.password = editedProfile.password
+                }
             if (loggedInUserInfo.role === "TEACHER") {
                 data.role = editedProfile.role
                 data.cohortId = editedProfile.cohortId
               }
             
+            console.log("3. data from editedprofile before patch", data)
             patch(endpoint, data)
-               
-            .catch((error) => {setIsError(true) })
+               .catch((error) => {setIsError(true) })
         }
         formDataPATCH()
     }
