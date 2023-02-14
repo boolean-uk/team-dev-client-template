@@ -81,28 +81,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
                 <CreateComment />
-                {/* <section className="commentForm"> */}
-                    {/* <div> */}
-                        {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}
-                        {/* <ProfileCircle initials={userInitials} /> */}
-                    {/* </div> */}
-                    {/* <div> */}
-                        {/* <form className="commentPost"> */}
-                            {/* <input */}
-                                {/* // type="text" */}
-                                {/* // required */}
-                                {/* // placeholder="Add a comment..." */}
-                                {/* // onChange={handleChange} */}
-                                {/* // value={text} */}
-                            {/* /> */}
-                            {/* <button id="commentSubmitArrow" name="submit" onClick={handleSubmit}> */}
-                                {/* <ArrowRightIcon />                                 */}
-                                
-                            {/* </button> */}
-                        {/* </form> */}
-                        
-                    {/* </div> */}
-                {/* </section> */}
+                
             </article>
         </Card >
     )

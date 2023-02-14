@@ -8,12 +8,11 @@ import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode";
 
 const CreateComment = () => {
+    // Long form of getting user info, need to sort out to do it with props
     const { token } = useAuth();
     const { userId } = jwt_decode(token);
 
-    const [text, setText] = useState("")
-
-    const [searchVal, setSearchVal] = useState("");
+    const [text, setText] = useState("")    
     const [user, setUser] = useState({
         userId: "",
         user: {
@@ -68,11 +67,10 @@ const CreateComment = () => {
         event.preventDefault()
         // Here we will need to post the comment to the server
         // Note what needs to be posted with the request and the variable names
-        // apiClient does not have a bit for comments, may need to wait until the comments are done server side
+        
         
         // comment.push(newComment)
-        // console.log(comment)
-        console.log(newComment.user)      
+        // console.log(comment)             
     }
 
     function handleChange(event) {
@@ -81,8 +79,7 @@ const CreateComment = () => {
 
     return (
         <section className="commentForm">
-            <div> 
-                {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}
+            <div>                
                 <ProfileCircle initials={userInitials} />
             </div>
             <div>
@@ -92,11 +89,10 @@ const CreateComment = () => {
                         required
                         placeholder="Add a comment..."
                         onChange={handleChange}
-                        // value={text}
+                        value={text}
                     />
                     <button id="commentSubmitArrow" name="submit" onClick={handleSubmit}>
                             <ArrowRightIcon />                                
-                                
                     </button>
                 </form>
                         
