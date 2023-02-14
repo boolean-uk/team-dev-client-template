@@ -20,8 +20,7 @@ const Posts = (props) => {
                         date={setTimeFormat}
                         content={post.content}
                         comments={post.comments}
-                        id={post.id}
-                        user={props.user}
+                        id={post.id}                        
                     />
             })}
         </>

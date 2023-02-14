@@ -15,7 +15,7 @@ const commentInitialState ={
 }
 
 
-const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
+const Post = ({ name, date, content, comments = [], id, likes = 0 }) => {
     const { openModal, setModal } = useModal()
     const [postContent, setContent] = useState(content)    
     const [text, setText] = useState("")
@@ -80,7 +80,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
-                <CreateComment user={props.user}/>
+                <CreateComment />
                 {/* <section className="commentForm"> */}
                     {/* <div> */}
                         {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}

@@ -3,27 +3,60 @@ import Comment from "../comment"
 import ProfileCircle from "../profileCircle"
 import ArrowRightIcon from "../../assets/icons/arrowRightIcon"
 import "./style.css"
+import { get } from "../../service/apiClient"
+import useAuth from "../../hooks/useAuth";
+import jwt_decode from "jwt-decode";
 
-const CreateComment = (props) => {
+const CreateComment = () => {
+    const { token } = useAuth();
+    const { userId } = jwt_decode(token);
+
     const [text, setText] = useState("")
 
-    const name = `${props.user.firstName} ${props.user.lastName}`
+    const [searchVal, setSearchVal] = useState("");
+    const [user, setUser] = useState({
+        userId: "",
+        user: {
+            id: "",
+            email: "",
+            role: "",
+            cohortId: "",
+            profile: {
+                id: "",
+                userId: "",
+                firstName: "",
+                lastName: "",
+                bio: "",
+                githubUrl: "",
+      },
+    },
+  });
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const res = await get(`users/${userId}`);
+      setUser(res.data.user);
+    };
+    getUserInfo();
+  }, [userId]);
+
+    const name = `${user.firstName} ${user.lastName}`
     const userInitials = name.match(/\b(\w)/g)
 
     const newComment = {
-        userId: props.userId,
+        userId: user.userId,
         user: {
-            id: props.userId,
-            // email: props.user.email,
-            // role: props.user.role,
-            // cohortId: props.user.cohort_id,
+            id: user.userId,
+            email: user.email,
+            role: user.role,
+            cohortId: user.cohort_id,
             profile: {
-                id: props.userId,
-                userId: props.userId,
-                // firstName: props.user.firstName,
-                // lastName: props.user.lastName,
-                // bio: props.user.biography,
-                // githubUrl: props.user.githubUrl,
+                id: user.userId,
+                userId: user.userId,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                bio: user.biography,
+                githubUrl: user.githubUrl,
             },
         },
         content: text,
@@ -36,6 +69,7 @@ const CreateComment = (props) => {
         // Here we will need to post the comment to the server
         // Note what needs to be posted with the request and the variable names
         // apiClient does not have a bit for comments, may need to wait until the comments are done server side
+        
         // comment.push(newComment)
         // console.log(comment)
         console.log(newComment.user)      
@@ -46,7 +80,7 @@ const CreateComment = (props) => {
     }
 
     return (
-        <section>
+        <section className="commentForm">
             <div> 
                 {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}
                 <ProfileCircle initials={userInitials} />
