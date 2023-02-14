@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react"
 import { get } from "../../service/apiClient";
-import useModal from "../../hooks/useModal";
+import useOnOutsideClick from "../../hooks/useOnOutsideClick"
 
 import ProfileCircle from "../profileCircle";
 import CascadingMenu from "../cascadingMenu";
 
 
-
 const TeacherList = () => {
     const [teachers, setTeachers] = useState([]);
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
 
-    const { openModal, setModal } = useModal();
 
-    const showModal = () => {
-      setModal("Create a post", <CascadingMenu className="cascading-menu-modal"/>); 
-      openModal();
-    };
+    useOnOutsideClick(menu, setIsMenuVisible(false))
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -42,18 +38,19 @@ const TeacherList = () => {
                         </div>
 
                         <div className="edit-icon"
-                        onClick={() => {
-                            showModal();
-                          }
-                          }>
+                            onClick={() => {
+                                setIsMenuVisible(!isMenuVisible)
+                            }
+                            }
+                        >
                             <p>...</p>
                         </div>
+                            { isMenuVisible === true && <CascadingMenu className="center-screen"/>}
                     </ section>
                 )
             })
             }
         </>
-
     );
 }
 

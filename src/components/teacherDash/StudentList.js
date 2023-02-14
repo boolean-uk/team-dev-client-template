@@ -9,13 +9,9 @@ import "./style.css";
 
 const StudentList = () => {
     const [students, setStudents] = useState([])
-   
-    const { openModal, setModal } = useModal();
 
-    const showModal = () => {
-      setModal("Create a post", <CascadingMenu className="cascading-menu-modal"/>); 
-      openModal();
-    };
+    const [isMenuVisible, setIsMenuVisible] = useState(false)
+
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -40,11 +36,12 @@ const StudentList = () => {
                         </div>
                         <div className="edit-icon"
                             onClick={() => {
-                                showModal();
+                                setIsMenuVisible(!isMenuVisible)
                             }
                             }>
                             <p>...</p>
                         </div>
+                            { isMenuVisible === true && <CascadingMenu className="center-screen"/>}
                     </section>
                 )
             })}

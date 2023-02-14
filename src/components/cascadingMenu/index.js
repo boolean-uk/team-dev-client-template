@@ -10,6 +10,8 @@ import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
 import MenuItem from "../menu/menuItem"
 import Menu from "../menu"
 
+import style from "../modal/style"
+
 const CascadingMenu = ({ name, setIsMenuVisible }) => {
     const menuRef = useRef(null)
 

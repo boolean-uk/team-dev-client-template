@@ -1,7 +1,7 @@
 .menu {
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: fixed;
+	top: 50px;
+	left: 350px;
 	z-index: 2;
 }
 .menu ul {
