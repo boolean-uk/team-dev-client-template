@@ -1,0 +1,81 @@
+.editContainer {
+    grid-column: span 2;
+    margin: 15px;
+}
+
+.edit-profile-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-column: span 2;
+}
+
+.text-input-containers {
+    display: grid;
+    gap: 20px;
+    border-top: 1px lightgray solid;
+    padding-top: 10px;
+}
+
+.basicInfoSection {
+    grid-area: "basicInfo";
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.contactInfoSection {
+    grid-area: "contactInfo";
+    display: grid;
+    grid-template-rows: 60px 100px 100px 80px;
+}
+
+.trainingInfoSection {
+    grid-area: "trainingInfo";
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.bioSection {
+    grid-area: "bio";
+}
+
+.profile-header {
+    grid-area: "profile-header";
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    margin-bottom: 10px;
+}
+
+.profile-header-text {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.headshot-container {
+    display: grid;
+    grid-template-columns: 60px 150px;
+    align-items: center;
+}
+
+.footer {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 250px 250px;
+    gap: 10px;
+}
+
+.proffesional-info-section {
+    display: grid;
+    grid-template-rows: repeat(4, 81.27px);
+    gap: 20px;
+    padding-top: 10px;
+    border-top: 1px lightgray solid;
+}
+
+textarea {
+    margin-top: 35px;
+}

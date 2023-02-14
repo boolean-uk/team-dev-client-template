@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
 import ProfileCircle from "../../components/profileCircle";
-import CascadingMenu from "../cascadingMenu"
-import Menu from "../menu"
-import MenuItem from "../menu/menuItem"
-import MonitorIcon from "../../assets/icons/monitorIcon"
-import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
-import CohortIconFill from "../../assets/icons/cohortIcon-fill"
-import './style.css'
+import CascadingMenu from "../cascadingMenu";
+import Menu from "../menu";
+import MenuItem from "../menu/menuItem";
+import MonitorIcon from "../../assets/icons/monitorIcon";
+import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
+import CohortIconFill from "../../assets/icons/cohortIcon-fill";
+import './style.css';
+import { useNavigate } from "react-router-dom";
 import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 const PersonCard = ({ person, isTeacher }) => {
@@ -20,6 +21,8 @@ const PersonCard = ({ person, isTeacher }) => {
         setIsMenuVisible(true)
     }
 
+    const navigate = useNavigate()
+  
     return (
         <li className="personCard">
             <ProfileCircle initials={userInitials} hasMenu={false}/>
@@ -31,8 +34,8 @@ const PersonCard = ({ person, isTeacher }) => {
             </div>
 
             <div className="button-wrapper">
-                <button className="profile">
-                    <p className="text-blue1">Profile</p>
+                <button onClick={() => navigate(`/profile/${person.id}`)} className="profile">
+                    <p className="text-blue1">Profile</p>     
                 </button>
 
                 {isTeacher && 

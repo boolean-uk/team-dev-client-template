@@ -6,6 +6,7 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
+
 import "./style.css";
 import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode";
