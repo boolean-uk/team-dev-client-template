@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = () => {
+const Posts = (props) => {
     const [posts, setPosts] = useState([])
     let setTimeFormat = ''
     useEffect(() => {
@@ -21,6 +21,7 @@ const Posts = () => {
                         content={post.content}
                         comments={post.comments}
                         id={post.id}
+                        user={props.user}
                     />
             })}
         </>

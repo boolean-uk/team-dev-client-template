@@ -80,7 +80,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
-                <CreateComment />
+                <CreateComment user={props.user}/>
                 {/* <section className="commentForm"> */}
                     {/* <div> */}
                         {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}

@@ -77,7 +77,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts />
+        <Posts user={user}/>
       </main>
 
       <aside>
