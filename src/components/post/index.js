@@ -7,6 +7,7 @@ import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import ArrowRightIcon from "../../assets/icons/arrowRightIcon"
+import CreateComment from "../createComment"
 import "./style.css"
 
 const commentInitialState ={
@@ -27,36 +28,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
         openModal()
     }
 
-    const newComment = {
-        userId: props.userId,
-        user: {
-            id: props.userId,
-            // email: props.user.email,
-            // role: props.user.role,
-            // cohortId: props.user.cohort_id,
-            profile: {
-                id: props.userId,
-                userId: props.userId,
-                // firstName: props.user.firstName,
-                // lastName: props.user.lastName,
-                // bio: props.user.biography,
-                // githubUrl: props.user.githubUrl,
-            },
-        },
-        content: text,
-        createdAt: "",
-        updatedAt: "",
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault()
-        comments.push(newComment)
-        console.log(comments)        
-    }
-
-    function handleChange(event) {
-        setText(event.target.value)
-    }
+    
 
     return (
         <Card>
@@ -78,10 +50,7 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
                     <p>{postContent}</p>
                 </section>
 
-                <section className={`post-interactions-container border-top 
-                `
-
-                }>
+                <section className={`post-interactions-container border-top`}>
                     <div id="likeButton" className="post-interactions">
                         <div className="onHover">
                             <button className= {isLiked.toString()}
@@ -111,29 +80,29 @@ const Post = ({ name, date, content, comments = [], id, likes = 0 }, props) => {
                 <section>
                     {comments.map(comment => <Comment key={comment.id} name={comment.name} content={comment.content} />)}
                 </section>
-                <section className="commentForm">
-                    <div>
+                <CreateComment />
+                {/* <section className="commentForm"> */}
+                    {/* <div> */}
                         {/* profile circle of user that is logged in, will need to update this, maybe to do with authenication token?*/}
-                        <ProfileCircle initials={userInitials} />
-                    </div>
-                    <div>
-                        <form className="commentPost">
-                            <input
-                                type="text"
-                                required
-                                placeholder="Add a comment..."
-                                onChange={handleChange}
-                                // value={text}
-                            />
-                            <button id="commentSubmitArrow" name="submit" onClick={handleSubmit}>
-                                <ArrowRightIcon />
+                        {/* <ProfileCircle initials={userInitials} /> */}
+                    {/* </div> */}
+                    {/* <div> */}
+                        {/* <form className="commentPost"> */}
+                            {/* <input */}
+                                {/* // type="text" */}
+                                {/* // required */}
+                                {/* // placeholder="Add a comment..." */}
+                                {/* // onChange={handleChange} */}
+                                {/* // value={text} */}
+                            {/* /> */}
+                            {/* <button id="commentSubmitArrow" name="submit" onClick={handleSubmit}> */}
+                                {/* <ArrowRightIcon />                                 */}
                                 
-                                
-                            </button>
-                        </form>
+                            {/* </button> */}
+                        {/* </form> */}
                         
-                    </div>
-                </section>
+                    {/* </div> */}
+                {/* </section> */}
             </article>
         </Card >
     )
