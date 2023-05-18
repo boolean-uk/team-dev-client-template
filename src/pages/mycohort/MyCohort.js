@@ -94,7 +94,7 @@ export default function MyCohort () {
 
                     </div>
                 </Card>
-
+{/* hell9o */}
                 {/* right side excercise bar */}
                 <Card>
                     <h4>My Exercise</h4>
