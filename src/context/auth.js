@@ -10,57 +10,57 @@ import jwt_decode from "jwt-decode"
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-	const navigate = useNavigate()
-	const location = useLocation()
-	const [token, setToken] = useState(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
 
-    useEffect(() => {
-      const storedToken = localStorage.getItem('token')
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token')
 
-      if (storedToken && !token) {
-          setToken(storedToken)
-          navigate("/")
-      }
-      if (token) {
-        const decoded = jwt_decode(token)
-        setUserId(decoded.userId)
-      }
-    }, [location.pathname, navigate, token])
+    if (storedToken && !token) {
+        setToken(storedToken)
+        navigate("/")
+    }
+    if (token) {
+      const decoded = jwt_decode(token)
+      setUserId(decoded.userId)
+    }
+  }, [location.pathname, navigate, token])
 
-	const handleLogin = async (email, password) => {
-		const res = await login(email, password)
+  const handleLogin = async (email, password) => {
+    const res = await login(email, password)
 
-        if (!res.data.token) {
-            return navigate("/login")
-        }
-
-        localStorage.setItem('token', res.data.token)
-
-		setToken(res.data.token)
-		navigate("/")
-	};
-
-	const handleLogout = () => {
-        localStorage.removeItem('token')
-		setToken(null)
-	};
-
-    const handleRegister = async (email, password) => {
-        const res = await register(email, password)
-		setToken(res.data.token)
-
-        navigate("/verification")
+    if (!res.data.token) {
+        return navigate("/login")
     }
 
-    const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-        const { userId } = jwt_decode(token)
+    localStorage.setItem('token', res.data.token)
+    setToken(res.data.token)
 
-        await createProfile(userId, firstName, lastName, githubUrl, bio)
+    navigate("/")
+  };
 
-        localStorage.setItem('token', token)
-        navigate('/')
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    setToken(null)
+  };
+
+  const handleRegister = async (email, password) => {
+    const res = await register(email, password)
+    localStorage.setItem('token', res.data.token)
+    setToken(res.data.token)
+
+    navigate("/verification")
+  }
+
+  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+    const { userId } = jwt_decode(token)
+
+    await createProfile(userId, firstName, lastName, githubUrl, bio)
+
+    navigate('/')
+  }
 
   const value = {
     token,
@@ -75,21 +75,21 @@ const AuthProvider = ({ children }) => {
 };
 
 const ProtectedRoute = ({ children }) => {
-	const { token } = useAuth()
-	const location = useLocation()
+  const { token } = useAuth()
+  const location = useLocation()
 
-	if (!token) {
-		return <Navigate to={"/login"} replace state={{ from: location }} />
-	}
+  if (!token) {
+    return <Navigate to={"/login"} replace state={{ from: location }} />
+  }
 
-	return (
-		<div className="container">
-			<Header />
-			<Navigation />
-            <Modal />
-			{children}
-		</div>
-	)
+  return (
+    <div className="container">
+      <Header />
+      <Navigation />
+      <Modal />
+      {children}
+    </div>
+  )
 }
 
 export { AuthContext, AuthProvider, ProtectedRoute }

@@ -10,7 +10,7 @@ async function register(email, password) {
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, {
+  return await put(`users/${userId}`, {
     firstName,
     lastName,
     githubUrl,
@@ -29,6 +29,10 @@ async function post(endpoint, data, auth = true) {
 
 async function patch(endpoint, data, auth = true) {
   return await request("PATCH", endpoint, data, auth);
+}
+
+async function put(endpoint, data, auth = true) {
+  return await request("PUT", endpoint, data, auth);
 }
 
 async function get(endpoint, auth = true) {
@@ -52,8 +56,6 @@ async function request(method, endpoint, data, auth = true) {
   }
 
   const response = await fetch(`${API_URL}/${endpoint}`, opts);
-  
-
   return response.json();
 }
 
@@ -66,4 +68,3 @@ export {
     patch,
     post
 }
-
