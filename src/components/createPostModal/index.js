@@ -1,9 +1,10 @@
 import { useState } from "react"
+import { post } from "../../service/apiClient"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const CreatePostModal = () => {
+const CreatePostModal = ({triggerUpdate, setTriggerUpdate, userName, userInitials}) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
@@ -14,8 +15,12 @@ const CreatePostModal = () => {
         setText(e.target.value)
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+        post('posts', {"content": text})
+        .then(() => {
+            setTriggerUpdate(true)
+        })
 
         setTimeout(() => {
             setMessage(null)
@@ -26,8 +31,8 @@ const CreatePostModal = () => {
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
+                <div className="profile-icon"><p>{userInitials}</p></div>
+                <div className="post-user-name"><p>{userName}</p></div>
             </section>
 
             <section>
