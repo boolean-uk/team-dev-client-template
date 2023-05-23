@@ -13,6 +13,9 @@ const Welcome = () => {
     lastName: "",
     githubUsername: "",
     bio: "",
+    password: "",
+    mobile: "",
+    email: "",
   });
 
   const onChange = (event) => {
@@ -29,7 +32,10 @@ const Welcome = () => {
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
-      profile.bio
+      profile.bio,
+      profile.email,
+      profile.password,
+      profile.mobile
     );
   };
 
