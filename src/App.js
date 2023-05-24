@@ -21,6 +21,7 @@ import MyCohort from "./pages/mycohort/MyCohort";
 import EditProfile from "./pages/edit";
 import ProfilePage from "./pages/profile"
 import MyExercises from "./pages/exercises/MyExercises"
+import LogsPage from "./pages/Logs";
 
 
 const App = () => {
@@ -102,6 +103,15 @@ const App = () => {
                             <SearchPage />
                        </ProtectedRoute>
                   }
+              />
+
+              <Route
+                path="logs"
+                element = {
+                  <ProtectedRoute>
+                      <LogsPage/>
+                  </ProtectedRoute>
+                }
               />
           </Routes>
         </ModalProvider>
