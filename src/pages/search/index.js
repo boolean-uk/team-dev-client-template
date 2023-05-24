@@ -76,10 +76,10 @@ function SearchPage () {
             
         }
         
-        if (showMore === index && userRole === 'TEACHER') {
+        if (showMore === index && userRole === 'teacher') {
             setShowMore(-1)
             showMenu(false)
-        } else if (showMore !== index && userRole === 'TEACHER'){
+        } else if (showMore !== index && userRole === 'teacher'){
             setShowMore(index)
             showMenu(true)
 
