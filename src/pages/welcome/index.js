@@ -17,15 +17,15 @@ const Welcome = () => {
     mobile: "",
     email: "",
   });
+	const [validForm, setValidForm] = useState(false)
 
-  const onChange = (event) => {
-    const { name, value } = event.target;
-
-    setProfile({
-      ...profile,
-      [name]: value,
-    });
-  };
+	const onChange = (event) => {
+		const { name, value } = event.target;
+		setProfile({
+			...profile,
+			[name]: value, 
+		});
+	};
 
   const onComplete = () => {
     onCreateProfile(
@@ -46,12 +46,12 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
-        <StepTwo data={profile} setData={onChange} />
-      </Stepper>
-    </main>
-  );
+			<Stepper header={<WelcomeHeader />} onComplete={onComplete} validForm={validForm} setValidForm={setValidForm}>
+				<StepOne data={profile} setData={onChange} setValidForm={setValidForm}/>
+				<StepTwo data={profile} setData={onChange} />
+			</Stepper>
+		</main>
+	);
 };
 
 const WelcomeHeader = () => {
