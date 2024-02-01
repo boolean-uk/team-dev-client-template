@@ -11,7 +11,7 @@ Client repository for team dev project.
 
 ### Project Management
 
-[https://github.com/orgs/boolean-uk/projects/10/views/1](https://trello.com/invite/b/3cEAMjKi/ATTIe60126493eaf9bd46a14b18c431c3e11EE7E5E20/team-dev-c11)
+https://trello.com/invite/b/3cEAMjKi/ATTIe60126493eaf9bd46a14b18c431c3e11EE7E5E20/team-dev-c11
 
 ### Contributing
 
