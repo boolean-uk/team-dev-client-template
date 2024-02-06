@@ -6,11 +6,20 @@ const Posts = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        getPosts().then(fetchedPosts => {
-            const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        getPosts().then(setPosts)
+        fetch('http://localhost:4000/posts')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error fetching posts');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const sortedPosts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setPosts(sortedPosts);
-        });
-    }, []);
+        })
+        .catch(error => console.error("Fetch error:", error));
+}, []);
 
     return (
         <>
