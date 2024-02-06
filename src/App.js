@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
+import Cohort from "./pages/cohort";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Loading from "./pages/loading";
@@ -33,6 +34,14 @@ const App = () => {
                             element={
                                 <ProtectedRoute disabledNav={true}>
                                     <Welcome />
+                                </ProtectedRoute>
+                            }
+                        />
+												<Route
+                            path="my-cohort"
+                            element={
+                                <ProtectedRoute disabledNav={true}>
+                                    <Cohort />
                                 </ProtectedRoute>
                             }
                         />
