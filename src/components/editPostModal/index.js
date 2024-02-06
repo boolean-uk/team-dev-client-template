@@ -76,8 +76,8 @@ const EditPostModal = () => {
       {isDeleting && (
         <section className="delete-confirmation">
           <p>Are you sure you want to delete this post?</p>
-          <button onClick={handleConfirmDelete}>Confirm</button>
-          <button onClick={handleCancelDelete}>Cancel</button>
+          <button className="cancel-delete" onClick={handleCancelDelete}>Cancel</button>
+          <button className="second-delete" onClick={handleConfirmDelete}>Delete Post</button>
         </section>
       )}
 
