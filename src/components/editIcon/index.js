@@ -1,10 +1,10 @@
 import './style.css'
 
-const EditIcon = () => {
+const EditIcon = ({ showModel }) => {
   return (
     <>
       <div className="edit-icon">
-        <p>...</p>
+        <p onClick={showModel}>...</p>
       </div>
     </>
   )
