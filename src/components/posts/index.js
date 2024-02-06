@@ -6,8 +6,11 @@ const Posts = () => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        getPosts().then(setPosts)
-    }, [])
+        getPosts().then(fetchedPosts => {
+            const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            setPosts(sortedPosts);
+        });
+    }, []);
 
     return (
         <>
