@@ -1,39 +1,49 @@
 import { useEffect, useState } from "react";
 import Post from "../post";
-import { getPosts } from "../../service/apiClient";
 
 const Posts = () => {
-    const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-        getPosts().then(setPosts)
-        fetch('http://localhost:4000/posts')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error fetching posts');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const sortedPosts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Adjust according to where your token is stored
+
+    fetch('http://localhost:4000/posts', {
+        headers: {
+            'Authorization': `Bearer ${token}` // Include the authorization header
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Correctly accessing the nested structure of the response
+        if (data.data && data.data.posts && Array.isArray(data.data.posts)) {
+            const sortedPosts = data.data.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setPosts(sortedPosts);
-        })
-        .catch(error => console.error("Fetch error:", error));
+        } else {
+            console.error('Posts data is not an array', data);
+        }
+    })
+    .catch(error => console.error("Fetch error:", error));
 }, []);
 
-    return (
-        <>
-            {posts.map(post => {
-                    return <Post
-                        key={post.id}
-                        name={`${post.author.firstName} ${post.author.lastName}`}
-                        date={post.createdAt}
-                        content={post.content}
-                        comments={post.comments}
-                    />
-            })}
-        </>
-    )
-}
 
-export default Posts
+  return (
+    <>
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          name={`${post.author.firstName} ${post.author.lastName}`}
+          date={post.createdAt}
+          content={post.content}
+          comments={post.comments}
+        />
+      ))}
+    </>
+  );
+};
+
+export default Posts;
