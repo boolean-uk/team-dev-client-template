@@ -5,11 +5,12 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Adjust according to where your token is stored
+    let token = localStorage.getItem('token'); 
 
-    fetch('http://localhost:4000/posts', {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    fetch(`${apiUrl}/posts`, {
         headers: {
-            'Authorization': `Bearer ${token}` // Include the authorization header
+            'Authorization': `Bearer ${token}` 
         }
     })
     .then(response => {
@@ -19,15 +20,15 @@ const Posts = () => {
         return response.json();
     })
     .then(data => {
-        // Correctly accessing the nested structure of the response
-        if (data.data && data.data.posts && Array.isArray(data.data.posts)) {
-            const sortedPosts = data.data.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            setPosts(sortedPosts);
-        } else {
-            console.error('Posts data is not an array', data);
+        if (!data.data || !data.data.posts || !Array.isArray(data.data.posts)) {
+            throw new Error("Invalid data format: Posts data is not an array.");
         }
+        const sortedPosts = data.data.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sortedPosts);
     })
-    .catch(error => console.error("Fetch error:", error));
+    .catch(error => {
+        console.error("Fetch error:", error.message);
+    });
 }, []);
 
 
