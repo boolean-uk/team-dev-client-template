@@ -19,8 +19,8 @@ async function getPosts() {
 }
 
 async function postPost(newPost) {
-    const res = await post('posts', newPost )
-    return res.data.post
+  const res = await post('posts', newPost)
+  return res.data.post
 }
 
 async function post(endpoint, data, auth = true) {
@@ -56,10 +56,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
-export {
-    login,
-    getPosts,
-    register,
-    createProfile, 
-    postPost
-}
+export { login, getPosts, register, createProfile, postPost }

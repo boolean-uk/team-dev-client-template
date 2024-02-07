@@ -1,4 +1,4 @@
-import Post from "../post";
+import Post from '../post'
 
 const Posts = ({ posts }) => {
   return (
@@ -13,10 +13,10 @@ const Posts = ({ posts }) => {
               content={post.content}
               comments={post.comments}
             />
-          );
+          )
         })}
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts

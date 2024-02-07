@@ -5,6 +5,7 @@ import Modal from '../components/modal'
 import Navigation from '../components/navigation'
 import useAuth from '../hooks/useAuth'
 import { createProfile, login, register } from '../service/apiClient'
+// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 
 const AuthContext = createContext()
