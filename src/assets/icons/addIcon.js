@@ -12,7 +12,7 @@ const AddIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default AddIcon
+export default AddIcon;

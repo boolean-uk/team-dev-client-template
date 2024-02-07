@@ -12,7 +12,7 @@ const CohortIconFill = () => {
         fill="#000046"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default CohortIconFill
+export default CohortIconFill;

@@ -1,11 +1,11 @@
-import './socialinks.css'
+import "./socialinks.css";
 
 const SocialLinks = () => {
   return (
     <>
       <button
         onClick={(e) => {
-          e.preventDefault()
+          e.preventDefault();
         }}
         className="socialbutton"
       >
@@ -35,7 +35,7 @@ const SocialLinks = () => {
       </button>
       <button
         onClick={(e) => {
-          e.preventDefault()
+          e.preventDefault();
         }}
         className="socialbutton"
       >
@@ -64,7 +64,7 @@ const SocialLinks = () => {
       </button>
       <button
         onClick={(e) => {
-          e.preventDefault()
+          e.preventDefault();
         }}
         className="socialbutton"
       >
@@ -85,7 +85,7 @@ const SocialLinks = () => {
         </svg>
       </button>
     </>
-  )
-}
+  );
+};
 
-export default SocialLinks
+export default SocialLinks;

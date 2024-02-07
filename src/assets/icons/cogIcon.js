@@ -12,7 +12,7 @@ const CogIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default CogIcon
+export default CogIcon;
