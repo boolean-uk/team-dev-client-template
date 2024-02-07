@@ -46,32 +46,9 @@ const Dashboard = () => {
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
-  return (
-    <>
-      <main>
-        <Card>
-          <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p>
-            </div>
-            <Button text="What's on your mind?" onClick={showModal} />
-          </div>
-        </Card>
 
         <Posts posts={posts} />
       </main>
-
-      <aside>
-        <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <TextInput
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-            />
-          </form>
-        </Card>
       <aside>
         <Card>
           <form onSubmit={(e) => e.preventDefault()}>

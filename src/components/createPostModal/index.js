@@ -43,6 +43,7 @@ const CreatePostModal = ({ getAllPosts }) => {
     }, 2000);
   };
 
+
   return (
     <>
       <section className="create-post-user-details">
@@ -53,39 +54,12 @@ const CreatePostModal = ({ getAllPosts }) => {
           <p>Alex J</p>
         </div>
       </section>
-  return (
-    <>
-      <section className="create-post-user-details">
-        <div className="profile-icon">
-          <p>AJ</p>
-        </div>
-        <div className="post-user-name">
-          <p>Alex J</p>
-        </div>
-      </section>
-
       <section>
         <textarea
           onChange={onChange}
           value={text}
           placeholder="What's on your mind?"
         ></textarea>
-      </section>
-      <section>
-        <textarea
-          onChange={onChange}
-          value={text}
-          placeholder="What's on your mind?"
-        ></textarea>
-      </section>
-
-      <section className="create-post-actions">
-        <Button
-          onClick={onSubmit}
-          text="Post"
-          classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
-          disabled={!text.length}
-        />
       </section>
       <section className="create-post-actions">
         <Button
