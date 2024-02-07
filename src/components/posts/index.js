@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react";
-import Post from "../post";
-import { getPosts } from "../../service/apiClient"; 
+import { useEffect, useState } from 'react'
+import Post from '../post'
+import { getPosts } from '../../service/apiClient'
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    getPosts().then(fetchedPosts => {
-        const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setPosts(sortedPosts);
-    })
-    .catch(error => {
-        console.error("Fetch error:", error.message);
-    });
-  }, []);
+    getPosts()
+      .then((fetchedPosts) => {
+        const sortedPosts = fetchedPosts.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        )
+        setPosts(sortedPosts)
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message)
+      })
+  }, [])
 
   return (
     <>
@@ -27,7 +30,7 @@ const Posts = () => {
         />
       ))}
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
