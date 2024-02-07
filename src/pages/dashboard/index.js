@@ -7,11 +7,12 @@ import TextInput from '../../components/form/textInput'
 import Posts from '../../components/posts'
 import useModal from '../../hooks/useModal'
 import './style.css'
-import { getPosts } from '../../service/apiClient'
+import { getPosts, getUserByName } from '../../service/apiClient'
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')
   const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
 
   const getAllPosts = () => {
     getPosts().then(setPosts)
@@ -21,6 +22,15 @@ const Dashboard = () => {
 
   const onChange = (e) => {
     setSearchVal(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e && e.preventDefault()
+    try {
+      getUserByName(searchVal).then(setUsers)
+    } catch (e) {
+      throw new Error(`no users named ${searchVal} were found`)
+    }
   }
 
   // Use the useModal hook to get the openModal and setModal functions
@@ -51,7 +61,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={onSubmit}>
             <TextInput
               icon={<SearchIcon />}
               value={searchVal}
@@ -60,9 +70,9 @@ const Dashboard = () => {
             />
           </form>
         </Card>
-
         <Card>
           <h4>My Cohort</h4>
+          <UserList users={users} />
         </Card>
       </aside>
     </>
