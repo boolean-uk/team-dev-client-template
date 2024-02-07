@@ -1,49 +1,108 @@
-import { useState } from "react"
-import useModal from "../../hooks/useModal"
-import './style.css'
-import Button from '../button'
+import { useState } from "react";
+import useModal from "../../hooks/useModal";
+import "./style.css";
+import Button from "../button";
 
 const EditPostModal = () => {
-    const { closeModal } = useModal()
-    const [message, setMessage] = useState(null)
-    const [text, setText] = useState('')
+  const { closeModal } = useModal();
+  const [message, setMessage] = useState(null);
+  const [text, setText] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-    const onChange = (e) => {
-        setText(e.target.value)
-    }
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
 
-    const onSubmit = () => {
-        setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+  const handleActionWithMessage = (message, timeout = 2000) => {
+    setMessage(message);
+    setTimeout(() => {
+      setMessage(null);
+      closeModal();
+    }, timeout);
+  };
 
-        setTimeout(() => {
-            setMessage(null)
-            closeModal()
-        }, 2000)
-    }
+  const onSubmit = () =>
+    handleActionWithMessage("Post updated! Closing modal in 2 seconds...");
 
-    return (
-        <>
-            <section className="create-post-user-details">
-                <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
-            </section>
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setIsDeleting(false);
+  };
 
-            <section>
-                <textarea onChange={onChange} value={text} placeholder="Edit your post"></textarea>
-            </section>
+  const handleDeleteClick = () => {
+    setIsDeleting(true);
+    setIsEditing(false);
+  };
 
-            <section className="create-post-actions">
-                <Button
-                    onClick={onSubmit}
-                    text='Post'
-                    classes={`${text.length ? 'blue' : 'offwhite' } width-full`}
-                    disabled={!text.length}
-                />
-            </section>
+  const handleConfirmDelete = () => {
+    handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
+  };
 
-            {message && <p>{message}</p>}
-        </>
-    )
-}
+  const handleCancelDelete = () => {
+    setIsDeleting(false);
+  };
 
-export default EditPostModal
+  return (
+    <>
+      <section className="create-post-user-details">
+        <div className="profile-icon">
+          <p>AJ</p>
+        </div>
+        <div className="post-user-name">
+          <p>Alex J</p>
+        </div>
+      </section>
+
+      <section className="edit-delete-buttons">
+        <div className="button-container">
+          <div className="circle-icon"></div>
+          <button className="edit" onClick={handleEditClick}>
+            Edit
+          </button>
+        </div>
+        <div className="button-container">
+          <div className="circle-icon"></div>
+          <button className="delete" onClick={handleDeleteClick}>
+            Delete
+          </button>
+        </div>
+      </section>
+
+      {isEditing && (
+        <section>
+          <textarea
+            onChange={onChange}
+            value={text}
+            placeholder="Edit your post"
+          ></textarea>
+        </section>
+      )}
+
+      {isDeleting && (
+        <section className="delete-confirmation">
+          <p>Are you sure you want to delete this post?</p>
+          <button className="cancel-delete" onClick={handleCancelDelete}>
+            Cancel
+          </button>
+          <button className="second-delete" onClick={handleConfirmDelete}>
+            Delete Post
+          </button>
+        </section>
+      )}
+
+      <section className="create-post-actions">
+        <Button
+          onClick={onSubmit}
+          text="Post"
+          classes={`${text.length ? "blue" : "offwhite"} width-full`}
+          disabled={!text.length || isDeleting}
+        />
+      </section>
+
+      {message && <p>{message}</p>}
+    </>
+  );
+};
+
+export default EditPostModal;
