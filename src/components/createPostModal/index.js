@@ -3,8 +3,7 @@ import useModal from '../../hooks/useModal'
 import './style.css'
 import Button from '../button'
 import { postPost } from '../../service/apiClient'
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 const CreatePostModal = ({ getAllPosts }) => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
@@ -19,7 +18,7 @@ const CreatePostModal = ({ getAllPosts }) => {
 
   const onSubmit = () => {
     const token = localStorage.getItem('token')
-    const { userId } = jwt_decode(token)
+    const { userId } = jwtDecode(token)
     const newPost = {
       content: text,
       userId: userId
