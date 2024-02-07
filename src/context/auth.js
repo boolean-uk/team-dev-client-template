@@ -5,7 +5,7 @@ import Modal from '../components/modal'
 import Navigation from '../components/navigation'
 import useAuth from '../hooks/useAuth'
 import { createProfile, login, register } from '../service/apiClient'
-import jwtDecode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
 
 const AuthContext = createContext()
 
@@ -13,15 +13,35 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const [token, setToken] = useState(null)
+  const [logout, setLogout] = useState(false)
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
 
-    if (storedToken) {
-      setToken(storedToken)
-      navigate(location.state?.from?.pathname || '/')
+    if (logout) {
+      localStorage.removeItem('token')
+      setToken(null)
+      setLogout(false)
+      navigate('/login', { state: null })
+      return
     }
-  }, [location.state?.from?.pathname, navigate])
+
+    if (!storedToken && location.pathname !== '/login') {
+      const redirectState = location.state || { from: location }
+
+      navigate('/login', {
+        state: redirectState
+      })
+    }
+
+    if (storedToken && !token) {
+      setToken(storedToken)
+    }
+
+    if (storedToken && token && location.state) {
+      navigate(location.state.from.pathname)
+    }
+  }, [location.state?.from?.pathname, navigate, logout])
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password)
@@ -33,12 +53,12 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token)
 
     setToken(res.token)
-    navigate(location.state?.from?.pathname || '/')
+    const redirectPath = location.state?.from?.pathname || '/'
+    navigate(redirectPath)
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    setToken(null)
+    setLogout(true)
   }
 
   const handleRegister = async (email, password) => {
@@ -49,7 +69,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-    const { userId } = jwtDecode(token)
+    const { userId } = jwt_decode(token)
 
     await createProfile(userId, firstName, lastName, githubUrl, bio)
 
