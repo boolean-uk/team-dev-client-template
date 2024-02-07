@@ -29,7 +29,7 @@ const Dashboard = () => {
     try {
       getUserByName(searchVal).then(setUsers);
     } catch (e) {
-      throw new Error(`no users named ${searchVal} were found`);
+      console.log('error getting username', e)
     }
   };
 
@@ -44,7 +44,7 @@ const Dashboard = () => {
     // Open the modal!
     openModal();
   };
-
+  
   return (
     <>
       <main>
