@@ -23,7 +23,7 @@ const FullLogo = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};
 
-export default FullLogo
+export default FullLogo;

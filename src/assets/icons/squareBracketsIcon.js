@@ -12,7 +12,7 @@ const SquareBracketsIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default SquareBracketsIcon
+export default SquareBracketsIcon;

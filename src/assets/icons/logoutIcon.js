@@ -12,7 +12,7 @@ const LogoutIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default LogoutIcon
+export default LogoutIcon;

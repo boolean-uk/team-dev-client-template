@@ -1,8 +1,8 @@
-import FullLogo from '../../assets/fullLogo'
-import { NavLink } from 'react-router-dom'
-import SocialLinks from '../socialLinks'
-import './credentials.css'
-import Card from '../card'
+import FullLogo from "../../assets/fullLogo";
+import { NavLink } from "react-router-dom";
+import SocialLinks from "../socialLinks";
+import "./credentials.css";
+import Card from "../card";
 
 const CredentialsCard = ({
   title,
@@ -10,7 +10,7 @@ const CredentialsCard = ({
   altButtonTitle,
   altButtonLink,
   altButtonText,
-  children
+  children,
 }) => {
   return (
     <div className="credentials">
@@ -34,7 +34,7 @@ const CredentialsCard = ({
         </div>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default CredentialsCard
+export default CredentialsCard;
