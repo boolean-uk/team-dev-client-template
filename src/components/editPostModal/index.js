@@ -5,7 +5,7 @@ import Button from '../button'
 
 const EditPostModal = () => {
   const { closeModal } = useModal()
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
   const [text, setText] = useState('')
   const [isEditing, setIsEditing] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
