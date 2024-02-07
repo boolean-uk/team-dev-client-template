@@ -12,7 +12,7 @@ const DeleteIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default DeleteIcon
+export default DeleteIcon;

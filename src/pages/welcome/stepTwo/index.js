@@ -1,4 +1,4 @@
-import Form from '../../../components/form'
+import Form from "../../../components/form";
 
 const StepTwo = ({ data, setData }) => {
   return (
@@ -13,7 +13,7 @@ const StepTwo = ({ data, setData }) => {
         </div>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default StepTwo
+export default StepTwo;

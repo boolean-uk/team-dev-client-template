@@ -1,4 +1,4 @@
-import './style.css'
+import "./style.css";
 
 const EditIcon = ({ showModel }) => {
   return (
@@ -7,7 +7,7 @@ const EditIcon = ({ showModel }) => {
         <p onClick={showModel}>...</p>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default EditIcon
+export default EditIcon;

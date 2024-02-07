@@ -1,47 +1,47 @@
-import { useState } from 'react'
-import useModal from '../../hooks/useModal'
-import './style.css'
-import Button from '../button'
+import { useState } from "react";
+import useModal from "../../hooks/useModal";
+import "./style.css";
+import Button from "../button";
 
 const EditPostModal = () => {
-  const { closeModal } = useModal()
-  const [message, setMessage] = useState(null)
-  const [text, setText] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const { closeModal } = useModal();
+  const [message, setMessage] = useState(null);
+  const [text, setText] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const onChange = (e) => {
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
 
   const handleActionWithMessage = (message, timeout = 2000) => {
-    setMessage(message)
+    setMessage(message);
     setTimeout(() => {
-      setMessage(null)
-      closeModal()
-    }, timeout)
-  }
+      setMessage(null);
+      closeModal();
+    }, timeout);
+  };
 
   const onSubmit = () =>
-    handleActionWithMessage('Post updated! Closing modal in 2 seconds...')
+    handleActionWithMessage("Post updated! Closing modal in 2 seconds...");
 
   const handleEditClick = () => {
-    setIsEditing(true)
-    setIsDeleting(false)
-  }
+    setIsEditing(true);
+    setIsDeleting(false);
+  };
 
   const handleDeleteClick = () => {
-    setIsDeleting(true)
-    setIsEditing(false)
-  }
+    setIsDeleting(true);
+    setIsEditing(false);
+  };
 
   const handleConfirmDelete = () => {
-    handleActionWithMessage('Post deleted! Closing modal in 2 seconds...')
-  }
+    handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
+  };
 
   const handleCancelDelete = () => {
-    setIsDeleting(false)
-  }
+    setIsDeleting(false);
+  };
 
   return (
     <>
@@ -95,14 +95,14 @@ const EditPostModal = () => {
         <Button
           onClick={onSubmit}
           text="Post"
-          classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
+          classes={`${text.length ? "blue" : "offwhite"} width-full`}
           disabled={!text.length || isDeleting}
         />
       </section>
 
       {message && <p>{message}</p>}
     </>
-  )
-}
+  );
+};
 
-export default EditPostModal
+export default EditPostModal;

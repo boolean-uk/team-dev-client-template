@@ -1,37 +1,37 @@
-import { useState } from 'react'
-import Stepper from '../../components/stepper'
-import useAuth from '../../hooks/useAuth'
-import StepOne from './stepOne'
-import StepTwo from './stepTwo'
-import './style.css'
+import { useState } from "react";
+import Stepper from "../../components/stepper";
+import useAuth from "../../hooks/useAuth";
+import StepOne from "./stepOne";
+import StepTwo from "./stepTwo";
+import "./style.css";
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth()
+  const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
-    firstName: '',
-    lastName: '',
-    githubUsername: '',
-    bio: ''
-  })
+    firstName: "",
+    lastName: "",
+    githubUsername: "",
+    bio: "",
+  });
 
   const onChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setProfile({
       ...profile,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const onComplete = () => {
     onCreateProfile(
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
-      profile.bio
-    )
-  }
+      profile.bio,
+    );
+  };
 
   return (
     <main className="welcome">
@@ -45,8 +45,8 @@ const Welcome = () => {
         <StepTwo data={profile} setData={onChange} />
       </Stepper>
     </main>
-  )
-}
+  );
+};
 
 const WelcomeHeader = () => {
   return (
@@ -56,7 +56,7 @@ const WelcomeHeader = () => {
         Tell us about yourself to create your profile
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;
