@@ -1,26 +1,33 @@
 // @ts-nocheck
+import './styles.css'
+import EditIcon from '../editIcon'
+import ProfileCircle from '../profileCircle'
 
-import ProfileCircle from "../profileCircle";
-
-const UserList = ({ users }) => {
+const UserList = ({ users, contextMenu }) => {
   return (
     <>
       {users.map((user) => {
-        const initials = `${user.firstName[0].toUpperCase()} ${user.lastName[0].toUpperCase()}`;
-        console.log(initials);
+        const initials = `${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}`
+
         return (
-          <>
+          <div className="user">
             <ProfileCircle initials={initials} />
-            <div>
-              {user.firstName} {user.lastName}
+            <section className="user-info">
+              <div className="user-name">
+                <strong>
+                  {user.firstName} {user.lastName}
+                </strong>
+              </div>
+              <div className="user-title">{user.title}</div>
+            </section>
+            <div className="edit-icon-wrapper">
+              <EditIcon showModel={contextMenu} />
             </div>
-            <div>{user.title}</div>
-						<div className="edit-icon"><p>...</p></div>
-          </>
-        );
+          </div>
+        )
       })}
     </>
-  );
-};
+  )
+}
 
-export default UserList;
+export default UserList
