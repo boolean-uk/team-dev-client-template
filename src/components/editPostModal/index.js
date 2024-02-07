@@ -14,12 +14,16 @@ const EditPostModal = () => {
     setText(e.target.value);
   };
 
-  const onSubmit = () => {
-    setMessage("Post updated! Closing modal in 2 seconds...");
+  const handleActionWithMessage = (message, timeout = 2000) => {
+    setMessage(message);
     setTimeout(() => {
       setMessage(null);
       closeModal();
-    }, 2000);
+    }, timeout);
+  };
+
+  const onSubmit = () => {
+    handleActionWithMessage("Post updated! Closing modal in 2 seconds...");
   };
 
   const handleEditClick = () => {
@@ -29,21 +33,16 @@ const EditPostModal = () => {
 
   const handleDeleteClick = () => {
     setIsDeleting(true);
-    setIsEditing(false); 
+    setIsEditing(false);
   };
 
   const handleConfirmDelete = () => {
-    setMessage("Post deleted! Closing modal in 2 seconds...");
-    setTimeout(() => {
-      setMessage(null);
-      closeModal();
-    }, 2000);
+    handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
   };
 
   const handleCancelDelete = () => {
     setIsDeleting(false);
   };
-
 
   return (
     <>
