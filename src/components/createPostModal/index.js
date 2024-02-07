@@ -1,5 +1,5 @@
-import { useState } from "react";
-import useModal from "../../hooks/useModal";
+import { useState } from 'react';
+import useModal from '../../hooks/useModal';
 import "./style.css";
 import Button from "../button";
 import { postPost } from "../../service/apiClient";
@@ -53,6 +53,16 @@ const CreatePostModal = ({ getAllPosts }) => {
           <p>Alex J</p>
         </div>
       </section>
+  return (
+    <>
+      <section className="create-post-user-details">
+        <div className="profile-icon">
+          <p>AJ</p>
+        </div>
+        <div className="post-user-name">
+          <p>Alex J</p>
+        </div>
+      </section>
 
       <section>
         <textarea
@@ -61,7 +71,22 @@ const CreatePostModal = ({ getAllPosts }) => {
           placeholder="What's on your mind?"
         ></textarea>
       </section>
+      <section>
+        <textarea
+          onChange={onChange}
+          value={text}
+          placeholder="What's on your mind?"
+        ></textarea>
+      </section>
 
+      <section className="create-post-actions">
+        <Button
+          onClick={onSubmit}
+          text="Post"
+          classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
+          disabled={!text.length}
+        />
+      </section>
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}

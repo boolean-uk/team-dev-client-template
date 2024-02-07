@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import SearchIcon from "../../assets/icons/searchIcon";
-import Button from "../../components/button";
-import Card from "../../components/card";
-import CreatePostModal from "../../components/createPostModal";
-import TextInput from "../../components/form/textInput";
-import Posts from "../../components/posts";
-import useModal from "../../hooks/useModal";
-import "./style.css";
+import { useEffect, useState } from 'react'
+import SearchIcon from '../../assets/icons/searchIcon'
+import Button from '../../components/button'
+import Card from '../../components/card'
+import CreatePostModal from '../../components/createPostModal'
+import TextInput from '../../components/form/textInput'
+import Posts from '../../components/posts'
+import useModal from '../../hooks/useModal'
+import './style.css'
 import { getPosts } from "../../service/apiClient";
 
 const Dashboard = () => {
@@ -46,10 +46,32 @@ const Dashboard = () => {
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
+  return (
+    <>
+      <main>
+        <Card>
+          <div className="create-post-input">
+            <div className="profile-icon">
+              <p>AJ</p>
+            </div>
+            <Button text="What's on your mind?" onClick={showModal} />
+          </div>
+        </Card>
 
         <Posts posts={posts} />
       </main>
 
+      <aside>
+        <Card>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <TextInput
+              icon={<SearchIcon />}
+              value={searchVal}
+              name="Search"
+              onChange={onChange}
+            />
+          </form>
+        </Card>
       <aside>
         <Card>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -70,4 +92,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dashboard
