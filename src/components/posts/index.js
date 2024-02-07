@@ -1,20 +1,23 @@
 import Post from '../post'
 
 const Posts = ({ posts }) => {
+  if (!posts) {
+    return <></>
+  }
+
   return (
     <>
-      {posts &&
-        posts.map((post) => {
-          return (
-            <Post
-              key={post.id}
-              name={`${post.author.firstName} ${post.author.lastName}`}
-              date={post.createdAt}
-              content={post.content}
-              comments={post.comments}
-            />
-          )
-        })}
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            name={`${post.author.firstName} ${post.author.lastName}`}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        )
+      })}
     </>
   )
 }
