@@ -42,8 +42,6 @@ const Welcome = () => {
       profile.startDate,
       profile.endDate
     )
-      console.log('hello')
-      console.log(profile)
   }
 
   return (
