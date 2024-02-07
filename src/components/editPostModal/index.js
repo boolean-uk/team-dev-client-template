@@ -7,18 +7,40 @@ const EditPostModal = () => {
   const { closeModal } = useModal()
   const [message, setMessage] = useState(null)
   const [text, setText] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const onChange = (e) => {
     setText(e.target.value)
   }
 
-  const onSubmit = () => {
-    setMessage('Submit button was clicked! Closing modal in 2 seconds...')
-
+  const handleActionWithMessage = (message, timeout = 2000) => {
+    setMessage(message)
     setTimeout(() => {
       setMessage(null)
       closeModal()
-    }, 2000)
+    }, timeout)
+  }
+
+  const onSubmit = () =>
+    handleActionWithMessage('Post updated! Closing modal in 2 seconds...')
+
+  const handleEditClick = () => {
+    setIsEditing(true)
+    setIsDeleting(false)
+  }
+
+  const handleDeleteClick = () => {
+    setIsDeleting(true)
+    setIsEditing(false)
+  }
+
+  const handleConfirmDelete = () => {
+    handleActionWithMessage('Post deleted! Closing modal in 2 seconds...')
+  }
+
+  const handleCancelDelete = () => {
+    setIsDeleting(false)
   }
 
   return (
@@ -32,20 +54,49 @@ const EditPostModal = () => {
         </div>
       </section>
 
-      <section>
-        <textarea
-          onChange={onChange}
-          value={text}
-          placeholder="Edit your post"
-        ></textarea>
+      <section className="edit-delete-buttons">
+        <div className="button-container">
+          <div className="circle-icon"></div>
+          <button className="edit" onClick={handleEditClick}>
+            Edit
+          </button>
+        </div>
+        <div className="button-container">
+          <div className="circle-icon"></div>
+          <button className="delete" onClick={handleDeleteClick}>
+            Delete
+          </button>
+        </div>
       </section>
+
+      {isEditing && (
+        <section>
+          <textarea
+            onChange={onChange}
+            value={text}
+            placeholder="Edit your post"
+          ></textarea>
+        </section>
+      )}
+
+      {isDeleting && (
+        <section className="delete-confirmation">
+          <p>Are you sure you want to delete this post?</p>
+          <button className="cancel-delete" onClick={handleCancelDelete}>
+            Cancel
+          </button>
+          <button className="second-delete" onClick={handleConfirmDelete}>
+            Delete Post
+          </button>
+        </section>
+      )}
 
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}
           text="Post"
           classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
-          disabled={!text.length}
+          disabled={!text.length || isDeleting}
         />
       </section>
 
