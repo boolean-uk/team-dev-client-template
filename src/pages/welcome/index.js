@@ -3,6 +3,7 @@ import Stepper from '../../components/stepper'
 import useAuth from '../../hooks/useAuth'
 import StepOne from './stepOne'
 import StepTwo from './stepTwo'
+import StepThree from './stepThree'
 import './style.css'
 
 const Welcome = () => {
@@ -12,7 +13,10 @@ const Welcome = () => {
     firstName: '',
     lastName: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    email: '',
+    mobile: '',
+    password: ''
   })
 
   const onChange = (event) => {
@@ -29,7 +33,10 @@ const Welcome = () => {
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
-      profile.bio
+      profile.bio,
+      profile.mobile,
+      profile.email,
+      profile.password
     )
   }
 
@@ -43,6 +50,7 @@ const Welcome = () => {
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
+        <StepThree data={profile} setData={onChange} />
       </Stepper>
     </main>
   )
