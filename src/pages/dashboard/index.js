@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
@@ -7,6 +7,7 @@ import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
+import UsersList from "../../components/usersList";
 
 const Dashboard = () => {
 	const [searchVal, setSearchVal] = useState('');
@@ -56,6 +57,9 @@ const Dashboard = () => {
 
 				<Card>
 					<h4>My Cohort</h4>
+					<UsersList props={Children}>
+						ACTIVE USERS
+					</UsersList>
 				</Card>
 			</aside>
 		</>

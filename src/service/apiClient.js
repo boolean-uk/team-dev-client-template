@@ -30,6 +30,11 @@ async function get(endpoint, auth = true) {
     return await request('GET', endpoint, null, auth)
 }
 
+async function getUsers() {
+    const res = await get('users')
+    return res.data.users
+}
+
 async function request(method, endpoint, data, auth = true) {
     const opts = {
         headers: {
@@ -55,5 +60,6 @@ export {
     login,
     getPosts,
     register,
-    createProfile
+    createProfile,
+    getUsers
 }
