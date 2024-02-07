@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react'
 import Post from '../post'
-import { getPosts } from '../../service/apiClient'
 
-const Posts = () => {
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    getPosts().then(setPosts)
-  }, [])
+const Posts = ({ posts }) => {
+  if (!posts) {
+    return <></>
+  }
 
   return (
     <>

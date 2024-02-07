@@ -5,7 +5,7 @@ import Modal from '../components/modal'
 import Navigation from '../components/navigation'
 import useAuth from '../hooks/useAuth'
 import { createProfile, login, register } from '../service/apiClient'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 const AuthContext = createContext()
 
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-    const { userId } = jwt_decode(token)
+    const { userId } = jwtDecode(token)
 
     await createProfile(userId, firstName, lastName, githubUrl, bio)
 
