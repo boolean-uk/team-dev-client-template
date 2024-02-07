@@ -2,7 +2,11 @@
   display: grid;
   grid-template-columns: 70px 1fr auto;
   grid-template-rows: 1fr;
-  margin: 5px;
+  padding: 5px;
+}
+
+.user:hover{
+  background-color: #F5FAFF
 }
 
 .user-info {
