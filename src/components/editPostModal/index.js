@@ -1,9 +1,10 @@
 import { useState } from "react";
 import useModal from "../../hooks/useModal";
 import "./style.css";
+import { deletePost } from "../../service/apiClient.js";
 import Button from "../button";
 
-const EditPostModal = () => {
+const EditPostModal = ({ postId, refreshPosts }) => {
   const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
   const [text, setText] = useState("");
@@ -35,8 +36,15 @@ const EditPostModal = () => {
     setIsEditing(false);
   };
 
-  const handleConfirmDelete = () => {
-    handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
+  const handleConfirmDelete = async (postId) => {
+    try {
+      await deletePost(postId);
+      handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
+      refreshPosts();
+    } catch (error) {
+      console.error("Failed to delete the post:", error.message);
+      setMessage("Failed to delete the post. Please try again.");
+    }
   };
 
   const handleCancelDelete = () => {
@@ -85,9 +93,8 @@ const EditPostModal = () => {
           <button className="cancel-delete" onClick={handleCancelDelete}>
             Cancel
           </button>
-          <button className="second-delete" onClick={handleConfirmDelete}>
-            Delete Post
-          </button>
+          <button className="second-delete" onClick={() => handleConfirmDelete(postId)}>Delete Post</button>
+
         </section>
       )}
 

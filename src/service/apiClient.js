@@ -71,12 +71,34 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
+async function deletePost(postId) {
+  console.log(postId)
+  const token = localStorage.getItem('token'); 
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to delete the post');
+  }
+
+  return response.json();
+}
+
+
 export {
     login,
     getPosts,
     register,
     createProfile,
     getUsers, 
-    postPost, getUserByName
+    postPost, getUserByName, deletePost
 }
+
+
+
+
 

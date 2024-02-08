@@ -13,7 +13,7 @@ import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({postId, name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
@@ -21,7 +21,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal />)
+    setModal('Edit post', <EditPostModal postId={postId} />)
     openModal()
   }
 
@@ -32,6 +32,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const commentHandler = () => {
     setIsComment(!isComment)
   }
+
 
   return (
     <Card>
