@@ -1,20 +1,29 @@
-import useModal from "../../hooks/useModal";
-import Card from "../card";
-import Comment from "../comment";
-import EditIcon from "../editIcon";
-import EditPostModal from "../editPostModal";
-import ProfileCircle from "../profileCircle";
-import "./style.css";
+import useModal from '../../hooks/useModal'
+import Card from '../card'
+import Comment from '../comment'
+import EditIcon from '../editIcon'
+import EditPostModal from '../editPostModal'
+import ProfileCircle from '../profileCircle'
+import { useState } from 'react'
+import './style.css'
+
+import emptyHeart from '../../assets/icons/empty-heart.png'
+import heart from '../../assets/icons/heart.png'
 
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
-  const { openModal, setModal } = useModal();
+  const { openModal, setModal } = useModal()
+  const [isLike, setIsLike] = useState(false)
 
-  const userInitials = name.match(/\b(\w)/g);
+  const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal("Edit post", <EditPostModal />);
-    openModal();
-  };
+    setModal('Edit post', <EditPostModal />)
+    openModal()
+  }
+
+  const likeHandler = () => {
+    setIsLike(!isLike)
+  }
 
   return (
     <Card>
@@ -35,15 +44,22 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
 
         <section
           className={`post-interactions-container border-top ${
-            comments.length ? "border-bottom" : null
+            comments.length ? 'border-bottom' : null
           }`}
         >
           <div className="post-interactions">
-            <div>Like</div>
+            <div className="heart-icon" onClick={likeHandler}>
+              {isLike ? (
+                <img src={heart} alt="heart" />
+              ) : (
+                <img src={emptyHeart} alt="heart" />
+              )}
+              <span>Like</span>
+            </div>
             <div>Comment</div>
           </div>
 
-          <p>{!likes && "Be the first to like this"}</p>
+          <p>{!likes && 'Be the first to like this'}</p>
         </section>
 
         <section>
@@ -57,7 +73,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
         </section>
       </article>
     </Card>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post
