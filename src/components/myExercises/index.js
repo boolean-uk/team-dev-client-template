@@ -14,7 +14,7 @@ const MyExercises = () => {
                         <p>Exercises:</p> <span>34/58 completed</span>
                     </div>
                 
-                    <div className="my-cohort-excercises--button">
+                    <div className="my-cohort-exercises--button">
                         <Button text="See Exercises"/>
                     </div>
                 </div>
