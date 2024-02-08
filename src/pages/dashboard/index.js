@@ -7,7 +7,8 @@ import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { getPosts, getUserByName } from "../../service/apiClient";
+import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
+import UsersList from "../../components/usersList";
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState("");
@@ -17,8 +18,14 @@ const Dashboard = () => {
   const getAllPosts = () => {
     getPosts().then(setPosts);
   };
+  
+  const getAllUsers = () => {
+    getUsers().then(setUsers)
+  }
 
   useEffect(getAllPosts, []);
+  useEffect(getAllUsers, [])
+
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -72,7 +79,7 @@ const Dashboard = () => {
         </Card>
         <Card>
           <h4>My Cohort</h4>
-          <UserList users={users} />
+          <UsersList users={users} />
         </Card>
       </aside>
     </>
