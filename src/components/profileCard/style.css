@@ -1,0 +1,30 @@
+.profile-card {
+	display: grid;
+	padding: 8px 16px;
+	grid-auto-flow: column;
+	grid-template-columns: min-content 1fr min-content;
+	gap: 16px;
+	align-items: center;
+	/* justify-items: start; */
+	max-width: 365px;
+}
+
+.profile-card-name {
+	font-weight: bold;
+}
+
+.more {
+	border-radius: 100%;
+	background-color: #F0F5FA;
+	color: #64648C;
+	width: 48px;
+	height: 48px;
+	place-self: end;
+	display: grid;
+	place-items: center;
+}
+
+.profile-icon{
+	display: grid;
+	grid-template-columns: 60px 300px;
+}
