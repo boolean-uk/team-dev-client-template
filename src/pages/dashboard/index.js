@@ -15,8 +15,17 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
+  const sortPosts = (fetchedPosts) =>  {
+    const sortedPosts = fetchedPosts.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    );
+    return sortedPosts
+  }
+
   const getAllPosts = () => {
-    getPosts().then(setPosts);
+    getPosts().then(sortPosts).then(setPosts).catch((error) => {
+      console.error("Fetch error:", error.message);
+    });
   };
   
   const getAllUsers = () => {
