@@ -1,7 +1,7 @@
 import useModal from "../../hooks/useModal";
 import Card from "../card";
 import Comment from "../comment";
-import EditIcon from "../editIcon";
+import OptionsIcon from "../optionsIcon";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
@@ -26,7 +26,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <EditIcon showModel={showModal} />
+          <OptionsIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
