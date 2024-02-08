@@ -6,8 +6,8 @@ const UsersList = ({ users }) => {
     }
     return (
         <>
-           {users.map(user => {
-            return <UserCard user={user} /> 
+           {users.map((user, index) => {
+            return <UserCard key={`usercardKey${index}`} user={user} /> 
            }
             )}
         </>
