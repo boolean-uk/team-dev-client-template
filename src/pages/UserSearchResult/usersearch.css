@@ -1,0 +1,24 @@
+
+
+.user-search-result-container {
+    display: flex;
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+  
+  .user-search-result-container p {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: left;
+    width: 283px;
+    height: 48px;
+    top: 120px;
+    left: 311px;
+    margin-top: 1px;
+    margin-left: 20px;
+  }
+  
+  .user-search-result-container svg {
+    fill: #64648C;
+      
+  }

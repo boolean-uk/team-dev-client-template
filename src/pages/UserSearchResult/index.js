@@ -1,19 +1,21 @@
 import { NavLink } from "react-router-dom";
 import BackArrowIcon from "../../assets/icons/backArrowIcon";
-
+import "./userSearch.css"
 const UserSearchResult = () => {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="user-search-result-container">
       <NavLink to="/">
         <BackArrowIcon
           width="48px"
           height="48px"
-          top="120px"
-          left="239px"
+          top="308px"
+          left="799px"
+          color="#DCE1F0"
           icon="Arrow Back"
+        
         />
       </NavLink>{" "}
-      <p style={{ marginLeft: "10px", marginTop: "10px" }}>Search results</p>
+      <p >Search results</p>
     </div>
   );
 };
