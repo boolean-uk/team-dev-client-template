@@ -9,7 +9,7 @@ const ArrowRightIcon = () => {
     >
       <path d="M0 20V0L10 10L0 20Z" fill="#000046" />
     </svg>
-  )
-}
+  );
+};
 
-export default ArrowRightIcon
+export default ArrowRightIcon;

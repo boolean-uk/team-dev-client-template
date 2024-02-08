@@ -1,40 +1,57 @@
-import { useEffect, useState } from 'react'
-import SearchIcon from '../../assets/icons/searchIcon'
-import Button from '../../components/button'
-import Card from '../../components/card'
-import CreatePostModal from '../../components/createPostModal'
-import TextInput from '../../components/form/textInput'
-import Posts from '../../components/posts'
-import useModal from '../../hooks/useModal'
-import './style.css'
-import { getPosts } from '../../service/apiClient'
+import { useState, useEffect } from "react";
+import SearchIcon from "../../assets/icons/searchIcon";
+import Button from "../../components/button";
+import Card from "../../components/card";
+import CreatePostModal from "../../components/createPostModal";
+import TextInput from "../../components/form/textInput";
+import Posts from "../../components/posts";
+import useModal from "../../hooks/useModal";
+import "./style.css";
+import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
+import UsersList from "../../components/usersList";
 
 const Dashboard = () => {
-  const [searchVal, setSearchVal] = useState('')
-  const [posts, setPosts] = useState([])
+  const [searchVal, setSearchVal] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const getAllPosts = () => {
-    getPosts().then(setPosts)
+    getPosts().then(setPosts);
+  };
+  
+  const getAllUsers = () => {
+    getUsers().then(setUsers)
   }
 
-  useEffect(getAllPosts, [])
+  useEffect(getAllPosts, []);
+  useEffect(getAllUsers, [])
+
 
   const onChange = (e) => {
-    setSearchVal(e.target.value)
-  }
+    setSearchVal(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e && e.preventDefault();
+    try {
+      getUserByName(searchVal).then(setUsers);
+    } catch (e) {
+      console.log('error getting username', e)
+    }
+  };
 
   // Use the useModal hook to get the openModal and setModal functions
-  const { openModal, setModal } = useModal()
+  const { openModal, setModal } = useModal();
 
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal getAllPosts={getAllPosts} />) // CreatePostModal is just a standard React component, nothing special
+    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
-    openModal()
-  }
-
+    openModal();
+  };
+  
   return (
     <>
       <main>
@@ -51,7 +68,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={onSubmit}>
             <TextInput
               icon={<SearchIcon />}
               value={searchVal}
@@ -60,13 +77,13 @@ const Dashboard = () => {
             />
           </form>
         </Card>
-
         <Card>
           <h4>My Cohort</h4>
+          <UsersList users={users} />
         </Card>
       </aside>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

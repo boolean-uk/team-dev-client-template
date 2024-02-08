@@ -1,14 +1,14 @@
-import Button from '../../components/button'
-import TickIcon from '../../assets/tickIcon'
-import './verification.css'
-import { useNavigate } from 'react-router-dom'
+import Button from "../../components/button";
+import TickIcon from "../../assets/tickIcon";
+import "./verification.css";
+import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onContinueClick = () => {
-    navigate('/welcome')
-  }
+    navigate("/welcome");
+  };
 
   return (
     <div className="bg-blue verify credentialpage">
@@ -31,7 +31,7 @@ const Verification = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Verification
+export default Verification;

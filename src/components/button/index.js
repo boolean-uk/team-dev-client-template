@@ -1,9 +1,9 @@
 const Button = ({
   text,
   onClick,
-  type = 'button',
+  type = "button",
   classes,
-  disabled = false
+  disabled = false,
 }) => {
   return (
     <button
@@ -14,7 +14,7 @@ const Button = ({
     >
       {text}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

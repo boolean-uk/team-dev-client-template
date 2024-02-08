@@ -4,7 +4,7 @@ const Comment = ({ name, content }) => {
       <h6>{name}</h6>
       <p>{content}</p>
     </>
-  )
-}
+  );
+};
 
-export default Comment
+export default Comment;
