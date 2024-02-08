@@ -13,7 +13,10 @@ const Welcome = () => {
     firstName: '',
     lastName: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    email: '',
+    mobile: '',
+    password: ''
   })
 
   const onChange = (event) => {
@@ -30,7 +33,10 @@ const Welcome = () => {
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
-      profile.bio
+      profile.bio,
+      profile.mobile,
+      profile.email,
+      profile.password
     )
   }
 
