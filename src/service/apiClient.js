@@ -28,6 +28,11 @@ async function postPost(newPost) {
   return res.data.post;
 }
 
+async function getUserByName(firstName) {
+  const res = await get(`users?first_name=${firstName}`);
+  return res.data.users;
+}
+
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth);
 }
@@ -38,6 +43,11 @@ async function patch(endpoint, data, auth = true) {
 
 async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth);
+}
+
+async function getUsers() {
+    const res = await get('users')
+    return res.data.users
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -61,4 +71,12 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, postPost };
+export {
+    login,
+    getPosts,
+    register,
+    createProfile,
+    getUsers, 
+    postPost, getUserByName
+}
+

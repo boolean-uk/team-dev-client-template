@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
@@ -7,20 +7,46 @@ import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { getPosts } from "../../service/apiClient";
+import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
+import UsersList from "../../components/usersList";
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState("");
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const sortPosts = (fetchedPosts) =>  {
+    const sortedPosts = fetchedPosts.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+    );
+    return sortedPosts
+  }
 
   const getAllPosts = () => {
-    getPosts().then(setPosts);
+    getPosts().then(sortPosts).then(setPosts).catch((error) => {
+      console.error("Fetch error:", error.message);
+    });
   };
+  
+  const getAllUsers = () => {
+    getUsers().then(setUsers)
+  }
 
   useEffect(getAllPosts, []);
+  useEffect(getAllUsers, [])
+
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e && e.preventDefault();
+    try {
+      getUserByName(searchVal).then(setUsers);
+    } catch (e) {
+      console.log('error getting username', e)
+    }
   };
 
   // Use the useModal hook to get the openModal and setModal functions
@@ -34,7 +60,7 @@ const Dashboard = () => {
     // Open the modal!
     openModal();
   };
-
+  
   return (
     <>
       <main>
@@ -51,7 +77,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={onSubmit}>
             <TextInput
               icon={<SearchIcon />}
               value={searchVal}
@@ -60,9 +86,9 @@ const Dashboard = () => {
             />
           </form>
         </Card>
-
         <Card>
           <h4>My Cohort</h4>
+          <UsersList users={users} />
         </Card>
       </aside>
     </>
