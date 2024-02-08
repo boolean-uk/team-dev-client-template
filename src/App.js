@@ -20,27 +20,37 @@ const App = () => {
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
 
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="welcome"
-              element={
-                <ProtectedRoute disabledNav={true}>
-                  <Welcome />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </ModalProvider>
-      </AuthProvider>
-    </>
-  );
+                        <Route
+                            index
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="my-cohort"
+                            element={
+                                <ProtectedRoute>
+                                  <p>component goes here</p>
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="welcome"
+                            element={
+                                <ProtectedRoute disabledNav={true}>
+                                    <Welcome />
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Routes>
+                </ModalProvider>
+			</AuthProvider>
+		</>
+	);
 };
 
 export default App;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Children, useState, useEffect } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
