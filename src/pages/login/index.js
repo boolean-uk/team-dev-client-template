@@ -8,6 +8,7 @@ import "./login.css";
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loginMessage, setLoginMessage] = useState('')
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -39,9 +40,10 @@ const Login = () => {
               type={"password"}
             />
           </form>
+          {loginMessage && <div>{loginMessage}</div>}
           <Button
             text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
+            onClick={() => onLogin(formData.email, formData.password, setLoginMessage)}
             classes="green width-full"
           />
         </div>

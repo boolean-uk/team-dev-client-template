@@ -43,11 +43,11 @@ const AuthProvider = ({ children }) => {
     }
   }, [location.state?.from?.pathname, navigate, logout, location, token]);
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (email, password, setLoginMessage) => {
     const res = await login(email, password);
 
     if (!res.data.token) {
-      alert(`${res.data.email}`)
+      setLoginMessage(res.data.email)
       return navigate("/login");
     }
 
