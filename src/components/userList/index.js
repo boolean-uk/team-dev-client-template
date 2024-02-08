@@ -1,6 +1,6 @@
 // @ts-nocheck
 import './styles.css'
-import EditIcon from '../editIcon'
+import EditIcon from '../optionsIcon'
 import ProfileCircle from '../profileCircle'
 
 const UserList = ({ users, contextMenu }) => {
