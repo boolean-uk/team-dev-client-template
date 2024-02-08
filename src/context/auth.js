@@ -45,7 +45,6 @@ const AuthProvider = ({ children }) => {
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
-    console.log(res)
 
     if (!res.data.token) {
       alert(`${res.data.email}`)
