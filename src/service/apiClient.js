@@ -28,6 +28,11 @@ async function postPost(newPost) {
   return res.data.post;
 }
 
+async function getUserByName(firstName) {
+  const res = await get(`users?first_name=${firstName}`);
+  return res.data.users;
+}
+
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth);
 }
@@ -72,6 +77,6 @@ export {
     register,
     createProfile,
     getUsers, 
-    postPost
+    postPost, getUserByName
 }
 
