@@ -45,9 +45,28 @@ async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth);
 }
 
+
 async function getUsers() {
-    const res = await get('users')
-    return res.data.users
+  const res = await get('users')
+  return res.data.users
+}
+
+async function put(endpoint, data, auth = true) {
+  return await request("PUT", endpoint, data, auth);
+}
+
+async function del(endpoint, auth = true) {
+  return await request("DELETE", endpoint, null, auth);
+}
+
+async function deletePost(postId) {
+return del(`posts/${postId}`)
+}
+
+
+async function editPost(postId, updatedContent) {
+  return put(`posts/${postId}`, updatedContent)
+ 
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -58,7 +77,7 @@ async function request(method, endpoint, data, auth = true) {
     method,
   };
 
-  if (method.toUpperCase() !== "GET") {
+  if (data) {
     opts.body = JSON.stringify(data);
   }
 
@@ -71,12 +90,19 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
+
+
+
 export {
     login,
     getPosts,
     register,
     createProfile,
     getUsers, 
-    postPost, getUserByName
+    postPost, getUserByName, deletePost, editPost
 }
+
+
+
+
 
