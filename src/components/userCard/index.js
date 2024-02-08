@@ -1,25 +1,41 @@
-import "./style.css"
+import { useState } from "react";
+import OptionsIcon from "../optionsIcon";
+import ProfileCircle from "../profileCircle";
+import "./style.css";
+import ProfileContextMenu from "../ProfileContextMenu";
 
+const UserCard = ({ user, contextMenu }) => {
 
-const UserCard = ({ user }) => {
+    const [triggerContextMenu, setTriggerContextMenu] = useState(false)
+    console.log(triggerContextMenu)
+    
 
-    if (!user.firstName || !user.lastName ) {
-        return
+    if (!user.firstName || !user.lastName) {
+        return;
     }
-    const initials = user.firstName?.charAt(0) + user.lastName?.charAt(0)
+
+    const initials = user.firstName?.charAt(0) + user.lastName?.charAt(0);
 
     return (
         <>
-            {
-                <section className="users">
-                    <div className="initials">{initials}</div>
-                    <div className="first-and-last-name"> {user.firstName  + " " + user.lastName}</div>
-                    <div className="more-menu"><button>...</button></div>
+            
+                <section className="user">
+                    <ProfileCircle initials={initials} />
+                    <div className="user-info">
+                        <div className="user-name">
+                            <strong>
+                                {user.firstName} {user.lastName}
+                            </strong>
+                        </div>
+                        <div className="user-title">{user.title}</div>
+                    </div>
+                    <div className="edit-icon-wrapper">
+                        <OptionsIcon trigger={ () => setTriggerContextMenu(!triggerContextMenu)} />
+                    </div>
                 </section>
-            }
+               { triggerContextMenu ? <ProfileContextMenu user={user} /> : ""}
         </>
-    )
-}
+    );
+};
 
-export default UserCard
-
+export default UserCard;
