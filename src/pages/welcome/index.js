@@ -3,44 +3,33 @@ import Stepper from '../../components/stepper'
 import useAuth from '../../hooks/useAuth'
 import StepOne from './stepOne'
 import StepTwo from './stepTwo'
-import StepThree from './stepThree'
 import './style.css'
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth()
+  const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
     githubUsername: '',
-    bio: '',
-    role: '',
-    specialism: '',
-    cohort: '',
-    startDate: '',
-    endDate: ''
+    bio: ''
   })
 
   const onChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setProfile({
       ...profile,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const onComplete = () => {
     onCreateProfile(
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
-      profile.bio,
-      profile.role,
-      profile.specialism,
-      profile.cohort,
-      profile.startDate,
-      profile.endDate
+      profile.bio
     )
   }
 
@@ -57,8 +46,8 @@ const Welcome = () => {
         <StepThree data={profile} setData={onChange} />
       </Stepper>
     </main>
-  )
-}
+  );
+};
 
 const WelcomeHeader = () => {
   return (
@@ -68,7 +57,7 @@ const WelcomeHeader = () => {
         Tell us about yourself to create your profile
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;

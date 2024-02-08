@@ -1,4 +1,4 @@
-const HomeIcon = ({ colour = '#64648C' }) => {
+const HomeIcon = ({ colour = "#64648C" }) => {
   return (
     <svg
       width="33"
@@ -12,7 +12,7 @@ const HomeIcon = ({ colour = '#64648C' }) => {
         fill={colour}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default HomeIcon
+export default HomeIcon;
