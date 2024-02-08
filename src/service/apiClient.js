@@ -88,6 +88,23 @@ async function deletePost(postId) {
   return response.json();
 }
 
+async function editPost(postId, updatedContent) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedContent), 
+  });
+  if (!response.ok) {
+    throw new Error('Failed to edit the post');
+  }
+  return response.json(); 
+}
+
+
 
 export {
     login,
@@ -95,7 +112,7 @@ export {
     register,
     createProfile,
     getUsers, 
-    postPost, getUserByName, deletePost
+    postPost, getUserByName, deletePost, editPost
 }
 
 

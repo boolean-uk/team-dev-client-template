@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { deletePost } from "../../service/apiClient.js";
+import { deletePost, editPost } from "../../service/apiClient.js";
 import Button from "../button";
 
 const EditPostModal = ({ postId, refreshPosts }) => {
@@ -15,7 +15,7 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     setText(e.target.value);
   };
 
-  const handleActionWithMessage = (message, timeout = 2000) => {
+  const handleActionWithMessage = (message, timeout = 5000) => {
     setMessage(message);
     setTimeout(() => {
       setMessage(null);
@@ -44,6 +44,22 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     } catch (error) {
       console.error("Failed to delete the post:", error.message);
       setMessage("Failed to delete the post. Please try again.");
+    }
+  };
+
+  const handleConfirmEdit = async () => {
+    if (!text.trim()) {
+      setMessage("Cannot update with empty content.");
+      return;
+    }
+
+    try {
+      await editPost(postId, { content: text });
+      handleActionWithMessage("Post edited! Closing modal in 5 seconds...");
+      refreshPosts();
+    } catch (error) {
+      console.error("Failed to edit the post:", error.message);
+      setMessage("Failed to edit the post. Please try again.");
     }
   };
 
@@ -84,6 +100,9 @@ const EditPostModal = ({ postId, refreshPosts }) => {
             value={text}
             placeholder="Edit your post"
           ></textarea>
+          <button className="second-edit" onClick={handleConfirmEdit}>
+            Edit
+          </button>
         </section>
       )}
 
@@ -93,8 +112,12 @@ const EditPostModal = ({ postId, refreshPosts }) => {
           <button className="cancel-delete" onClick={handleCancelDelete}>
             Cancel
           </button>
-          <button className="second-delete" onClick={() => handleConfirmDelete(postId)}>Delete Post</button>
-
+          <button
+            className="second-delete"
+            onClick={() => handleConfirmDelete(postId)}
+          >
+            Delete Post
+          </button>
         </section>
       )}
 
