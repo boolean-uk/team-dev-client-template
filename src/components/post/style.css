@@ -49,18 +49,32 @@
     text-align: right;
 }
 
-.heart-icon {
+.icon {
     width: fit-content;
     display: flex;
     align-items: center;
     cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 13px;
 }
 
-.heart-icon img {
-    height: 25px;
+.icon img {
     margin-right: 10px;
 }
 
-.heart-icon span {
+.icon span {
     user-select: none;
+}
+
+.icon img {
+    height: 25px;
+}
+
+.heart-icon {
+    padding: 0;
+    margin-right: 15px;
+}
+
+.comment-icon--active {
+    background-color: #F5FAFF;
 }

@@ -7,12 +7,16 @@ import ProfileCircle from '../profileCircle'
 import { useState } from 'react'
 import './style.css'
 
+// Icons
 import emptyHeart from '../../assets/icons/empty-heart.png'
 import heart from '../../assets/icons/heart.png'
+import emptyComment from '../../assets/icons/empty-comment.png'
+import comment from '../../assets/icons/comment.png'
 
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
+  const [isComment, setIsComment] = useState(false)
 
   const userInitials = name.match(/\b(\w)/g)
 
@@ -23,6 +27,10 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
 
   const likeHandler = () => {
     setIsLike(!isLike)
+  }
+
+  const commentHandler = () => {
+    setIsComment(!isComment)
   }
 
   return (
@@ -48,7 +56,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
           }`}
         >
           <div className="post-interactions">
-            <div className="heart-icon" onClick={likeHandler}>
+            <div className="heart-icon icon" onClick={likeHandler}>
               {isLike ? (
                 <img src={heart} alt="heart" />
               ) : (
@@ -56,7 +64,18 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
               )}
               <span>Like</span>
             </div>
-            <div>Comment</div>
+            <div
+              className={`comment-icon${isComment && '--active'} icon`}
+              onClick={commentHandler}
+            >
+              {isComment ? (
+                <img src={comment} alt="comment" />
+              ) : (
+                <img src={emptyComment} alt="comment" />
+              )}
+
+              <span>Comment</span>
+            </div>
           </div>
 
           <p>{!likes && 'Be the first to like this'}</p>
