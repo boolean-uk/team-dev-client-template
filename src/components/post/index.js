@@ -6,13 +6,13 @@ import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({postId, name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal();
 
   const userInitials = name.match(/\b(\w)/g);
 
   const showModal = () => {
-    setModal("Edit post", <EditPostModal />);
+    setModal("Edit post", <EditPostModal postId={postId} />);
     openModal();
   };
 
