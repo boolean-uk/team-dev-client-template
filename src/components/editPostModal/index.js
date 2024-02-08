@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { deletePost, editPost } from "../../service/apiClient.js";
+import { deletePost, put } from "../../service/apiClient.js";
 import Button from "../button";
 
 const EditPostModal = ({ postId, refreshPosts }) => {
@@ -15,7 +15,7 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     setText(e.target.value);
   };
 
-  const handleActionWithMessage = (message, timeout = 5000) => {
+  const handleActionWithMessage = (message, timeout = 2000) => {
     setMessage(message);
     setTimeout(() => {
       setMessage(null);
@@ -54,8 +54,8 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     }
 
     try {
-      await editPost(postId, { content: text });
-      handleActionWithMessage("Post edited! Closing modal in 5 seconds...");
+      await put(postId, { content: text });
+      handleActionWithMessage("Post edited! Closing modal in 2 seconds...");
       refreshPosts();
     } catch (error) {
       console.error("Failed to edit the post:", error.message);

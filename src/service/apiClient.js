@@ -72,37 +72,13 @@ async function request(method, endpoint, data, auth = true) {
 }
 
 async function deletePost(postId) {
-  console.log(postId)
-  const token = localStorage.getItem('token'); 
-  const response = await fetch(`${API_URL}/posts/${postId}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to delete the post');
-  }
-
-  return response.json();
+  return await request('DELETE', `posts/${postId}`);
 }
 
-async function editPost(postId, updatedContent) {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${API_URL}/posts/${postId}`, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedContent), 
-  });
-  if (!response.ok) {
-    throw new Error('Failed to edit the post');
-  }
-  return response.json(); 
+async function put(postId, updatedContent) {
+  return await request('PUT', `posts/${postId}`, updatedContent);
 }
+
 
 
 
@@ -112,7 +88,7 @@ export {
     register,
     createProfile,
     getUsers, 
-    postPost, getUserByName, deletePost, editPost
+    postPost, getUserByName, deletePost, put
 }
 
 
