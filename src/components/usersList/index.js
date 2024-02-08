@@ -14,8 +14,6 @@ const UsersList = () => {
         return <></>
     }
 
-    console.log(users)
-
     return (
         <>
            {users.map(user => {
