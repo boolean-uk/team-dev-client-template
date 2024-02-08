@@ -3,6 +3,7 @@ import Stepper from '../../components/stepper'
 import useAuth from '../../hooks/useAuth'
 import StepOne from './stepOne'
 import StepTwo from './stepTwo'
+import StepThree from './stepThree'
 import './style.css'
 
 const Welcome = () => {
