@@ -7,7 +7,7 @@ import StepThree from './stepThree'
 import './style.css'
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth()
+  const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
@@ -20,13 +20,13 @@ const Welcome = () => {
   })
 
   const onChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setProfile({
       ...profile,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const onComplete = () => {
     onCreateProfile(
@@ -53,8 +53,8 @@ const Welcome = () => {
         <StepThree data={profile} setData={onChange} />
       </Stepper>
     </main>
-  )
-}
+  );
+};
 
 const WelcomeHeader = () => {
   return (
@@ -64,7 +64,7 @@ const WelcomeHeader = () => {
         Tell us about yourself to create your profile
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;

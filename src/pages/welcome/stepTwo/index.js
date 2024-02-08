@@ -36,7 +36,7 @@ const StepTwo = ({ data, setData }) => {
         </div>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default StepTwo
+export default StepTwo;

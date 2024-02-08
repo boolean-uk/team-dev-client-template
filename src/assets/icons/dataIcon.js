@@ -12,7 +12,7 @@ const DataIcon = () => {
         fill="#64648C"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default DataIcon
+export default DataIcon;

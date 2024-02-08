@@ -12,7 +12,7 @@ const TickIcon = ({ height = 64, width = 64 }) => {
         fill="#64DC78"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default TickIcon
+export default TickIcon;
