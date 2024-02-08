@@ -15,6 +15,14 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const checkLoginErrors = async () => {
+    try {
+      await onLogin(formData.email, formData.password);
+    } catch (error) {
+      setLoginMessage(error.message);
+    }
+  };
+
   return (
     <div className="bg-blue login credentialpage">
       <CredentialsCard
@@ -43,7 +51,10 @@ const Login = () => {
           {loginMessage && <div>{loginMessage}</div>}
           <Button
             text="Log in"
-            onClick={() => onLogin(formData.email, formData.password, setLoginMessage)}
+            onClick={() => {
+              checkLoginErrors()
+              onLogin(formData.email, formData.password)}
+            } 
             classes="green width-full"
           />
         </div>

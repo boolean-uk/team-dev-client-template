@@ -43,12 +43,11 @@ const AuthProvider = ({ children }) => {
     }
   }, [location.state?.from?.pathname, navigate, logout, location, token]);
 
-  const handleLogin = async (email, password, setLoginMessage) => {
+  const handleLogin = async (email, password) => {
     const res = await login(email, password);
 
     if (!res.data.token) {
-      setLoginMessage(res.data.email)
-      return navigate("/login");
+      throw new Error(res.data.error)
     }
 
     localStorage.setItem("token", res.data.token);
