@@ -1,40 +1,43 @@
-
 import useModal from "../../hooks/useModal";
 import Card from "../card";
 import Comment from "../comment";
 import OptionsIcon from "../optionsIcon";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
-import { useState } from 'react'
+import { useState } from 'react';
 import "./style.css";
 
 
-// Icons
-import emptyHeart from '../../assets/icons/empty-heart.png'
-import heart from '../../assets/icons/heart.png'
-import emptyComment from '../../assets/icons/empty-comment.png'
-import comment from '../../assets/icons/comment.png'
+import emptyHeart from '../../assets/icons/empty-heart.png';
+import heart from '../../assets/icons/heart.png';
+import emptyComment from '../../assets/icons/empty-comment.png';
+import comment from '../../assets/icons/comment.png';
 
 const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPosts}) => {
-  const { openModal, setModal } = useModal()
-  const [isLike, setIsLike] = useState(false)
-  const [isComment, setIsComment] = useState(false)
+  const { openModal, setModal } = useModal();
+  const [userLiked, setUserLiked] = useState(false); 
+  const [likesCount, setLikesCount] = useState(likes);
+  const [isComment, setIsComment] = useState(false);
 
-  const userInitials = name.match(/\b(\w)/g)
+  const userInitials = name.match(/\b(\w)/g);
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />)
-    openModal()
-  }
+    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />);
+    openModal();
+  };
 
   const likeHandler = () => {
-    setIsLike(!isLike)
-  }
+    if (userLiked) {
+      setLikesCount(likesCount - 1);
+    } else {
+      setLikesCount(likesCount + 1);
+    }
+    setUserLiked(!userLiked);
+  };
 
   const commentHandler = () => {
-    setIsComment(!isComment)
-  }
-
+    setIsComment(!isComment);
+  };
 
   return (
     <Card>
@@ -55,33 +58,25 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
 
         <section
           className={`post-interactions-container border-top ${
-            comments.length ? 'border-bottom' : null
+            comments.length ? 'border-bottom' : ''
           }`}
         >
           <div className="post-interactions">
             <div className="heart-icon icon" onClick={likeHandler}>
-              {isLike ? (
-                <img src={heart} alt="heart" />
-              ) : (
-                <img src={emptyHeart} alt="heart" />
-              )}
+              <img src={userLiked ? heart : emptyHeart} alt="heart" />
               <span>Like</span>
             </div>
-            <div
-              className={`comment-icon${isComment && '--active'} icon`}
-              onClick={commentHandler}
-            >
-              {isComment ? (
-                <img src={comment} alt="comment" />
-              ) : (
-                <img src={emptyComment} alt="comment" />
-              )}
-
+            <div className={`comment-icon ${isComment ? 'comment-icon--active' : ''} icon`} onClick={commentHandler}>
+              <img src={isComment ? comment : emptyComment} alt="comment" />
               <span>Comment</span>
             </div>
           </div>
 
-          <p>{!likes && 'Be the first to like this'}</p>
+          {likesCount > 0 ? (
+            <p>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</p>
+          ) : (
+            <p>Be the first to like this</p>
+          )}
         </section>
 
         <section>
@@ -95,7 +90,7 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
         </section>
       </article>
     </Card>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;
