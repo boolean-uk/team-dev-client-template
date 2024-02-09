@@ -1,9 +1,9 @@
 .register-form {
-	margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 .register-form form {
-	display: grid;
-	grid-template-rows: repeat(2, auto);
-	gap: 24px;
-	margin-bottom: 40px;
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  gap: 24px;
+  margin-bottom: 40px;
 }
