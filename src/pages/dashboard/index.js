@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
 import CreatePostModal from "../../components/createPostModal";
-import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
+import { getPosts, getUsers } from "../../service/apiClient";
 import UsersList from "../../components/usersList";
+import UserSearchBar from "../../components/userSearchBar/UserSearchBar";
 
 const Dashboard = () => {
-  const [searchVal, setSearchVal] = useState("");
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -35,19 +33,6 @@ const Dashboard = () => {
   useEffect(getAllPosts, []);
   useEffect(getAllUsers, [])
 
-
-  const onChange = (e) => {
-    setSearchVal(e.target.value);
-  };
-
-  const onSubmit = (e) => {
-    e && e.preventDefault();
-    try {
-      getUserByName(searchVal).then(setUsers);
-    } catch (e) {
-      console.log('error getting username', e)
-    }
-  };
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
@@ -76,16 +61,7 @@ const Dashboard = () => {
         <Posts posts={posts} />
       </main>
       <aside>
-        <Card>
-          <form onSubmit={onSubmit}>
-            <TextInput
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-            />
-          </form>
-        </Card>
+        <UserSearchBar />
         <Card>
           <h4>My Cohort</h4>
           <UsersList users={users} />
