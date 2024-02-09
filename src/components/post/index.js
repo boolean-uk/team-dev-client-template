@@ -1,12 +1,11 @@
-
-import useModal from "../../hooks/useModal";
-import Card from "../card";
-import Comment from "../comment";
-import OptionsIcon from "../optionsIcon";
-import EditPostModal from "../editPostModal";
-import ProfileCircle from "../profileCircle";
-import { useState } from 'react'
-import "./style.css";
+import useModal from '../../hooks/useModal'
+import Card from '../card'
+import Comment from '../comment'
+import OptionsIcon from '../optionsIcon'
+import EditPostModal from '../editPostModal'
+import ProfileCircle from '../profileCircle'
+import { useEffect, useState } from 'react'
+import './style.css'
 
 // Icons
 import emptyHeart from '../../assets/icons/empty-heart.png'
@@ -18,6 +17,8 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPost
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
+
+  const [formatDate, setFormatDate] = useState(null)
 
   const userInitials = name.match(/\b(\w)/g)
 
@@ -34,6 +35,14 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPost
     setIsComment(!isComment)
   }
 
+  useEffect(() => {
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.toLocaleString('en-GB', { month: 'long' })
+    const time = newDate.toLocaleTimeString().slice(0, 5)
+
+    setFormatDate(`${day} ${month} at ${time}`)
+  }, [date])
 
   return (
     <Card>
@@ -43,7 +52,7 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPost
 
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{formatDate}</small>
           </div>
           <OptionsIcon showModel={showModal} />
         </section>
