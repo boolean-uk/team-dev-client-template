@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import useModal from '../../hooks/useModal'
-import './style.css'
-import { deletePost, editPost } from '../../service/apiClient.js'
+import { useState } from "react"
+import useModal from "../../hooks/useModal"
+import "./style.css"
+import { deletePost, editPost } from "../../service/apiClient.js"
 
 const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const { closeModal } = useModal()
   const [message, setMessage] = useState(null)
-  const [text, setText] = useState('')
+  const [text, setText] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -35,28 +35,28 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const handleConfirmDelete = async (postId) => {
     try {
       await deletePost(postId)
-      handleActionWithMessage('Post deleted! Closing modal in 2 seconds...')
+      handleActionWithMessage("Post deleted! Closing modal in 2 seconds...")
       getAllPosts()
     } catch (error) {
-      console.error('Failed to delete the post:', error.message)
-      setMessage('Failed to delete the post. Please try again.')
+      console.error("Failed to delete the post:", error.message)
+      setMessage("Failed to delete the post. Please try again.")
     }
   }
 
   const handleConfirmEdit = async () => {
     if (!text.trim()) {
-      setMessage('Cannot update with empty content.')
+      setMessage("Cannot update with empty content.")
       return
     }
 
     try {
       const editPostResponse = await editPost(postId, { content: text })
       const editedPost = editPostResponse.data.post.content
-      handleActionWithMessage('Post edited! Closing modal in 2 seconds...')
+      handleActionWithMessage("Post edited! Closing modal in 2 seconds...")
       setPostContent(editedPost)
     } catch (error) {
-      console.error('Failed to edit the post:', error.message)
-      setMessage('Failed to edit the post. Please try again.')
+      console.error("Failed to edit the post:", error.message)
+      setMessage("Failed to edit the post. Please try again.")
     }
   }
 
@@ -78,7 +78,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
       <section className="edit-delete-buttons">
         <div className="button-container">
           <button
-            className={`post__settings-button edit ${isEditing && 'post__settings-button--active'}`}
+            className={`post__settings-button edit ${isEditing && "post__settings-button--active"}`}
             onClick={handleEditClick}
           >
             Edit
@@ -86,7 +86,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
         </div>
         <div className="button-container">
           <button
-            className={`post__settings-button delete ${isDeleting && 'post__settings-button--active'}`}
+            className={`post__settings-button delete ${isDeleting && "post__settings-button--active"}`}
             onClick={handleDeleteClick}
           >
             Delete
