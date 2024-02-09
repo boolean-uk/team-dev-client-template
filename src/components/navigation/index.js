@@ -1,15 +1,15 @@
-import { NavLink } from "react-router-dom";
-import CohortIcon from "../../assets/icons/cohortIcon";
-import HomeIcon from "../../assets/icons/homeIcon";
-import ProfileIcon from "../../assets/icons/profileIcon";
-import useAuth from "../../hooks/useAuth";
-import "./style.css";
+import { NavLink } from "react-router-dom"
+import CohortIcon from "../../assets/icons/cohortIcon"
+import HomeIcon from "../../assets/icons/homeIcon"
+import ProfileIcon from "../../assets/icons/profileIcon"
+import useAuth from "../../hooks/useAuth"
+import "./style.css"
 
 const Navigation = () => {
-  const { token } = useAuth();
+  const { token } = useAuth()
 
   if (!token) {
-    return null;
+    return null
   }
 
   return (
@@ -28,14 +28,14 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to="/my-cohort">
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation
