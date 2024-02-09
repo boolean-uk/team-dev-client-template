@@ -1,13 +1,11 @@
-
-import useModal from "../../hooks/useModal";
-import Card from "../card";
-import Comment from "../comment";
-import OptionsIcon from "../optionsIcon";
-import EditPostModal from "../editPostModal";
-import ProfileCircle from "../profileCircle";
-import { useState } from 'react'
-import "./style.css";
-
+import useModal from '../../hooks/useModal'
+import Card from '../card'
+import Comment from '../comment'
+import EditIcon from '../editIcon'
+import EditPostModal from '../editPostModal'
+import ProfileCircle from '../profileCircle'
+import { useEffect, useState } from 'react'
+import './style.css'
 
 // Icons
 import emptyHeart from '../../assets/icons/empty-heart.png'
@@ -15,15 +13,28 @@ import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
 
-const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPosts}) => {
+const Post = ({
+  postId,
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  refreshPosts
+}) => {
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
 
+  const [formatDate, setFormatDate] = useState(null)
+
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />)
+    setModal(
+      'Edit post',
+      <EditPostModal postId={postId} refreshPosts={refreshPosts} />
+    )
     openModal()
   }
 
@@ -35,6 +46,14 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
     setIsComment(!isComment)
   }
 
+  useEffect(() => {
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.toLocaleString('en-GB', { month: 'long' })
+    const time = newDate.toLocaleTimeString().slice(0, 5)
+
+    setFormatDate(`${day} ${month} at ${time}`)
+  }, [date])
 
   return (
     <Card>
@@ -44,9 +63,9 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
 
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{formatDate}</small>
           </div>
-          <OptionsIcon showModel={showModal} />
+          <EditIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
