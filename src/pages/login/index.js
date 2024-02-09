@@ -1,18 +1,27 @@
-import { useState } from 'react'
-import Button from '../../components/button'
-import TextInput from '../../components/form/textInput'
-import useAuth from '../../hooks/useAuth'
-import CredentialsCard from '../../components/credentials'
-import './login.css'
+import { useState } from "react";
+import Button from "../../components/button";
+import TextInput from "../../components/form/textInput";
+import useAuth from "../../hooks/useAuth";
+import CredentialsCard from "../../components/credentials";
+import "./login.css";
 
 const Login = () => {
-  const { onLogin } = useAuth()
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const { onLogin } = useAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loginMessage, setLoginMessage] = useState('')
 
   const onChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const checkLoginErrors = async () => {
+    try {
+      await onLogin(formData.email, formData.password);
+    } catch (error) {
+      setLoginMessage(error.message);
+    }
+  };
 
   return (
     <div className="bg-blue login credentialpage">
@@ -29,25 +38,29 @@ const Login = () => {
               value={formData.email}
               onChange={onChange}
               name="email"
-              label={'Email *'}
+              label={"Email *"}
             />
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
-              label={'Password *'}
-              type={'password'}
+              label={"Password *"}
+              type={"password"}
             />
           </form>
+          {loginMessage && <div>{loginMessage}</div>}
           <Button
             text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
+            onClick={() => {
+              checkLoginErrors()
+              onLogin(formData.email, formData.password)}
+            } 
             classes="green width-full"
           />
         </div>
       </CredentialsCard>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

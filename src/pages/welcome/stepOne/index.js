@@ -1,5 +1,5 @@
-import Form from '../../../components/form'
-import TextInput from '../../../components/form/textInput'
+import Form from "../../../components/form";
+import TextInput from "../../../components/form/textInput";
 
 const StepOne = ({ data, setData }) => {
   return (
@@ -21,31 +21,25 @@ const StepOne = ({ data, setData }) => {
             onChange={setData}
             value={data.firstName}
             name="firstName"
-            label={'First name*'}
-            placeholder="enter your firstname"
-            required
+            label={"First name"}
           />
           <TextInput
             onChange={setData}
             value={data.lastName}
             name="lastName"
-            label={'Last name*'}
-            placeholder="enter your lastname"
-            required
+            label={"Last name"}
           />
           <TextInput
             onChange={setData}
             value={data.githubUsername}
             name="githubUsername"
-            label={'Github link or username*'}
-            placeholder="enter a valid github link or username"
-            required
+            label={"Github Username"}
           />
           <p className="text-blue1">*Required</p>
         </div>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default StepOne
+export default StepOne;

@@ -12,7 +12,7 @@ const MonitorIcon = () => {
         fill="#000046"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default MonitorIcon
+export default MonitorIcon;
