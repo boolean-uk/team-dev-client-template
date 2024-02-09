@@ -9,9 +9,10 @@ import useModal from "../../hooks/useModal";
 import "./style.css";
 import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
 import UsersList from "../../components/usersList";
+import SearchUserAside from "../../components/searchUserAside";
 
 const Dashboard = () => {
-  const [searchVal, setSearchVal] = useState("");
+
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -34,20 +35,6 @@ const Dashboard = () => {
 
   useEffect(getAllPosts, []);
   useEffect(getAllUsers, [])
-
-
-  const onChange = (e) => {
-    setSearchVal(e.target.value);
-  };
-
-  const onSubmit = (e) => {
-    e && e.preventDefault();
-    try {
-      getUserByName(searchVal).then(setUsers);
-    } catch (e) {
-      console.log('error getting username', e)
-    }
-  };
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
@@ -76,16 +63,7 @@ const Dashboard = () => {
         <Posts posts={posts} />
       </main>
       <aside>
-        <Card>
-          <form onSubmit={onSubmit}>
-            <TextInput
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-            />
-          </form>
-        </Card>
+        <SearchUserAside />
         <Card>
           <h4>My Cohort</h4>
           <UsersList users={users} />
