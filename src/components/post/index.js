@@ -45,7 +45,7 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPost
     setFormatDate(`${day} ${month} at ${time}`)
   }, [date])
 
-  useEffect(() => setPostContent(content), [])
+  useEffect(() => setPostContent(content), [content])
 
   return (
     <Card>
