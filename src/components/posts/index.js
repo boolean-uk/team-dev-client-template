@@ -22,6 +22,8 @@ const Posts = () => {
     fetchAndSetPosts(); 
   }, []);
 
+  
+
   return (
     <>
       {posts.map((post) => (
@@ -32,6 +34,7 @@ const Posts = () => {
           date={post.createdAt}
           content={post.content}
           comments={post.comments}
+          likes={post.likes.length || 0}
           refreshPosts={fetchAndSetPosts} 
         />
       ))}
