@@ -20,57 +20,19 @@
   
   .user-search-result-container svg {
     fill: #64648C;
-      
+    transition: fill 0.3s; 
   }
+  
 
   .white-background-box {
     width: 600px;
-    height: 550px;
+    height: fit-content;
     top: 292px;
     left: 44px;
-   
     background-color: #fff;
     margin-left: 100px;
     margin-top: 10px;
-
-  }
-
-  .white-background-box {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 432px;
-    height: 441px;
-    margin-top: 20px;
-    border: 1px solid #000;
-    background-color: #fff;
-  }
-
-  .column {
-   
-    text-align: center;
-    margin-top: 1px;
-  
-    
-  }
-
-  .circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #DCE1F0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  .name {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .profession {
-    color: #555;
+    flex-direction: column; 
+    gap: 20px; 
   }
