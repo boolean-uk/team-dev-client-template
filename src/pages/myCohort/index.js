@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import MyExercises from "../../components/myExercises"
-import MyTeachers from "../../components/myTeachers"
+import MyExercises from "../../components/myCohortExercises"
+import MyTeachers from "../../components/myCohortTeachers"
 import MyCohortDetails from "../../components/myCohortDetails"
 import { getUsers } from "../../service/apiClient"
 
