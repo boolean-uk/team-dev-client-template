@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
     const res = await login(email, password);
 
     if (!res.data.token) {
-      return navigate("/login");
+      throw new Error(res.data.error)
     }
 
     localStorage.setItem("token", res.data.token);

@@ -1,0 +1,29 @@
+.profile-context-menu {
+  position: absolute;
+  z-index: 1;
+  right: 105px;
+
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  place-content: center;
+  padding: 10px;
+  height: 96px;
+  width: 310px;
+
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px #00000040;
+}
+
+.profile-context-menu:hover {
+  background-color: #F5FAFF;
+}
+
+.profile-text {
+  display: grid;
+  align-content: center;
+}
+
+.profile-icon:hover {
+  color: #000046;
+}
