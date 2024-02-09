@@ -8,14 +8,13 @@ import ProfileCircle from "../profileCircle";
 import { useState } from 'react'
 import "./style.css";
 
-
 // Icons
 import emptyHeart from '../../assets/icons/empty-heart.png'
 import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
 
-const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPosts}) => {
+const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPosts}) => {
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
@@ -23,7 +22,7 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />)
+    setModal('Edit post', <EditPostModal postId={postId} getAllPosts={getAllPosts} />)
     openModal()
   }
 
