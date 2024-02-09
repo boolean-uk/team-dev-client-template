@@ -1,7 +1,9 @@
 import Form from '../../../components/form'
-import TextInput from '../../../components/form/textInput'
 
 const StepFour = ({data, setData})=>{
+    const splitWord = data.bio.trim(/\s+/g, '').length;
+    console.log('this is split word ',splitWord)
+
     return(
      <>
         <div className='welcome-formheader'>
@@ -12,15 +14,21 @@ const StepFour = ({data, setData})=>{
         <Form className={"welcome-form"}>
             <p>Bio</p>
             <div className="welcome-form-inputs">
-                <TextInput
+                <textarea
                 onChange={setData}
                 value={data.bio}
                 name="bio"
                 placeholder = "Tell use about yourself, your educational and professional highlight to date"
                 label={'Bio'}
                 type={"textarea"}
+                maxLength={3000}
                 />
+
+            <p className='word-count'>
+                {splitWord}/3000
+            </p>
             </div>
+    
         </Form>
      </>
 
@@ -28,3 +36,5 @@ const StepFour = ({data, setData})=>{
 }
 
 export default StepFour
+
+
