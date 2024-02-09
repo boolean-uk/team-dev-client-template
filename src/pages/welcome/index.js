@@ -1,28 +1,28 @@
-import { useState } from 'react'
-import Stepper from '../../components/stepper'
-import useAuth from '../../hooks/useAuth'
-import StepOne from './stepOne'
-import StepTwo from './stepTwo'
-import StepThree from './stepThree'
-import './style.css'
+import { useState } from "react";
+import Stepper from "../../components/stepper";
+import useAuth from "../../hooks/useAuth";
+import StepOne from "./stepOne";
+import StepTwo from "./stepTwo";
+import StepThree from "./stepThree";
+import "./style.css";
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
-    firstName: '',
-    lastName: '',
-    githubUsername: '',
-    bio: '',
-    email: '',
-    mobile: '',
-    password: '',
-    role: '',
-    specialism: '',
-    cohort: '', 
-    startDate: '', 
-    endDate: ''
-  })
+    firstName: "",
+    lastName: "",
+    githubUsername: "",
+    bio: "",
+    email: "",
+    mobile: "",
+    password: "",
+    role: "",
+    specialism: "",
+    cohort: "",
+    startDate: "",
+    endDate: "",
+  });
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -47,8 +47,8 @@ const Welcome = () => {
       profile.cohort,
       profile.startDate,
       profile.endDate
-    )
-  }
+    );
+  };
 
   return (
     <main className="welcome">

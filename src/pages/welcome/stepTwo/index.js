@@ -1,9 +1,7 @@
-import Form from '../../../components/form'
-import TextInput from '../../../components/form/textInput'
+import Form from "../../../components/form";
+import TextInput from "../../../components/form/textInput";
 
 const StepTwo = ({ data, setData }) => {
-  console.log(data)
-
   return (
     <>
       <div className="welcome-formheader">
@@ -15,21 +13,21 @@ const StepTwo = ({ data, setData }) => {
             onChange={setData}
             value={data.email}
             name="email"
-            label={'Email'}
+            label={"Email*"}
             type="text"
           />
           <TextInput
             onChange={setData}
             value={data.mobile}
             name="mobile"
-            label={'Mobile'}
+            label={"Mobile*"}
             type="text"
           />
           <TextInput
             onChange={setData}
             value={data.password}
             name="password"
-            label={'Password'}
+            label={"Password*"}
             type="password"
           />
           <p className="text-blue1">*Required</p>
