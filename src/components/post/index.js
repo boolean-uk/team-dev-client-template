@@ -47,7 +47,12 @@ const Post = ({
   }
 
   useEffect(() => {
-    setFormatDate(new Date(date).toUTCString().slice(5, -4))
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.toLocaleString('eng', { month: 'long' })
+    const time = newDate.toLocaleTimeString().slice(0, 5)
+
+    setFormatDate(`${day} ${month} at ${time}`)
   }, [date])
 
   return (
