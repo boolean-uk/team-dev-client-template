@@ -14,6 +14,7 @@ const StepOne = ({ data, setData }) => {
             value={data.pictureUrl}
             name="pictureUrl"
             label={'Photograph'}
+            placeholder="please enter a valid image url"
           />
 
           <TextInput
@@ -21,6 +22,7 @@ const StepOne = ({ data, setData }) => {
             value={data.firstName}
             name="firstName"
             label={'First name*'}
+            placeholder="enter your firstname"
             required
           />
           <TextInput
@@ -28,13 +30,15 @@ const StepOne = ({ data, setData }) => {
             value={data.lastName}
             name="lastName"
             label={'Last name*'}
+            placeholder="enter your lastname"
             required
           />
           <TextInput
             onChange={setData}
             value={data.githubUsername}
             name="githubUsername"
-            label={'Github link/username*'}
+            label={'Github link or username*'}
+            placeholder="enter a valid github link or username"
             required
           />
           <p className="text-blue1">*Required</p>
