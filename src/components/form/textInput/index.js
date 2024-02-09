@@ -25,6 +25,7 @@ const TextInput = ({
             setInput(e.target.value)
           }}
           placeholder={placeholder}
+          required={required}
         />
         {showpassword && (
           <input
@@ -58,6 +59,7 @@ const TextInput = ({
           onChange={onChange}
           className={icon && 'input-has-icon'}
           placeholder={placeholder}
+          required={required}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>
