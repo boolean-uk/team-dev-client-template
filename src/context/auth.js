@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
       return
     }
 
-    if (!storedToken && location.pathname !== "/login") {
+    if (!storedToken && (location.pathname !== "/login" && location.pathname !== '/register')) {
       const redirectState = location.state || { from: location }
 
       navigate("/login", {
