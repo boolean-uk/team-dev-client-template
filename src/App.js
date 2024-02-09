@@ -10,15 +10,15 @@ import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 
 const App = () => {
-	return (
-		<>
-			<AuthProvider>
-                <ModalProvider>
-                    <Routes>
-                        <Route path="login" element={<Login />} />
-                        <Route path="register" element={<Register />} />
-                        <Route path="loading" element={<Loading />} />
-                        <Route path="verification" element={<Verification />} />
+  return (
+    <>
+      <AuthProvider>
+        <ModalProvider>
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="loading" element={<Loading />} />
+            <Route path="verification" element={<Verification />} />
 
                         <Route
                             index
@@ -28,6 +28,16 @@ const App = () => {
                                 </ProtectedRoute>
                             }
                         />
+
+                        <Route
+                            path="my-cohort"
+                            element={
+                                <ProtectedRoute>
+                                  <p>component goes here</p>
+                                </ProtectedRoute>
+                            }
+                        />
+
                         <Route
                             path="welcome"
                             element={

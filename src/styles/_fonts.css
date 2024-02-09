@@ -1,9 +1,9 @@
 /* fonts here */
 @font-face {
-	font-family: "Lexend";
-	src: local("Lexend Regular"), local("Lexend-Regular"),
-		url("../fonts/Lexend-VariableFont_wght.ttf") format("truetype");
-	font-weight: 300 900;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Lexend';
+  src: local('Lexend Regular'), local('Lexend-Regular'),
+    url('../fonts/Lexend-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
 }

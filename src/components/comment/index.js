@@ -1,10 +1,10 @@
 const Comment = ({ name, content }) => {
-    return (
-        <>
-            <h6>{name}</h6>
-            <p>{content}</p>
-        </>
-    )
-}
+  return (
+    <>
+      <h6>{name}</h6>
+      <p>{content}</p>
+    </>
+  );
+};
 
-export default Comment
+export default Comment;

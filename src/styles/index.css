@@ -1,16 +1,16 @@
-@import "./_fonts.css";
-@import "./_globals.css";
-@import "./_buttons.css";
-@import "./_reset.css";
-@import "./_text.css";
-@import "./_form.css";
+@import './_fonts.css';
+@import './_globals.css';
+@import './_buttons.css';
+@import './_reset.css';
+@import './_text.css';
+@import './_form.css';
 
 /* miscellaneous */
 .credentialpage {
-	padding: 32px;
-	min-height: 100vh;
-	display: grid;
-	grid-template: 1fr / 1fr;
-	justify-items: center;
-	align-items: center;
+  padding: 32px;
+  min-height: 100vh;
+  display: grid;
+  grid-template: 1fr / 1fr;
+  justify-items: center;
+  align-items: center;
 }
