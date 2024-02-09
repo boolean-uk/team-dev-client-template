@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import BackArrowIcon from "../../assets/icons/backArrowIcon";
 import "./userSearch.css"
+
+
+
 const UserSearchResult = () => {
+
   return (
+  <div>
     <div className="user-search-result-container">
       <NavLink to="/">
         <BackArrowIcon
@@ -17,6 +22,11 @@ const UserSearchResult = () => {
       </NavLink>{" "}
       <p >Search results</p>
     </div>
+     <div className="white-background-box">
+     
+     </div>
+     </div>
+
   );
 };
 
