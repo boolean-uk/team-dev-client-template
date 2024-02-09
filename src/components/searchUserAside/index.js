@@ -8,14 +8,15 @@ import UsersList from "../usersList";
 import "./style.css";
 import Button from "../button";
 
-
 import { user } from "../../service/mockData";
-
+import { NavLink } from "react-router-dom";
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [users, setUsers] = useState(user.user);
+  const [users, setUsers] = useState([]);
+
+  const menuOpen = hasFocus || searchVal.length > 0;
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -46,31 +47,39 @@ const SearchUserAside = () => {
           />
         </form>
       </Card>
-      <UserResults users={users} />
-
+      {menuOpen && <UserResults users={users} />}
     </div>
   );
 };
 
-const UserResults = ({ users }) => {
-  // TODO: need onFocus stuff for the results list
-
+const UserResults = ({ users, setResultsHasFocus }) => {
   // TODO: results should be same width as search bar
   // TODO: add bottom button area which changes depending on length of userListResults
-
-
 
   return (
     <>
       <Menu className={"search-user-menu"}>
-
         <h4 className="border-bottom spacing">People</h4>
         <UsersList users={users} />
-        {users.length >= 10 &&
-          <Button classes='button  offwhite  spacing' text={'All Results'} />
-        }
+        {users.length >= 10 && (
+          <NavLink to="/results">
+            <Button classes="button  offwhite  spacing" text={"All Results"} />
+          </NavLink>
+        )}
+        {users.length === 0 && <NoResults />}
       </Menu>
+    </>
+  );
+};
 
+const NoResults = () => {
+  return (
+    <>
+      <p>Sorry, no results found.</p>
+      <p>Try changing your search term.</p>
+      <NavLink to="/results">
+        <Button classes="button  offwhite  spacing" text={"Edit Search"} />
+      </NavLink>
     </>
   );
 };
