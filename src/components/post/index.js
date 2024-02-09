@@ -1,11 +1,13 @@
-import useModal from '../../hooks/useModal'
-import Card from '../card'
-import Comment from '../comment'
-import EditIcon from '../editIcon'
-import EditPostModal from '../editPostModal'
-import ProfileCircle from '../profileCircle'
+
+import useModal from "../../hooks/useModal";
+import Card from "../card";
+import Comment from "../comment";
+import OptionsIcon from "../optionsIcon";
+import EditPostModal from "../editPostModal";
+import ProfileCircle from "../profileCircle";
 import { useState } from 'react'
-import './style.css'
+import "./style.css";
+
 
 // Icons
 import emptyHeart from '../../assets/icons/empty-heart.png'
@@ -13,7 +15,7 @@ import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPosts}) => {
   const { openModal, setModal } = useModal()
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
@@ -21,7 +23,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal />)
+    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />)
     openModal()
   }
 
@@ -33,6 +35,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     setIsComment(!isComment)
   }
 
+
   return (
     <Card>
       <article className="post">
@@ -43,7 +46,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <EditIcon showModel={showModal} />
+          <OptionsIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
