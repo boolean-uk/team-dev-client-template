@@ -4,7 +4,7 @@ import "./style.css";
 import { deletePost, editPost } from "../../service/apiClient.js";
 import Button from "../button";
 
-const EditPostModal = ({ postId, refreshPosts }) => {
+const EditPostModal = ({ postId, getAllPosts }) => {
   const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
   const [text, setText] = useState("");
@@ -40,7 +40,7 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     try {
       await deletePost(postId);
       handleActionWithMessage("Post deleted! Closing modal in 2 seconds...");
-      refreshPosts();
+      getAllPosts();
     } catch (error) {
       console.error("Failed to delete the post:", error.message);
       setMessage("Failed to delete the post. Please try again.");
@@ -56,7 +56,7 @@ const EditPostModal = ({ postId, refreshPosts }) => {
     try {
       await editPost(postId, { content: text });
       handleActionWithMessage("Post edited! Closing modal in 2 seconds...");
-      refreshPosts();
+      getAllPosts();
     } catch (error) {
       console.error("Failed to edit the post:", error.message);
       setMessage("Failed to edit the post. Please try again.");
