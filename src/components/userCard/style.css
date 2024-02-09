@@ -1,42 +1,31 @@
-.users {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    background-color: white;
-    grid-template-columns: 50px auto 48px;
-    padding: 5px;
-    column-gap: 20px;
+.user {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  grid-template-rows: 1fr;
+  padding: 5px;
 }
 
-
-.initials {
-    text-align: center;
-    padding-top: 9px;
-    border-radius: 50%;
-    background-color: #64DC78;
-    align-self: center;
-    align-items: center;
-    margin-left: 15px;
-    width: 40px;
-    height: 40px;
+.user:hover {
+  background-color: #f5faff;
 }
 
-.first-and-last-name {
-    padding-top: 9px;
-    font-weight: 600;
-    font-size: 1.1rem;
+.user-info {
+  display: grid;
+  align-items: center;
 }
 
-.more-menu {
-    text-align: center;
-    color: #64648C;
-    border-radius: 50%;
-    background: #F0F5FA;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 11px;
-    padding-bottom: 8px;
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #64648c;
+}
+
+.options-icon-wrapper {
+  display: grid;
+  align-items: center;
 }
