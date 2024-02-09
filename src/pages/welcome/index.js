@@ -62,7 +62,7 @@ const Welcome = () => {
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
         <StepThree data={profile} setData={onChange} />
-        <StepFour data={profile} setData={onChange}></StepFour>
+        <StepFour data={profile} setData={onChange}/>
       </Stepper>
     </main>
   );

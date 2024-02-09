@@ -2,7 +2,6 @@ import Form from '../../../components/form'
 
 const StepFour = ({data, setData})=>{
     const splitWord = data.bio.trim(/\s+/g, '').length;
-    console.log('this is split word ',splitWord)
 
     return(
      <>
