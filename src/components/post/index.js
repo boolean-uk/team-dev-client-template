@@ -1,7 +1,7 @@
 import useModal from '../../hooks/useModal'
 import Card from '../card'
 import Comment from '../comment'
-import EditIcon from '../editIcon'
+import OptionsIcon from '../optionsIcon'
 import EditPostModal from '../editPostModal'
 import ProfileCircle from '../profileCircle'
 import { useEffect, useState } from 'react'
@@ -65,7 +65,7 @@ const Post = ({
             <p>{name}</p>
             <small>{formatDate}</small>
           </div>
-          <EditIcon showModel={showModal} />
+          <OptionsIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
