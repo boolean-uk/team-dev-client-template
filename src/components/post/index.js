@@ -5,6 +5,7 @@ import OptionsIcon from "../optionsIcon";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import { useState } from 'react';
+import { toggleLike } from '../../service/apiClient';
 import "./style.css";
 
 
@@ -13,9 +14,9 @@ import heart from '../../assets/icons/heart.png';
 import emptyComment from '../../assets/icons/empty-comment.png';
 import comment from '../../assets/icons/comment.png';
 
-const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPosts}) => {
+const Post = ({ postId, name, date, content, comments = [], likes = 0, refreshPosts }) => {
   const { openModal, setModal } = useModal();
-  const [userLiked, setUserLiked] = useState(false); 
+  const [userLiked, setUserLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(likes);
   const [isComment, setIsComment] = useState(false);
 
@@ -26,13 +27,15 @@ const Post = ({postId, name, date, content, comments = [], likes = 0, refreshPos
     openModal();
   };
 
-  const likeHandler = () => {
-    if (userLiked) {
-      setLikesCount(likesCount - 1);
-    } else {
-      setLikesCount(likesCount + 1);
+
+  const likeHandler = async () => {
+    try {
+      await toggleLike(postId); 
+      setUserLiked(!userLiked); 
+      setLikesCount(userLiked ? likesCount - 1 : likesCount + 1); 
+    } catch (error) {
+      console.error('Error toggling like:', error);
     }
-    setUserLiked(!userLiked);
   };
 
   const commentHandler = () => {

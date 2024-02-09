@@ -69,6 +69,11 @@ async function editPost(postId, updatedContent) {
  
 }
 
+async function toggleLike(postId) {
+  const response = await post(`posts/${postId}/like`, {}, true); // Empty object `{}` as no body is required for this action
+  return response;
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -99,7 +104,7 @@ export {
     register,
     createProfile,
     getUsers, 
-    postPost, getUserByName, deletePost, editPost
+    postPost, getUserByName, deletePost, editPost, toggleLike
 }
 
 
