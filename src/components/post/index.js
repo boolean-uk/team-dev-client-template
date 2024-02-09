@@ -13,16 +13,9 @@ import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
 
-const Post = ({
-  postId,
-  name,
-  date,
-  content,
-  comments = [],
-  likes = 0,
-  refreshPosts
-}) => {
+const Post = ({postId, name, date, content, comments = [], likes = 0, getAllPosts}) => {
   const { openModal, setModal } = useModal()
+  const [postContent, setPostContent] = useState(null)
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
 
@@ -31,10 +24,7 @@ const Post = ({
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal(
-      'Edit post',
-      <EditPostModal postId={postId} refreshPosts={refreshPosts} />
-    )
+    setModal('Edit post', <EditPostModal postId={postId} getAllPosts={getAllPosts} setPostContent={setPostContent}/>)
     openModal()
   }
 
@@ -55,6 +45,8 @@ const Post = ({
     setFormatDate(`${day} ${month} at ${time}`)
   }, [date])
 
+  useEffect(() => setPostContent(content), [content])
+
   return (
     <Card>
       <article className="post">
@@ -69,7 +61,7 @@ const Post = ({
         </section>
 
         <section className="post-content">
-          <p>{content}</p>
+          <p>{postContent}</p>
         </section>
 
         <section
