@@ -5,7 +5,7 @@ import { getPosts } from "../../service/apiClient";
 const Posts = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+  const fetchAndSetPosts = () => { 
     getPosts()
       .then((fetchedPosts) => {
         const sortedPosts = fetchedPosts.sort(
@@ -16,6 +16,10 @@ const Posts = () => {
       .catch((error) => {
         console.error("Fetch error:", error.message);
       });
+  };
+
+  useEffect(() => {
+    fetchAndSetPosts(); 
   }, []);
 
   return (
@@ -23,10 +27,12 @@ const Posts = () => {
       {posts.map((post) => (
         <Post
           key={post.id}
+          postId={post.id}
           name={`${post.author.firstName} ${post.author.lastName}`}
           date={post.createdAt}
           content={post.content}
           comments={post.comments}
+          refreshPosts={fetchAndSetPosts} 
         />
       ))}
     </>

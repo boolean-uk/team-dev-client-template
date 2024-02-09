@@ -16,7 +16,12 @@ const Welcome = () => {
     bio: '',
     email: '',
     mobile: '',
-    password: ''
+    password: '',
+    role: '',
+    specialism: '',
+    cohort: '', 
+    startDate: '', 
+    endDate: ''
   })
 
   const onChange = (event) => {
@@ -36,7 +41,12 @@ const Welcome = () => {
       profile.bio,
       profile.mobile,
       profile.email,
-      profile.password
+      profile.password,
+      profile.role,
+      profile.specialism,
+      profile.cohort,
+      profile.startDate,
+      profile.endDate
     )
   }
 
