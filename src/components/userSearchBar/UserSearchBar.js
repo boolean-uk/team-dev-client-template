@@ -14,7 +14,7 @@ const UserSearchBar = () => {
   };
 
   useEffect(() => {
-    const getUserByFirstName = async () => {
+    const getUsers = async () => {
       try {
         const res = await getUserByName(searchVal);
         setSearchResults(res);
@@ -22,7 +22,7 @@ const UserSearchBar = () => {
         console.error("Error fetching user:", error);
       }
     };
-    getUserByFirstName();
+    getUsers();
   }, [searchVal]);
 
   return (
@@ -36,7 +36,6 @@ const UserSearchBar = () => {
             onChange={onChange}
           />
         </form>
-        {/* this card is used to display the results */}
       </Card>
       {searchVal && (
         <Card>
