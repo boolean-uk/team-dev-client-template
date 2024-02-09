@@ -1,29 +1,29 @@
 nav {
-    background-color: white;
+  background-color: white;
 }
 
 nav ul {
-    display: grid;
-    grid-auto-rows: 136px;
+  display: grid;
+  grid-auto-rows: 136px;
 }
 
 nav li {
-    padding: 32px 16px;
+  padding: 32px 16px;
 }
 
 nav a {
-    text-align: center;
-    display: grid;
-    grid-template-rows: auto;
-    text-decoration: none;
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto;
+  text-decoration: none;
 }
 
 nav svg {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 4px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 4px;
 }
 
 nav p {
-    line-height: 24px;
+  line-height: 24px;
 }

@@ -1,34 +1,34 @@
 header {
-    grid-column: span 3;
-    display: grid;
-    grid-template-columns: 1fr 50px;
-    background-color: #000046;
-    padding: 20px 64px;
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  background-color: #000046;
+  padding: 20px 64px;
 }
 
 header .profile-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 header .user-panel {
-    position: absolute;
-    right: 60px;
-    top: 85px;
-    z-index: 1;
-    width: 533px;
+  position: absolute;
+  right: 60px;
+  top: 85px;
+  z-index: 1;
+  width: 533px;
 }
 
 .user-panel-options {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .user-panel-options ul li a {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    margin-top: 20px;
-    text-decoration: none;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  margin-top: 20px;
+  text-decoration: none;
 }
 
 .user-panel-options ul li p {
-    line-height: 2.5;
+  line-height: 2.5;
 }
