@@ -111,7 +111,7 @@ const Post = ({
           <p>{!likes && "Be the first to like this"}</p>
         </section>
 
-        {/* <section>
+        <section>
           {comments.map((comment) => (
             <Comment
               key={comment.id}
@@ -119,9 +119,9 @@ const Post = ({
               content={comment.content}
             />
           ))}
-        </section> */}
+        </section>
 
-        <CommentInput />
+        <CommentInput postId={postId} getAllPosts={getAllPosts} />
       </article>
     </Card>
   )

@@ -2,12 +2,15 @@ import { useState } from "react"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
 import sendIcon from "../../assets/icons/send.png"
+import { postComment } from "../../service/apiClient"
 
-const CommentInput = () => {
+const CommentInput = ({ postId, getAllPosts }) => {
   const [content, setContent] = useState("")
 
   const submitHandler = (e) => {
     e.preventDefault()
+    postComment({ postId, content }).then(getAllPosts)
+    setContent("")
   }
 
   const changeHandler = (e) => {
