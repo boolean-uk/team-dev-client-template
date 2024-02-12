@@ -27,7 +27,7 @@ const Dashboard = () => {
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
-        console.error("Fetch error:", error.message)
+        console.error("Error get all posts sorted:", error.message)
       })
   }
 
