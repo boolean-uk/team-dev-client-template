@@ -46,7 +46,7 @@ const SearchUserAside = () => {
   )
 }
 
-const UserResults = ({ users, menuHover, setMenuHover }) => {
+const UserResults = ({ users, setMenuHover }) => {
   return (
     <>
       <div
