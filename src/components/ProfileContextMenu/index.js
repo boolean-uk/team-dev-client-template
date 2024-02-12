@@ -8,7 +8,7 @@ const ProfileContextMenu = ({user}) => {
             <ProfileIcon/>
             <div className="profile-text">Profile</div>
         </div>
-    );
-};
+    )
+}
 
 export default ProfileContextMenu;
