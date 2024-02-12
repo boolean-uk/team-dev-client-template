@@ -38,8 +38,6 @@ async function postComment(comment) {
   return res.data
 }
 
-// ----------------------------------------------------------------------
-
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
 }
