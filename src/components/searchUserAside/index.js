@@ -8,13 +8,20 @@ import UsersList from "../usersList";
 import "./style.css";
 import Button from "../button";
 
-import { user } from "../../service/mockData";
 import { NavLink } from "react-router-dom";
+
+function makeUsers(amount) {
+  const users = []
+  for (let i = 0; i < amount; i++) {
+    users.push({firstName: "Joe", lastName: "Bloggs"})
+  }
+  return users
+}
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false);
   const [searchVal, setSearchVal] = useState("");
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(makeUsers(0));
 
   const menuOpen = hasFocus || searchVal.length > 0;
 
