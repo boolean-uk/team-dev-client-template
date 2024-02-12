@@ -8,10 +8,19 @@ import "./login.css";
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loginMessage, setLoginMessage] = useState('')
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const checkLoginErrors = async () => {
+    try {
+      await onLogin(formData.email, formData.password);
+    } catch (error) {
+      setLoginMessage(error.message);
+    }
   };
 
   return (
@@ -39,9 +48,13 @@ const Login = () => {
               type={"password"}
             />
           </form>
+          {loginMessage && <div>{loginMessage}</div>}
           <Button
             text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
+            onClick={() => {
+              checkLoginErrors()
+              onLogin(formData.email, formData.password)}
+            } 
             classes="green width-full"
           />
         </div>

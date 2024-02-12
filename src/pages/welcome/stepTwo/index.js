@@ -1,7 +1,33 @@
-import Form from "../../../components/form";
-import TextInput from "../../../components/form/textInput";
+import { useEffect, useState } from "react"
+import Form from "../../../components/form"
+import TextInput from "../../../components/form/textInput"
 
-const StepTwo = ({ data, setData }) => {
+const StepTwo = ({ data, setData, setCanProgress }) => {
+  const { isEmailValid, setIsEmailValid } = useState(false)
+  const { isPaswordValid, setIsPasswordValid } = useState(false)
+
+
+  const onInput = (e) => {
+    setData(e)
+    const inputName = e.target.name
+    const inputValue = e.target.value
+
+    if (inputName === "email") {
+      if (inputValue.length > 1) {
+        setIsEmailValid(true)
+      }
+    }
+    if (inputName === "password") {
+      if (inputValue.length > 1) {
+        setIsPasswordValid(true)
+      }
+    }
+  }
+
+  useEffect(() => {
+    setCanProgress(isEmailValid && isPaswordValid)
+  }, [isEmailValid, setCanProgress, isPaswordValid])
+
   return (
     <>
       <div className="welcome-formheader">
@@ -10,21 +36,21 @@ const StepTwo = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.email}
             name="email"
             label={"Email*"}
             type="text"
           />
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.mobile}
             name="mobile"
             label={"Mobile*"}
             type="text"
           />
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.password}
             name="password"
             label={"Password*"}
@@ -34,7 +60,7 @@ const StepTwo = ({ data, setData }) => {
         </div>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default StepTwo;
+export default StepTwo

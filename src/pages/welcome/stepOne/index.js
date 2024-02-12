@@ -1,9 +1,39 @@
-import { useState } from "react";
-import ProfileIcon from "../../../assets/icons/profileIcon";
-import Form from "../../../components/form";
-import TextInput from "../../../components/form/textInput";
+import { useState, useEffect } from "react"
+import ProfileIcon from "../../../assets/icons/profileIcon"
+import Form from "../../../components/form"
+import TextInput from "../../../components/form/textInput"
 
-const StepOne = ({ data, setData }) => {
+const StepOne = ({ data, setData, setCanProgress }) => {
+  const { firstNameValid, setFirstNameValid } = useState(false)
+  const { lastNameValid, setLastNameValid } = useState(false)
+  const { userNameValid, setUserNameValid } = useState(false)
+
+  const onInput = (e) => {
+    setData(e)
+    const inputName = e.target.name
+    const inputValue = e.target.value
+
+    if (inputName === "firstName") {
+      if (inputValue.length > 1) {
+        setFirstNameValid(true)
+      }
+    }
+    if (inputName === "lastName") {
+      if (inputValue.length > 1) {
+        setLastNameValid(true)
+      }
+    }
+    if (inputName === "githubUsername") {
+      if (inputValue.length > 1) {
+        setUserNameValid(true)
+      }
+    }
+  }
+
+  useEffect(() => {
+    setCanProgress(firstNameValid && lastNameValid)
+  }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
+
   return (
     <>
       <div className="welcome-formheader">
@@ -23,19 +53,19 @@ const StepOne = ({ data, setData }) => {
         </div>
         <div className="welcome-form-inputs">
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.firstName}
             name="firstName"
             label={"First name"}
           />
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.lastName}
             name="lastName"
             label={"Last name"}
           />
           <TextInput
-            onChange={setData}
+            onChange={onInput}
             value={data.githubUsername}
             name="githubUsername"
             label={"Github Username"}
@@ -44,7 +74,7 @@ const StepOne = ({ data, setData }) => {
         </div>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default StepOne;
+export default StepOne

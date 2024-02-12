@@ -1,26 +1,28 @@
-import Steps from "./steps";
-import Card from "../card";
-import Button from "../button";
-import "./style.css";
-import { useState } from "react";
+import Steps from "./steps"
+import Card from "../card"
+import Button from "../button"
+import "./style.css"
+import { useState } from "react"
 
-const Stepper = ({ header, children, onComplete }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+const Stepper = ({ header, children, onComplete, canProgress }) => {
+  const [currentStep, setCurrentStep] = useState(0)
 
   const onBackClick = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep(currentStep - 1)
     }
-  };
+  }
 
+  console.log(canProgress)
   const onNextClick = () => {
+    console.log("click next")
     if (currentStep === children.length - 1) {
-      onComplete();
-      return;
+      onComplete()
+      return
     }
 
-    setCurrentStep(currentStep + 1);
-  };
+    setCurrentStep(currentStep + 1)
+  }
 
   return (
     <Card>
@@ -37,10 +39,11 @@ const Stepper = ({ header, children, onComplete }) => {
           text={currentStep === children.length - 1 ? "Submit" : "Next"}
           classes="blue"
           onClick={onNextClick}
+          disabled={!canProgress}
         />
       </div>
     </Card>
-  );
-};
+  )
+}
 
-export default Stepper;
+export default Stepper

@@ -1,13 +1,16 @@
-import { useState } from "react";
-import Stepper from "../../components/stepper";
-import useAuth from "../../hooks/useAuth";
-import StepOne from "./stepOne";
-import StepTwo from "./stepTwo";
-import StepThree from "./stepThree";
-import "./style.css";
+import { useState } from "react"
+import Stepper from "../../components/stepper"
+import useAuth from "../../hooks/useAuth"
+import StepOne from "./stepOne"
+import StepTwo from "./stepTwo"
+import StepThree from "./stepThree"
+import StepFour from "./stepFour"
+import "./style.css"
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth();
+  const { canProgress, setCanProgress } = useState(true)
+
+  const { onCreateProfile } = useAuth()
 
   const [profile, setProfile] = useState({
     firstName: "",
@@ -22,16 +25,16 @@ const Welcome = () => {
     cohort: "",
     startDate: "",
     endDate: "",
-  });
+  })
 
   const onChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     setProfile({
       ...profile,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const onComplete = () => {
     onCreateProfile(
@@ -47,8 +50,8 @@ const Welcome = () => {
       profile.cohort,
       profile.startDate,
       profile.endDate
-    );
-  };
+    )
+  }
 
   return (
     <main className="welcome">
@@ -57,14 +60,29 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
-        <StepTwo data={profile} setData={onChange} />
+      <Stepper
+        header={<WelcomeHeader />}
+        onComplete={onComplete}
+        canProgress={canProgress}
+      >
+        <StepOne
+          data={profile}
+          setData={onChange}
+          setCanProgress={setCanProgress}
+          canProgress={canProgress}
+        />
+        <StepTwo
+          data={profile}
+          setData={onChange}
+          canProgress={canProgress}
+          setCanProgress={setCanProgress}
+        />
         <StepThree data={profile} setData={onChange} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
-  );
-};
+  )
+}
 
 const WelcomeHeader = () => {
   return (
@@ -74,7 +92,7 @@ const WelcomeHeader = () => {
         Tell us about yourself to create your profile
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Welcome;
+export default Welcome
