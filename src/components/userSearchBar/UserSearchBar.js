@@ -1,22 +1,23 @@
-import Card from "../card";
-import TextInput from "../form/textInput";
-import SearchIcon from "../../assets/icons/searchIcon";
-import { useEffect, useState } from "react";
-import { getUserByName } from "../../service/apiClient";
+import Card from "../card"
+import TextInput from "../form/textInput"
+import SearchIcon from "../../assets/icons/searchIcon"
+import { useEffect, useState } from "react"
+import { getUserByName } from "../../service/apiClient"
 
 const UserSearchBar = () => {
-  const [searchVal, setSearchVal] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchVal, setSearchVal] = useState("")
+  // eslint-disable-next-line no-unused-vars
+  const [searchResults, setSearchResults] = useState([])
 
   const onChange = (e) => {
-    setSearchVal(e.target.value);
-  };
+    setSearchVal(e.target.value)
+  }
 
   const getUsers = () => {
-    getUserByName(searchVal).then(setSearchResults);
-  };
+    getUserByName(searchVal).then(setSearchResults)
+  }
 
-  useEffect(getUsers, [searchVal]);
+  useEffect(getUsers, [searchVal])
 
   return (
     <>
@@ -31,7 +32,7 @@ const UserSearchBar = () => {
         </form>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default UserSearchBar;
+export default UserSearchBar
