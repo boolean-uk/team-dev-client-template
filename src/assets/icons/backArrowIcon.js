@@ -1,19 +1,13 @@
-import React from "react";
+import React from "react"
 
-const BackArrowIcon = ({
-  width,
-  height,
-  top,
-  left,
-  color,
-}) => {
+const BackArrowIcon = ({ width, height, top, left, color }) => {
   const svgStyle = {
     width,
     height,
     top,
     left,
     color,
-  };
+  }
 
   return (
     <svg
@@ -27,7 +21,7 @@ const BackArrowIcon = ({
     >
       <path d="M19 12H5M12 19l-7-7 7-7" />
     </svg>
-  );
-};
+  )
+}
 
-export default BackArrowIcon;
+export default BackArrowIcon

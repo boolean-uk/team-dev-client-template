@@ -1,38 +1,27 @@
-
-
 .user-search-result-container {
-    display: flex;
-    margin-left: 100px;
-    margin-top: 20px;
-  }
-  
-  .user-search-result-container p {
-    font-size: 2rem;
-    font-weight: 600;
-    text-align: left;
-    width: 283px;
-    height: 48px;
-    top: 120px;
-    left: 311px;
-    margin-top: 1px;
-    margin-left: 20px;
-  }
-  
-  .user-search-result-container svg {
-    fill: #64648C;
-    transition: fill 0.3s; 
-  }
-  
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-top: 20px;
+}
 
-  .white-background-box {
-    width: 600px;
-    height: fit-content;
-    top: 292px;
-    left: 44px;
-    background-color: #fff;
-    margin-left: 100px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column; 
-    gap: 20px; 
-  }
+.user-result {
+  display: flex;
+  align-items: center;
+}
+
+.search-results-text {
+  font-size: 2rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 10px;
+}
+.people-lists {
+  margin-left: 55px;
+}
+
+.user-search-result-container hr {
+  width: 100%;
+  border-top: 1px solid #64648c;
+  margin: 10px 0;
+}
