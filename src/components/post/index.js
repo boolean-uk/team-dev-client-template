@@ -4,7 +4,7 @@ import Comment from "../comment"
 import OptionsIcon from "../optionsIcon"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { toggleLike } from "../../service/apiClient"
 import "./style.css"
 
@@ -14,6 +14,7 @@ import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
 import jwtDecode from "jwt-decode"
 import CommentInput from "../commentInput"
+import { AuthContext } from "../../context/auth"
 
 const Post = ({
   postId,
@@ -33,6 +34,8 @@ const Post = ({
   const [formatDate, setFormatDate] = useState(null)
 
   const userInitials = name.match(/\b(\w)/g)
+
+  const { token } = useContext(AuthContext)
 
   const showModal = () => {
     setModal(
@@ -57,14 +60,14 @@ const Post = ({
   }
 
   useEffect(() => {
-    const { userId } = jwtDecode(localStorage.getItem("token"))
+    const { userId } = jwtDecode(token)
     const isUserLiked = likes.find(
       (like) => Number(like.userId) === Number(userId)
     )
 
     setUserLiked(!!isUserLiked)
     setLikesCount(likes.length)
-  }, [likes])
+  }, [likes, token])
 
   useEffect(() => {
     const newDate = new Date(date)
