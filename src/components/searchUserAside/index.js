@@ -47,6 +47,10 @@ const SearchUserAside = () => {
 }
 
 const UserResults = ({ users, setMenuHover }) => {
+  if (!Array.isArray(users)) {
+    users = []
+  }
+  
   return (
     <>
       <div
