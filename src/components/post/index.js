@@ -13,6 +13,7 @@ import heart from "../../assets/icons/heart.png"
 import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
 import jwtDecode from "jwt-decode"
+import CommentInput from "../commentInput"
 
 const Post = ({
   postId,
@@ -21,19 +22,26 @@ const Post = ({
   content,
   comments = [],
   likes,
-  refreshPosts,
+  getAllPosts,
 }) => {
   const { openModal, setModal } = useModal()
+  const [postContent, setPostContent] = useState(null)
   const [userLiked, setUserLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(likes.length)
   const [isComment, setIsComment] = useState(false)
+  
+  const [formatDate, setFormatDate] = useState(null)
 
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
     setModal(
       "Edit post",
-      <EditPostModal postId={postId} refreshPosts={refreshPosts} />
+      <EditPostModal
+        postId={postId}
+        getAllPosts={getAllPosts}
+        setPostContent={setPostContent}
+      />
     )
     openModal()
   }
@@ -57,6 +65,17 @@ const Post = ({
     setUserLiked(!!isUserLiked)
     setLikesCount(likes.length)
   }, [likes])
+
+  useEffect(() => {
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.toLocaleString("en-GB", { month: "long" })
+    const time = newDate.toLocaleTimeString().slice(0, 5)
+
+    setFormatDate(`${day} ${month} at ${time}`)
+  }, [date])
+
+  useEffect(() => setPostContent(content), [content])
 
   const commentHandler = () => {
     setIsComment(!isComment)
@@ -90,7 +109,7 @@ const Post = ({
               <span>Like</span>
             </div>
             <div
-              className={`comment-icon ${isComment ? "comment-icon--active" : ""} icon`}
+              className={`comment-icon${isComment && "--active"} icon`}
               onClick={commentHandler}
             >
               <img src={isComment ? comment : emptyComment} alt="comment" />
@@ -105,6 +124,7 @@ const Post = ({
           ) : (
             <p>Be the first to like this</p>
           )}
+
         </section>
 
         <section>
@@ -116,6 +136,8 @@ const Post = ({
             />
           ))}
         </section>
+
+        <CommentInput postId={postId} getAllPosts={getAllPosts} />
       </article>
     </Card>
   )
