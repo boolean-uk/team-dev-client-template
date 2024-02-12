@@ -11,6 +11,7 @@ const Welcome = () => {
   const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
+    photoUrl: '',
     firstName: '',
     lastName: '',
     githubUsername: '',
@@ -36,6 +37,7 @@ const Welcome = () => {
 
   const onComplete = () => {
     onCreateProfile(
+      profile.photoUrl,
       profile.firstName,
       profile.lastName,
       profile.githubUsername,

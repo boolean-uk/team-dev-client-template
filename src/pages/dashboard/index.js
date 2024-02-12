@@ -20,43 +20,49 @@ const Dashboard = () => {
     return sortedPosts
   }
 
-  const getAllPosts = () => {
-    getPosts().then(sortPosts).then(setPosts).catch((error) => {
-      console.error("Fetch error:", error.message);
-    });
-  };
-  
-  const getAllUsers = () => {
-    getUsers().then(setUsers)
-  }
+    const getAllPosts = () => {
+        getPosts()
+            .then(sortPosts)
+            .then(setPosts)
+            .catch((error) => {
+                console.error("Fetch error:", error.message)
+            })
+    }
+
+    const getAllUsers = () => {
+        getUsers().then(setUsers)
+    }
 
   useEffect(getAllPosts, []);
   useEffect(getAllUsers, [])
 
 
-  // Use the useModal hook to get the openModal and setModal functions
-  const { openModal, setModal } = useModal();
+    // Use the useModal hook to get the openModal and setModal functions
+    const { openModal, setModal } = useModal()
 
-  // Create a function to run on user interaction
-  const showModal = () => {
-    // Use setModal to set the header of the modal and the component the modal should render
-    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />); // CreatePostModal is just a standard React component, nothing special
+    // Create a function to run on user interaction
+    const showModal = () => {
+        // Use setModal to set the header of the modal and the component the modal should render
+        setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />) // CreatePostModal is just a standard React component, nothing special
 
-    // Open the modal!
-    openModal();
-  };
-  
-  return (
-    <>
-      <main>
-        <Card>
-          <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p>
-            </div>
-            <Button text="What's on your mind?" onClick={showModal} />
-          </div>
-        </Card>
+        // Open the modal!
+        openModal()
+    }
+
+    return (
+        <>
+            <main>
+                <Card>
+                    <div className="create-post-input">
+                        <div className="profile-icon">
+                            <p>AJ</p>
+                        </div>
+                        <Button
+                            text="What's on your mind?"
+                            onClick={showModal}
+                        />
+                    </div>
+                </Card>
 
         <Posts posts={posts} />
       </main>
@@ -71,4 +77,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dashboard
