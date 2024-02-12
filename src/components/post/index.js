@@ -1,18 +1,18 @@
-import useModal from '../../hooks/useModal'
-import Card from '../card'
-import Comment from '../comment'
-import OptionsIcon from '../optionsIcon'
-import EditPostModal from '../editPostModal'
-import ProfileCircle from '../profileCircle'
-import { useState, useEffect } from 'react'
-import { toggleLike } from '../../service/apiClient'
-import './style.css'
+import useModal from "../../hooks/useModal"
+import Card from "../card"
+import Comment from "../comment"
+import OptionsIcon from "../optionsIcon"
+import EditPostModal from "../editPostModal"
+import ProfileCircle from "../profileCircle"
+import { useState, useEffect } from "react"
+import { toggleLike } from "../../service/apiClient"
+import "./style.css"
 
-import emptyHeart from '../../assets/icons/empty-heart.png'
-import heart from '../../assets/icons/heart.png'
-import emptyComment from '../../assets/icons/empty-comment.png'
-import comment from '../../assets/icons/comment.png'
-import jwtDecode from 'jwt-decode'
+import emptyHeart from "../../assets/icons/empty-heart.png"
+import heart from "../../assets/icons/heart.png"
+import emptyComment from "../../assets/icons/empty-comment.png"
+import comment from "../../assets/icons/comment.png"
+import jwtDecode from "jwt-decode"
 
 const Post = ({
   postId,
@@ -21,7 +21,7 @@ const Post = ({
   content,
   comments = [],
   likes,
-  refreshPosts
+  refreshPosts,
 }) => {
   const { openModal, setModal } = useModal()
   const [userLiked, setUserLiked] = useState(false)
@@ -32,7 +32,7 @@ const Post = ({
 
   const showModal = () => {
     setModal(
-      'Edit post',
+      "Edit post",
       <EditPostModal postId={postId} refreshPosts={refreshPosts} />
     )
     openModal()
@@ -44,12 +44,12 @@ const Post = ({
       setUserLiked(!userLiked)
       setLikesCount(userLiked ? likesCount - 1 : likesCount + 1)
     } catch (error) {
-      console.error('Error toggling like:', error)
+      console.error("Error toggling like:", error)
     }
   }
 
   useEffect(() => {
-    const { userId } = jwtDecode(localStorage.getItem('token'))
+    const { userId } = jwtDecode(localStorage.getItem("token"))
     const isUserLiked = likes.find(
       (like) => Number(like.userId) === Number(userId)
     )
@@ -81,7 +81,7 @@ const Post = ({
 
         <section
           className={`post-interactions-container border-top ${
-            comments.length ? 'border-bottom' : ''
+            comments.length ? "border-bottom" : ""
           }`}
         >
           <div className="post-interactions">
@@ -90,7 +90,7 @@ const Post = ({
               <span>Like</span>
             </div>
             <div
-              className={`comment-icon ${isComment ? 'comment-icon--active' : ''} icon`}
+              className={`comment-icon ${isComment ? "comment-icon--active" : ""} icon`}
               onClick={commentHandler}
             >
               <img src={isComment ? comment : emptyComment} alt="comment" />
@@ -100,7 +100,7 @@ const Post = ({
 
           {likesCount > 0 ? (
             <p>
-              {likesCount} {likesCount === 1 ? 'like' : 'likes'}
+              {likesCount} {likesCount === 1 ? "like" : "likes"}
             </p>
           ) : (
             <p>Be the first to like this</p>
