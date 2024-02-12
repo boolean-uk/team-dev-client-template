@@ -1,46 +1,59 @@
-import useModal from "../../hooks/useModal";
-import Card from "../card";
-import Comment from "../comment";
-import OptionsIcon from "../optionsIcon";
-import EditPostModal from "../editPostModal";
-import ProfileCircle from "../profileCircle";
-import { useState } from 'react';
-import { toggleLike } from '../../service/apiClient';
-import "./style.css";
+import useModal from '../../hooks/useModal'
+import Card from '../card'
+import Comment from '../comment'
+import OptionsIcon from '../optionsIcon'
+import EditPostModal from '../editPostModal'
+import ProfileCircle from '../profileCircle'
+import { useState, useEffect } from 'react'
+import { toggleLike } from '../../service/apiClient'
+import './style.css'
 
+import emptyHeart from '../../assets/icons/empty-heart.png'
+import heart from '../../assets/icons/heart.png'
+import emptyComment from '../../assets/icons/empty-comment.png'
+import comment from '../../assets/icons/comment.png'
 
-import emptyHeart from '../../assets/icons/empty-heart.png';
-import heart from '../../assets/icons/heart.png';
-import emptyComment from '../../assets/icons/empty-comment.png';
-import comment from '../../assets/icons/comment.png';
+const Post = ({
+  postId,
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  refreshPosts
+}) => {
+  const { openModal, setModal } = useModal()
+  const [userLiked, setUserLiked] = useState(false)
+  const [likesCount, setLikesCount] = useState(likes)
+  const [isComment, setIsComment] = useState(false)
 
-const Post = ({ postId, name, date, content, comments = [], likes = 0, refreshPosts }) => {
-  const { openModal, setModal } = useModal();
-  const [userLiked, setUserLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(likes);
-  const [isComment, setIsComment] = useState(false);
-
-  const userInitials = name.match(/\b(\w)/g);
+  const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal postId={postId} refreshPosts={refreshPosts} />);
-    openModal();
-  };
-
+    setModal(
+      'Edit post',
+      <EditPostModal postId={postId} refreshPosts={refreshPosts} />
+    )
+    openModal()
+  }
 
   const likeHandler = async () => {
     try {
-      await toggleLike(postId); 
-      setUserLiked(!userLiked); 
-      setLikesCount(userLiked ? likesCount - 1 : likesCount + 1); 
+      await toggleLike(postId)
+      setUserLiked(!userLiked)
+      setLikesCount(userLiked ? likesCount - 1 : likesCount + 1)
     } catch (error) {
-      console.error('Error toggling like:', error);
+      console.error('Error toggling like:', error)
     }
-  };
+  }
+
+  useEffect(() => {
+    setLikesCount(likes)
+  }, [likes])
 
   const commentHandler = () => {
-    setIsComment(!isComment);
-  };
+    setIsComment(!isComment)
+  }
 
   return (
     <Card>
@@ -69,14 +82,19 @@ const Post = ({ postId, name, date, content, comments = [], likes = 0, refreshPo
               <img src={userLiked ? heart : emptyHeart} alt="heart" />
               <span>Like</span>
             </div>
-            <div className={`comment-icon ${isComment ? 'comment-icon--active' : ''} icon`} onClick={commentHandler}>
+            <div
+              className={`comment-icon ${isComment ? 'comment-icon--active' : ''} icon`}
+              onClick={commentHandler}
+            >
               <img src={isComment ? comment : emptyComment} alt="comment" />
               <span>Comment</span>
             </div>
           </div>
 
           {likesCount > 0 ? (
-            <p>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</p>
+            <p>
+              {likesCount} {likesCount === 1 ? 'like' : 'likes'}
+            </p>
           ) : (
             <p>Be the first to like this</p>
           )}
@@ -93,7 +111,7 @@ const Post = ({ postId, name, date, content, comments = [], likes = 0, refreshPo
         </section>
       </article>
     </Card>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post

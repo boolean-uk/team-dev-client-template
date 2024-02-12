@@ -1,6 +1,26 @@
-import Post from "../post";
+import { useEffect, useState } from 'react'
+import Post from '../post'
+import { getPosts } from '../../service/apiClient'
 
-const Posts = ({ posts, getAllPosts }) => {
+const Posts = () => {
+  const [posts, setPosts] = useState([])
+
+  const fetchAndSetPosts = () => {
+    getPosts()
+      .then((fetchedPosts) => {
+        const sortedPosts = fetchedPosts.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        )
+        setPosts(sortedPosts)
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error.message)
+      })
+  }
+
+  useEffect(() => {
+    fetchAndSetPosts()
+  }, [])
 
   return (
     <>
@@ -12,11 +32,12 @@ const Posts = ({ posts, getAllPosts }) => {
           date={post.createdAt}
           content={post.content}
           comments={post.comments}
-          getAllPosts={getAllPosts} 
+          likes={post.likes.length || 0}
+          refreshPosts={fetchAndSetPosts}
         />
       ))}
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
