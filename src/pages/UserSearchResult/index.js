@@ -1,9 +1,12 @@
-import React from "react"
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import BackArrowIcon from "../../assets/icons/backArrowIcon"
 import "./usersearch.css"
-import UserCard from "../../components/userCard"
+
+import UserSearchBar from "../../components/userSearchBar/UserSearchBar"
+
 import Card from "../../components/card"
+import UsersList from "../../components/usersList"
 
 const users = [
   { firstName: "Terry", lastName: "Buckley", title: "software developer" },
@@ -16,6 +19,8 @@ const users = [
 ]
 
 const UserSearchResult = () => {
+  const [searchVal, setSearchVal] = useState("")
+  const [searchResults, setSearchResults] = useState([])
   return (
     <div className="user-search-result-container">
       <div className="user-result">
@@ -31,20 +36,19 @@ const UserSearchResult = () => {
         <p className="search-results-text">Search results</p>
       </div>
       <div className="people-lists">
-        <p>people</p>
+        <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
+        <Card boxShadow>
+          <p>people</p>
 
-        <hr
-          style={{
-            width: "100%",
-            borderTop: "1px solid #64648c",
-            margin: "10px 0",
-          }}
-        />
-        {users.map((user, index) => (
-          <Card key={index} boxShadow>
-            <UserCard key={index} user={user} />
-          </Card>
-        ))}
+          <hr
+            style={{
+              width: "100%",
+              borderTop: "1px solid #64648c",
+              margin: "10px 0",
+            }}
+          />
+          <UsersList users={searchResults} />
+        </Card>
       </div>
     </div>
   )
