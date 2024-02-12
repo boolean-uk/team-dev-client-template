@@ -73,7 +73,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts posts={posts} />
+        <Posts posts={posts} getAllPosts={getAllPosts}/>
       </main>
       <aside>
         <Card>
