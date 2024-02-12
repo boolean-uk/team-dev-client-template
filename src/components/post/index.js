@@ -7,7 +7,6 @@ import ProfileCircle from "../profileCircle"
 import { useEffect, useState } from "react"
 import "./style.css"
 
-// Icons
 import emptyHeart from "../../assets/icons/empty-heart.png"
 import heart from "../../assets/icons/heart.png"
 import emptyComment from "../../assets/icons/empty-comment.png"
