@@ -27,9 +27,11 @@ const SearchUserAside = () => {
 
   const menuOpen = hasFocus || searchVal.length > 0;
 
-  const onChange = (e) => {
-    setSearchVal(e.target.value);
-  };
+  const getUsers = () => {
+    getUserByName(searchVal).then(setUsers)
+  }
+
+  useEffect(getUsers, [searchVal])
 
   const onSubmit = (e) => {
     e && e.preventDefault();
@@ -48,12 +50,7 @@ const SearchUserAside = () => {
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
         >
-          <TextInput
-            icon={<SearchIcon />}
-            value={searchVal}
-            name="Search"
-            onChange={onChange}
-          />
+          <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
         </form>
       </Card>
       {menuOpen && <UserResults users={users} />}
