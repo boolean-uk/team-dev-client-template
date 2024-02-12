@@ -12,6 +12,7 @@ import emptyHeart from '../../assets/icons/empty-heart.png'
 import heart from '../../assets/icons/heart.png'
 import emptyComment from '../../assets/icons/empty-comment.png'
 import comment from '../../assets/icons/comment.png'
+import jwtDecode from 'jwt-decode'
 
 const Post = ({
   postId,
@@ -19,12 +20,12 @@ const Post = ({
   date,
   content,
   comments = [],
-  likes = 0,
+  likes,
   refreshPosts
 }) => {
   const { openModal, setModal } = useModal()
   const [userLiked, setUserLiked] = useState(false)
-  const [likesCount, setLikesCount] = useState(likes)
+  const [likesCount, setLikesCount] = useState(likes.length)
   const [isComment, setIsComment] = useState(false)
 
   const userInitials = name.match(/\b(\w)/g)
@@ -48,7 +49,13 @@ const Post = ({
   }
 
   useEffect(() => {
-    setLikesCount(likes)
+    const { userId } = jwtDecode(localStorage.getItem('token'))
+    const isUserLiked = likes.find(
+      (like) => Number(like.userId) === Number(userId)
+    )
+
+    setUserLiked(!!isUserLiked)
+    setLikesCount(likes.length)
   }, [likes])
 
   const commentHandler = () => {
