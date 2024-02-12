@@ -1,11 +1,10 @@
 .options-icon-wrapper {
   position: relative;
-  z-index: 100;
 }
 
 .profile-context-menu {
   position: absolute;
-  z-index: 120;
+  z-index: 100;
   right: 25px;
   top: 35px;
 
