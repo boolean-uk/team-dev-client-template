@@ -37,8 +37,6 @@ const Dashboard = () => {
   useEffect(getAllPosts, []);
   useEffect(getAllUsers, [])
 
-
-
   const { openModal, setModal } = useModal()
 
   const showModal = () => {
@@ -63,8 +61,6 @@ const Dashboard = () => {
       </main>
       <aside>
         <UserSearchBar />
-       
-     
         <Card>
           <h4>My Cohort</h4>
           <UsersList users={users} />
@@ -73,6 +69,5 @@ const Dashboard = () => {
     </>
   )
 }
-
 
 export default Dashboard
