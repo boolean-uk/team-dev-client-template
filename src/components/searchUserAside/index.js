@@ -13,10 +13,12 @@ import { NavLink } from "react-router-dom";
 function makeUsers(amount) {
   const users = []
   for (let i = 0; i < amount; i++) {
-    users.push({firstName: "Joe", lastName: "Bloggs"})
+
+    users.push({ firstName: `Joe${i}`, lastName: "Bloggs" })
   }
   return users
 }
+
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false);
@@ -62,12 +64,12 @@ const SearchUserAside = () => {
 const UserResults = ({ users, setResultsHasFocus }) => {
   // TODO: results should be same width as search bar
   // TODO: add bottom button area which changes depending on length of userListResults
-
+  console.log('users', users)
   return (
     <>
       <Menu className={"search-user-menu"}>
-        <h4 className="border-bottom spacing">People</h4>
-        <UsersList users={users} />
+        <p className="border-bottom spacing  text-blue1">People</p>
+        <UsersList users={users.slice(0, 10)} />
         {users.length >= 10 && (
           <NavLink to="/results">
             <Button classes="button  offwhite  spacing" text={"All Results"} />
@@ -82,8 +84,12 @@ const UserResults = ({ users, setResultsHasFocus }) => {
 const NoResults = () => {
   return (
     <>
-      <p>Sorry, no results found.</p>
-      <p>Try changing your search term.</p>
+      <div className="spacing ">
+        <p className="text-blue1 ">Sorry, no results found.
+          <br /><br />
+          Try changing your search term.</p>
+      </div>
+
       <NavLink to="/results">
         <Button classes="button  offwhite  spacing" text={"Edit Search"} />
       </NavLink>

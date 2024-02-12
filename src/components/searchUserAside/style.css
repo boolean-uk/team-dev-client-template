@@ -3,9 +3,11 @@
   position: absolute;
   cursor: pointer;
   top: 100px;
+  left: 50%;
+  margin-left: -196px;
 }
 
 .spacing {
-
-  margin: 15px 0 15px 27px;
+  margin: 15px 27px ;
+  padding-bottom: 10px;
 }
