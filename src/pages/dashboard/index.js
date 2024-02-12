@@ -11,7 +11,6 @@ import UserSearchBar from "../../components/userSearchBar/UserSearchBar";
 
 const Dashboard = () => {
 
-  const [searchVal, setSearchVal] = useState("")
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState([])
 
