@@ -11,7 +11,7 @@ const Posts = ({ posts, getAllPosts }) => {
           date={post.createdAt}
           content={post.content}
           comments={post.comments}
-          likes={post.likes.length || 0}
+          likes={post.likes}
           getAllPosts={getAllPosts}
         />
       ))}
