@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import BackArrowIcon from "../../assets/icons/backArrowIcon"
 import { getUserByName } from "../../service/apiClient"
-import "./usersearch.css"
+import "./userSearch.css"
 
 import UserSearchBar from "../../components/userSearchBar/UserSearchBar"
 
