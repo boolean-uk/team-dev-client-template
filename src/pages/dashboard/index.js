@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
-import SearchIcon from '../../assets/icons/searchIcon'
-import Button from '../../components/button'
-import Card from '../../components/card'
-import CreatePostModal from '../../components/createPostModal'
-import TextInput from '../../components/form/textInput'
-import Posts from '../../components/posts'
-import useModal from '../../hooks/useModal'
-import './style.css'
-import { getPosts, getUserByName, getUsers } from '../../service/apiClient'
-import UsersList from '../../components/usersList'
+import { useState, useEffect } from "react"
+import SearchIcon from "../../assets/icons/searchIcon"
+import Button from "../../components/button"
+import Card from "../../components/card"
+import CreatePostModal from "../../components/createPostModal"
+import TextInput from "../../components/form/textInput"
+import Posts from "../../components/posts"
+import useModal from "../../hooks/useModal"
+import "./style.css"
+import { getPosts, getUserByName, getUsers } from "../../service/apiClient"
+import UsersList from "../../components/usersList"
 
 const Dashboard = () => {
-  const [searchVal, setSearchVal] = useState('')
+  const [searchVal, setSearchVal] = useState("")
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState([])
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
-        console.error('Fetch error:', error.message)
+        console.error("Fetch error:", error.message)
       })
   }
 
@@ -47,7 +47,7 @@ const Dashboard = () => {
     try {
       getUserByName(searchVal).then(setUsers)
     } catch (e) {
-      console.log('error getting username', e)
+      console.log("error getting username", e)
     }
   }
 
@@ -57,13 +57,11 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal getAllPosts={getAllPosts} />) // CreatePostModal is just a standard React component, nothing special
+    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />) // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal()
   }
-
-  console.log(posts)
 
   return (
     <>
