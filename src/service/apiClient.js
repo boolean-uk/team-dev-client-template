@@ -29,8 +29,8 @@ async function postPost(newPost) {
 }
 
 async function getUserByName(firstName) {
-  const res = await get(`users?first_name=${firstName}`)
-  return res.data.users
+  const res = await get(`users?name=${firstName}`);
+  return res.data.users;
 }
 
 async function postComment(comment) {
