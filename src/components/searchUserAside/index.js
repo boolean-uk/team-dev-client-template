@@ -13,10 +13,11 @@ import "./style.css"
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false)
+  const [menuHover, setMenuHover] = useState(false)
   const [searchVal, setSearchVal] = useState("")
   const [users, setUsers] = useState([])
 
-  const menuOpen = hasFocus || searchVal.length > 0
+  const menuOpen = hasFocus || searchVal.length > 0 || menuHover
 
   const getUsers = () => {
     getUserByName(searchVal).then(setUsers)
@@ -34,24 +35,35 @@ const SearchUserAside = () => {
           <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
         </form>
       </Card>
-      {menuOpen && <UserResults users={users} />}
+      {menuOpen && (
+        <UserResults
+          users={users}
+          menuHover={menuHover}
+          setMenuHover={setMenuHover}
+        />
+      )}
     </div>
   )
 }
 
-const UserResults = ({ users, setResultsHasFocus }) => {
+const UserResults = ({ users, menuHover, setMenuHover }) => {
   return (
     <>
-      <Menu className={"search-user-menu"}>
-        <p className="border-bottom spacing text-blue1">People</p>
-        <UsersList users={users.slice(0, 10)} />
-        {users.length >= 10 && (
-          <NavLink to="/results">
-            <Button classes="button offwhite spacing" text={"All Results"} />
-          </NavLink>
-        )}
-        {users.length === 0 && <NoResults />}
-      </Menu>
+      <div
+        onMouseEnter={() => setMenuHover(true)}
+        onMouseLeave={() => setMenuHover(false)}
+      >
+        <Menu className={"search-user-menu"}>
+          <p className="border-bottom spacing text-blue1">People</p>
+          <UsersList users={users.slice(0, 10)} />
+          {users.length >= 10 && (
+            <NavLink to="/results">
+              <Button classes="button offwhite spacing" text={"All Results"} />
+            </NavLink>
+          )}
+          {users.length === 0 && <NoResults />}
+        </Menu>
+      </div>
     </>
   )
 }
