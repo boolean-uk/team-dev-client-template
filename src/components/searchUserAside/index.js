@@ -1,24 +1,15 @@
-import { useState } from "react";
-import Card from "../card";
-import TextInput from "../form/textInput";
-import SearchIcon from "../../assets/icons/searchIcon";
-import { getUserByName } from "../../service/apiClient";
-import Menu from "../menu";
-import UsersList from "../usersList";
-import "./style.css";
-import Button from "../button";
+import { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
 
-import { NavLink } from "react-router-dom";
+import Button from "../button"
+import Card from "../card"
+import Menu from "../menu"
+import UsersList from "../usersList"
+import UserSearchBar from "../userSearchBar/UserSearchBar"
 
-function makeUsers(amount) {
-  const users = []
-  for (let i = 0; i < amount; i++) {
+import { getUserByName } from "../../service/apiClient"
 
-    users.push({ firstName: `Joe${i}`, lastName: "Bloggs" })
-  }
-  return users
-}
-
+import "./style.css"
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false);
