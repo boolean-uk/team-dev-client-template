@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import BackArrowIcon from "../../assets/icons/backArrowIcon"
+import { getUserByName } from "../../service/apiClient"
 import "./usersearch.css"
 
 import UserSearchBar from "../../components/userSearchBar/UserSearchBar"
@@ -8,19 +9,16 @@ import UserSearchBar from "../../components/userSearchBar/UserSearchBar"
 import Card from "../../components/card"
 import UsersList from "../../components/usersList"
 
-const users = [
-  { firstName: "Terry", lastName: "Buckley", title: "software developer" },
-  { firstName: "Akindele", lastName: "Ayo", title: "frontend developer" },
-  { firstName: "Faiza", lastName: "Khan", title: "full stack developer" },
-  { firstName: "Lukas", lastName: "Dembicki", title: "web developer" },
-  { firstName: "Eduard", lastName: "Bissell", title: "teacher/web developer" },
-  { firstName: "Pierluigi", lastName: "Capirci", title: "full stack engineer" },
-  { firstName: "Papi", lastName: "Nnorom", title: "full stack developer" },
-]
-
 const UserSearchResult = () => {
   const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([])
+
+  const getUsers = () => {
+    getUserByName(searchVal).then(setSearchResults)
+  }
+
+  useEffect(getUsers, [searchVal])
+
   return (
     <div className="user-search-result-container">
       <div className="user-result">
