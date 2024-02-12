@@ -29,7 +29,7 @@ const Post = ({
   const [userLiked, setUserLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(likes.length)
   const [isComment, setIsComment] = useState(false)
-  
+
   const [formatDate, setFormatDate] = useState(null)
 
   const userInitials = name.match(/\b(\w)/g)
@@ -89,13 +89,13 @@ const Post = ({
 
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{formatDate}</small>
           </div>
           <OptionsIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
-          <p>{content}</p>
+          <p>{postContent}</p>
         </section>
 
         <section
@@ -124,7 +124,6 @@ const Post = ({
           ) : (
             <p>Be the first to like this</p>
           )}
-
         </section>
 
         <section>

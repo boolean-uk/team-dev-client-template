@@ -44,13 +44,19 @@
   padding-bottom: 0;
 }
 
+.border-bottom {
+  padding-bottom: 20px;
+}
+
 .post-interactions {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .post-interactions-container p {
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .icon {
