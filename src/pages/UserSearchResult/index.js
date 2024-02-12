@@ -34,9 +34,11 @@ const UserSearchResult = () => {
         <p className="search-results-text">Search results</p>
       </div>
       <div className="people-lists">
-        <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
-        <Card boxShadow>
-          <p>people</p>
+        <Card>
+          <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
+        </Card>
+        <Card>
+          <p className="text-blue1">People</p>
 
           <hr
             style={{
