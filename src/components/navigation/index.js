@@ -2,16 +2,9 @@ import { NavLink } from "react-router-dom"
 import CohortIcon from "../../assets/icons/cohortIcon"
 import HomeIcon from "../../assets/icons/homeIcon"
 import ProfileIcon from "../../assets/icons/profileIcon"
-import useAuth from "../../hooks/useAuth"
 import "./style.css"
 
 const Navigation = () => {
-  const { token } = useAuth()
-
-  if (!token) {
-    return null
-  }
-
   return (
     <nav>
       <ul>
