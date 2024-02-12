@@ -1,27 +1,45 @@
-import useModal from '../../hooks/useModal'
-import Card from '../card'
-import Comment from '../comment'
-import EditIcon from '../editIcon'
-import EditPostModal from '../editPostModal'
-import ProfileCircle from '../profileCircle'
-import { useState } from 'react'
-import './style.css'
+import useModal from "../../hooks/useModal"
+import Card from "../card"
+import Comment from "../comment"
+import OptionsIcon from "../optionsIcon"
+import EditPostModal from "../editPostModal"
+import ProfileCircle from "../profileCircle"
+import { useEffect, useState } from "react"
+import "./style.css"
 
-// Icons
-import emptyHeart from '../../assets/icons/empty-heart.png'
-import heart from '../../assets/icons/heart.png'
-import emptyComment from '../../assets/icons/empty-comment.png'
-import comment from '../../assets/icons/comment.png'
+import emptyHeart from "../../assets/icons/empty-heart.png"
+import heart from "../../assets/icons/heart.png"
+import emptyComment from "../../assets/icons/empty-comment.png"
+import comment from "../../assets/icons/comment.png"
+import CommentInput from "../commentInput"
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({
+  postId,
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  getAllPosts,
+}) => {
   const { openModal, setModal } = useModal()
+  const [postContent, setPostContent] = useState(null)
   const [isLike, setIsLike] = useState(false)
   const [isComment, setIsComment] = useState(false)
+
+  const [formatDate, setFormatDate] = useState(null)
 
   const userInitials = name.match(/\b(\w)/g)
 
   const showModal = () => {
-    setModal('Edit post', <EditPostModal />)
+    setModal(
+      "Edit post",
+      <EditPostModal
+        postId={postId}
+        getAllPosts={getAllPosts}
+        setPostContent={setPostContent}
+      />
+    )
     openModal()
   }
 
@@ -33,6 +51,17 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     setIsComment(!isComment)
   }
 
+  useEffect(() => {
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.toLocaleString("en-GB", { month: "long" })
+    const time = newDate.toLocaleTimeString().slice(0, 5)
+
+    setFormatDate(`${day} ${month} at ${time}`)
+  }, [date])
+
+  useEffect(() => setPostContent(content), [content])
+
   return (
     <Card>
       <article className="post">
@@ -41,18 +70,18 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
 
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{formatDate}</small>
           </div>
-          <EditIcon showModel={showModal} />
+          <OptionsIcon showModel={showModal} />
         </section>
 
         <section className="post-content">
-          <p>{content}</p>
+          <p>{postContent}</p>
         </section>
 
         <section
           className={`post-interactions-container border-top ${
-            comments.length ? 'border-bottom' : null
+            comments.length ? "border-bottom" : null
           }`}
         >
           <div className="post-interactions">
@@ -65,7 +94,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
               <span>Like</span>
             </div>
             <div
-              className={`comment-icon${isComment && '--active'} icon`}
+              className={`comment-icon${isComment && "--active"} icon`}
               onClick={commentHandler}
             >
               {isComment ? (
@@ -78,7 +107,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             </div>
           </div>
 
-          <p>{!likes && 'Be the first to like this'}</p>
+          <p>{!likes && "Be the first to like this"}</p>
         </section>
 
         <section>
@@ -90,6 +119,8 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             />
           ))}
         </section>
+
+        <CommentInput postId={postId} getAllPosts={getAllPosts} />
       </article>
     </Card>
   )

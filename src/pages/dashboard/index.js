@@ -1,53 +1,49 @@
-import { useState, useEffect } from "react";
-import SearchIcon from "../../assets/icons/searchIcon";
-import Button from "../../components/button";
-import Card from "../../components/card";
-import CreatePostModal from "../../components/createPostModal";
-import TextInput from "../../components/form/textInput";
-import Posts from "../../components/posts";
-import useModal from "../../hooks/useModal";
-import "./style.css";
-import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
-import UsersList from "../../components/usersList";
-import SearchUserAside from "../../components/searchUserAside";
+import { useState, useEffect } from "react"
+import Button from "../../components/button"
+import Card from "../../components/card"
+import CreatePostModal from "../../components/createPostModal"
+import Posts from "../../components/posts"
+import useModal from "../../hooks/useModal"
+import "./style.css"
+import { getPosts, getUsers } from "../../service/apiClient"
+import UsersList from "../../components/usersList"
+import SearchUserAside from "../../components/searchUserAside"
 
 const Dashboard = () => {
+  const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
 
-  const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
-
-  const sortPosts = (fetchedPosts) =>  {
+  const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-    );
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    )
     return sortedPosts
   }
 
   const getAllPosts = () => {
-    getPosts().then(sortPosts).then(setPosts).catch((error) => {
-      console.error("Fetch error:", error.message);
-    });
-  };
-  
+    getPosts()
+      .then(sortPosts)
+      .then(setPosts)
+      .catch((error) => {
+        console.error("Error get all posts sorted:", error.message)
+      })
+  }
+
   const getAllUsers = () => {
     getUsers().then(setUsers)
   }
 
-  useEffect(getAllPosts, []);
+  useEffect(getAllPosts, [])
   useEffect(getAllUsers, [])
 
-  // Use the useModal hook to get the openModal and setModal functions
-  const { openModal, setModal } = useModal();
+  const { openModal, setModal } = useModal()
 
-  // Create a function to run on user interaction
   const showModal = () => {
-    // Use setModal to set the header of the modal and the component the modal should render
-    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />); // CreatePostModal is just a standard React component, nothing special
+    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />)
 
-    // Open the modal!
-    openModal();
-  };
-  
+    openModal()
+  }
+
   return (
     <>
       <main>
@@ -60,7 +56,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts posts={posts} />
+        <Posts posts={posts} getAllPosts={getAllPosts} />
       </main>
       <aside>
         <SearchUserAside />
@@ -70,7 +66,7 @@ const Dashboard = () => {
         </Card>
       </aside>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
