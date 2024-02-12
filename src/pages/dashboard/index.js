@@ -47,7 +47,7 @@ const Dashboard = () => {
     try {
       getUserByName(searchVal).then(setUsers)
     } catch (e) {
-      console.log("error getting username", e)
+      console.error("error getting username", e)
     }
   }
 
