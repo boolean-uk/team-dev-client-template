@@ -15,17 +15,9 @@ const resources = {
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
-  .init(
-    {
-      resources,
-      fallbackLng: "en",
-    },
-    (err, t) => {
-      if (err) return console.error(err)
-      console.log("i18next is ready...")
-      console.log(t("welcome"))
-      console.log(t("welcome", { lng: "se" }))
-    }
-  )
+  .init({
+    resources,
+    fallbackLng: "en",
+  })
 
 export default i18n
