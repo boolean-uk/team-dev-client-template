@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
   const location = useLocation()
   const [token, setToken] = useState(null)
   const [logout, setLogout] = useState(false)
+  const [userId, setUserId] = useState(null)
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token")
@@ -22,11 +23,16 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("token")
       setToken(null)
       setLogout(false)
+      setUserId(null)
       navigate("/login", { state: null })
       return
     }
 
-    if (!storedToken && location.pathname !== "/login") {
+    if (
+      !storedToken &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/register"
+    ) {
       const redirectState = location.state || { from: location }
 
       navigate("/login", {
@@ -41,7 +47,18 @@ const AuthProvider = ({ children }) => {
     if (storedToken && token && location.state) {
       navigate(location.state.from.pathname)
     }
-  }, [location.state?.from?.pathname, navigate, logout, location, token])
+
+    if (storedToken && !userId) {
+      setUserId(jwtDecode(storedToken).userId)
+    }
+  }, [
+    location.state?.from?.pathname,
+    navigate,
+    logout,
+    location,
+    token,
+    userId,
+  ])
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password)
@@ -83,7 +100,7 @@ const AuthProvider = ({ children }) => {
   ) => {
     const { userId } = jwtDecode(token)
 
-    await createProfile(
+    const res = await createProfile(
       userId,
       firstName,
       lastName,
@@ -98,12 +115,17 @@ const AuthProvider = ({ children }) => {
       password
     )
 
+    if (!res.data) {
+      throw new Error(res.data.error)
+    }
+
     localStorage.setItem("token", token)
     navigate("/")
   }
 
   const value = {
     token,
+    userId,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,

@@ -56,19 +56,25 @@ const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
             onChange={onInput}
             value={data.firstName}
             name="firstName"
-            label={"First name"}
+            label={"First name*"}
+            placeholder="enter your first name"
+            required
           />
           <TextInput
             onChange={onInput}
             value={data.lastName}
             name="lastName"
-            label={"Last name"}
+            label={"Last name*"}
+            placeholder="enter your last name"
+            required
           />
           <TextInput
             onChange={onInput}
             value={data.githubUsername}
             name="githubUsername"
-            label={"Github Username"}
+            label={"Github Username*"}
+            placeholder="enter your github user name"
+            required
           />
           <p className="text-blue1">*Required</p>
         </div>

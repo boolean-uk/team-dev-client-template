@@ -42,6 +42,7 @@ const Stepper = ({ header, children, onComplete, canProgress }) => {
           disabled={!canProgress}
         />
       </div>
+      {!canProgress && <p>All fields need to be complete</p>}
     </Card>
   )
 }

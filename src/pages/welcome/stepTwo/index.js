@@ -4,7 +4,7 @@ import TextInput from "../../../components/form/textInput"
 
 const StepTwo = ({ data, setData, setCanProgress, canProgress }) => {
   const [ isEmailValid, setIsEmailValid ] = useState(false)
-  const [ isPaswordValid, setIsPasswordValid ] = useState(false)
+  const [ isPasswordValid, setIsPasswordValid ] = useState(false)
 
 
   const onInput = (e) => {
@@ -25,8 +25,8 @@ const StepTwo = ({ data, setData, setCanProgress, canProgress }) => {
   }
 
   useEffect(() => {
-    setCanProgress(isEmailValid && isPaswordValid)
-  }, [isEmailValid, setCanProgress, isPaswordValid])
+    setCanProgress(isEmailValid && isPasswordValid)
+  }, [isEmailValid, setCanProgress, isPasswordValid])
 
   return (
     <>

@@ -38,6 +38,7 @@ const Welcome = () => {
 
   const onComplete = () => {
     onCreateProfile(
+      profile.photoUrl,
       profile.firstName,
       profile.lastName,
       profile.githubUsername,
