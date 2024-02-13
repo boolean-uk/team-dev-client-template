@@ -1,0 +1,15 @@
+.comment-container{
+    display: flex;
+}
+
+.comment-sub-container{
+    width: fit-content;
+    background-color: #C8D2E6;
+    padding: 10px;
+    border-radius: 8px; 
+    margin: 0px 10px 25px 15px;
+}
+
+
+
+
