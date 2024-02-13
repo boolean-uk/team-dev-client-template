@@ -99,11 +99,7 @@ const Post = ({
           <p>{postContent}</p>
         </section>
 
-        <section
-          className={`post-interactions-container border-top ${
-            comments.length ? "border-bottom" : ""
-          }`}
-        >
+        <section className="post-interactions-container border-top">
           <div className="post-interactions">
             <div className="heart-icon icon" onClick={likeHandler}>
               <img src={userLiked ? heart : emptyHeart} alt="heart" />
@@ -127,7 +123,7 @@ const Post = ({
           )}
         </section>
 
-        <section>
+        <section className={`comments ${comments.length > 0 && "border-top"}`}>
           {comments.map((comment) => (
             <Comment
               key={comment.id}

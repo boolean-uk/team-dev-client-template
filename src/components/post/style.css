@@ -88,3 +88,7 @@
 .comment-icon--active {
   background-color: #F5FAFF;
 }
+
+.comments {
+  padding-top: 20px;
+}
