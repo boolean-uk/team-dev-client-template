@@ -4,9 +4,6 @@ import Card from "../card";
 import "./style.css";
 
 const MyCohortDetails = ({ users }) => {
-  const students = users.filter((user) => user.role === "STUDENT" && user.cohort_id === 1);
-	console.log(students)
-
   return (
     <Card>
       <h3 className="my-cohort-details--header">My Cohort</h3>
@@ -20,7 +17,7 @@ const MyCohortDetails = ({ users }) => {
       </section>
 
       <ul className="my-cohort-details--list">
-        {students.map((user, idx) => (
+        {users.map((user, idx) => (
           <UserCard user={user} key={idx} />
         ))}
       </ul>

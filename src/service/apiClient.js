@@ -55,6 +55,10 @@ async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth)
 }
 
+async function getSelf() {
+	return get( "users/me")
+}
+
 async function getUsers() {
   const res = await get("users")
   return res.data.users
@@ -107,6 +111,7 @@ export {
     register,
     createProfile,
     getUsers,
+		getSelf,
     postPost, getUserByName, deletePost, editPost
 }
 
