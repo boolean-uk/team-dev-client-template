@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
-const StepTwo = ({ data, setData, setCanProgress }) => {
+const StepTwo = ({ data, setData, setCanProgress, canProgress }) => {
   const { isEmailValid, setIsEmailValid } = useState(false)
   const { isPaswordValid, setIsPasswordValid } = useState(false)
 
@@ -24,9 +24,9 @@ const StepTwo = ({ data, setData, setCanProgress }) => {
     }
   }
 
-  useEffect(() => {
-    setCanProgress(isEmailValid && isPaswordValid)
-  }, [isEmailValid, setCanProgress, isPaswordValid])
+  // useEffect(() => {
+  //   setCanProgress(isEmailValid && isPaswordValid)
+  // }, [isEmailValid, setCanProgress, isPaswordValid])
 
   return (
     <>

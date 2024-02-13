@@ -64,6 +64,7 @@ const Welcome = () => {
         header={<WelcomeHeader />}
         onComplete={onComplete}
         canProgress={canProgress}
+        setCanProgress={setCanProgress}
       >
         <StepOne
           data={profile}

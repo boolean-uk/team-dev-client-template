@@ -3,7 +3,7 @@ import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
-const StepOne = ({ data, setData, setCanProgress }) => {
+const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
   const { firstNameValid, setFirstNameValid } = useState(false)
   const { lastNameValid, setLastNameValid } = useState(false)
   const { userNameValid, setUserNameValid } = useState(false)
@@ -30,9 +30,9 @@ const StepOne = ({ data, setData, setCanProgress }) => {
     }
   }
 
-  useEffect(() => {
-    setCanProgress(firstNameValid && lastNameValid)
-  }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
+  // useEffect(() => {
+  //   setCanProgress(firstNameValid && lastNameValid)
+  // }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
 
   return (
     <>
