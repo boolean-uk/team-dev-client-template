@@ -12,7 +12,6 @@ import emptyHeart from "../../assets/icons/empty-heart.png"
 import heart from "../../assets/icons/heart.png"
 import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
-import jwtDecode from "jwt-decode"
 import CommentInput from "../commentInput"
 import useAuth from "../../hooks/useAuth"
 
@@ -35,7 +34,7 @@ const Post = ({
 
   const userInitials = name.match(/\b(\w)/g)
 
-  const { token } = useAuth()
+  const { userId } = useAuth()
 
   const showModal = () => {
     setModal(
@@ -60,14 +59,13 @@ const Post = ({
   }
 
   useEffect(() => {
-    const { userId } = jwtDecode(token)
     const isUserLiked = likes.find(
       (like) => Number(like.userId) === Number(userId)
     )
 
     setUserLiked(!!isUserLiked)
     setLikesCount(likes.length)
-  }, [likes, token])
+  }, [likes, userId])
 
   useEffect(() => {
     const newDate = new Date(date)
