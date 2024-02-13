@@ -36,6 +36,7 @@ const Dashboard = () => {
   useEffect(getAllPosts, [])
   useEffect(getAllUsers, [])
 
+
   const { openModal, setModal } = useModal()
 
   const showModal = () => {

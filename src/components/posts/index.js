@@ -1,7 +1,6 @@
-import Post from "../post";
+import Post from '../post'
 
 const Posts = ({ posts, getAllPosts }) => {
-
   return (
     <>
       {posts.map((post) => (
@@ -12,11 +11,12 @@ const Posts = ({ posts, getAllPosts }) => {
           date={post.createdAt}
           content={post.content}
           comments={post.comments}
-          getAllPosts={getAllPosts} 
+          likes={post.likes}
+          getAllPosts={getAllPosts}
         />
       ))}
     </>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
