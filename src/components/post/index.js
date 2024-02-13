@@ -4,7 +4,7 @@ import Comment from "../comment"
 import OptionsIcon from "../optionsIcon"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { toggleLike } from "../../service/apiClient"
 import "./style.css"
 
@@ -14,7 +14,7 @@ import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
 import jwtDecode from "jwt-decode"
 import CommentInput from "../commentInput"
-import { AuthContext } from "../../context/auth"
+import useAuth from "../../hooks/useAuth"
 
 const Post = ({
   postId,
@@ -35,7 +35,7 @@ const Post = ({
 
   const userInitials = name.match(/\b(\w)/g)
 
-  const { token } = useContext(AuthContext)
+  const { token } = useAuth()
 
   const showModal = () => {
     setModal(
