@@ -56,7 +56,8 @@ async function get(endpoint, auth = true) {
 }
 
 async function getSelf() {
-	return get( "users/me")
+	const res = await get("users/me")
+	return res.data.user
 }
 
 async function getUsers() {

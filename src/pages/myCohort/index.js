@@ -8,16 +8,11 @@ const MyCohort = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    getUsers().then((users) => setUsers(users))
+    getUsers().then((users) => {
+			getSelf()
+				.then((self) => setUsers(users.filter((user) => user.cohort_id === self.cohort_id &&	user.role === "STUDENT")))
+		})
   }, [])
-
-	useEffect(() => {
-    getSelf()
-		.then((self) => setUsers(users.filter((user) => {
-			return user.cohort_id === self.cohort_id &&
-			user.role === "STUDENT"
-			})))
-	}, [])
 
   return (
     <>
