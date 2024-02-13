@@ -1,26 +1,32 @@
-import Steps from "./steps";
-import Card from "../card";
-import Button from "../button";
-import "./style.css";
-import { useState } from "react";
+import Steps from "./steps"
+import Card from "../card"
+import Button from "../button"
+import "./style.css"
+import { useState } from "react"
 
-const Stepper = ({ header, children, onComplete }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
+  const [currentStep, setCurrentStep] = useState(0)
 
   const onBackClick = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep(currentStep - 1)
     }
-  };
+  }
 
   const onNextClick = () => {
+    if (!canProgress) {
+      setMessage("Required fields need to be complete")
+      return
+    } else {
+      setMessage("")
+    }
     if (currentStep === children.length - 1) {
-      onComplete();
-      return;
+      onComplete()
+      return
     }
 
-    setCurrentStep(currentStep + 1);
-  };
+    setCurrentStep(currentStep + 1)
+  }
 
   return (
     <Card>
@@ -40,7 +46,7 @@ const Stepper = ({ header, children, onComplete }) => {
         />
       </div>
     </Card>
-  );
-};
+  )
+}
 
-export default Stepper;
+export default Stepper
