@@ -4,7 +4,7 @@ import Button from "../button"
 import "./style.css"
 import { useState } from "react"
 
-const Stepper = ({ header, children, onComplete, canProgress }) => {
+const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
   const [currentStep, setCurrentStep] = useState(0)
 
   const onBackClick = () => {
@@ -13,9 +13,13 @@ const Stepper = ({ header, children, onComplete, canProgress }) => {
     }
   }
 
-  console.log(canProgress)
   const onNextClick = () => {
-    console.log("click next")
+    if (!canProgress) {
+      setMessage("Required fields need to be complete")
+      return
+    } else {
+      setMessage("")
+    }
     if (currentStep === children.length - 1) {
       onComplete()
       return
@@ -39,10 +43,8 @@ const Stepper = ({ header, children, onComplete, canProgress }) => {
           text={currentStep === children.length - 1 ? "Submit" : "Next"}
           classes="blue"
           onClick={onNextClick}
-          disabled={!canProgress}
         />
       </div>
-      {!canProgress && <p>All fields need to be complete</p>}
     </Card>
   )
 }

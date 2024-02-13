@@ -3,7 +3,7 @@ import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
-const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
+const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
   const [userNameValid, setUserNameValid] = useState(false)
@@ -14,18 +14,24 @@ const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
     const inputValue = e.target.value
 
     if (inputName === "firstName") {
-      if (inputValue.length > 1) {
+      if (inputValue.length > 3) {
         setFirstNameValid(true)
+      } else {
+        setMessage("Enter 3 charachter or more")
       }
     }
     if (inputName === "lastName") {
-      if (inputValue.length > 1) {
+      if (inputValue.length > 3) {
         setLastNameValid(true)
+      } else {
+        setMessage("Enter 3 charachter or more")
       }
     }
     if (inputName === "githubUsername") {
-      if (inputValue.length > 1) {
+      if (inputValue.length > 3) {
         setUserNameValid(true)
+      } else {
+        setMessage("Enter 3 charachter or more")
       }
     }
   }
@@ -76,6 +82,7 @@ const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
             placeholder="enter your github user name"
             required
           />
+          {message && <p className="input-message">{message}</p>}
           <p className="text-blue1">*Required</p>
         </div>
       </Form>

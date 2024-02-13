@@ -8,7 +8,8 @@ import StepFour from "./stepFour"
 import "./style.css"
 
 const Welcome = () => {
-  const [ canProgress, setCanProgress ] = useState(false)
+  const [canProgress, setCanProgress] = useState(false)
+  const [message, setMessage] = useState("")
 
   const { onCreateProfile } = useAuth()
 
@@ -62,24 +63,33 @@ const Welcome = () => {
       </div>
 
       <Stepper
+        setMessage={setMessage}
         header={<WelcomeHeader />}
         onComplete={onComplete}
         canProgress={canProgress}
         setCanProgress={setCanProgress}
       >
         <StepOne
+          setMessage={setMessage}
+          message={message}
           data={profile}
           setData={onChange}
           setCanProgress={setCanProgress}
-          canProgress={canProgress}
         />
         <StepTwo
+        setMessage={setMessage}
+          message={message}
           data={profile}
           setData={onChange}
-          canProgress={canProgress}
           setCanProgress={setCanProgress}
         />
-        <StepThree data={profile} setData={onChange} />
+        <StepThree
+        setMessage={setMessage}
+          message={message}
+          data={profile}
+          setData={onChange}
+          setCanProgress={setCanProgress}
+        />
         <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>

@@ -100,7 +100,7 @@ const AuthProvider = ({ children }) => {
   ) => {
     const { userId } = jwtDecode(token)
 
-    const res = await createProfile(
+    await createProfile(
       userId,
       firstName,
       lastName,
@@ -114,10 +114,6 @@ const AuthProvider = ({ children }) => {
       mobile,
       password
     )
-
-    if (!res.data) {
-      throw new Error(res.data.error)
-    }
 
     localStorage.setItem("token", token)
     navigate("/")

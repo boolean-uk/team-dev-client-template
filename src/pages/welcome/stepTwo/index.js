@@ -2,24 +2,27 @@ import { useEffect, useState } from "react"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
-const StepTwo = ({ data, setData, setCanProgress, canProgress }) => {
-  const [ isEmailValid, setIsEmailValid ] = useState(false)
-  const [ isPasswordValid, setIsPasswordValid ] = useState(false)
-
+const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
+  const [isEmailValid, setIsEmailValid] = useState(false)
+  const [isPasswordValid, setIsPasswordValid] = useState(false)
 
   const onInput = (e) => {
     setData(e)
     const inputName = e.target.name
     const inputValue = e.target.value
 
-    if (inputName === "email") {
-      if (inputValue.length > 1) {
+    if (inputName === "email" && inputValue.includes("@")) {
+      if (inputValue.length > 3) {
         setIsEmailValid(true)
+      }else {
+        setMessage("Enter 3 charachter or more")
       }
     }
     if (inputName === "password") {
-      if (inputValue.length > 1) {
+      if (inputValue.length > 3) {
         setIsPasswordValid(true)
+      }else {
+        setMessage("Enter 3 charachter or more")
       }
     }
   }
@@ -56,6 +59,7 @@ const StepTwo = ({ data, setData, setCanProgress, canProgress }) => {
             label={"Password*"}
             type="password"
           />
+          {message && <p className="input-message">{message}</p>}
           <p className="text-blue1">*Required</p>
         </div>
       </Form>
