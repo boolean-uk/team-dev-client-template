@@ -8,7 +8,7 @@ import StepFour from "./stepFour"
 import "./style.css"
 
 const Welcome = () => {
-  const { canProgress, setCanProgress } = useState(true)
+  const [ canProgress, setCanProgress ] = useState(false)
 
   const { onCreateProfile } = useAuth()
 

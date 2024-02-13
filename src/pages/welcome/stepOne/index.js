@@ -4,9 +4,9 @@ import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
 const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
-  const { firstNameValid, setFirstNameValid } = useState(false)
-  const { lastNameValid, setLastNameValid } = useState(false)
-  const { userNameValid, setUserNameValid } = useState(false)
+  const [firstNameValid, setFirstNameValid] = useState(false)
+  const [lastNameValid, setLastNameValid] = useState(false)
+  const [userNameValid, setUserNameValid] = useState(false)
 
   const onInput = (e) => {
     setData(e)
@@ -30,9 +30,9 @@ const StepOne = ({ data, setData, setCanProgress, canProgress }) => {
     }
   }
 
-  // useEffect(() => {
-  //   setCanProgress(firstNameValid && lastNameValid)
-  // }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
+  useEffect(() => {
+    setCanProgress(firstNameValid && lastNameValid)
+  }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
 
   return (
     <>
