@@ -4,7 +4,8 @@ import Card from "../card";
 import "./style.css";
 
 const MyCohortDetails = ({ users }) => {
-  const students = users.filter((user) => user.role === "STUDENT");
+  const students = users.filter((user) => user.role === "STUDENT" && user.cohort_id === 1);
+	console.log(students)
 
   return (
     <Card>

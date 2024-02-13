@@ -74,6 +74,7 @@ async function deletePost(postId) {
 
 async function editPost(postId, updatedContent) {
   return put(`posts/${postId}`, updatedContent)
+
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -97,16 +98,19 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
+
+
+
 export {
-  login,
-  getPosts,
-  register,
-  createProfile,
-  getUsers,
-  postPost,
-  getUserByName,
-  deletePost,
-  editPost,
-  toggleLike,
-  postComment,
+    login,
+    getPosts,
+    register,
+    createProfile,
+    getUsers,
+    postPost, getUserByName, deletePost, editPost
 }
+
+
+
+
+
