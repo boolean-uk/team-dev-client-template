@@ -102,7 +102,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
           <textarea
             onChange={onChange}
             value={text}
-            placeholder="Edit your post"
+            placeholder={t("EditYourPost")}
           ></textarea>
           <button
             className="post__settings-button second-edit"
