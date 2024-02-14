@@ -9,9 +9,9 @@ const CommentsList = ({ postId }) => {
     getCommentsByPostId(postId).then(setComments)
   }, [postId])
 
-  return (
-    <>
-      <section className={`comments ${comments.length > 0 && "border-top"}`}>
+  const checkEmptyComments = () => {
+    return (
+      <>
         {!!comments.length ? (
           comments.map((comment) => (
             <Comment
@@ -23,8 +23,14 @@ const CommentsList = ({ postId }) => {
         ) : (
           <p>No comments...</p>
         )}
-      </section>
-    </>
+      </>
+    )
+  }
+
+  return (
+    <section className={`comments ${comments.length > 0 && "border-top"}`}>
+      {checkEmptyComments()}
+    </section>
   )
 }
 
