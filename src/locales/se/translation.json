@@ -26,13 +26,13 @@
   "postDeleted": "Din publicering har tagits bort! Fönstret stängs automatiskt om 2 sekunder...",
   "postEdited" : "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
   "failedToDeletePost" : "Misslyckades att ta bort inlägget. Försök igen",
-  "failedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
-  "cannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
-  "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
-  "anonymous": "Anonymt",
   "modules" : "Kurser",
   "units" : "Enheter",
   "exercises" : "Övningar",
   "seeExercises" : "Visa övningar",
+  "failedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
+  "cannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
+  "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
+  "anonymous": "Anonymt",
   "countAndCompleted" : "completed {{completedTasks}}/{{totalTasks}}"
 }
