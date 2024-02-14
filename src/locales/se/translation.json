@@ -4,16 +4,16 @@
   "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
-  "Delete" : "Utrota",
+  "delete" : "Utrota",
   "deletePost" : "Ta bort inlägg",
-  "Edit" : "Redigera",
-  "EditYourPost" : "Redigera ditt inlägg",
-  "Cancel" : "Avbryt",
+  "edit" : "Redigera",
+  "ditYourPost" : "Redigera ditt inlägg",
+  "cancel" : "Avbryt",
   "postDeleted": "Din publicering har tagits bort! Fönstret stängs automatiskt om 2 sekunder...",
   "postEdited" : "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
   "failedToDeletePost" : "Misslyckades att ta bort inlägget. Försök igen",
   "failedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
   "cannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
   "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
-  "Anonymous": "Anonymt"
+  "anonymous": "Anonymt"
 }
