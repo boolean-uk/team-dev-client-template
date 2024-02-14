@@ -31,8 +31,8 @@
   "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
   "anonymous": "Anonymt",
   "modules" : "Kurser",
-  "completed" : "Klar",
   "units" : "Enheter",
   "exercises" : "Övningar",
-  "seeExercises" : "Visa övningar"
+  "seeExercises" : "Visa övningar",
+  "countAndCompleted" : "completed {{completedTasks}}/{{totalTasks}}"
 }
