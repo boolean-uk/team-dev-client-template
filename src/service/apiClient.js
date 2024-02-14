@@ -18,11 +18,6 @@ async function createProfile(userId, firstName, lastName, githubUrl, bio) {
   })
 }
 
-async function toggleLike(postId) {
-  const response = await post(`posts/${postId}/like`)
-  return response
-}
-
 async function getPosts() {
   const res = await get("posts")
   return res.data.posts
@@ -38,11 +33,6 @@ async function getUserByName(firstName) {
   return res.data.users
 }
 
-async function postComment(comment) {
-  const res = await post("comments", comment)
-  return res.data
-}
-
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth)
 }
@@ -53,6 +43,11 @@ async function patch(endpoint, data, auth = true) {
 
 async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth)
+}
+
+async function getSelf() {
+	const res = await get("users/me")
+	return res.data.user
 }
 
 async function getUsers() {
@@ -74,6 +69,7 @@ async function deletePost(postId) {
 
 async function editPost(postId, updatedContent) {
   return put(`posts/${postId}`, updatedContent)
+
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -97,16 +93,20 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
+
+
+
 export {
-  login,
-  getPosts,
-  register,
-  createProfile,
-  getUsers,
-  postPost,
-  getUserByName,
-  deletePost,
-  editPost,
-  toggleLike,
-  postComment,
+    login,
+    getPosts,
+    register,
+    createProfile,
+    getUsers,
+		getSelf,
+    postPost, getUserByName, deletePost, editPost
 }
+
+
+
+
+

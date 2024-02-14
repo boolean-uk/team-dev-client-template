@@ -1,5 +1,7 @@
 {
   "welcome": "Välkommen till Cohort Manager",
+  "people" : "Människor",
+  "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
   "login": "Logga in",
@@ -8,5 +10,6 @@
   "signUp": "Registrera dig",
   "email": "E-post",
   "password": "Lösenord",
-  "logIn": "Logga in"
+  "logIn": "Logga in",
+  "Anonymous": "Anonymt"
 }
