@@ -7,8 +7,10 @@ import CogIcon from "../../assets/icons/cogIcon";
 import LogoutIcon from "../../assets/icons/logoutIcon";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const {t} = useTranslation()
   const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
@@ -46,17 +48,17 @@ const Header = () => {
               <ul>
                 <li>
                   <NavLink to="/">
-                    <ProfileIcon /> <p>Profile</p>
+                    <ProfileIcon /> <p>{t("profile")}</p>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/">
-                    <CogIcon /> <p>Settings &amp; Privacy</p>
+                    <CogIcon /> <p>{t("settings")} &amp; {t("privacy")}</p>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="#" onClick={onLogout}>
-                    <LogoutIcon /> <p>Log out</p>
+                    <LogoutIcon /> <p>{t("logOut")}</p>
                   </NavLink>
                 </li>
               </ul>
