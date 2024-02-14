@@ -56,8 +56,8 @@ async function get(endpoint, auth = true) {
 }
 
 async function getSelf() {
-	const res = await get("users/me")
-	return res.data.user
+  const res = await get("users/me")
+  return res.data.user
 }
 
 async function getUsers() {
@@ -79,7 +79,6 @@ async function deletePost(postId) {
 
 async function editPost(postId, updatedContent) {
   return put(`posts/${postId}`, updatedContent)
-
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -108,12 +107,6 @@ async function toggleLike(postId) {
   return response
 }
 
-async function postComment(comment) {
-  const res = await post("comments", comment)
-  return res.data
-}
-
-
 export {
   login,
   getPosts,
@@ -127,9 +120,5 @@ export {
   toggleLike,
   postComment,
   getCommentsByPostId,
+  getSelf,
 }
-
-
-
-
-
