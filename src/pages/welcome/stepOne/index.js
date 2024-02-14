@@ -3,10 +3,26 @@ import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
+const imageLocalStorage = () => {
+  const image = localStorage.getItem("user-headshot")
+  try {
+    return image ? <img alt="user" src={URL.createObjectURL(image)} /> : ""
+  } catch (error) {
+    console.error("Error parsing stored user:", error)
+    return ""
+  }
+}
+
 const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
   const [userNameValid, setUserNameValid] = useState(false)
+
+  const [selectedImage, setSelectedImage] = useState(imageLocalStorage())
+
+  const handleImageUpload = (e) => {
+    setSelectedImage(e.target.files[0])
+  }
 
   const onInput = (e) => {
     setData(e)
@@ -37,6 +53,10 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   }
 
   useEffect(() => {
+    localStorage.setItem("user-headshot", JSON.stringify(selectedImage))
+  }, [handleImageUpload])
+
+  useEffect(() => {
     setCanProgress(firstNameValid && lastNameValid)
   }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
 
@@ -49,10 +69,30 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
         <div className="welcome-form-profileimg">
           <p className="text-blue1">Photo</p>
           <div className="welcome-form-profileimg-input">
-            <ProfileIcon colour="#28C846" background="#64DC78" />
+            {selectedImage ? (
+              <div className="headshot-container">
+                <div>
+                  <img
+                    className="headshot"
+                    alt="not found"
+                    src={URL.createObjectURL(selectedImage)}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <ProfileIcon colour="#28C846" background="#64DC78" />
+              </div>
+            )}
 
-            <p className="text-blue1">Add headshot</p>
+            <input
+              type="file"
+              name="myImage"
+              placeholder="Upload a headshot"
+              onChange={(event) => handleImageUpload(event)}
+            />
           </div>
+          <button onClick={() => setSelectedImage(null)}>Remove</button>
           <p className="welcome-form-profileimg-error">
             Please upload a valid image file
           </p>
