@@ -19,5 +19,10 @@
   "failedToEditPost" : "Failed to edit the post. Please try again.",
   "cannotUpdateWithEmpty" : "Cannot update with empty content.",
   "areYouSureDelete" : "Are you sure you want to delete this post?",
-  "anonymous": "Anonymous"
+  "anonymous": "Anonymous",
+  "modules" : "Modules",
+  "completed" : "completed",
+  "units" : "Units",
+  "exercises" : "Exercises",
+  "seeExercises" : "See Exercises"
 }
