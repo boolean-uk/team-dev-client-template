@@ -7,5 +7,20 @@
   "getStarted": "Skapa din profil för att komma igång",
   "createProfile": "Skapa profil",
   "aboutSelf": "Berätta om dig själv för att skapa din profil",
-  "Anonymous": "Anonymt"
+  "allResults": "Alla resultat",
+  "editSearch": "Inga resultat",
+  "noResultsFound": "Det finns inga resultat.",
+  "changeSearch": "Försök ändra söktermen.",
+  "delete" : "Utrota",
+  "deletePost" : "Ta bort inlägg",
+  "edit" : "Redigera",
+  "editYourPost" : "Redigera ditt inlägg",
+  "cancel" : "Avbryt",
+  "postDeleted": "Din publicering har tagits bort! Fönstret stängs automatiskt om 2 sekunder...",
+  "postEdited" : "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
+  "failedToDeletePost" : "Misslyckades att ta bort inlägget. Försök igen",
+  "failedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
+  "cannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
+  "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
+  "anonymous": "Anonymt"
 }
