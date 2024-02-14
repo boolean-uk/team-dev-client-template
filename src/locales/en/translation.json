@@ -1,3 +1,5 @@
 {
-  "welcome": "Welcome to Cohort Manager"
+  "welcome": "Welcome to Cohort Manager",
+  "people" : "People",
+  "searchResults" : "Search Results"
 }
