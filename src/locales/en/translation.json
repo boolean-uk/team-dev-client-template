@@ -20,8 +20,6 @@
   "editSearch": "No results",
   "noResultsFound": "Sorry, no results found.",
   "changeSearch": "Try changing your search term.",
-  "postDeleted": "Post deleted! Closing modal in 2 seconds...",
-  "postEdited": "Post edited! Closing modal in 2 seconds...",
   "delete" : "Delete",
   "deletePost" : "Delete Post",
   "edit" : "Edit",
@@ -31,5 +29,11 @@
   "failedToEditPost": "Failed to edit the post. Please try again.",
   "cannotUpdateWithEmpty": "Cannot update with empty content.",
   "areYouSureDelete": "Are you sure you want to delete this post?",
-  "anonymous": "Anonymous"
+  "anonymous": "Anonymous",
+  "editPost": "Edit Post",
+  "errorLike" : "Error toggling like",
+  "like" : "Like",
+  "comment" : "Comment",
+  "firstLike" : "Be the first to like this",
+  "likes" : "Likes"
 }
