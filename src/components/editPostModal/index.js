@@ -84,7 +84,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className={`post__settings-button edit ${isEditing && "post__settings-button--active"}`}
             onClick={handleEditClick}
           >
-            <Trans>Edit</Trans>
+            <Trans>edit</Trans>
           </button>
         </div>
         <div className="button-container">
@@ -92,7 +92,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className={`post__settings-button delete ${isDeleting && "post__settings-button--active"}`}
             onClick={handleDeleteClick}
           >
-            <Trans>Delete</Trans>
+            <Trans>delete</Trans>
           </button>
         </div>
       </section>
@@ -108,7 +108,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className="post__settings-button second-edit"
             onClick={handleConfirmEdit}
           >
-            <Trans>Edit</Trans>
+            <Trans>edit</Trans>
           </button>
         </section>
       )}
@@ -120,7 +120,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className="post__settings-button cancel-delete"
             onClick={handleCancelDelete}
           >
-            <Trans>Cancel</Trans>
+            <Trans>cancel</Trans>
           </button>
           <button
             className="post__settings-button second-delete"
