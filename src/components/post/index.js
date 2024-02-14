@@ -1,6 +1,5 @@
 import useModal from "../../hooks/useModal"
 import Card from "../card"
-import Comment from "../comment"
 import OptionsIcon from "../optionsIcon"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
@@ -14,16 +13,9 @@ import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
 import CommentInput from "../commentInput"
 import useAuth from "../../hooks/useAuth"
+import CommentsList from "../CommentsList"
 
-const Post = ({
-  postId,
-  name,
-  date,
-  content,
-  comments = [],
-  likes,
-  getAllPosts,
-}) => {
+const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
   const { openModal, setModal } = useModal()
   const [postContent, setPostContent] = useState(null)
   const [userLiked, setUserLiked] = useState(false)
@@ -123,15 +115,7 @@ const Post = ({
           )}
         </section>
 
-        <section className={`comments ${comments.length > 0 && "border-top"}`}>
-          {comments.map((comment) => (
-            <Comment
-              key={comment.id}
-              name={comment.name}
-              content={comment.content}
-            />
-          ))}
-        </section>
+        <CommentsList postId={postId} />
 
         <CommentInput postId={postId} getAllPosts={getAllPosts} />
       </article>
