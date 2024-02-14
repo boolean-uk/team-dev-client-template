@@ -28,5 +28,11 @@
   "like": "Hoffi",
   "comment": "Sylw",
   "firstLike": "Byddwch y cyntaf i hoffi",
-  "likes": "Hoffi"
+  "likes": "Hoffi",
+  "modules": "modiwlau",
+  "completed": "wedi gwblhau",
+  "units": "unedau",
+  "exercises": "ymarferion",
+  "seeExercises": "Gweld ymarferion",
+  "countAndCompleted": "{{completedTasks}}/{{totalTasks}} wedi'u cwblhau"
 }
