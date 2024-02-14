@@ -4,11 +4,12 @@ import "../comment/comment.css";
 import ProfileCircle from "../profileCircle";
 import OptionsIcon from "../optionsIcon";
 import ProfileContextMenu from "../ProfileContextMenu";
+import { Trans } from 'react-i18next';
 
 const Comment = ({ user, content }) => { 
   const [triggerContextMenu, setTriggerContextMenu] = useState(false);
 
-  const fullName = user && user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : "Anonymous";
+  const fullName = user && user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : <Trans>"Anonymous"</Trans>;
   const initials = user && user.firstName && user.lastName ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : "A";
 
   return (

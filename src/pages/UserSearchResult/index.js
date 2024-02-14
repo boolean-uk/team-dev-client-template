@@ -8,10 +8,13 @@ import UserSearchBar from "../../components/userSearchBar/UserSearchBar"
 
 import Card from "../../components/card"
 import UsersList from "../../components/usersList"
+import { useTranslation } from "react-i18next"
 
 const UserSearchResult = () => {
   const [searchVal, setSearchVal] = useState("")
   const [searchResults, setSearchResults] = useState([])
+
+  const { t } = useTranslation()
 
   const getUsers = () => {
     getUserByName(searchVal).then(setSearchResults)
@@ -31,14 +34,14 @@ const UserSearchResult = () => {
             icon="Arrow Back"
           />
         </NavLink>{" "}
-        <p className="search-results-text">Search results</p>
+        <p className="search-results-text">{t("searchResults")}</p>
       </div>
       <div className="people-lists">
         <Card>
           <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
         </Card>
         <Card>
-          <p className="text-blue1">People</p>
+          <p className="text-blue1">{t("people")}</p>
 
           <hr
             style={{
