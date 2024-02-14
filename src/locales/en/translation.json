@@ -1,5 +1,8 @@
 {
   "welcome": "Welcome to Cohort Manager",
   "addAComment": "Add a comment...",
-  "sendMessage": "send message"
+  "sendMessage": "send message",
+  "getStarted": "Create your profile to get started",
+  "createProfile": "Create Profile",
+  "aboutSelf": "Berätta om dig själv för att skapa din profil"
 }
