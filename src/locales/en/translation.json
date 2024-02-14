@@ -11,5 +11,16 @@
   "email": "Email",
   "password": "password",
   "signUp": "Sign Up",
-  "Anonymous": "Anonymous"
+  "delete" : "Delete",
+  "deletePost" : "Delete Post",
+  "edit" : "Edit",
+  "editYourPost" : "Edit your post",
+  "cancel" : "Cancel",
+  "postDeleted" : "Post deleted! Closing modal in 2 seconds...",
+  "postEdited" : "Post edited! Closing modal in 2 seconds...",
+  "failedToDeletePost": "Failed to delete the post. Please try again.",
+  "failedToEditPost" : "Failed to edit the post. Please try again.",
+  "cannotUpdateWithEmpty" : "Cannot update with empty content.",
+  "areYouSureDelete" : "Are you sure you want to delete this post?",
+  "anonymous": "Anonymous"
 }

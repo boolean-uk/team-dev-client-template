@@ -2,8 +2,11 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import "./style.css"
 import { deletePost, editPost } from "../../service/apiClient.js"
+import { useTranslation } from "react-i18next"
+import { Trans } from "react-i18next"
 
 const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
+  const {t} = useTranslation()
   const { closeModal } = useModal()
   const [message, setMessage] = useState(null)
   const [text, setText] = useState("")
@@ -35,28 +38,28 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const handleConfirmDelete = async (postId) => {
     try {
       await deletePost(postId)
-      handleActionWithMessage("Post deleted! Closing modal in 2 seconds...")
+      handleActionWithMessage(t("postDeleted"))
       getAllPosts()
     } catch (error) {
       console.error("Failed to delete the post:", error.message)
-      setMessage("Failed to delete the post. Please try again.")
+      setMessage(t("failedToDeleteThePost"))
     }
   }
 
   const handleConfirmEdit = async () => {
     if (!text.trim()) {
-      setMessage("Cannot update with empty content.")
+      setMessage(t("cannotUpdateWithEmpty"))
       return
     }
 
     try {
       const editPostResponse = await editPost(postId, { content: text })
       const editedPost = editPostResponse.data.post.content
-      handleActionWithMessage("Post edited! Closing modal in 2 seconds...")
+      handleActionWithMessage(t("postEdited"))
       setPostContent(editedPost)
     } catch (error) {
       console.error("Failed to edit the post:", error.message)
-      setMessage("Failed to edit the post. Please try again.")
+      setMessage(t("failedToEditPost"))
     }
   }
 
@@ -81,7 +84,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className={`post__settings-button edit ${isEditing && "post__settings-button--active"}`}
             onClick={handleEditClick}
           >
-            Edit
+            <Trans>edit</Trans>
           </button>
         </div>
         <div className="button-container">
@@ -89,7 +92,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className={`post__settings-button delete ${isDeleting && "post__settings-button--active"}`}
             onClick={handleDeleteClick}
           >
-            Delete
+            <Trans>delete</Trans>
           </button>
         </div>
       </section>
@@ -99,31 +102,31 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
           <textarea
             onChange={onChange}
             value={text}
-            placeholder="Edit your post"
+            placeholder={t("editYourPost")}
           ></textarea>
           <button
             className="post__settings-button second-edit"
             onClick={handleConfirmEdit}
           >
-            Edit
+            <Trans>edit</Trans>
           </button>
         </section>
       )}
 
       {isDeleting && (
         <section className="delete-confirmation">
-          <p>Are you sure you want to delete this post?</p>
+          <p>{t("areYouSureDelete")}</p>
           <button
             className="post__settings-button cancel-delete"
             onClick={handleCancelDelete}
           >
-            Cancel
+            <Trans>cancel</Trans>
           </button>
           <button
             className="post__settings-button second-delete"
             onClick={() => handleConfirmDelete(postId)}
           >
-            Delete Post
+            {t("deletePost")}
           </button>
         </section>
       )}
