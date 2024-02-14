@@ -35,5 +35,6 @@
   "like" : "Like",
   "comment" : "Comment",
   "firstLike" : "Be the first to like this",
-  "likes" : "Likes"
+  "likes" : "Likes",
+  "heart" : "heart"
 }

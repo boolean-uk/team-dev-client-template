@@ -96,14 +96,14 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
         <section className="post-interactions-container border-top">
           <div className="post-interactions">
             <div className="heart-icon icon" onClick={likeHandler}>
-              <img src={userLiked ? heart : emptyHeart} alt="heart" />
+              <img src={userLiked ? heart : emptyHeart} alt={t("heart")} />
               <span>{t("like")}</span>
             </div>
             <div
               className={`comment-icon${isComment && "--active"} icon`}
               onClick={commentHandler}
             >
-              <img src={isComment ? comment : emptyComment} alt="comment" />
+              <img src={isComment ? comment : emptyComment} alt={t("comment")} />
               <span>{ t("comment")}</span>
             </div>
           </div>

@@ -35,5 +35,6 @@
   "like" : "Gilla",
   "comment" : "Kommentera",
   "firstLike" : "Var den första att gilla detta",
-  "likes" : "Gillar"
+  "likes" : "Gillar",
+  "heart" : "hjärta"
 }
