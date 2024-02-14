@@ -22,5 +22,11 @@
   "failedToEditPost": "Methu golygu'r post. Trio eto os gwelwch yn dda",
   "cannotUpdateWithEmpty": "Dwyt ti ddim yn gallu diweddaru gyda cynnwys gwag",
   "areYouSureDelete": "Wyt ti'n siwr ti eisiau dileu'r post?",
-  "anonymous": "Anhysbys"
+  "anonymous": "Anhysbys",
+  "editPost": "Golygu post",
+  "errorLike": "Gwall togl post",
+  "like": "Hoffi",
+  "comment": "Sylw",
+  "firstLike": "Byddwch y cyntaf i hoffi",
+  "likes": "Hoffi"
 }
