@@ -7,7 +7,7 @@ const FullLogo = ({ textColour = "#000046" }) => {
     alt='Cohort Manager Logo'
     width='100px'
   />
-  <h3 style={{ color: "#000046", fontSize: "32px", gridColumn: "2" }}>Cohort Manager</h3>
+  <h3 style={{ color: "#000046", fontSize: "32px"}}>Cohort Manager</h3>
 </figure>
 
   
