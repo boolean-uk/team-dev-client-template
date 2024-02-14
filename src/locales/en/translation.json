@@ -1,8 +1,15 @@
 {
   "welcome": "Welcome to Cohort Manager",
-  "people" : "People",
-  "searchResults" : "Search Results",
+  "people": "People",
+  "searchResults": "Search Results",
   "addAComment": "Add a comment...",
   "sendMessage": "send message",
+  "register": "Register",
+  "signUpAlternative": "Or sign up with",
+  "userExist": "Already a user?",
+  "logIn": "Log in",
+  "email": "Email",
+  "password": "password",
+  "signUp": "Sign Up",
   "Anonymous": "Anonymous"
 }

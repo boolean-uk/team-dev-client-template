@@ -5,7 +5,7 @@ import OptionsIcon from "../optionsIcon"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import { useState, useEffect } from "react"
-import { toggleLike } from "../../service/apiClient"
+//import { toggleLike } from "../../service/apiClient"
 import "./style.css"
 
 import emptyHeart from "../../assets/icons/empty-heart.png"
@@ -50,7 +50,7 @@ const Post = ({
 
   const likeHandler = async () => {
     try {
-      await toggleLike(postId)
+     // await toggleLike(postId)
       setUserLiked(!userLiked)
       setLikesCount(userLiked ? likesCount - 1 : likesCount + 1)
     } catch (error) {

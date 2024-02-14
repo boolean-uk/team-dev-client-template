@@ -2,7 +2,7 @@ import { useState } from "react"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
 import sendIcon from "../../assets/icons/send.png"
-import { postComment } from "../../service/apiClient"
+//import { postComment } from "../../service/apiClient"
 import { useTranslation } from "react-i18next"
 
 const CommentInput = ({ postId, getAllPosts }) => {
@@ -11,7 +11,7 @@ const CommentInput = ({ postId, getAllPosts }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    postComment({ postId, content }).then(getAllPosts)
+   // postComment({ postId, content }).then(getAllPosts)
     setContent("")
   }
 

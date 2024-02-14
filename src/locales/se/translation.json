@@ -4,5 +4,12 @@
   "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
+  "register": "Registrera dig",
+  "signUpAlternative": "Eller registrera dig med",
+  "userExist":"Redan en användare?",
+  "logIn": "Logga in",
+  "email": "E-post",
+  "password": "lösenord",
+  "signUp": "Registrera dig",
   "Anonymous": "Anonymt"
 }
