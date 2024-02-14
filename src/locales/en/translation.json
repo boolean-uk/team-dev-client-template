@@ -34,5 +34,6 @@
   "cannotUpdateWithEmpty": "Cannot update with empty content.",
   "areYouSureDelete": "Are you sure you want to delete this post?",
   "anonymous": "Anonymous",
-  "countAndCompleted" : "{{completedTasks}}/{{totalTasks}} completed"
+  "countAndCompleted" : "{{completedTasks}}/{{totalTasks}} completed",
+  "teachers": "Teachers"
 }
