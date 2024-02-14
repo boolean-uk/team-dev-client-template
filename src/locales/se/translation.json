@@ -1,9 +1,12 @@
 {
   "welcome": "Välkommen till Cohort Manager",
   "people" : "Människor",
+  "cohort" : "Kohort",
+  "myCohort" : "Min kohort",
   "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
+  "softwareDevelopment" : "Mjukvaruutveckling",
   "allResults": "Alla resultat",
   "editSearch": "Inga resultat",
   "noResultsFound": "Det finns inga resultat.",
