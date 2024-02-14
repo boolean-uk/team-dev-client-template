@@ -18,11 +18,6 @@ async function createProfile(userId, firstName, lastName, githubUrl, bio) {
   })
 }
 
-async function toggleLike(postId) {
-  const response = await post(`posts/${postId}/like`)
-  return response
-}
-
 async function getPosts() {
   const res = await get("posts")
   return res.data.posts
@@ -60,6 +55,11 @@ async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth)
 }
 
+async function getSelf() {
+	const res = await get("users/me")
+	return res.data.user
+}
+
 async function getUsers() {
   const res = await get("users")
   return res.data.users
@@ -79,6 +79,7 @@ async function deletePost(postId) {
 
 async function editPost(postId, updatedContent) {
   return put(`posts/${postId}`, updatedContent)
+
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -102,6 +103,17 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
+async function toggleLike(postId) {
+  const response = await post(`posts/${postId}/like`)
+  return response
+}
+
+async function postComment(comment) {
+  const res = await post("comments", comment)
+  return res.data
+}
+
+
 export {
   login,
   getPosts,
@@ -116,3 +128,8 @@ export {
   postComment,
   getCommentsByPostId,
 }
+
+
+
+
+
