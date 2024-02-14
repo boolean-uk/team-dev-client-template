@@ -28,5 +28,6 @@
   "units": "unedau",
   "exercises": "ymarferion",
   "seeExercises": "Gweld ymarferion",
-  "countAndCompleted": "{{completedTasks}}/{{totalTasks}} wedi'u cwblhau"
+  "countAndCompleted": "{{completedTasks}}/{{totalTasks}} wedi'u cwblhau",
+  "teachers": "Athrawon"
 }
