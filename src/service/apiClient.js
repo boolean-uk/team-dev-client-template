@@ -93,7 +93,15 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
+async function toggleLike(postId) {
+  const response = await post(`posts/${postId}/like`)
+  return response
+}
 
+async function postComment(comment) {
+  const res = await post("comments", comment)
+  return res.data
+}
 
 
 export {
@@ -103,7 +111,12 @@ export {
     createProfile,
     getUsers,
 		getSelf,
-    postPost, getUserByName, deletePost, editPost
+    postPost,
+		getUserByName,
+		deletePost,
+		editPost,
+		toggleLike,
+		postComment
 }
 
 

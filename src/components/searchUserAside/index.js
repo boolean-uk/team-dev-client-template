@@ -8,6 +8,7 @@ import UsersList from "../usersList"
 import UserSearchBar from "../userSearchBar/UserSearchBar"
 
 import { getUserByName } from "../../service/apiClient"
+import { useTranslation } from "react-i18next"
 
 import "./style.css"
 
@@ -47,10 +48,11 @@ const SearchUserAside = () => {
 }
 
 const UserResults = ({ users, setMenuHover }) => {
+  const { t } = useTranslation()
   if (!Array.isArray(users)) {
     users = []
   }
-  
+
   return (
     <>
       <div
@@ -58,11 +60,14 @@ const UserResults = ({ users, setMenuHover }) => {
         onMouseLeave={() => setMenuHover(false)}
       >
         <Menu className={"search-user-menu"}>
-          <p className="border-bottom spacing text-blue1">People</p>
+          <p className="border-bottom spacing text-blue1">{t("people")}</p>
           <UsersList users={users.slice(0, 10)} />
           {users.length >= 10 && (
             <NavLink to="/results">
-              <Button classes="button offwhite spacing" text={"All Results"} />
+              <Button
+                classes="button offwhite spacing"
+                text={t("allResults")}
+              />
             </NavLink>
           )}
           {users.length === 0 && <NoResults />}
@@ -73,19 +78,20 @@ const UserResults = ({ users, setMenuHover }) => {
 }
 
 const NoResults = () => {
+  const { t } = useTranslation()
   return (
     <>
       <div className="spacing ">
         <p className="text-blue1 ">
-          Sorry, no results found.
+          {t("noResultsFound")}
           <br />
           <br />
-          Try changing your search term.
+
+          {t("changeSearch")}
         </p>
       </div>
-
       <NavLink to="/results">
-        <Button classes="button offwhite spacing" text={"Edit Search"} />
+        <Button classes="button offwhite spacing" text={t("editSearch")} />
       </NavLink>
     </>
   )
