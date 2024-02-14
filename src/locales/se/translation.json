@@ -1,5 +1,7 @@
 {
   "welcome": "Välkommen till Cohort Manager",
+  "people" : "Människor",
+  "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
   "Delete" : "Utrota",
@@ -12,5 +14,6 @@
   "FailedToDeletePost" : "Misslyckades att ta bort inlägget. Försök igen",
   "FailedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
   "CannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
-  "AreYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?"
+  "AreYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
+  "Anonymous": "Anonymt"
 }

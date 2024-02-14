@@ -1,5 +1,7 @@
 {
   "welcome": "Welcome to Cohort Manager",
+  "people" : "People",
+  "searchResults" : "Search Results",
   "addAComment": "Add a comment...",
   "sendMessage": "send message",
   "Delete" : "Delete",
@@ -12,5 +14,6 @@
   "FailedToDeletePost": "Failed to delete the post. Please try again.",
   "FailedToEditPost" : "Failed to edit the post. Please try again.",
   "CannotUpdateWithEmpty" : "Cannot update with empty content.",
-  "AreYouSureDelete" : "Are you sure you want to delete this post?"
+  "AreYouSureDelete" : "Are you sure you want to delete this post?",
+  "Anonymous": "Anonymous"
 }
