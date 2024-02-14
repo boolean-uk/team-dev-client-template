@@ -19,11 +19,12 @@
   "enterThreeCharacters": "Enter 3 character or more",
   "basicInfo": "Basic info",
   "photo": "Photo",
-  "upLoadImage": "Please upload a valid image file",
+  "uploadValidImage": "Please upload a valid image file",
   "addHeadShot": "Add headshot",
   "firstName": "First name",
   "enterYourFirstName": "enter your first name",
   "lastName": "Last name",
+  "enterYourLastName": "enter your last name",
   "GithubUserName": "Github Username",
   "enterYourGithubUser": "enter your github username",
   "required": "Required"

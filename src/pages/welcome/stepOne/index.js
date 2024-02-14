@@ -55,7 +55,9 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
 
             <p className="text-blue1">{t("addHeadShot")}</p>
           </div>
-          <p className="welcome-form-profileimg-error">{t("upLoadImage")}</p>
+          <p className="welcome-form-profileimg-error">
+            {t("uploadValidImage")}
+          </p>
         </div>
         <div className="welcome-form-inputs">
           <TextInput
