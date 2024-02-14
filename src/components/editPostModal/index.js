@@ -84,7 +84,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className={`post__settings-button edit ${isEditing && "post__settings-button--active"}`}
             onClick={handleEditClick}
           >
-            Edit
+            <Trans>Edit</Trans>
           </button>
         </div>
         <div className="button-container">
