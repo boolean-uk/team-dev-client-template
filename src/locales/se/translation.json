@@ -2,8 +2,8 @@
   "aboutSelf": "Berätta om dig själv för att skapa din profil",
   "addAComment": "Lägg till en kommentar...",
   "allResults": "Alla resultat",
-  "anonymous": "Anonymt",
   "areYouSureDelete": "Är du säker på att du vill ta bort detta inlägg?",
+  "anonymous": "Anonymt",
   "cancel": "Avbryt",
   "cannotUpdateWithEmpty": "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
   "changeSearch": "Försök ändra söktermen.",
@@ -40,6 +40,8 @@
   "sendMessage": "Skicka meddelande",
   "settings": "Inställningar",
   "softwareDevelopment": "Mjukvaruutveckling",
+  "teachers": "Lärare",
   "units": "Enheter",
   "welcome": "Välkommen till Cohort Manager"
 }
+

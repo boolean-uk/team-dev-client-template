@@ -2,8 +2,8 @@
   "aboutSelf": "Tell us about yourself to create your profile",
   "addAComment": "Add a comment...",
   "allResults": "All results",
-  "anonymous": "Anonymous",
   "areYouSureDelete": "Are you sure you want to delete this post?",
+  "anonymous": "Anonymous",
   "cancel": "Cancel",
   "cannotUpdateWithEmpty": "Cannot update with empty content.",
   "changeSearch": "Try changing your search term.",
@@ -40,6 +40,8 @@
   "sendMessage": "send message",
   "settings": "Settings",
   "softwareDevelopment": "Software Development",
+  "teachers": "Teachers",
   "units": "Units",
   "welcome": "Welcome to Cohort Manager"
 }
+
