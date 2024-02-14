@@ -1,5 +1,9 @@
 {
   "welcome": "Welcome to Cohort Manager",
   "addAComment": "Add a comment...",
-  "sendMessage": "send message"
+  "sendMessage": "send message",
+  "allResults": "All results",
+  "editSearch": "No results",
+  "noResultsFound": "Sorry, no results found.",
+  "changeSearch": "Try changing your search term."
 }

@@ -1,5 +1,9 @@
 {
   "welcome": "Välkommen till Cohort Manager",
   "addAComment": "Lägg till en kommentar...",
-  "sendMessage": "Skicka meddelande"
+  "sendMessage": "Skicka meddelande",
+  "allResults": "Alla resultat",
+  "editSearch": "Inga resultat",
+  "noResultsFound": "Det finns inga resultat.",
+  "changeSearch": "Försök ändra söktermen."
 }
