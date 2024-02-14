@@ -1,5 +1,15 @@
 {
   "welcome": "Välkommen till Cohort Manager",
   "addAComment": "Lägg till en kommentar...",
-  "sendMessage": "Skicka meddelande"
+  "sendMessage": "Skicka meddelande",
+  "Delete" : "Utrota",
+  "DeletePost" : "Ta bort inlägg",
+  "Edit" : "Redigera",
+  "Cancel" : "Avbryt",
+  "PostDeleted": "Din publicering har tagits bort! Fönstret stängs automatiskt om 2 sekunder...",
+  "PostEdited" : "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
+  "FailedToDeletePost" : "Misslyckades att ta bort inlägget. Försök igen",
+  "FailedToEditPost" : "Misslyckades att redigera inlägget. Försök igen.",
+  "CannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
+  "AreYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?"
 }
