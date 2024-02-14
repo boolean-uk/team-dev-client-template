@@ -1,4 +1,4 @@
-header {
+/* header {
     grid-column: span 3;
     display: grid;
     grid-template-columns: 1fr 50px;
@@ -7,10 +7,25 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+}  */
+
+
+header{
+    display: grid;
+    grid-column: span 3;
+    grid-template-columns: 1fr 2fr 60px;
+    background-color: #000046;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+
 }
+
 
 header .profile-icon {
     cursor: pointer;
+
 }
 
 header .user-panel {

@@ -22,8 +22,12 @@ const Header = () => {
 
   return (
     <header>
-      <FullLogo textColour="white" />
-
+      <FullLogo textColour="white" display="none" />
+      <h3  style={{
+          color: 'white',
+        }}>
+        Cohort Manager
+      </h3 >
       <div className="profile-icon" onClick={onClickProfileIcon}>
         <p>AJ</p>
       </div>
