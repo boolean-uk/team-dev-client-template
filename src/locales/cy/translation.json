@@ -19,5 +19,10 @@
   "failedToEditPost": "Methu golygu'r post. Trio eto os gwelwch yn dda",
   "cannotUpdateWithEmpty": "Dwyt ti ddim yn gallu diweddaru gyda cynnwys gwag",
   "areYouSureDelete": "Wyt ti'n siwr ti eisiau dileu'r post?",
-  "anonymous": "Anhysbys"
+  "anonymous": "Anhysbys",
+  "modules": "modiwlau",
+  "completed": "wedi gwblhau",
+  "units": "unedau",
+  "exercises": "ymarferion",
+  "seeExercises": "Gweld ymarferion"
 }
