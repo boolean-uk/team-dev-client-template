@@ -7,6 +7,7 @@ import { Trans } from "react-i18next"
 const MyExercises = () => {
   const { t } = useTranslation()
 
+
   return (
     <>
       <Card>

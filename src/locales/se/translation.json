@@ -34,5 +34,5 @@
   "cannotUpdateWithEmpty" : "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
   "areYouSureDelete" : "Är du säker på att du vill ta bort detta inlägg?",
   "anonymous": "Anonymt",
-  "countAndCompleted" : "completed {{completedTasks}}/{{totalTasks}}"
+  "countAndCompleted" : "Klar {{completedTasks}}/{{totalTasks}}"
 }
