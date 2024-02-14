@@ -11,46 +11,44 @@ import { getUserByName } from "../../service/apiClient"
 import { useTranslation } from "react-i18next"
 
 import "./style.css"
-import { t } from "i18next"
 
 const SearchUserAside = () => {
   const [hasFocus, setHasFocus] = useState(false)
   const [menuHover, setMenuHover] = useState(false)
   const [searchVal, setSearchVal] = useState("")
   const [users, setUsers] = useState([])
-  // eslint-disable-next-line no-unused-vars
-  const { t } = useTranslation()
-
+  
   const menuOpen = hasFocus || searchVal.length > 0 || menuHover
-
+  
   const getUsers = () => {
     getUserByName(searchVal).then(setUsers)
   }
-
+  
   useEffect(getUsers, [searchVal])
-
+  
   return (
     <div className="relative">
       <Card>
         <form
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
-        >
+          >
           <UserSearchBar searchVal={searchVal} setSearchVal={setSearchVal} />
         </form>
       </Card>
       {menuOpen && (
         <UserResults
-          users={users}
-          menuHover={menuHover}
-          setMenuHover={setMenuHover}
+        users={users}
+        menuHover={menuHover}
+        setMenuHover={setMenuHover}
         />
-      )}
+        )}
     </div>
   )
 }
 
 const UserResults = ({ users, setMenuHover }) => {
+  const { t } = useTranslation()
   if (!Array.isArray(users)) {
     users = []
   }
@@ -60,7 +58,7 @@ const UserResults = ({ users, setMenuHover }) => {
       <div
         onMouseEnter={() => setMenuHover(true)}
         onMouseLeave={() => setMenuHover(false)}
-      >
+        >
         <Menu className={"search-user-menu"}>
           <p className="border-bottom spacing text-blue1">{t("people")}</p>
           <UsersList users={users.slice(0, 10)} />
@@ -77,6 +75,7 @@ const UserResults = ({ users, setMenuHover }) => {
 }
 
 const NoResults = () => {
+  const { t } = useTranslation()
   return (
     <>
       <div className="spacing ">
