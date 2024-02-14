@@ -27,5 +27,6 @@
   "completed": "wedi gwblhau",
   "units": "unedau",
   "exercises": "ymarferion",
-  "seeExercises": "Gweld ymarferion"
+  "seeExercises": "Gweld ymarferion",
+  "countAndCompleted": "{{completedTasks}}/{{totalTasks}} wedi'u cwblhau"
 }
