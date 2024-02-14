@@ -1,9 +1,19 @@
 {
   "welcome": "Croeso i Cohort Manager",
-  "Anonymous": "Anhysbys",
   "people": "Pobl",
   "searchResults": "Canlyniadau chwilio",
   "addAComment": "Ychwanegu sylw...",
   "sendMessage": "Anfon neges",
+  "delete": "Dileu",
+  "deletePost": "Dileu post",
+  "edit": "Golyga",
+  "editYourPost": "Golyga dy bost",
+  "cancel": "Canslo",
+  "postDeleted": "Post wedi'i ddileu. Cau'r moddol mewn dwy eiliad",
+  "postEdited": "Post wedi'i olygu. Caur'r moddol mewn dwy eiliad",
+  "failedToDelete": "Methu dileu'r post. Trio eto os gwelwch yn dda",
+  "failedToEditPost": "Methu golygu'r post. Trio eto os gwelwch yn dda",
+  "cannotUpdateWithEmpty": "Dwyt ti ddim yn gallu diweddaru gyda cynnwys gwag",
+  "areYouSureDelete": "Wyt ti'n siwr ti eisiau dileu'r post?",
+  "anonymous": "Anhysbys"
 }
-
