@@ -38,28 +38,28 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const handleConfirmDelete = async (postId) => {
     try {
       await deletePost(postId)
-      handleActionWithMessage(t("PostDeleted"))
+      handleActionWithMessage(t("postDeleted"))
       getAllPosts()
     } catch (error) {
       console.error("Failed to delete the post:", error.message)
-      setMessage(t("FailedToDeleteThePost"))
+      setMessage(t("failedToDeleteThePost"))
     }
   }
 
   const handleConfirmEdit = async () => {
     if (!text.trim()) {
-      setMessage(t("CannotUpdateWithEmpty"))
+      setMessage(t("cannotUpdateWithEmpty"))
       return
     }
 
     try {
       const editPostResponse = await editPost(postId, { content: text })
       const editedPost = editPostResponse.data.post.content
-      handleActionWithMessage(t("PostEdited"))
+      handleActionWithMessage(t("postEdited"))
       setPostContent(editedPost)
     } catch (error) {
       console.error("Failed to edit the post:", error.message)
-      setMessage(t("FailedToEditPost"))
+      setMessage(t("failedToEditPost"))
     }
   }
 
@@ -102,7 +102,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
           <textarea
             onChange={onChange}
             value={text}
-            placeholder={t("EditYourPost")}
+            placeholder={t("editYourPost")}
           ></textarea>
           <button
             className="post__settings-button second-edit"
@@ -115,7 +115,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
 
       {isDeleting && (
         <section className="delete-confirmation">
-          <p>{t("AreYouSureDelete")}</p>
+          <p>{t("areYouSureDelete")}</p>
           <button
             className="post__settings-button cancel-delete"
             onClick={handleCancelDelete}
@@ -126,7 +126,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
             className="post__settings-button second-delete"
             onClick={() => handleConfirmDelete(postId)}
           >
-            {t("DeletePost")}
+            {t("deletePost")}
           </button>
         </section>
       )}
