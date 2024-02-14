@@ -38,6 +38,11 @@ async function getUserByName(firstName) {
   return res.data.users
 }
 
+async function getCommentsByPostId(postId) {
+  const res = await get(`comments/${postId}`)
+  return res.data.comments
+}
+
 async function postComment(comment) {
   const res = await post("comments", comment)
   return res.data
@@ -109,4 +114,5 @@ export {
   editPost,
   toggleLike,
   postComment,
+  getCommentsByPostId,
 }
