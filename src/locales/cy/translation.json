@@ -1,12 +1,8 @@
 {
   "welcome": "Croeso i Cohort Manager",
   "people": "Pobl",
-  "profile": "Profil",
-  "privacy" : "Integritet",
   "postDeleted": "Post wedi'i ddileu. Cau'r moddol mewn dwy eiliad",
   "postEdited": "Post wedi'i olygu. Caur'r moddol mewn dwy eiliad",
-  "settings" : "Inställningar",
-  "logOut" : "Logga ut",
   "searchResults": "Canlyniadau chwilio",
   "addAComment": "Ychwanegu sylw...",
   "sendMessage": "Anfon neges",
