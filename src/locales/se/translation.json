@@ -1,8 +1,11 @@
 {
   "welcome": "Välkommen till Cohort Manager",
+  "people" : "Människor",
+  "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande",
   "getStarted": "Skapa din profil för att komma igång",
   "createProfile": "Skapa profil",
-  "aboutSelf": "Berätta om dig själv för att skapa din profil"
+  "aboutSelf": "Berätta om dig själv för att skapa din profil",
+  "Anonymous": "Anonymt"
 }
