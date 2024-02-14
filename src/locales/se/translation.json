@@ -1,3 +1,7 @@
 {
-  "welcome": "Välkommen till Cohort Manager"
+  "welcome": "Välkommen till Cohort Manager",
+  "closingModal": "Skicka-knappen klickades! Stänger modal om 2 sekunder...",
+  "oopsEmptyPost": "Hoppsan, det här inlägget är tomt!",
+  "whatsOnYourMind": "Vad tänker du på?",
+  "post": "Skicka"
 }

@@ -1,3 +1,7 @@
 {
-  "welcome": "Welcome to Cohort Manager"
+  "welcome": "Welcome to Cohort Manager",
+  "closingModal": "Submit button was clicked! Closing modal in 2 seconds...",
+  "oopsEmptyPost": "Oops, this post is empty!",
+  "whatsOnYourMind": "What's on your mind?",
+  "post": "Post"
 }
