@@ -115,7 +115,7 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
           )}
         </section>
 
-        <CommentsList postId={postId} />
+        {isComment && <CommentsList postId={postId} />}
 
         <CommentInput postId={postId} getAllPosts={getAllPosts} />
       </article>
