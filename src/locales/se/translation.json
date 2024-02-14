@@ -1,5 +1,7 @@
 {
   "welcome": "Välkommen till Cohort Manager",
+  "people" : "Människor",
+  "searchResults" : "Sökresultat",
   "addAComment": "Lägg till en kommentar...",
   "sendMessage": "Skicka meddelande"
 }
