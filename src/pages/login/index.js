@@ -4,11 +4,13 @@ import TextInput from "../../components/form/textInput"
 import useAuth from "../../hooks/useAuth"
 import CredentialsCard from "../../components/credentials"
 import "./login.css"
+import { useTranslation } from "react-i18next"
 
 const Login = () => {
   const { onLogin } = useAuth()
   const [formData, setFormData] = useState({ email: "", password: "" })
   const [loginMessage, setLoginMessage] = useState("")
+  const {t} = useTranslation()
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -26,11 +28,11 @@ const Login = () => {
   return (
     <div className="bg-blue login credentialpage">
       <CredentialsCard
-        title="Login"
-        socialLinksTitle="Or log in with"
-        altButtonTitle="Need an account?"
+        title={t('login')}
+        socialLinksTitle={t("loginAlternative")}
+        altButtonTitle={t("needOtherAccount")}
         altButtonLink="/register"
-        altButtonText="Sign up"
+        altButtonText={t("Registrera dig")}
       >
         <div className="login-form">
           <form>
@@ -38,19 +40,19 @@ const Login = () => {
               value={formData.email}
               onChange={onChange}
               name="email"
-              label={"Email *"}
+              label={`${t('email')} *`}
             />
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
-              label={"Password *"}
+              label={`${t('password')} *`}
               type={"password"}
             />
           </form>
           {loginMessage && <p className="input-message">{loginMessage}</p>}
           <Button
-            text="Log in"
+            text={t("logIn")}
             onClick={() => {
               checkLoginErrors()
               onLogin(formData.email, formData.password)

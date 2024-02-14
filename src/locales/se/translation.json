@@ -1,5 +1,12 @@
 {
   "welcome": "Välkommen till Cohort Manager",
   "addAComment": "Lägg till en kommentar...",
-  "sendMessage": "Skicka meddelande"
+  "sendMessage": "Skicka meddelande",
+  "login": "Logga in",
+  "loginAlternative": "Eller logga in med",
+  "needOtherAccount": "Behöver du ett konto?",
+  "signUp": "Registrera dig",
+  "email": "E-post",
+  "password": "Lösenord",
+  "logIn": "Logga in"
 }

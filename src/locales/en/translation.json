@@ -1,5 +1,12 @@
 {
   "welcome": "Welcome to Cohort Manager",
   "addAComment": "Add a comment...",
-  "sendMessage": "send message"
+  "sendMessage": "send message",
+  "login": "Login",
+  "loginAlternative": "Or log in with",
+  "needOtherAccount": "Need an account?",
+  "signUp": "Sign up",
+  "email": "Email",
+  "password": "Password",
+  "logIn": "Log in"
 }
