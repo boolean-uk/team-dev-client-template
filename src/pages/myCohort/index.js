@@ -2,13 +2,16 @@ import { useEffect, useState } from "react"
 import MyExercises from "../../components/myCohortExercises"
 import MyTeachers from "../../components/myCohortTeachers"
 import MyCohortDetails from "../../components/myCohortDetails"
-import { getUsers } from "../../service/apiClient"
+import { getUsers, getSelf } from "../../service/apiClient"
 
 const MyCohort = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    getUsers().then((users) => setUsers(users))
+    getUsers().then((users) => {
+			getSelf()
+				.then((self) => setUsers(users.filter((user) => user.cohort_id === self.cohort_id &&	user.role === "STUDENT")))
+		})
   }, [])
 
   return (
