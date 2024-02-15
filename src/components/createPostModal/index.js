@@ -3,7 +3,7 @@ import useModal from "../../hooks/useModal"
 import "./style.css"
 import Button from "../button"
 import { postPost } from "../../service/apiClient"
-import jwtDecode from "jwt-decode"
+import useAuth from "../../hooks/useAuth"
 
 const CreatePostModal = ({ getAllPosts }) => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
@@ -17,8 +17,7 @@ const CreatePostModal = ({ getAllPosts }) => {
   }
 
   const onSubmit = () => {
-    const token = localStorage.getItem("token")
-    const { userId } = jwtDecode(token)
+    const { userId } = useAuth()
     const newPost = {
       content: text,
       userId,
