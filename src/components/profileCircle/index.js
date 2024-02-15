@@ -42,7 +42,7 @@ const CascadingMenu = () => {
           <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 3`} />
         </MenuItem>
 
-        <MenuItem icon={<MonitorIcon />} text="Frontend Development">
+        <MenuItem icon={<MonitorIcon />} text={t('frontendDevelopment')}>
           <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 1`} />
           <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 2`} />
           <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 3`} />
