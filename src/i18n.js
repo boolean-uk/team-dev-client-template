@@ -1,5 +1,6 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
+import LanguageDetector from "i18next-browser-languagedetector"
 
 import translationEN from "./locales/en/translation.json"
 import translationSV from "./locales/sv/translation.json"
@@ -23,6 +24,7 @@ i18n.availableLanguages = Object.keys(resources)
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)
   .init({
     resources,
     fallbackLng: REACT_APP_DEFAULT_LANGUAGE,
