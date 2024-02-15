@@ -14,8 +14,17 @@ import comment from "../../assets/icons/comment.png"
 import CommentInput from "../commentInput"
 import useAuth from "../../hooks/useAuth"
 import CommentsList from "../CommentsList"
+import { useTranslation } from "react-i18next"
 
-const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
+const Post = ({
+  userPostId,
+  postId,
+  name,
+  date,
+  content,
+  likes,
+  getAllPosts,
+}) => {
   const { openModal, setModal } = useModal()
   const [postContent, setPostContent] = useState(null)
   const [userLiked, setUserLiked] = useState(false)
@@ -28,9 +37,10 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
 
   const { userId } = useAuth()
 
+  const { t } = useTranslation()
   const showModal = () => {
     setModal(
-      "Edit post",
+      t("editPost"),
       <EditPostModal
         postId={postId}
         getAllPosts={getAllPosts}
@@ -46,7 +56,7 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
       setUserLiked(!userLiked)
       setLikesCount(userLiked ? likesCount - 1 : likesCount + 1)
     } catch (error) {
-      console.error("Error toggling like:", error)
+      console.error(t("errorLike"), error)
     }
   }
 
@@ -84,7 +94,8 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
             <p>{name}</p>
             <small>{formatDate}</small>
           </div>
-          <OptionsIcon showModel={showModal} />
+
+          {userPostId === userId && <OptionsIcon showModel={showModal} />}
         </section>
 
         <section className="post-content">
@@ -94,24 +105,27 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
         <section className="post-interactions-container border-top">
           <div className="post-interactions">
             <div className="heart-icon icon" onClick={likeHandler}>
-              <img src={userLiked ? heart : emptyHeart} alt="heart" />
-              <span>Like</span>
+              <img src={userLiked ? heart : emptyHeart} alt={t("heart")} />
+              <span>{t("like")}</span>
             </div>
             <div
               className={`comment-icon${isComment && "--active"} icon`}
               onClick={commentHandler}
             >
-              <img src={isComment ? comment : emptyComment} alt="comment" />
-              <span>Comment</span>
+              <img
+                src={isComment ? comment : emptyComment}
+                alt={t("comment")}
+              />
+              <span>{t("comment")}</span>
             </div>
           </div>
 
           {likesCount > 0 ? (
             <p>
-              {likesCount} {likesCount === 1 ? "like" : "likes"}
+              {likesCount} {likesCount === 1 ? t("like") : t("likes")}
             </p>
           ) : (
-            <p>Be the first to like this</p>
+            <p>{t("firstLike")}</p>
           )}
         </section>
 

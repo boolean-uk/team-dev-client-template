@@ -9,6 +9,7 @@ import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Menu from "../menu";
 import MenuItem from "../menu/menuItem";
 import "./style.css";
+import { useTranslation } from "react-i18next";
 
 const ProfileCircle = ({ initials }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -28,26 +29,27 @@ const ProfileCircle = ({ initials }) => {
 };
 
 const CascadingMenu = () => {
+  const {t} = useTranslation()
   return (
     <Menu className="profile-circle-menu">
-      <MenuItem icon={<ProfileIcon />} text="Profile" />
-      <MenuItem icon={<AddIcon />} text="Add note" />
+      <MenuItem icon={<ProfileIcon />} text={t('profile')} />
+      <MenuItem icon={<AddIcon />} text={t('addNote')} />
 
-      <MenuItem icon={<CohortIcon />} text="Move to cohort">
-        <MenuItem icon={<SquareBracketsIcon />} text="Software Development">
-          <MenuItem icon={<CohortIconFill />} text="Cohort 1" />
-          <MenuItem icon={<CohortIconFill />} text="Cohort 2" />
-          <MenuItem icon={<CohortIconFill />} text="Cohort 3" />
+      <MenuItem icon={<CohortIcon />} text={t("moveToCohort")}>
+        <MenuItem icon={<SquareBracketsIcon />} text={t('softwareDevelopment')}>
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 1`} />
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 2`} />
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 3`} />
         </MenuItem>
 
-        <MenuItem icon={<MonitorIcon />} text="Frontend Development">
-          <MenuItem icon={<CohortIconFill />} text="Cohort 1" />
-          <MenuItem icon={<CohortIconFill />} text="Cohort 2" />
-          <MenuItem icon={<CohortIconFill />} text="Cohort 3" />
+        <MenuItem icon={<MonitorIcon />} text={t('frontendDevelopment')}>
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 1`} />
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 2`} />
+          <MenuItem icon={<CohortIconFill />} text={`${t('cohort')} 3`} />
         </MenuItem>
       </MenuItem>
 
-      <MenuItem icon={<DeleteIcon />} text="Delete student" />
+      <MenuItem icon={<DeleteIcon />} text={t('deleteStudent')} />
     </Menu>
   );
 };
