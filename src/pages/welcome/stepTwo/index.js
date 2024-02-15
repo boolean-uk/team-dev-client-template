@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
+import { useTranslation } from "react-i18next"
 
 const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
+  const {t} = useTranslation()
+
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [isPasswordValid, setIsPasswordValid] = useState(false)
 
@@ -15,14 +18,14 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
       if (inputValue.length > 3) {
         setIsEmailValid(true)
       }else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(`${t('enterCharacter')}`)
       }
     }
     if (inputName === "password") {
       if (inputValue.length > 3) {
         setIsPasswordValid(true)
       }else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(`${t('enterCharacter')}`)
       }
     }
   }
@@ -34,7 +37,7 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
   return (
     <>
       <div className="welcome-formheader">
-        <h3>Contact Info</h3>
+        <h3>{t('contactInfo')}</h3>
       </div>
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
@@ -42,25 +45,25 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
             onChange={onInput}
             value={data.email}
             name="email"
-            label={"Email*"}
+            label={`${t('email')} *`}
             type="text"
           />
           <TextInput
             onChange={onInput}
             value={data.mobile}
             name="mobile"
-            label={"Mobile*"}
+            label={`${t('mobile')} *`}
             type="text"
           />
           <TextInput
             onChange={onInput}
             value={data.password}
             name="password"
-            label={"Password*"}
+            label={`${t('password')} *`}
             type="password"
           />
           {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*Required</p>
+          <p className="text-blue1">*{t('required')}</p>
         </div>
       </Form>
     </>
