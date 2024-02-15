@@ -25,7 +25,7 @@
   "enterYourFirstName": "Ange ditt förnamn",
   "lastName": "Efternamn",
   "enterYourLastName": "Ange ditt efternamn",
-  "GithubUserName": "Github-användarnamn",
+  "githubUserName": "Github-användarnamn",
   "enterYourGithubUser": "Ange ditt GitHub-användarnamn",
   "required": "Krävs"
 }

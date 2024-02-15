@@ -80,7 +80,7 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
             onChange={onInput}
             value={data.githubUsername}
             name="githubUsername"
-            label={`${t("GithubUserName")} *`}
+            label={`${t("githubUserName")} *`}
             placeholder={`${t("enterYourGithubUser")} *`}
             required
           />
