@@ -2,12 +2,27 @@
   display: grid;
   grid-template-columns: 60px 100px;
   grid-template-rows: 1fr;
-  padding: 5px;
+  gap: 15px;
+}
+
+.cohort-card .profile-circle{
+  place-self: center;
+  display: grid;
+}
+
+.cohort-card .profile-icon{
+  background-color: rgb(127, 228, 127);
+}
+
+.cohort-card .profile-icon > p {
+  font-size: 32px;
+  color: white;
 }
 
 .cohort-card:hover {
   background-color: #f5faff;
 }
+
 .cohort-card-info {
   display: grid;
   align-items: center;
