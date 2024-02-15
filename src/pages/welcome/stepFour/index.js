@@ -14,14 +14,14 @@ const StepFour = ({data, setData})=>{
             </h3>
         </div>
         <Form className={"welcome-form"}>
-            <p>{`${t("bio")}`}</p>
+            <p>{t("bio")}</p>
             <div className="welcome-form-inputs">
                 <textarea
                 onChange={setData}
                 value={data.bio}
                 name="bio"
-                placeholder = {`${t("placeholder")}`}
-                label={'Bio'}
+                placeholder = {t("placeholder")}
+                label={t("bio")}
                 type={"textarea"}
                 maxLength={3000}
                 />
