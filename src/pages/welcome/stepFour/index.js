@@ -20,7 +20,7 @@ const StepFour = ({data, setData})=>{
                 onChange={setData}
                 value={data.bio}
                 name="bio"
-                placeholder = {t("placeholder")}
+                placeholder = {t("tellUsAboutYourselfMessage")}
                 label={t("bio")}
                 type={"textarea"}
                 maxLength={3000}
