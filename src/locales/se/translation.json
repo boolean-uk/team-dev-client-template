@@ -43,6 +43,8 @@
   "softwareDevelopment": "Mjukvaruutveckling",
   "teachers": "Lärare",
   "units": "Enheter",
-  "welcome": "Välkommen till Cohort Manager"
+  "welcome": "Välkommen till Cohort Manager",
+  "placeholder":"Berätta om dig själv, din pedagogiska och professionella höjdpunkt hittills",
+  "bio": "Biografi"
 }
 

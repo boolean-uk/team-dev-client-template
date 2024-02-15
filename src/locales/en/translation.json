@@ -43,6 +43,8 @@
   "softwareDevelopment": "Software Development",
   "teachers": "Teachers",
   "units": "Units",
-  "welcome": "Welcome to Cohort Manager"
+  "welcome": "Welcome to Cohort Manager",
+  "placeholder":"Tell use about yourself, your educational and professional highlight to date",
+  "bio":"Biography"
 }
 
