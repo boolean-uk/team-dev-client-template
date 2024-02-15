@@ -13,6 +13,7 @@
   "cohort": "Cohort",
   "comment": "Comment",
   "countAndCompleted": "{{completedTasks}}/{{totalTasks}} completed",
+  "createAPost" : "Create a post",
   "createProfile": "Create Profile",
   "delete": "Delete",
   "deletePost": "Delete Post",

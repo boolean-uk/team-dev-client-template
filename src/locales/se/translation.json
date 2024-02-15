@@ -13,6 +13,7 @@
   "cohort": "Kohort",
   "comment": "Kommentera",
   "countAndCompleted": "Klar {{completedTasks}}/{{totalTasks}}",
+  "createAPost" : "Skapa ett inlägg",
   "createProfile": "Skapa profil",
   "delete": "Utrota",
   "deletePost": "Ta bort inlägg",

@@ -13,6 +13,7 @@
   "completed": "wedi gwblhau",
   "countAndCompleted": "{{completedTasks}}/{{totalTasks}} wedi'u cwblhau",
   "createProfile": "Creu proffil",
+  "createAPost": "Creu post",
   "delete": "Dileu",
   "deletePost": "Dileu post",
   "deleteStudent": "Dileu myfyriwr",
