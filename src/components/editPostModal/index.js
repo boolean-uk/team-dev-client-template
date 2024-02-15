@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { Trans } from "react-i18next"
 
 const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const { closeModal } = useModal()
   const [message, setMessage] = useState(null)
   const [text, setText] = useState("")
@@ -15,14 +15,6 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
 
   const onChange = (e) => {
     setText(e.target.value)
-  }
-
-  const handleActionWithMessage = (message, timeout = 2000) => {
-    setMessage(message)
-    setTimeout(() => {
-      setMessage(null)
-      closeModal()
-    }, timeout)
   }
 
   const handleEditClick = () => {
@@ -38,7 +30,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
   const handleConfirmDelete = async (postId) => {
     try {
       await deletePost(postId)
-      handleActionWithMessage(t("postDeleted"))
+      closeModal()
       getAllPosts()
     } catch (error) {
       console.error("Failed to delete the post:", error.message)
@@ -55,7 +47,7 @@ const EditPostModal = ({ postId, getAllPosts, setPostContent }) => {
     try {
       const editPostResponse = await editPost(postId, { content: text })
       const editedPost = editPostResponse.data.post.content
-      handleActionWithMessage(t("postEdited"))
+      closeModal()
       setPostContent(editedPost)
     } catch (error) {
       console.error("Failed to edit the post:", error.message)

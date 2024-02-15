@@ -3,8 +3,10 @@ import Card from "../card"
 import Button from "../button"
 import "./style.css"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
+  const {t} = useTranslation()
   const [currentStep, setCurrentStep] = useState(0)
 
   const onBackClick = () => {
@@ -15,7 +17,7 @@ const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
 
   const onNextClick = () => {
     if (!canProgress) {
-      setMessage("Required fields need to be complete")
+      setMessage(`${t('requiredFields')}`)
       return
     } else {
       setMessage("")
@@ -38,9 +40,9 @@ const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
       {children[currentStep]}
 
       <div className="stepper-buttons">
-        <Button text="Back" classes="offwhite" onClick={onBackClick} />
+        <Button text={t('back')} classes="offwhite" onClick={onBackClick} />
         <Button
-          text={currentStep === children.length - 1 ? "Submit" : "Next"}
+          text={currentStep === children.length - 1 ? `${t('submit')}` : `${t('next')}`}
           classes="blue"
           onClick={onNextClick}
         />
