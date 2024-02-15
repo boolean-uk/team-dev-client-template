@@ -54,7 +54,7 @@ const Dashboard = () => {
     openModal()
   }
   
-  const shouldRenderCohortList = () => !!Array.isArray(cohorts)
+  const shouldRenderCohortList = () => Array.isArray(cohorts)
 
   const showCohorts = () => {
     if (!shouldRenderCohortList()) {
