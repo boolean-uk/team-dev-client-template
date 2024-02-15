@@ -14,9 +14,17 @@ import comment from "../../assets/icons/comment.png"
 import CommentInput from "../commentInput"
 import useAuth from "../../hooks/useAuth"
 import CommentsList from "../CommentsList"
-import {  useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next"
 
-const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
+const Post = ({
+  userPostId,
+  postId,
+  name,
+  date,
+  content,
+  likes,
+  getAllPosts,
+}) => {
   const { openModal, setModal } = useModal()
   const [postContent, setPostContent] = useState(null)
   const [userLiked, setUserLiked] = useState(false)
@@ -29,7 +37,7 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
 
   const { userId } = useAuth()
 
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const showModal = () => {
     setModal(
       t("editPost"),
@@ -86,7 +94,8 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
             <p>{name}</p>
             <small>{formatDate}</small>
           </div>
-          <OptionsIcon showModel={showModal} />
+
+          {userPostId === userId && <OptionsIcon showModel={showModal} />}
         </section>
 
         <section className="post-content">
@@ -103,8 +112,11 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
               className={`comment-icon${isComment && "--active"} icon`}
               onClick={commentHandler}
             >
-              <img src={isComment ? comment : emptyComment} alt={t("comment")} />
-              <span>{ t("comment")}</span>
+              <img
+                src={isComment ? comment : emptyComment}
+                alt={t("comment")}
+              />
+              <span>{t("comment")}</span>
             </div>
           </div>
 
@@ -113,7 +125,7 @@ const Post = ({ postId, name, date, content, likes, getAllPosts }) => {
               {likesCount} {likesCount === 1 ? t("like") : t("likes")}
             </p>
           ) : (
-              <p>{t("firstLike")}</p>
+            <p>{t("firstLike")}</p>
           )}
         </section>
 
