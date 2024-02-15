@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import ProfileIcon from "../../../assets/icons/profileIcon"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
 
@@ -12,6 +11,7 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
     setData(e)
     const inputName = e.target.name
     const inputValue = e.target.value
+    console.log(inputValue)
 
     if (inputName === "firstName") {
       if (inputValue.length > 3) {
@@ -46,18 +46,14 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
         <h3>Basic info</h3>
       </div>
       <Form className="welcome-form">
-        <div className="welcome-form-profileimg">
-          <p className="text-blue1">Photo</p>
-          <div className="welcome-form-profileimg-input">
-            <ProfileIcon colour="#28C846" background="#64DC78" />
-
-            <p className="text-blue1">Add headshot</p>
-          </div>
-          <p className="welcome-form-profileimg-error">
-            Please upload a valid image file
-          </p>
-        </div>
         <div className="welcome-form-inputs">
+          <TextInput
+            onChange={onInput}
+            value={data.imageUrl}
+            name="imageUrl"
+            label={"Profile image URL"}
+            placeholder="enter your profile image URL"
+           />
           <TextInput
             onChange={onInput}
             value={data.firstName}
