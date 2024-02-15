@@ -3,27 +3,29 @@ import CohortIcon from "../../assets/icons/cohortIcon"
 import HomeIcon from "../../assets/icons/homeIcon"
 import ProfileIcon from "../../assets/icons/profileIcon"
 import "./style.css"
+import { useTranslation } from "react-i18next"
 
 const Navigation = () => {
+  const {t} = useTranslation()
   return (
     <nav>
       <ul>
         <li>
           <NavLink to="/">
             <HomeIcon colour="#000046" />
-            <p>Home</p>
+            <p>{t("home")}</p>
           </NavLink>
         </li>
         <li>
           <NavLink to="/">
             <ProfileIcon />
-            <p>Profile</p>
+            <p>{t("profile")}</p>
           </NavLink>
         </li>
         <li>
           <NavLink to="/my-cohort">
             <CohortIcon />
-            <p>Cohort</p>
+            <p>{t("cohort")}</p>
           </NavLink>
         </li>
       </ul>
