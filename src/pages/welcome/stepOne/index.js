@@ -19,21 +19,21 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
       if (inputValue.length > 3) {
         setFirstNameValid(true)
       } else {
-        setMessage(t("enterThreeCharacters"))
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "lastName") {
       if (inputValue.length > 3) {
         setLastNameValid(true)
       } else {
-        setMessage(t("enterThreeCharacters"))
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "githubUsername") {
       if (inputValue.length > 3) {
         setUserNameValid(true)
       } else {
-        setMessage(t("enterThreeCharacters"))
+        setMessage(t("enterCharacter"))
       }
     }
   }

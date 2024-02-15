@@ -39,6 +39,8 @@ const Welcome = () => {
     })
   }
 
+
+
   const onComplete = () => {
     onCreateProfile(
       profile.photoUrl,
