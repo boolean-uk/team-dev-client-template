@@ -3,12 +3,12 @@
   "addAComment": "Add a comment...",
   "addNote" : "Add note",
   "allResults": "All results",
-  "areYouSureDelete": "Are you sure you want to delete this post?",
   "anonymous": "Anonymous",
-  "home" : "Home",
+  "areYouSureDelete": "Are you sure you want to delete this post?",
   "cancel": "Cancel",
   "cannotUpdateWithEmpty": "Cannot update with empty content.",
   "changeSearch": "Try changing your search term.",
+  "closingModal": "Submit button was clicked! Closing modal in 2 seconds...",
   "cohort": "Cohort",
   "comment": "Comment",
   "countAndCompleted": "{{completedTasks}}/{{totalTasks}} completed",
@@ -28,6 +28,7 @@
   "firstLike": "Be the first to like this",
   "getStarted": "Create your profile to get started",
   "heart": "heart",
+  "home": "Home",
   "like": "Like",
   "likes": "Likes",
   "logOut": "Log Out",
@@ -35,7 +36,9 @@
   "moveToCohort" : "Move to cohort",
   "myCohort": "My Cohort",
   "noResultsFound": "Sorry, no results found.",
+  "oopsEmptyPost": "Oops, this post is empty!",
   "people": "People",
+  "post": "Post",
   "postDeleted": "Post deleted! Closing modal in 2 seconds...",
   "postEdited": "Post edited! Closing modal in 2 seconds...",
   "privacy": "Privacy",
@@ -47,6 +50,6 @@
   "softwareDevelopment": "Software Development",
   "teachers": "Teachers",
   "units": "Units",
-  "welcome": "Welcome to Cohort Manager"
+  "welcome": "Welcome to Cohort Manager",
+  "whatsOnYourMind": "What's on your mind?"
 }
-
