@@ -6,10 +6,12 @@ import StepTwo from "./stepTwo"
 import StepThree from "./stepThree"
 import StepFour from "./stepFour"
 import "./style.css"
+import { useTranslation } from "react-i18next"
 
 const Welcome = () => {
   const [canProgress, setCanProgress] = useState(false)
   const [message, setMessage] = useState("")
+  const { t } = useTranslation()
 
   const { onCreateProfile } = useAuth()
 
@@ -58,8 +60,8 @@ const Welcome = () => {
   return (
     <main className="welcome">
       <div className="welcome-titleblock">
-        <h1 className="h2">Welcome to Cohort Manager</h1>
-        <p className="text-blue1">Create your profile to get started</p>
+        <h1 className="h2">{t("welcome")}</h1>
+        <p className="text-blue1">{t("getStarted")}</p>
       </div>
 
       <Stepper
@@ -77,14 +79,14 @@ const Welcome = () => {
           setCanProgress={setCanProgress}
         />
         <StepTwo
-        setMessage={setMessage}
+          setMessage={setMessage}
           message={message}
           data={profile}
           setData={onChange}
           setCanProgress={setCanProgress}
         />
         <StepThree
-        setMessage={setMessage}
+          setMessage={setMessage}
           message={message}
           data={profile}
           setData={onChange}
@@ -97,12 +99,11 @@ const Welcome = () => {
 }
 
 const WelcomeHeader = () => {
+  const { t } = useTranslation()
   return (
     <div className="welcome-cardheader">
-      <h2>Create profile</h2>
-      <p className="text-blue1">
-        Tell us about yourself to create your profile
-      </p>
+      <h2>{t("createProfile")}</h2>
+      <p className="text-blue1">{t("aboutSelf")}</p>
     </div>
   )
 }
