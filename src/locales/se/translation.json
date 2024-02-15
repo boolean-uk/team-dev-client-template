@@ -6,6 +6,7 @@
   "anonymous": "Anonymt",
   "areYouSureDelete": "Är du säker på att du vill ta bort detta inlägg?",
   "back": "Tillbaka",
+  "bio": "Biografi",
   "cancel": "Avbryt",
   "cannotUpdateWithEmpty": "Du kan inte publicera en tom inläggning. Vänligen lägg till text eller media",
   "changeSearch": "Försök ändra söktermen.",
@@ -50,6 +51,7 @@
   "oopsEmptyPost": "Hoppsan, det här inlägget är tomt!",
   "password": "Lösenord",
   "people": "Människor",
+  "placeholder": "Berätta om dig själv, din pedagogiska och professionella höjdpunkt hittills",
   "post": "Skicka",
   "postDeleted": "Din publicering har tagits bort! Fönstret stängs automatiskt om 2 sekunder...",
   "postEdited": "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
@@ -66,6 +68,5 @@
   "submit": "Skicka in",
   "teachers": "Lärare",
   "units": "Enheter",
-  "welcome": "Välkommen till Cohort Manager",
-  "whatsOnYourMind": "Vad tänker du på?"
+  "welcome": "Välkommen till Cohort Manager"
 }
