@@ -2,7 +2,7 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 
 import translationEN from "./locales/en/translation.json"
-import translationSE from "./locales/se/translation.json"
+import translationSV from "./locales/sv/translation.json"
 import translationCY from "./locales/cy/translation.json"
 
 const {REACT_APP_DEFAULT_LANGUAGE} = process.env
@@ -11,8 +11,8 @@ const resources = {
   en: {
     translation: translationEN,
   },
-  se: {
-    translation: translationSE,
+  sv: {
+    translation: translationSV,
   },
   cy: {
     translation: translationCY,
