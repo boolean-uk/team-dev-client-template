@@ -65,6 +65,7 @@
   "postEdited": "Post edited! Closing modal in 2 seconds...",
   "privacy": "Privacy",
   "profile": "Profile",
+  "register": "Register",
   "required": "Required",
   "requiredFields": "Required fields need to be complete",
   "searchResults": "Search Results",
@@ -72,12 +73,14 @@
   "sendMessage": "send message",
   "settings": "Settings",
   "signUp": "Sign up",
+  "signUpAlternative": "Or sign up with",
   "softwareDevelopment": "Software Development",
   "submit": "Submit",
   "teachers": "Teachers",
   "tellUsAboutYourselfMessage": "Tell use about yourself, your educational and professional highlight to date",
   "units": "Units",
   "uploadValidImage": "Please upload a valid image file",
+  "userExist": "Already a user?",
   "welcome": "Welcome to Cohort Manager",
   "whatsOnYourMind": "What's on your mind?"
 }

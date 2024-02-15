@@ -65,6 +65,7 @@
   "postEdited": "Din publicering är uppdaterad! Fönstret stängs automatiskt om 2 sekunder...",
   "privacy": "Integritet",
   "profile": "Profil",
+  "register": "Registrera dig",
   "required": "Obligatorisk",
   "requiredFields": "Fyll i alla obligatoriska fält",
   "searchResults": "Sökresultat",
@@ -72,12 +73,14 @@
   "sendMessage": "Skicka meddelande",
   "settings": "Inställningar",
   "signUp": "Registrera dig",
+  "signUpAlternative": "Eller registrera dig med",
   "softwareDevelopment": "Mjukvaruutveckling",
   "submit": "Skicka in",
   "teachers": "Lärare",
   "tellUsAboutYourselfMessage": "Berätta om dig själv, din pedagogiska och professionella höjdpunkt hittills",
   "units": "Enheter",
   "uploadValidImage": "Ladda upp en giltig bildfil",
+  "userExist": "Redan en användare?",
   "welcome": "Välkommen till Cohort Manager",
   "whatsOnYourMind": "Vad tänker du på?"
 }
