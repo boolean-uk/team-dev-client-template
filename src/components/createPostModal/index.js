@@ -2,8 +2,8 @@ import { useState } from "react";
 import useModal from "../../hooks/useModal";
 import "./style.css";
 import Button from "../button";
+import useAuth from "../../hooks/useAuth"
 import { postPost } from "../../service/apiClient";
-import jwtDecode from "jwt-decode";
 import { useTranslation } from "react-i18next";
 
 const CreatePostModal = ({ getAllPosts }) => {
@@ -11,39 +11,35 @@ const CreatePostModal = ({ getAllPosts }) => {
   const { closeModal } = useModal();
   const { t } = useTranslation();
 
-  const [message, setMessage] = useState(null);
-  const [text, setText] = useState("");
+  const [message, setMessage] = useState(null)
+  const [text, setText] = useState("")
+
+  const { userId } = useAuth()
 
   const onChange = (e) => {
-    setText(e.target.value);
-  };
+    setText(e.target.value)
+  }
 
   const onSubmit = () => {
-    const token = localStorage.getItem("token");
-    const { userId } = jwtDecode(token);
     const newPost = {
       content: text,
       userId,
-    };
+    }
 
     const createPost = (newPost) => {
-      postPost(newPost).then(getAllPosts);
-    };
+      postPost(newPost).then(getAllPosts)
+    }
 
     try {
-      createPost(newPost);
+      createPost(newPost)
       setMessage(t("closingModal"));
+      closeModal()
     } catch (e) {
       if (e.codeStatus === 400) {
         setMessage(t("oopsEmptyPost"));
       }
     }
-
-    setTimeout(() => {
-      setMessage(null);
-      closeModal();
-    }, 2000);
-  };
+  }
 
   return (
     <>
@@ -73,7 +69,7 @@ const CreatePostModal = ({ getAllPosts }) => {
 
       {message && <p>{message}</p>}
     </>
-  );
-};
+  )
+}
 
-export default CreatePostModal;
+export default CreatePostModal
