@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import SocialLinks from "../socialLinks";
 import "./credentials.css";
 import Card from "../card";
+import LanguageSelect from "../languageSelect";
 
 const CredentialsCard = ({
   title,
@@ -26,11 +27,14 @@ const CredentialsCard = ({
             <SocialLinks />
           </div>
         </div>
-        <div className="credentials-altbutton">
-          <p>{altButtonTitle && altButtonTitle}</p>
-          <NavLink to={altButtonLink} className="button offwhite">
-            {altButtonText}
-          </NavLink>
+        <div className="credentials-bottom">
+          <div className="credentials-altbutton">
+            <p>{altButtonTitle && altButtonTitle}</p>
+            <NavLink to={altButtonLink} className="button offwhite">
+              {altButtonText}
+            </NavLink>
+          </div>
+          <LanguageSelect />
         </div>
       </Card>
     </div>
