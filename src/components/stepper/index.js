@@ -17,7 +17,7 @@ const Stepper = ({ header, children, onComplete, canProgress, setMessage }) => {
 
   const onNextClick = () => {
     if (!canProgress) {
-      setMessage(`${t('requiredFeilds')}`)
+      setMessage(`${t('requiredFields')}`)
       return
     } else {
       setMessage("")
