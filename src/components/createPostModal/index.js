@@ -12,12 +12,13 @@ const CreatePostModal = ({ getAllPosts }) => {
   const [message, setMessage] = useState(null)
   const [text, setText] = useState("")
 
+  const { userId } = useAuth()
+
   const onChange = (e) => {
     setText(e.target.value)
   }
 
   const onSubmit = () => {
-    const { userId } = useAuth()
     const newPost = {
       content: text,
       userId,
