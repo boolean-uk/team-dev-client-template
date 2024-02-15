@@ -1,0 +1,11 @@
+.note-container {
+	padding: 16px 24px 20px 24px;
+	border-top: 1px solid #E6EBF5;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
+}
+
+.note-title {
+	font-weight: bold;
+}
