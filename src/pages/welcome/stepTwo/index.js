@@ -45,21 +45,21 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
             onChange={onInput}
             value={data.email}
             name="email"
-            label={`${t('email')}*`}
+            label={`${t('email')} *`}
             type="text"
           />
           <TextInput
             onChange={onInput}
             value={data.mobile}
             name="mobile"
-            label={`${t('mobile')}*`}
+            label={`${t('mobile')} *`}
             type="text"
           />
           <TextInput
             onChange={onInput}
             value={data.password}
             name="password"
-            label={`${t('password')}*`}
+            label={`${t('password')} *`}
             type="password"
           />
           {message && <p className="input-message">{message}</p>}
