@@ -83,7 +83,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <SearchUserAside />
-        <Card header={t('My Cohort')}>
+        <Card header={t('myCohort')}>
           <UsersList users={users} />
         </Card>
         {showCohorts()}
