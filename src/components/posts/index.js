@@ -1,4 +1,4 @@
-import Post from '../post'
+import Post from "../post"
 
 const Posts = ({ posts, getAllPosts }) => {
   return (
@@ -6,6 +6,7 @@ const Posts = ({ posts, getAllPosts }) => {
       {posts.map((post) => (
         <Post
           key={post.id}
+          userPostId={post.userId}
           postId={post.id}
           name={`${post.author.firstName} ${post.author.lastName}`}
           date={post.createdAt}
