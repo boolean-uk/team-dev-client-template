@@ -5,8 +5,10 @@ import Menu from "../menu"
 
 import "./style.css"
 
+const {REACT_APP_DEFAULT_LANGUAGE} = process.env
+
 const LanguageSelect = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("en")
+  const [selectedLanguage, setSelectedLanguage] = useState(REACT_APP_DEFAULT_LANGUAGE)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   useEffect(() => {
