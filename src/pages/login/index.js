@@ -32,7 +32,7 @@ const Login = () => {
         socialLinksTitle={t("loginAlternative")}
         altButtonTitle={t("needOtherAccount")}
         altButtonLink="/register"
-        altButtonText={t("Registrera dig")}
+        altButtonText={t("signUp")}
       >
         <div className="login-form">
           <form>
