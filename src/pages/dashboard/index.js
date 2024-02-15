@@ -61,7 +61,7 @@ const Dashboard = () => {
       return <></>
     }
     return (
-      <Card header={"Cohorts"}>
+      <Card header={t('Cohorts')}>
         <CohortList cohorts={cohorts} />
       </Card>
     )
@@ -83,8 +83,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <SearchUserAside />
-        <Card>
-          <h4>{t('myCohort')}</h4>
+        <Card header={t('My Cohort')}>
           <UsersList users={users} />
         </Card>
         {showCohorts()}
