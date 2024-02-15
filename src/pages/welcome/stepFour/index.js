@@ -1,6 +1,9 @@
 import Form from '../../../components/form'
+import { useTranslation } from 'react-i18next';
 
 const StepFour = ({data, setData})=>{
+    const {t} = useTranslation()
+
     const splitWord = data.bio.trim(/\s+/g, '').length;
 
     return(
@@ -11,14 +14,14 @@ const StepFour = ({data, setData})=>{
             </h3>
         </div>
         <Form className={"welcome-form"}>
-            <p>Bio</p>
+            <p>{t("bio")}</p>
             <div className="welcome-form-inputs">
                 <textarea
                 onChange={setData}
                 value={data.bio}
                 name="bio"
-                placeholder = "Tell use about yourself, your educational and professional highlight to date"
-                label={'Bio'}
+                placeholder = {t("tellUsAboutYourselfMessage")}
+                label={t("bio")}
                 type={"textarea"}
                 maxLength={3000}
                 />

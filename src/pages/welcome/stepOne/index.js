@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import Form from "../../../components/form"
 import TextInput from "../../../components/form/textInput"
+import { useTranslation } from "react-i18next"
 
 const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
+  const { t } = useTranslation()
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
   const [userNameValid, setUserNameValid] = useState(false)
@@ -11,27 +13,26 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
     setData(e)
     const inputName = e.target.name
     const inputValue = e.target.value
-    console.log(inputValue)
 
     if (inputName === "firstName") {
       if (inputValue.length > 3) {
         setFirstNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "lastName") {
       if (inputValue.length > 3) {
         setLastNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "githubUsername") {
       if (inputValue.length > 3) {
         setUserNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
   }
@@ -43,7 +44,7 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   return (
     <>
       <div className="welcome-formheader">
-        <h3>Basic info</h3>
+        <h3>{t("basicInfo")}</h3>
       </div>
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
@@ -51,35 +52,35 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
             onChange={onInput}
             value={data.imageUrl}
             name="imageUrl"
-            label={"Profile image URL"}
-            placeholder="enter your profile image URL"
-           />
+            label={`${t("profileImageUrl")}`}
+            placeholder={`${t("enterProfileImageUrl")}`}
+          />
           <TextInput
             onChange={onInput}
             value={data.firstName}
             name="firstName"
-            label={"First name*"}
-            placeholder="enter your first name"
+            label={`${t("firstName")} *`}
+            placeholder={`${t("enterYourFirstName")} *`}
             required
           />
           <TextInput
             onChange={onInput}
             value={data.lastName}
             name="lastName"
-            label={"Last name*"}
-            placeholder="enter your last name"
+            label={`${t("lastName")} *`}
+            placeholder={`${t("enterYourLastName")} *`}
             required
           />
           <TextInput
             onChange={onInput}
             value={data.githubUsername}
             name="githubUsername"
-            label={"Github Username*"}
-            placeholder="enter your github user name"
+            label={`${t("githubUserName")} *`}
+            placeholder={`${t("enterYourGithubUser")} *`}
             required
           />
           {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*Required</p>
+          <p className="text-blue1">{`*${t("required")}`}</p>
         </div>
       </Form>
     </>

@@ -1,0 +1,33 @@
+.language-select {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.language-select .menu {
+  top: 50px;
+  left: -100%;
+}
+
+.language-select .menu ul {
+  width: auto;
+  padding: 8px 0;
+}
+
+.language-select .menu li {
+  padding: 0 16px;
+}
+
+.language-display {
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.language-display:hover,
+.language-display:focus {
+  background-color: var(--color-blue);
+  color: white;
+}
