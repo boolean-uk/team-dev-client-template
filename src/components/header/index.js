@@ -8,6 +8,7 @@ import LogoutIcon from "../../assets/icons/logoutIcon";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import LanguageSelect from "../languageSelect";
 
 const Header = () => {
   const {t} = useTranslation()
@@ -25,7 +26,7 @@ const Header = () => {
   return (
     <header>
       <FullLogo textColour="white" />
-
+      <LanguageSelect />
       <div className="profile-icon" onClick={onClickProfileIcon}>
         <p>AJ</p>
       </div>

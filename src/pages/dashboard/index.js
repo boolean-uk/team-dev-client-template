@@ -5,16 +5,18 @@ import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getPosts, getUsers } from "../../service/apiClient"
+import { getCohorts, getPosts, getUsers } from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
+import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
 
 const Dashboard = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([])
+  const [myCohort, setMyCohort] = useState([])
+  const [cohorts, setCohorts] = useState(null)
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -33,19 +35,43 @@ const Dashboard = () => {
   }
 
   const getAllUsers = () => {
-    getUsers().then(setUsers)
+    getUsers().then(setMyCohort)
+  }
+
+  const getAllCohorts = () => {
+    getCohorts().then(setCohorts)
   }
 
   useEffect(getAllPosts, [])
   useEffect(getAllUsers, [])
-
+  useEffect(getAllCohorts, [])
 
   const { openModal, setModal } = useModal()
 
   const showModal = () => {
-    setModal(`${t('createAPost')}`, <CreatePostModal getAllPosts={getAllPosts} />)
+    setModal(
+      `${t("createAPost")}`,
+      <CreatePostModal getAllPosts={getAllPosts} />
+    )
 
     openModal()
+  }
+
+  const shouldRenderList = (list) => Array.isArray(list)
+
+  const showAllCohortsOrMine = () => {
+    if (shouldRenderList(cohorts)) {
+      return (
+        <Card header={t("Cohorts")}>
+          <CohortList cohorts={cohorts} />
+        </Card>
+      )
+    }
+    return (
+      <Card header={t("myCohort")}>
+        <UsersList users={myCohort} />
+      </Card>
+    )
   }
 
   return (
@@ -56,7 +82,7 @@ const Dashboard = () => {
             <div className="profile-icon">
               <p>AJ</p>
             </div>
-            <Button text={t('whatsOnYourMind')} onClick={showModal} />
+            <Button text={t("whatsOnYourMind")} onClick={showModal} />
           </div>
         </Card>
 
@@ -64,10 +90,7 @@ const Dashboard = () => {
       </main>
       <aside>
         <SearchUserAside />
-        <Card>
-          <h4>{t('myCohort')}</h4>
-          <UsersList users={users} />
-        </Card>
+        {showAllCohortsOrMine()}
       </aside>
     </>
   )
