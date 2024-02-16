@@ -27,7 +27,7 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: REACT_APP_DEFAULT_LANGUAGE,
+    fallbackLng: REACT_APP_DEFAULT_LANGUAGE || "en",
   })
 
 export default i18n
