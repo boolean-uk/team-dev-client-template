@@ -62,11 +62,9 @@ const Dashboard = () => {
   const showAllCohortsOrMine = () => {
     if (shouldRenderList(cohorts)) {
       return (
-        <>
-          <Card header={t("Cohorts")}>
-            <CohortList cohorts={cohorts} />
-          </Card>
-        </>
+        <Card header={t("Cohorts")}>
+          <CohortList cohorts={cohorts} />
+        </Card>
       )
     }
     return (
