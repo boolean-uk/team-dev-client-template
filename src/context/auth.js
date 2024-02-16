@@ -81,7 +81,7 @@ const AuthProvider = ({ children }) => {
   const checkPassword = (password) => {
     const hasUppercase = /[A-Z]/.test(password);
     const hasNumber = /\d/.test(password);
-    const hasSpecialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password);
+    const hasSpecialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(password);
 
     return password.length >= 8 && hasUppercase && hasNumber && hasSpecialChar
   }
