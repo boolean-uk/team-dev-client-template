@@ -11,7 +11,6 @@ import emptyHeart from "../../assets/icons/empty-heart.png"
 import heart from "../../assets/icons/heart.png"
 import emptyComment from "../../assets/icons/empty-comment.png"
 import comment from "../../assets/icons/comment.png"
-import CommentInput from "../commentInput"
 import useAuth from "../../hooks/useAuth"
 import CommentsList from "../CommentsList"
 import { useTranslation } from "react-i18next"
@@ -129,9 +128,7 @@ const Post = ({
           )}
         </section>
 
-        {isComment && <CommentsList postId={postId} />}
-
-        <CommentInput postId={postId} getAllPosts={getAllPosts} />
+        <CommentsList postId={postId} isComment={isComment} />
       </article>
     </Card>
   )

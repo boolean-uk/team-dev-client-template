@@ -5,20 +5,19 @@ import sendIcon from "../../assets/icons/send.png"
 import { postComment } from "../../service/apiClient"
 import { useTranslation } from "react-i18next"
 
-const CommentInput = ({ postId, getAllPosts }) => {
-  const {t} = useTranslation()
+const CommentInput = ({ postId, refreshAllComments }) => {
+  const { t } = useTranslation()
   const [content, setContent] = useState("")
 
   const submitHandler = (e) => {
     e.preventDefault()
-    postComment({ postId, content }).then(getAllPosts)
+    postComment({ postId, content }).then(refreshAllComments)
     setContent("")
   }
 
   const changeHandler = (e) => {
     setContent(e.target.value)
   }
-  
 
   return (
     <section className="commentInput">
