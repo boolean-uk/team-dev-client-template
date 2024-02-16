@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Comment from "../comment"
 import { getCommentsByPostId } from "../../service/apiClient"
+import CommentInput from "../commentInput"
 
-const CommentsList = ({ postId }) => {
+const CommentsList = ({ postId, isComment }) => {
   const [comments, setComments] = useState([])
 
-  useEffect(() => {
+  const refreshAllComments = useCallback(() => {
     getCommentsByPostId(postId).then(setComments)
   }, [postId])
+
+  useEffect(() => {
+    refreshAllComments()
+  }, [refreshAllComments])
 
   const checkEmptyComments = () => {
     return (
@@ -28,9 +33,15 @@ const CommentsList = ({ postId }) => {
   }
 
   return (
-    <section className={`comments ${comments.length > 0 && "border-top"}`}>
-      {checkEmptyComments()}
-    </section>
+    <>
+      {isComment && (
+        <section className={`comments ${comments.length > 0 && "border-top"}`}>
+          {checkEmptyComments()}
+        </section>
+      )}
+
+      <CommentInput postId={postId} refreshAllComments={refreshAllComments} />
+    </>
   )
 }
 
