@@ -42,7 +42,7 @@ const Register = () => {
             type={"password"}
             />
           </form>
-          <p>{checkPassword(formData.password) ? 'Password OK!' : 'Password must contain at least one capital letter, one number and one special character'}</p>
+          <p>{checkPassword(formData.password) ? t('Password OK!') : t('Password must contain at least one capital letter, one number and one special character')}</p>
           <Button
             text={t('signUp')}
             onClick={() => checkPassword(formData.password) ? onRegister(formData.email, formData.password) : false }
