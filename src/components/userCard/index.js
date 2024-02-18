@@ -5,6 +5,7 @@ import ProfileContextMenu from "../ProfileContextMenu"
 import "./style.css"
 
 const UserCard = ({ user, contextMenu }) => {
+  console.log(user)
   const [triggerContextMenu, setTriggerContextMenu] = useState(false)
 
   if (!user.firstName || !user.lastName) {
