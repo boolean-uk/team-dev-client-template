@@ -54,8 +54,8 @@ const Dashboard = () => {
   }, [])
 
   useEffect(() => {
-    getAllPosts()
-    getAllUsers()
+    // getAllPosts()
+    // getAllUsers()
     getAllCohorts()
     getAllTeachers()
   }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers])
