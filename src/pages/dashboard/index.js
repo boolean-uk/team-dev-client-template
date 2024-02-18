@@ -15,6 +15,7 @@ import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
 import { useTranslation } from "react-i18next"
+import TeacherList from "../../components/teacherList"
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -104,6 +105,9 @@ const Dashboard = () => {
       <aside>
         <SearchUserAside />
         {showAllCohortsOrMine()}
+        <Card header={t("Teachers")}>
+          <TeacherList teachers={teachers} />
+        </Card>
       </aside>
     </>
   )
