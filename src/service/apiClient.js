@@ -50,7 +50,7 @@ async function getCohorts() {
 
 async function getTeachers() {
   const res = await get("teachers")
-  return res.data
+  return res.data.teachers
 }
 
 async function post(endpoint, data, auth = true) {

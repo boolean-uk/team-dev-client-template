@@ -5,7 +5,12 @@ import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getCohorts, getPosts, getUsers } from "../../service/apiClient"
+import {
+  getCohorts,
+  getPosts,
+  getTeachers,
+  getUsers,
+} from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
 import CohortList from "../../components/cohortList"
@@ -17,6 +22,7 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([])
   const [myCohort, setMyCohort] = useState([])
   const [cohorts, setCohorts] = useState(null)
+  const [teachers, setTeachers] = useState([])
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -42,11 +48,16 @@ const Dashboard = () => {
     getCohorts().then(setCohorts)
   }, [])
 
+  const getAllTeachers = useCallback(() => {
+    getTeachers().then(setTeachers)
+  }, [])
+
   useEffect(() => {
     getAllPosts()
     getAllUsers()
     getAllCohorts()
-  }, [getAllPosts, getAllUsers, getAllCohorts])
+    getAllTeachers()
+  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers])
 
   const { openModal, setModal } = useModal()
 
