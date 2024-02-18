@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
@@ -25,26 +25,28 @@ const Dashboard = () => {
     return sortedPosts
   }
 
-  const getAllPosts = () => {
+  const getAllPosts = useCallback(() => {
     getPosts()
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
         console.error("Error get all posts sorted:", error.message)
       })
-  }
+  }, [])
 
-  const getAllUsers = () => {
+  const getAllUsers = useCallback(() => {
     getUsers().then(setMyCohort)
-  }
+  }, [])
 
-  const getAllCohorts = () => {
+  const getAllCohorts = useCallback(() => {
     getCohorts().then(setCohorts)
-  }
+  }, [])
 
-  useEffect(getAllPosts, [])
-  useEffect(getAllUsers, [])
-  useEffect(getAllCohorts, [])
+  useEffect(() => {
+    getAllPosts()
+    getAllUsers()
+    getAllCohorts()
+  }, [getAllPosts, getAllUsers, getAllCohorts])
 
   const { openModal, setModal } = useModal()
 
