@@ -126,5 +126,5 @@ export {
   postComment,
   getCommentsByPostId,
   getSelf,
-  getCohorts
+  getCohorts,
 }
