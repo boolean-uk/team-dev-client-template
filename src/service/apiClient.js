@@ -126,6 +126,11 @@ async function toggleLike(postId) {
   return response
 }
 
+async function getStudents() {
+  const response = await get('students')
+  return response.data.students
+}
+
 export {
   login,
   getPosts,
@@ -144,4 +149,5 @@ export {
   getTeachers,
   getStudentsByCohortId,
   getUserById
+  getStudents
 }
