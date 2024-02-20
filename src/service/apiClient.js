@@ -80,6 +80,10 @@ async function getUsers() {
   return res.data.users
 }
 
+async function getUserById(userId) {
+    return get(`users/:${userId}`)
+  }
+
 async function put(endpoint, data, auth = true) {
   return await request("PUT", endpoint, data, auth)
 }
@@ -144,5 +148,6 @@ export {
   getCohorts,
   getTeachers,
   getStudentsByCohortId,
+  getUserById,
   getStudents
 }
