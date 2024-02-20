@@ -26,14 +26,21 @@ const Header = () => {
   return (
     <header>
       <div className="header-logo">
-        <FullLogo  />
+        <FullLogo />
       </div>
       <div className="header-text-logo">
-        <h3 style={{ color: "white", fontSize: "30px", display: "block"}}>
+        <h3 style={{ color: "white", fontSize: "30px", display: "block" }}>
           Cohort Manager
         </h3>
       </div>
-      <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", paddingRight: "10px"}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingRight: "10px",
+        }}
+      >
         <LanguageSelect />
         <div className="profile-icon" onClick={onClickProfileIcon}>
           <p>AJ</p>

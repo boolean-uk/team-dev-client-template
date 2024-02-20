@@ -47,13 +47,13 @@ header .user-panel {
   line-height: 2.5;
 }
 
-.header-logo{
-    display: grid;
-    place-content: center;
+.header-logo {
+  display: grid;
+  place-content: center;
 }
 
 .header-text-logo {
-    display: flex;
-    justify-content: left;
-    align-items: center;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
