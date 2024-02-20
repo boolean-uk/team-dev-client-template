@@ -2,7 +2,13 @@ import Form from "../form"
 import TextInput from "../form/textInput"
 import { useTranslation } from "react-i18next"
 
-const ProfessionalInfo = ({ data, setData, disabledText, message, classes }) => {
+const ProfessionalInfo = ({
+  data,
+  setData,
+  disabledText,
+  message,
+  classes,
+}) => {
   const { t } = useTranslation()
   const onInput = (e) => {
     setData(e)
