@@ -148,6 +148,6 @@ export {
   getCohorts,
   getTeachers,
   getStudentsByCohortId,
-  getUserById
+  getUserById,
   getStudents
 }
