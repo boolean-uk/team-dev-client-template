@@ -1,20 +1,17 @@
-import logo from '../assets/logo.jpg'
-const FullLogo = ({ textColour = "#000046", display= 'block' }) => {
-
+import logo from "../assets/logo.jpg"
+const FullLogo = () => {
   return (
-<figure style={{}}>
-<img 
-        src={logo} 
-        alt='Cohort Manager Logo'
+    <figure className="header-logo">
+      <img
+        src={logo}
+        alt="Cohort Manager Logo"
         style={{
-          width: '80px'
+          width: "80px",
+          borderRadius: "50%",
         }}
       />
-  <h3 style={{ color: textColour, fontSize: "32px", display: display}}>Cohort Manager</h3>
-</figure>
+    </figure>
+  )
+}
 
-  
-  );
-};
-
-export default FullLogo;
+export default FullLogo
