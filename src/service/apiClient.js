@@ -18,11 +18,6 @@ async function createProfile(userId, firstName, lastName, githubUrl, bio) {
   })
 }
 
-async function toggleLike(postId) {
-  const response = await post(`posts/${postId}/like`)
-  return response
-}
-
 async function getPosts() {
   const res = await get("posts")
   return res.data.posts
@@ -38,9 +33,29 @@ async function getUserByName(firstName) {
   return res.data.users
 }
 
+async function getCommentsByPostId(postId) {
+  const res = await get(`comments/${postId}`)
+  return res.data.comments
+}
+
 async function postComment(comment) {
   const res = await post("comments", comment)
   return res.data
+}
+
+async function getCohorts() {
+  const res = await get("cohorts")
+  return res.data
+}
+
+async function getTeachers() {
+  const res = await get("teachers")
+  return res.data.teachers
+}
+
+async function getStudentsByCohortId(cohort_id) {
+  const res = await get(`cohorts/${cohort_id}/students`)
+  return res.students
 }
 
 async function post(endpoint, data, auth = true) {
@@ -53,6 +68,11 @@ async function patch(endpoint, data, auth = true) {
 
 async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth)
+}
+
+async function getSelf() {
+  const res = await get("users/me")
+  return res.data.user
 }
 
 async function getUsers() {
@@ -97,6 +117,11 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
+async function toggleLike(postId) {
+  const response = await post(`posts/${postId}/like`)
+  return response
+}
+
 export {
   login,
   getPosts,
@@ -109,4 +134,9 @@ export {
   editPost,
   toggleLike,
   postComment,
+  getCommentsByPostId,
+  getSelf,
+  getCohorts,
+  getTeachers,
+  getStudentsByCohortId,
 }

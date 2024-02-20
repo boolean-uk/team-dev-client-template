@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import ProfileIcon from "../../../assets/icons/profileIcon"
-import Form from "../../../components/form"
-import TextInput from "../../../components/form/textInput"
+import { useTranslation } from "react-i18next"
+import BasicInfo from "../../../components/basic-info"
 
-const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
+const StepOne = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
+  const { t } = useTranslation()
   const [firstNameValid, setFirstNameValid] = useState(false)
   const [lastNameValid, setLastNameValid] = useState(false)
   const [userNameValid, setUserNameValid] = useState(false)
@@ -17,21 +17,21 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
       if (inputValue.length > 3) {
         setFirstNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "lastName") {
       if (inputValue.length > 3) {
         setLastNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
     if (inputName === "githubUsername") {
       if (inputValue.length > 3) {
         setUserNameValid(true)
       } else {
-        setMessage("Enter 3 charachter or more")
+        setMessage(t("enterCharacter"))
       }
     }
   }
@@ -41,52 +41,13 @@ const StepOne = ({ data, setData, setCanProgress, message, setMessage }) => {
   }, [firstNameValid, setCanProgress, lastNameValid, userNameValid])
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>Basic info</h3>
-      </div>
-      <Form className="welcome-form">
-        <div className="welcome-form-profileimg">
-          <p className="text-blue1">Photo</p>
-          <div className="welcome-form-profileimg-input">
-            <ProfileIcon colour="#28C846" background="#64DC78" />
-
-            <p className="text-blue1">Add headshot</p>
-          </div>
-          <p className="welcome-form-profileimg-error">
-            Please upload a valid image file
-          </p>
-        </div>
-        <div className="welcome-form-inputs">
-          <TextInput
-            onChange={onInput}
-            value={data.firstName}
-            name="firstName"
-            label={"First name*"}
-            placeholder="enter your first name"
-            required
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.lastName}
-            name="lastName"
-            label={"Last name*"}
-            placeholder="enter your last name"
-            required
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.githubUsername}
-            name="githubUsername"
-            label={"Github Username*"}
-            placeholder="enter your github user name"
-            required
-          />
-          {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*Required</p>
-        </div>
-      </Form>
-    </>
+    <BasicInfo
+      data={data}
+      onInput={onInput}
+      message={message}
+      disabledText={disabledText}
+      classes={classes}
+    />
   )
 }
 

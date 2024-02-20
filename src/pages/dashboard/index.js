@@ -1,17 +1,29 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Button from "../../components/button"
 import Card from "../../components/card"
 import CreatePostModal from "../../components/createPostModal"
 import Posts from "../../components/posts"
 import useModal from "../../hooks/useModal"
 import "./style.css"
-import { getPosts, getUsers } from "../../service/apiClient"
+import {
+  getCohorts,
+  getPosts,
+  getTeachers,
+  getUsers,
+} from "../../service/apiClient"
 import UsersList from "../../components/usersList"
 import SearchUserAside from "../../components/searchUserAside"
+import CohortList from "../../components/cohortList"
+import { useTranslation } from "react-i18next"
+import TeacherList from "../../components/teacherList"
 
 const Dashboard = () => {
+  const { t } = useTranslation()
+
   const [posts, setPosts] = useState([])
-  const [users, setUsers] = useState([])
+  const [myCohort, setMyCohort] = useState([])
+  const [cohorts, setCohorts] = useState(null)
+  const [teachers, setTeachers] = useState([])
 
   const sortPosts = (fetchedPosts) => {
     const sortedPosts = fetchedPosts.sort(
@@ -20,29 +32,60 @@ const Dashboard = () => {
     return sortedPosts
   }
 
-  const getAllPosts = () => {
+  const getAllPosts = useCallback(() => {
     getPosts()
       .then(sortPosts)
       .then(setPosts)
       .catch((error) => {
         console.error("Error get all posts sorted:", error.message)
       })
-  }
+  }, [])
 
-  const getAllUsers = () => {
-    getUsers().then(setUsers)
-  }
+  const getAllUsers = useCallback(() => {
+    getUsers().then(setMyCohort)
+  }, [])
 
-  useEffect(getAllPosts, [])
-  useEffect(getAllUsers, [])
+  const getAllCohorts = useCallback(() => {
+    getCohorts().then(setCohorts)
+  }, [])
 
+  const getAllTeachers = useCallback(() => {
+    getTeachers().then(setTeachers)
+  }, [])
+
+  useEffect(() => {
+    getAllPosts()
+    getAllUsers()
+    getAllCohorts()
+    getAllTeachers()
+  }, [getAllPosts, getAllUsers, getAllCohorts, getAllTeachers])
 
   const { openModal, setModal } = useModal()
 
   const showModal = () => {
-    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />)
+    setModal(
+      `${t("createAPost")}`,
+      <CreatePostModal getAllPosts={getAllPosts} />
+    )
 
     openModal()
+  }
+
+  const shouldRenderList = (list) => Array.isArray(list)
+
+  const showAllCohortsOrMine = () => {
+    if (shouldRenderList(cohorts)) {
+      return (
+        <Card header={t("Cohorts")}>
+          <CohortList cohorts={cohorts} />
+        </Card>
+      )
+    }
+    return (
+      <Card header={t("myCohort")}>
+        <UsersList users={myCohort} />
+      </Card>
+    )
   }
 
   return (
@@ -53,7 +96,7 @@ const Dashboard = () => {
             <div className="profile-icon">
               <p>AJ</p>
             </div>
-            <Button text="What's on your mind?" onClick={showModal} />
+            <Button text={t("whatsOnYourMind")} onClick={showModal} />
           </div>
         </Card>
 
@@ -61,9 +104,9 @@ const Dashboard = () => {
       </main>
       <aside>
         <SearchUserAside />
-        <Card>
-          <h4>My Cohort</h4>
-          <UsersList users={users} />
+        {showAllCohortsOrMine()}
+        <Card header={t("Teachers")}>
+          <TeacherList teachers={teachers} />
         </Card>
       </aside>
     </>

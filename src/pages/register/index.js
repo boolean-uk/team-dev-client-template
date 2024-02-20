@@ -4,45 +4,48 @@ import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./register.css";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
-  const { onRegister } = useAuth();
+  const { onRegister, checkPassword } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const { t } = useTranslation()
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
+  const onChange = (event) => {
+    const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
   return (
     <div className="bg-blue register credentialpage">
       <CredentialsCard
-        title="Register"
-        socialLinksTitle="Or sign up with"
-        altButtonTitle="Already a user?"
+        title={t("register")}
+        socialLinksTitle={t("signUpAlternative")}
+        altButtonTitle={t("userExist")}
         altButtonLink="/login"
-        altButtonText="Log in"
+        altButtonText={t("logIn")}
       >
         <div className="register-form">
           <form>
             <TextInput
               value={formData.email}
-              onChange={onChange}
+              onChange={(event) => onChange(event)}
               type="email"
               name="email"
-              label={"Email *"}
+              label={`${t('email')} *`}
             />
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
-              label={"Password *"}
-              type={"password"}
+              label={`${t('password')} *`}
+            type={"password"}
             />
           </form>
+          <p>{checkPassword(formData.password) ? t('passwordOk') : t('invalidPassword')}</p>
           <Button
-            text="Sign up"
-            onClick={() => onRegister(formData.email, formData.password)}
+            text={t('signUp')}
+            onClick={() => checkPassword(formData.password) ? onRegister(formData.email, formData.password) : false }
             classes="green width-full"
           />
         </div>

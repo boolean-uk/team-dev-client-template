@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import Form from "../../../components/form"
-import TextInput from "../../../components/form/textInput"
+import { useTranslation } from "react-i18next"
+import ContactInfo from "../../../components/contactInfo"
 
-const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
+const StepTwo = ({ data, setData, setCanProgress, message, setMessage, disabledText, classes }) => {
+  const { t } = useTranslation()
+
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [isPasswordValid, setIsPasswordValid] = useState(false)
 
@@ -14,15 +16,15 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
     if (inputName === "email" && inputValue.includes("@")) {
       if (inputValue.length > 3) {
         setIsEmailValid(true)
-      }else {
-        setMessage("Enter 3 charachter or more")
+      } else {
+        setMessage(`${t("enterCharacter")}`)
       }
     }
     if (inputName === "password") {
       if (inputValue.length > 3) {
         setIsPasswordValid(true)
-      }else {
-        setMessage("Enter 3 charachter or more")
+      } else {
+        setMessage(`${t("enterCharacter")}`)
       }
     }
   }
@@ -32,38 +34,13 @@ const StepTwo = ({ data, setData, setCanProgress, message, setMessage }) => {
   }, [isEmailValid, setCanProgress, isPasswordValid])
 
   return (
-    <>
-      <div className="welcome-formheader">
-        <h3>Contact Info</h3>
-      </div>
-      <Form className="welcome-form">
-        <div className="welcome-form-inputs">
-          <TextInput
-            onChange={onInput}
-            value={data.email}
-            name="email"
-            label={"Email*"}
-            type="text"
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.mobile}
-            name="mobile"
-            label={"Mobile*"}
-            type="text"
-          />
-          <TextInput
-            onChange={onInput}
-            value={data.password}
-            name="password"
-            label={"Password*"}
-            type="password"
-          />
-          {message && <p className="input-message">{message}</p>}
-          <p className="text-blue1">*Required</p>
-        </div>
-      </Form>
-    </>
+    <ContactInfo
+      data={data}
+      onInput={onInput}
+      disabledText={disabledText}
+      message={message}
+      classes={classes}
+    />
   )
 }
 

@@ -1,39 +1,21 @@
-import Form from '../../../components/form'
+import Bio from "../../../components/bio"
 
-const StepFour = ({data, setData})=>{
-    const splitWord = data.bio.trim(/\s+/g, '').length;
+const StepFour = ({ data, setData, disabledText, classes }) => {
+  const onInput = (e) => {
+    setData(e)
+  }
 
-    return(
-     <>
-        <div className='welcome-formheader'>
-            <h3>
-                Bio
-            </h3>
-        </div>
-        <Form className={"welcome-form"}>
-            <p>Bio</p>
-            <div className="welcome-form-inputs">
-                <textarea
-                onChange={setData}
-                value={data.bio}
-                name="bio"
-                placeholder = "Tell use about yourself, your educational and professional highlight to date"
-                label={'Bio'}
-                type={"textarea"}
-                maxLength={3000}
-                />
+  const splitWord = data.bio.trim(/\s+/g, "").length
 
-            <p className='word-count'>
-                {splitWord}/3000
-            </p>
-            </div>
-    
-        </Form>
-     </>
-
-    )
+  return (
+    <Bio
+      data={data}
+      onInput={onInput}
+      splitWord={splitWord}
+      disabledText={disabledText}
+      classes={classes}
+    />
+  )
 }
 
 export default StepFour
-
-
