@@ -1,0 +1,31 @@
+.user {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  grid-template-rows: 1fr;
+  padding: 5px;
+}
+
+.user:hover {
+  background-color: #f5faff;
+}
+
+.user-info {
+  display: grid;
+  align-items: center;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #64648c;
+}
+
+.options-icon-wrapper {
+  display: grid;
+  align-items: center;
+}

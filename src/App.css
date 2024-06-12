@@ -1,16 +1,35 @@
 * {
-    color: #000046;
+  color: #000046;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 151px 2fr 1fr;
-    grid-template-rows: 96px auto;
-    background-color: #F0F5FA;
-    height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: 151px 2fr 1fr;
+  grid-template-rows: 96px auto;
+  background-color: #f0f5fa;
+  min-height: 100vh;
 }
 
 .ReactModal__Body--open,
 .ReactModal__Html--open {
   overflow: hidden;
+}
+
+.input-message {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+}
+
+.headshot {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.headshot-container {
+  display: flex;
+  justify-content: center;
 }

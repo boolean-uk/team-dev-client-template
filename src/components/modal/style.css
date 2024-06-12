@@ -1,14 +1,25 @@
+.ReactModal__Overlay--after-open {
+    z-index: 100;
+}
+
 .modal-body {
     display: grid;
     grid-template-columns: auto;
     grid-auto-rows: auto;
     row-gap: 20px;
+    padding-bottom: 20px;
 }
 
 .modal-header {
     display: grid;
     grid-template-columns: 1fr 30px;
     padding-bottom: 20px;
+}
+
+.modal-header p {
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
 }
 
 .modal-content {
@@ -19,10 +30,10 @@
 }
 
 * {
-    font-family: "Lexend";
-	src: local("Lexend Regular"), local("Lexend-Regular"),
-		url("../../fonts/Lexend-VariableFont_wght.ttf") format("truetype");
-	font-weight: 300 900;
-	font-style: normal;
-	font-display: swap;
+    font-family: 'Lexend';
+    src: local('Lexend Regular'), local('Lexend-Regular'),
+        url('../../fonts/Lexend-VariableFont_wght.ttf') format('truetype');
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
 }

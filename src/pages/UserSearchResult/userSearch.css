@@ -1,0 +1,27 @@
+.user-search-result-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+.user-result {
+  display: flex;
+  align-items: center;
+}
+
+.search-results-text {
+  font-size: 2rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 10px;
+}
+.people-lists {
+  margin-left: 55px;
+}
+
+.user-search-result-container hr {
+  width: 100%;
+  border-top: 1px solid #64648c;
+  margin: 10px 0;
+}

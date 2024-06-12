@@ -1,0 +1,17 @@
+.my-cohort-exercises--header {
+    border-bottom: 1px solid #E6EBF5;
+    padding-bottom: 6px;
+}
+
+.my-cohort-exercises--stats {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    gap: 10px;
+    padding: 1rem 0;
+}
+
+.my-cohort-exercises--button > button {
+    background-color:  #F0F5FA;
+    color: #64648C;
+    cursor: pointer;
+}
