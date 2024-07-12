@@ -1,7 +1,3 @@
-### Team Dev Client
-
-Client repository for team dev project.
-
 ### Set up
 
 1. Copy the `.env.example` file to a new file named `.env` (NOTE: Make sure to copy the file, don't remove the original .env.example)
@@ -11,8 +7,8 @@ Client repository for team dev project.
 
 ### Project Management
 
-https://github.com/orgs/boolean-uk/projects/10/views/1
+https://github.com/orgs/boolean-uk/projects/13/views/1
 
 ### Contributing
 
-- Pull requests should be made from branches following the naming convention: `<username>-<issue_number>-<feature>`, e.g. `vherus-#1-user_registration`
+- Pull requests MUST be made from branches following the naming convention: `<username>-<issue_number>-<feature>`, e.g. `vherus-#1-user_registration`
