@@ -5,6 +5,7 @@ import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
 import StepFour from "./stepFour";
 import "./style.css";
+import StepThree from "./stepThree";
 
 const Welcome = () => {
 	const { onCreateProfile } = useAuth();
@@ -43,6 +44,7 @@ const Welcome = () => {
 				<StepOne data={profile} setData={onChange} />
 				<StepTwo data={profile} setData={onChange} />
 				<StepFour data={profile} setData={onChange} />
+				<StepThree data={profile} />
 			</Stepper>
 		</main>
 	);

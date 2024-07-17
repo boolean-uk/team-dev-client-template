@@ -23,8 +23,8 @@ form label {
 
 .input-icon {
     position: absolute;
-    left: 16px;
-    padding-top: 15px;
+    right: 16px;
+    padding-top: 8px;
 }
 .input-has-icon {
     padding-left: 56px;

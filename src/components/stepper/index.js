@@ -22,6 +22,8 @@ const Stepper = ({ header, children, onComplete }) => {
         setCurrentStep(currentStep+1)
     }
 
+    const btnText = currentStep === children.length-1 ? 'Create profile' : 'Next'
+
 	return (
         <Card>
             {header}
@@ -33,7 +35,7 @@ const Stepper = ({ header, children, onComplete }) => {
 
             <div className="stepper-buttons">
                 <Button text="Back" classes="offwhite" onClick={onBackClick} />
-                <Button text={currentStep === children.length-1 ? 'Submit' : 'Next'} classes="blue" onClick={onNextClick} />
+                <Button text={btnText} classes="blue" onClick={onNextClick} />
             </div>
         </Card>
 	);
