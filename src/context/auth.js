@@ -39,17 +39,24 @@ const AuthProvider = ({ children }) => {
 
     setToken(res.data.token);
     navigate(location.state?.from?.pathname || "/");
+    setError("");
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    setError("");
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
-    setToken(res.data.token);
-    navigate("/verification");
+    if (res.data.error) {
+      setError(res.data.error);
+    } else {
+      setToken(res.data.token);
+      navigate("/verification");
+      setError("");
+    }
   };
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
@@ -68,6 +75,7 @@ const AuthProvider = ({ children }) => {
     onRegister: handleRegister,
     onCreateProfile: handleCreateProfile,
     error: error,
+    setError: setError,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

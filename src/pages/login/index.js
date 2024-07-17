@@ -6,7 +6,7 @@ import CredentialsCard from "../../components/credentials";
 import "./login.css";
 
 const Login = () => {
-  const { onLogin, error } = useAuth();
+  const { onLogin, error, setError } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const onChange = (e) => {
@@ -22,6 +22,7 @@ const Login = () => {
         altButtonTitle="Need an account?"
         altButtonLink="/register"
         altButtonText="Sign up"
+        setError={setError}
       >
         <div className="login-form">
           <form>
@@ -39,7 +40,7 @@ const Login = () => {
               type={"password"}
             />
           </form>
-          <p className="error-message">{error}</p>
+          {error && <p className="error-message">{error}</p>}
           <Button
             text="Log in"
             onClick={() => onLogin(formData.email, formData.password)}
