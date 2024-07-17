@@ -43,8 +43,8 @@ const Welcome = () => {
 			<Stepper header={<WelcomeHeader />} onComplete={onComplete}>
 				<StepOne data={profile} setData={onChange} />
 				<StepTwo data={profile} setData={onChange} />
-				<StepFour data={profile} setData={onChange} />
 				<StepThree data={profile} />
+				<StepFour data={profile} setData={onChange} />
 			</Stepper>
 		</main>
 	);
