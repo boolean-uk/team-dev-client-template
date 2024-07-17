@@ -5,85 +5,90 @@ import Modal from "../components/modal";
 import Navigation from "../components/navigation";
 import useAuth from "../hooks/useAuth";
 import { createProfile, login, register } from "../service/apiClient";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const navigate = useNavigate()
-	const location = useLocation()
-	const [token, setToken] = useState(null)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState(null);
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('token')
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
 
-        if (storedToken) {
-            setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/")
-        }
-    }, [location.state?.from?.pathname, navigate])
+    if (storedToken) {
+      setToken(storedToken);
+      navigate(location.state?.from?.pathname || "/");
+    }
+  }, [location.state?.from?.pathname, navigate]);
 
-	const handleLogin = async (email, password) => {
-		const res = await login(email, password)
+  const handleLogin = async (email, password) => {
+    const res = await login(email, password);
 
-        if (!res.data.token) {
-            return navigate("/login")
-        }
-
-        localStorage.setItem('token', res.data.token)
-
-		setToken(res.token)
-		navigate(location.state?.from?.pathname || "/")
-	};
-
-	const handleLogout = () => {
-        localStorage.removeItem('token')
-		setToken(null)
-	};
-
-    const handleRegister = async (email, password) => {
-        const res = await register(email, password)
-		setToken(res.data.token)
-
-        navigate("/verification")
+    if (res.data.error) {
+      setError(res.data.error);
     }
 
-    const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-        const { userId } = jwt_decode(token)
-
-        await createProfile(userId, firstName, lastName, githubUrl, bio)
-
-        localStorage.setItem('token', token)
-        navigate('/')
+    if (!res.data.token) {
+      return navigate("/login");
     }
 
-	const value = {
-		token,
-		onLogin: handleLogin,
-		onLogout: handleLogout,
-        onRegister: handleRegister,
-        onCreateProfile: handleCreateProfile
-	};
+    localStorage.setItem("token", res.data.token);
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    setToken(res.data.token);
+    navigate(location.state?.from?.pathname || "/");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  const handleRegister = async (email, password) => {
+    const res = await register(email, password);
+    setToken(res.data.token);
+    navigate("/verification");
+  };
+
+  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+    const { userId } = jwt_decode(token);
+
+    await createProfile(userId, firstName, lastName, githubUrl, bio);
+
+    localStorage.setItem("token", token); // Isn't it redundant, as the token is already stored in localStorage during login or registration?
+    navigate("/");
+  };
+
+  const value = {
+    token,
+    onLogin: handleLogin,
+    onLogout: handleLogout,
+    onRegister: handleRegister,
+    onCreateProfile: handleCreateProfile,
+    error: error,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 const ProtectedRoute = ({ children }) => {
-	const { token } = useAuth()
-	const location = useLocation()
+  const { token } = useAuth();
+  const location = useLocation();
 
-	if (!token) {
-		return <Navigate to={"/login"} replace state={{ from: location }} />
-	}
+  if (!token) {
+    return <Navigate to={"/login"} replace state={{ from: location }} />;
+  }
 
-	return (
-		<div className="container">
-			<Header />
-			<Navigation />
-            <Modal />
-			{children}
-		</div>
-	)
-}
+  return (
+    <div className="container">
+      <Header />
+      <Navigation />
+      <Modal />
+      {children}
+    </div>
+  );
+};
 
-export { AuthContext, AuthProvider, ProtectedRoute }
+export { AuthContext, AuthProvider, ProtectedRoute };
