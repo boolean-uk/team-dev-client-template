@@ -13,11 +13,10 @@ const Welcome = () => {
 	const [profile, setProfile] = useState({
 		firstName: "",
 		lastName: "",
+		username: "",
 		githubUsername: "",
 		bio: "",
-		email: "",
-		mobile: "",
-		password: ""
+		mobile: ""
 	});
 
 	const onChange = (event) => {
@@ -30,7 +29,7 @@ const Welcome = () => {
 	};
 
 	const onComplete = () => {
-		onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio, profile.email, profile.mobile, profile.password);
+		onCreateProfile(profile.firstName, profile.lastName, profile.username, profile.githubUsername, profile.bio, profile.mobile);
 	};
 
 	return (
