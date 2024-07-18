@@ -39,7 +39,7 @@ const Welcome = () => {
 				<p className="text-blue1">Create your profile to get started</p>
 			</div>
 
-			<Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+			<Stepper header={<WelcomeHeader />} onComplete={onComplete} data={profile}>
 				<StepOne data={profile} setData={onChange} />
 				<StepTwo data={profile} setData={onChange} />
 				<StepThree data={profile} />
