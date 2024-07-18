@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+<<<<<<< HEAD
 const TextInput = ({ value, onChange, name, label, icon, type = "text" }) => {
   const [input, setInput] = useState("");
   const [showpassword, setShowpassword] = useState(false);
@@ -53,6 +54,54 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text" }) => {
       </div>
     );
   }
+=======
+const TextInput = ({ value, onChange, name, label, icon, type = "text", readOnly = false }) => {
+	const [input, setInput] = useState("");
+	const [showpassword, setShowpassword] = useState(false);
+	if (type === "password") {
+		return (
+			<div className="inputwrapper">
+				<label htmlFor={name}>{label}</label>
+				<input
+					type={type}
+					name={name}
+					value={value}
+					onChange={(e) => {
+						onChange(e);
+						setInput(e.target.value);
+					}}
+				/>
+				{showpassword && (
+					<input
+						type="text"
+						name={name}
+						value={input}
+						className="passwordreveal"
+					/>
+				)}
+				<button
+					className={`showpasswordbutton formbutton ${
+						showpassword === true && "__faded"
+					}`}
+					onClick={(e) => {
+						e.preventDefault();
+						setShowpassword(!showpassword);
+					}}
+				>
+					<EyeLogo />
+				</button>
+			</div>
+		);
+	} else {
+		return (
+			<div className="inputwrapper">
+				{label && <label htmlFor={name}>{label}</label>}
+				<input type={type} name={name} value={value} onChange={onChange} className={icon && 'input-has-icon'} readOnly={readOnly} />
+                {icon && <span className="input-icon">{icon}</span>}
+			</div>
+		);
+	}
+>>>>>>> main
 };
 
 const EyeLogo = () => {
