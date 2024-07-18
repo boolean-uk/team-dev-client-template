@@ -9,15 +9,7 @@ const StepTwo = ({ data, setData }) => {
 			</div>
             <Form className="welcome-form">
                 <div className="welcome-form-inputs">
-                    <TextInput onChange={setData} value={data.email} name="email" label={"Email*"} />
                     <TextInput onChange={setData} value={data.mobile} name="mobile" label={"Mobile"} />
-                    <TextInput
-                        onChange={setData}
-                        value={data.password}
-                        name="password"
-                        label={"Password*"}
-                    />
-                    <p className="text-blue1">*Required</p>
                 </div>
             </Form>
         </>
