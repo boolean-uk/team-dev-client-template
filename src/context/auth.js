@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
 
     await createProfile(userId, firstName, lastName, githubUrl, bio);
 
-    localStorage.setItem("token", token); // Isn't it redundant, as the token is already stored in localStorage during login or registration?
+    localStorage.setItem("token", token);
     navigate("/");
   };
 

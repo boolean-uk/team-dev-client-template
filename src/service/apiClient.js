@@ -7,7 +7,9 @@ async function login(email, password) {
 async function register(email, password) {
   const res = await post("users", { email, password }, false);
 
-  if (res.data.error) return res;
+  if (res.data.error) {
+    return res;
+  }
   return await login(email, password);
 }
 
