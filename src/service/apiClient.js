@@ -13,18 +13,23 @@ async function register(email, password) {
   return await login(email, password);
 }
 
-<<<<<<< HEAD
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
+async function createProfile(
+  userId,
+  firstName,
+  lastName,
+  username,
+  githubUrl,
+  mobile,
+  bio
+) {
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
+    username,
     githubUrl,
+    mobile,
     bio,
   });
-=======
-async function createProfile(userId, firstName, lastName, username, githubUrl, mobile, bio) {
-    return await patch(`users/${userId}`, { firstName, lastName, username, githubUrl, mobile, bio })
->>>>>>> main
 }
 
 async function getPosts() {
