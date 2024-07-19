@@ -8,9 +8,12 @@ const TextInput = ({
   icon,
   type = "text",
   readOnly = false,
+  required = false,
 }) => {
   const [input, setInput] = useState("");
   const [showpassword, setShowpassword] = useState(false);
+  const inputHasIcon = icon ? "input-has-icon" : "";
+
   if (type === "password") {
     return (
       <div className="inputwrapper">
@@ -54,8 +57,9 @@ const TextInput = ({
           name={name}
           value={value}
           onChange={onChange}
-          className={icon && "input-has-icon"}
+          className={inputHasIcon}
           readOnly={readOnly}
+          required={required}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>
