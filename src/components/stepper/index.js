@@ -4,7 +4,7 @@ import Button from "../button";
 import "./style.css";
 import { useState } from "react";
 
-const Stepper = ({ header, children, onComplete, canProgress }) => {
+const Stepper = ({ header, children, onComplete, canProgress = true }) => {
     const [currentStep, setCurrentStep] = useState(0)
 
     const onBackClick = () => {
