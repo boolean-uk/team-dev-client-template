@@ -4,7 +4,6 @@ import { getPosts } from "../../service/apiClient";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  console.log(posts);
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
