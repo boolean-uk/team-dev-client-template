@@ -59,13 +59,16 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+  const handleCreateProfile = async (firstName, lastName, username, githubUsername, mobile, bio) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
-
     localStorage.setItem("token", token);
-    navigate("/");
+
+    const res= await createProfile(userId, firstName, lastName, username, githubUsername, mobile, bio);
+
+    if (res.status === "succes") {
+      navigate("/")
+    }
   };
 
   const value = {

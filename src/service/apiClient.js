@@ -18,7 +18,7 @@ async function createProfile(
   firstName,
   lastName,
   username,
-  githubUrl,
+  githubUsername,
   mobile,
   bio
 ) {
@@ -26,7 +26,7 @@ async function createProfile(
     firstName,
     lastName,
     username,
-    githubUrl,
+    githubUsername,
     mobile,
     bio,
   });
