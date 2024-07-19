@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
 
     const res= await createProfile(userId, firstName, lastName, username, githubUsername, mobile, bio);
 
-    if (res.status === "succes") {
+    if (res.status === "success") {
       navigate("/")
     }
   };
