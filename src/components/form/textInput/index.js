@@ -32,6 +32,10 @@ const TextInput = ({
             type="text"
             name={name}
             value={input}
+            onChange={(e) => {
+              onChange(e);
+              setInput(e.target.value);
+            }}
             className="passwordreveal"
           />
         )}
