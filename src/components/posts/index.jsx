@@ -7,7 +7,7 @@ const Posts = () => {
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
-
+  
   return (
     <>
       {posts.map((post) => {
