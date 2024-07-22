@@ -11,7 +11,7 @@ import useUser from '../../hooks/useUser'
 
 const Dashboard = () => {
     const [searchVal, setSearchVal] = useState('')
-    const { userInitials } = useUser()
+    const { currentUser } = useUser()
 
     const onChange = (e) => {
         setSearchVal(e.target.value)
@@ -28,6 +28,11 @@ const Dashboard = () => {
         // Open the modal!
         openModal()
     }
+
+    const userInitials =
+        `${currentUser?.firstName[0].toUpperCase() || ''}${
+            currentUser?.lastName[0].toUpperCase() || ''
+        }` || ''
 
     return (
         <>

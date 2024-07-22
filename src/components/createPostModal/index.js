@@ -7,7 +7,7 @@ import useUser from '../../hooks/useUser'
 const CreatePostModal = () => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
-    const { userInitials, userFirstNameAndInital } = useUser()
+    const { currentUser } = useUser()
 
     const [message, setMessage] = useState(null)
     const [text, setText] = useState('')
@@ -24,6 +24,14 @@ const CreatePostModal = () => {
             closeModal()
         }, 2000)
     }
+
+    const userInitials =
+        `${currentUser?.firstName[0].toUpperCase() || ''}${
+            currentUser?.lastName[0].toUpperCase() || ''
+        }` || ''
+    const userFirstNameAndInital =
+        `${currentUser?.firstName || ''} ${currentUser?.lastName[0] || ''}` ||
+        ''
 
     return (
         <>

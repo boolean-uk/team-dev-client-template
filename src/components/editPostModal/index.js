@@ -8,7 +8,7 @@ const EditPostModal = () => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState('')
-    const { userInitials, userFirstNameAndInital } = useUser()
+    const { currentUser } = useUser()
 
     const onChange = (e) => {
         setText(e.target.value)
@@ -22,6 +22,14 @@ const EditPostModal = () => {
             closeModal()
         }, 2000)
     }
+
+    const userInitials =
+        `${currentUser?.firstName[0].toUpperCase() || ''}${
+            currentUser?.lastName[0].toUpperCase() || ''
+        }` || ''
+    const userFirstNameAndInital =
+        `${currentUser?.firstName || ''} ${currentUser?.lastName[0] || ''}` ||
+        ''
 
     return (
         <>

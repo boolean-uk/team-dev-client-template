@@ -12,7 +12,7 @@ import useUser from '../../hooks/useUser'
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
-    const { currentUser, userFullName, userInitials, userCohort } = useUser()
+    const { currentUser } = useUser()
 
     const onClickProfileIcon = () => {
         setIsMenuVisible(!isMenuVisible)
@@ -21,6 +21,14 @@ const Header = () => {
     if (!token) {
         return null
     }
+
+    const userCohort = `${currentUser?.cohort || ''}` || ''
+    const userFullName =
+        `${currentUser?.firstName || ''} ${currentUser?.lastName || ''}` || ''
+    const userInitials =
+        `${currentUser?.firstName[0].toUpperCase() || ''}${
+            currentUser?.lastName[0].toUpperCase() || ''
+        }` || ''
 
     return (
         <header>
@@ -41,8 +49,7 @@ const Header = () => {
                             <div className="post-user-name">
                                 <p>{userFullName}</p>
                                 <small>
-                                    {currentUser.role},{' '}
-                                    {userCohort}
+                                    {currentUser?.role || ''}, {userCohort}
                                 </small>
                             </div>
                         </section>
