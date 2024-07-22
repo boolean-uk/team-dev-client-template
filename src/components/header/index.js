@@ -19,8 +19,11 @@ const Header = () => {
   if (!token) {
     return null;
   }
+  //TODO Fix hardcoded text
 
   return (
+    
+    
     <header>
       <FullLogo textColour="white" />
 

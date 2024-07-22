@@ -23,6 +23,8 @@ const CreatePostModal = () => {
     }, 2000);
   };
 
+ //TODO:Fix Hardcoded Text
+
   return (
     <>
       <section className="create-post-user-details">

@@ -20,6 +20,7 @@ const EditPostModal = () => {
             closeModal()
         }, 2000)
     }
+            //TODO: Fix hardcoded text
 
     return (
         <>
