@@ -12,13 +12,16 @@ import './style.css'
 
 const ProfileCircle = ({ initials }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false)
-
+    const uppercaseInitals = initials.map((element) => {
+        return element.toUpperCase()
+    })
+    
     return (
         <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
             {isMenuVisible && <CascadingMenu />}
             
             <div className="profile-icon">
-                <p>{initials}</p>
+                <p>{uppercaseInitals}</p>
             </div>
         </div>
         

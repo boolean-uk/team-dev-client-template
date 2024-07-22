@@ -7,9 +7,11 @@ import TextInput from '../../components/form/textInput'
 import Posts from '../../components/posts'
 import useModal from '../../hooks/useModal'
 import './style.css'
+import useUser from '../../hooks/useUser'
 
 const Dashboard = () => {
     const [searchVal, setSearchVal] = useState('')
+    const { userInitials } = useUser()
 
     const onChange = (e) => {
         setSearchVal(e.target.value)
@@ -26,14 +28,14 @@ const Dashboard = () => {
         // Open the modal!
         openModal()
     }
-    //TODO Fix hardcoded text
+
     return (
         <>
             <main>
                 <Card>
                     <div className="create-post-input">
                         <div className="profile-icon">
-                            <p>AJ</p>
+                            <p>{userInitials}</p>
                         </div>
                         <Button
                             text="What's on your mind?"
