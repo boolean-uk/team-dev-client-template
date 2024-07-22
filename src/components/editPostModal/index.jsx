@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useModal from '../../hooks/useModal'
 import './style.css'
 import Button from '../button'
-import useUser from '../../hooks/useUser'
+import UserProfileIcon from '../UserProfileIcon'
+import UserDetails from '../UserDetails'
+import PostModalActions from '../PostModalActions'
 
 const EditPostModal = () => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState('')
-    const { currentUser } = useUser()
 
     const onChange = (e) => {
         setText(e.target.value)
@@ -23,23 +24,11 @@ const EditPostModal = () => {
         }, 2000)
     }
 
-    const userInitials =
-        `${currentUser?.firstName[0].toUpperCase() || ''}${
-            currentUser?.lastName[0].toUpperCase() || ''
-        }` || ''
-    const userFirstNameAndInital =
-        `${currentUser?.firstName || ''} ${currentUser?.lastName[0] || ''}` ||
-        ''
-
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon">
-                    <p>{userInitials}</p>
-                </div>
-                <div className="post-user-name">
-                    <p>{userFirstNameAndInital}</p>
-                </div>
+                <UserProfileIcon/>
+                <UserDetails/>
             </section>
 
             <section>
@@ -50,14 +39,7 @@ const EditPostModal = () => {
                 ></textarea>
             </section>
 
-            <section className="create-post-actions">
-                <Button
-                    onClick={onSubmit}
-                    text="Post"
-                    classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
-                    disabled={!text.length}
-                />
-            </section>
+            <PostModalActions onSubmit={onSubmit} text={text}/>
 
             {message && <p>{message}</p>}
         </>

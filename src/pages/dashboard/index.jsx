@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -7,11 +7,11 @@ import TextInput from '../../components/form/textInput'
 import Posts from '../../components/posts'
 import useModal from '../../hooks/useModal'
 import './style.css'
-import useUser from '../../hooks/useUser'
+import UserProfileIcon from '../../components/UserProfileIcon'
 
 const Dashboard = () => {
     const [searchVal, setSearchVal] = useState('')
-    const { currentUser } = useUser()
+
 
     const onChange = (e) => {
         setSearchVal(e.target.value)
@@ -29,19 +29,14 @@ const Dashboard = () => {
         openModal()
     }
 
-    const userInitials =
-        `${currentUser?.firstName[0].toUpperCase() || ''}${
-            currentUser?.lastName[0].toUpperCase() || ''
-        }` || ''
+    
 
     return (
         <>
             <main>
                 <Card>
                     <div className="create-post-input">
-                        <div className="profile-icon">
-                            <p>{userInitials}</p>
-                        </div>
+                        <UserProfileIcon/>
                         <Button
                             text="What's on your mind?"
                             onClick={showModal}

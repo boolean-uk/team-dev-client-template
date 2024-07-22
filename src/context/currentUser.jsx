@@ -14,15 +14,19 @@ export const CurrentUserProvider = ({ children }) => {
             setCurrentUser({ ...user })
             return
         }
+
         async function getUserFromToken() {
             if (token) {
                 const { userId } = jwt_decode(token)
-
                 const userDetails = await getUser(userId)
-                userDetails.status === 'success'
-                    ? setCurrentUser({ ...userDetails.data.user })
-                    : setCurrentUser(null)
+
+                if (userDetails.status === 'success') {
+                    setCurrentUser({ ...userDetails.data.user })
+                    return
+                }
             }
+            setCurrentUser(null)
+            return
         }
         getUserFromToken()
         return

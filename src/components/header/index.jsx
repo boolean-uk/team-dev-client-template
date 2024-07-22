@@ -7,12 +7,12 @@ import CogIcon from '../../assets/icons/cogIcon'
 import LogoutIcon from '../../assets/icons/logoutIcon'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
-import useUser from '../../hooks/useUser'
+import UserProfileIcon from '../UserProfileIcon'
+import UserDetails from '../UserDetails'
 
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
-    const { currentUser } = useUser()
 
     const onClickProfileIcon = () => {
         setIsMenuVisible(!isMenuVisible)
@@ -22,36 +22,18 @@ const Header = () => {
         return null
     }
 
-    const userCohort = `${currentUser?.cohort || ''}` || ''
-    const userFullName =
-        `${currentUser?.firstName || ''} ${currentUser?.lastName || ''}` || ''
-    const userInitials =
-        `${currentUser?.firstName[0].toUpperCase() || ''}${
-            currentUser?.lastName[0].toUpperCase() || ''
-        }` || ''
-
     return (
         <header>
             <FullLogo textColour="white" />
 
-            <div className="profile-icon" onClick={onClickProfileIcon}>
-                <p>{userInitials}</p>
-            </div>
+            <UserProfileIcon onClick={onClickProfileIcon} />
 
             {isMenuVisible && (
                 <div className="user-panel">
                     <Card>
                         <section className="post-details">
-                            <div className="profile-icon">
-                                <p>{userInitials}</p>
-                            </div>
-
-                            <div className="post-user-name">
-                                <p>{userFullName}</p>
-                                <small>
-                                    {currentUser?.role || ''}, {userCohort}
-                                </small>
-                            </div>
+                            <UserProfileIcon />
+                            <UserDetails header={true} />
                         </section>
 
                         <section className="user-panel-options border-top">
