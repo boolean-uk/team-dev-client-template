@@ -13,6 +13,10 @@ async function register(email, password) {
   return await login(email, password);
 }
 
+async function getUser(id) {
+  return await get(`users/${id}`);
+}
+
 async function createProfile(
   userId,
   firstName,
@@ -40,7 +44,7 @@ async function getUsers() {
 const getPosts = async () => {
   const res = await get("posts");
   return res.data.posts;
-}
+};
 
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth);
@@ -75,4 +79,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getUsers, getPosts, register, createProfile };
+export { login, getUsers, getPosts, register, createProfile, getUser };
