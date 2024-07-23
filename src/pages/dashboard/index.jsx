@@ -136,7 +136,7 @@ const Dashboard = () => {
                   )}
 
                   <div>
-                    <b>{`${cohort.firstName} ${cohort.lastName}`}</b>
+                    <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
                     <p>Software Developer</p>
                   </div>
 
