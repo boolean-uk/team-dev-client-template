@@ -13,6 +13,10 @@ async function register(email, password) {
   return await login(email, password);
 }
 
+async function getUser(id) {
+  return await get(`users/${id}`)
+}
+
 async function createProfile(
   userId,
   firstName,
@@ -70,4 +74,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile };
+export { login, getPosts, register, createProfile , getUser};
