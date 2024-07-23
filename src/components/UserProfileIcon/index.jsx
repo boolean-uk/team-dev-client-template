@@ -3,7 +3,7 @@ import useUser from "../../hooks/useUser"
 export default function UserProfileIcon({onClick=null}) {
     const { currentUser } = useUser()
     
-    if(!currentUser){
+    if(!currentUser || !currentUser?.firstName){
         return <div className="profile-icon" onClick={onClick}/>
     }
 

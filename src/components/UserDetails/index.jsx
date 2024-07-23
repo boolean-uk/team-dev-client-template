@@ -3,16 +3,14 @@ import useUser from '../../hooks/useUser'
 export default function UserDetails({ header = false }) {
     const { currentUser } = useUser()
 
-    if (!currentUser) {
+    if (!currentUser || !currentUser?.firstName) {
         return <div className="post-user-name"></div>
     }
 
     const userCohort = currentUser?.cohort ? `, Cohort ${currentUser.cohort}` : ''
     const userFullName = `${currentUser?.firstName} ${currentUser?.lastName}`
 
-    if (header) {
-        console.log(userFullName)
-        
+    if (header) {        
         return (
             <div className="post-user-name">
                 <p>{userFullName}</p>
