@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import useModal from '../../hooks/useModal'
 import './style.css'
-import Button from '../button'
 import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 import PostModalActions from '../PostModalActions'

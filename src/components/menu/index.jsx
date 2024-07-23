@@ -1,13 +1,12 @@
-import "./menu.css";
+import { forwardRef } from 'react'
+import './menu.css'
 
-const Menu = ({ children, className }) => {
-	return (
-		<div className={`menu ${className}`}>
-			<ul>
-                {children}
-			</ul>
-		</div>
-	);
-};
+const Menu = forwardRef(({ children, className }, ref) => {
+  return (
+    <div ref={ref} className={`menu ${className}`}>
+      <ul>{children}</ul>
+    </div>
+  )
+})
 
-export default Menu;
+export default Menu
