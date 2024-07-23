@@ -1,6 +1,4 @@
 main {
-  display: grid;
-  gap: 1.563rem;
   padding: 30px;
 }
 
@@ -95,4 +93,9 @@ aside {
 
 .card.cohorts {
   margin-top: 1.563rem;
+}
+
+.card.create-post,
+.card.dashboard-card-post {
+  margin-bottom: 1.563rem;
 }

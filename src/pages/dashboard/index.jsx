@@ -33,8 +33,10 @@ const Dashboard = () => {
     setSearchVal(e.target.value)
   }
 
-  const result = cohorts.filter((cohort) =>
-    cohort.firstName.toLowerCase().includes(searchVal.toLowerCase())
+  const result = cohorts.filter(
+    (cohort) =>
+      cohort.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
+      cohort.lastName.toLowerCase().includes(searchVal.toLowerCase())
   )
 
   const handleClickOutside = (event) => {
@@ -70,7 +72,7 @@ const Dashboard = () => {
   return (
     <>
       <main>
-        <Card>
+        <Card name='create-post'>
           <div className="create-post-input">
             <div className="profile-icon">
               <p>AJ</p>
@@ -149,7 +151,7 @@ const Dashboard = () => {
           </article>
         )}
 
-        <Card cohorts={true}>
+        <Card name={'cohorts'}>
           <h4>My Cohort</h4>
         </Card>
       </aside>

@@ -1,9 +1,9 @@
 import './style.css'
 
-const Card = ({ children, boxShadow = false, cohorts = false }) => {
+const Card = ({ children, boxShadow = false, name = "" }) => {
   return (
     <div
-      className={`card ${boxShadow && 'card-shadow'} ${cohorts && 'cohorts'}`}
+      className={`card ${boxShadow && 'card-shadow'} ${name}`}
     >
       {children}
     </div>

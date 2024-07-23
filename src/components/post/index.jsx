@@ -17,7 +17,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   };
 
   return (
-    <Card>
+    <Card name='dashboard-card-post'>
       <article className="post">
         <section className="post-details">
           <ProfileCircle initials={userInitials} />
