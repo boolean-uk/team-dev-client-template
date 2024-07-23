@@ -1,3 +1,4 @@
+import EllipsisIcon from "../../assets/icons/ellipsisIcon";
 import useModal from "../../hooks/useModal";
 import Card from "../card";
 import Comment from "../comment";
@@ -24,9 +25,9 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <div className="edit-icon">
-            <p onClick={showModal}>...</p>
-          </div>
+          <figure className="edit-icon" onClick={showModal}>
+            <EllipsisIcon />
+          </figure>
         </section>
 
         <section className="post-content">

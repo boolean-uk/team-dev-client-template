@@ -32,7 +32,12 @@ async function createProfile(
   });
 }
 
-async function getPosts() {
+async function getUsers() {
+  const res = await get("users");
+  return res.data.users;
+}
+
+const getPosts = async () => {
   const res = await get("posts");
   return res.data.posts;
 }
@@ -70,4 +75,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile };
+export { login, getUsers, getPosts, register, createProfile };
