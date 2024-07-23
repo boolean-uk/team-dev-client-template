@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -99,6 +100,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
+    user,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
