@@ -19,7 +19,11 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   const cursor = hasCascadingMenu ? 'pointer' : 'default'
 
   const renderCascadingMenu = () => {
-    if (isMenuVisible && hasCascadingMenu) return <CascadingMenu />
+    if (isMenuVisible && hasCascadingMenu) {
+      return <CascadingMenu />
+    }
+
+    return null
   }
 
   return (
