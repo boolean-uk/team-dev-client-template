@@ -36,10 +36,10 @@ const AuthProvider = ({ children }) => {
         setToken(res.data.token);
         navigate(location.state?.from?.pathname || "/");
         setError("");
-      } else {
-        setError("Login failed");
-        navigate("/login");
+        return;
       }
+      setError("Login failed");
+      navigate("/login");
     } catch (error) {
       setError("An error occurred during login");
     }
@@ -56,12 +56,12 @@ const AuthProvider = ({ children }) => {
       const res = await register(email, password);
       if (res.data.error) {
         setError(res.data.error);
-      } else {
-        localStorage.setItem("token", res.data.token);
-        setToken(res.data.token);
-        navigate("/verification");
-        setError("");
+        return;
       }
+      localStorage.setItem("token", res.data.token);
+      setToken(res.data.token);
+      navigate("/verification");
+      setError("");
     } catch (error) {
       setError("An error occurred during registration");
     }
@@ -90,9 +90,9 @@ const AuthProvider = ({ children }) => {
 
       if (res.status === "success") {
         navigate("/");
-      } else {
-        setError("Failed to create profile");
+        return;
       }
+      setError("Failed to create profile");
     } catch (error) {
       setError("An error occurred during profile creation");
     }
