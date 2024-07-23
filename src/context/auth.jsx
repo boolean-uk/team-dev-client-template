@@ -3,6 +3,9 @@ import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import useAuth from "../hooks/useAuth";
 import { createProfile, login, register } from "../service/apiClient";
+import Navigation from "../components/navigation";
+import Header from "../components/header";
+import Modal from "../components/modal";
 
 const AuthContext = createContext();
 
@@ -120,7 +123,14 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  return <>{children}</>;
+  return (
+    <div className="container">
+      <Header />
+      <Navigation />
+      <Modal />
+      {children}
+    </div>
+  );
 };
 
 export { AuthContext, AuthProvider, ProtectedRoute };
