@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -9,11 +9,17 @@ import './style.css'
 import { getUsers } from '../../service/apiClient'
 import ProfileCircle from '../../components/profileCircle'
 import EllipsisIcon from '../../assets/icons/ellipsisIcon'
+import Menu from '../../components/menu'
+import MenuItem from '../../components/menu/menuItem'
+import ProfileIcon from '../../assets/icons/profileIcon'
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')
   const [isSearchResVisible, setIsSearchResVisible] = useState(false)
   const [cohorts, setCohorts] = useState([])
+  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
+  const [selectedProfileId, setSelectedProfileId] = useState(null)
+  const menuRef = useRef(null)
 
   useEffect(() => {
     getUsers().then(setCohorts)
@@ -37,6 +43,8 @@ const Dashboard = () => {
       !event.target.closest('#input-wrapper-search-bar')
     ) {
       setIsSearchResVisible(false)
+      setIsStudentModalVisible(false)
+      setSelectedProfileId(null)
     }
   }
 
@@ -47,15 +55,15 @@ const Dashboard = () => {
     }
   }, [])
 
-  // Use the useModal hook to get the openModal and setModal functions
+  const onClickStudent = (id) => {
+    setSelectedProfileId(id)
+    setIsStudentModalVisible(true)
+  }
+
   const { openModal, setModal } = useModal()
 
-  // Create a function to run on user interaction
   const showModal = () => {
-    // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal />) // CreatePostModal is just a standard React component, nothing special
-
-    // Open the modal!
+    setModal('Create a post', <CreatePostModal />)
     openModal()
   }
 
@@ -111,31 +119,37 @@ const Dashboard = () => {
 
             <div className="divider-search-bar"></div>
 
-            {result.map((cohort) => (
-              <div className="user-search-card" key={cohort.id}>
-                <ProfileCircle
-                  initials={
-                    cohort.firstName[0].toUpperCase() +
-                    cohort.lastName[0].toUpperCase()
-                  }
-                />
+            <ul>
+              {result.map((cohort) => (
+                <li className="user-search-card" key={cohort.id}>
+                  <ProfileCircle
+                    initials={[cohort.firstName[0], cohort.lastName[0]]}
+                    hasCascadingMenu={false}
+                  />
 
-                <div>
-                  <b>{`${cohort.firstName} ${cohort.lastName}`}</b>
-                  <p>Software Developer</p>
-                </div>
+                  {isStudentModalVisible && selectedProfileId === cohort.id && (
+                    <Menu className="profile-circle-menu" ref={menuRef}>
+                      <MenuItem icon={<ProfileIcon />} text="Profile" />
+                    </Menu>
+                  )}
 
-                <figure>
-                  <EllipsisIcon />
-                </figure>
-              </div>
-            ))}
+                  <div>
+                    <b>{`${cohort.firstName} ${cohort.lastName}`}</b>
+                    <p>Software Developer</p>
+                  </div>
+
+                  <figure onClick={() => onClickStudent(cohort.id)}>
+                    <EllipsisIcon />
+                  </figure>
+                </li>
+              ))}
+            </ul>
 
             {result.length >= 10 && <button>All results</button>}
           </article>
         )}
 
-        <Card>
+        <Card cohorts={true}>
           <h4>My Cohort</h4>
         </Card>
       </aside>
