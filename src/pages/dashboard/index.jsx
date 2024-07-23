@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useState } from 'react'
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -11,7 +11,6 @@ import UserProfileIcon from '../../components/UserProfileIcon'
 
 const Dashboard = () => {
     const [searchVal, setSearchVal] = useState('')
-
 
     const onChange = (e) => {
         setSearchVal(e.target.value)
@@ -29,14 +28,12 @@ const Dashboard = () => {
         openModal()
     }
 
-    
-
     return (
         <>
             <main>
                 <Card>
                     <div className="create-post-input">
-                        <UserProfileIcon/>
+                        <UserProfileIcon />
                         <Button
                             text="What's on your mind?"
                             onClick={showModal}
