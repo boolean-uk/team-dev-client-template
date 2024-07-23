@@ -7,7 +7,10 @@ export default function UserDetails({ header = false }) {
         return <div className="post-user-name"></div>
     }
 
-    const userCohort = currentUser?.cohort ? `, Cohort ${currentUser.cohort}` : ''
+    console.log()
+
+    const userCohort = currentUser?.cohortId ? `, Cohort ${currentUser.cohortId}` : ''
+
     const userFullName = `${currentUser?.firstName} ${currentUser?.lastName}`
 
     if (header) {        
