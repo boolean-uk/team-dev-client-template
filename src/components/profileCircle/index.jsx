@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import AddIcon from '../../assets/icons/addIcon'
 import CohortIcon from '../../assets/icons/cohortIcon'
 import CohortIconFill from '../../assets/icons/cohortIcon-fill'
@@ -9,9 +9,17 @@ import SquareBracketsIcon from '../../assets/icons/squareBracketsIcon'
 import Menu from '../menu'
 import MenuItem from '../menu/menuItem'
 import './style.css'
+import useAuth from '../../hooks/useAuth'
 
 const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
+  const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
+  const profileRef = useRef(null)
+
+  useClickOutside(profileRef, () => {
+    setIsMenuVisible(false)
+  })
+
   const uppercaseInitials = initials
     .filter(Boolean)
     .map((element) => element?.[0]?.toUpperCase() || '')
@@ -27,15 +35,17 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   }
 
   return (
-    <div
-      className="profile-circle"
-      onClick={() => setIsMenuVisible(!isMenuVisible)}
-      style={{ cursor: cursor }}
-    >
-      {renderCascadingMenu()}
+    <div ref={profileRef}>
+      <div
+        className="profile-circle"
+        onClick={() => setIsMenuVisible(!isMenuVisible)}
+        style={{ cursor: cursor }}
+      >
+        {renderCascadingMenu()}
 
-      <div className="profile-icon">
-        <p>{uppercaseInitials}</p>
+        <div className="profile-icon">
+          <p>{uppercaseInitials}</p>
+        </div>
       </div>
     </div>
   )

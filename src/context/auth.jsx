@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import useAuth from "../hooks/useAuth";
@@ -16,14 +16,31 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
 
+  const useClickOutside = (ref, onClickOutside) => {
+    useEffect(() => {
+
+      const handleClickOutside = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          onClickOutside()
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside)
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }, [ref, onClickOutside])
+  }
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || "/");
+      navigate(location?.pathname ||  "/");
     }
-  }, [location.state?.from?.pathname, navigate]);
+  }, [location?.pathname]);
 
   const handleLogin = async (email, password) => {
     try {
@@ -41,6 +58,7 @@ const AuthProvider = ({ children }) => {
         setError("");
         return;
       }
+      setUser({...res.data.user})
       setError("Login failed");
       navigate("/login");
     } catch (error) {
@@ -51,6 +69,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    setUser(null)
     setError("");
   };
 
@@ -110,6 +129,7 @@ const AuthProvider = ({ children }) => {
     onCreateProfile: handleCreateProfile,
     error,
     setError,
+    useClickOutside
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
