@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import useAuth from "../hooks/useAuth";
@@ -14,12 +14,24 @@ const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
-  const [openMenus, setOpenMenus] = useState(false)
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    document.body.addEventListener("click", () => {setOpenMenus(false)})
-  }, [openMenus])
+  const useClickOutside = (ref, onClickOutside) => {
+    useEffect(() => {
+
+      const handleClickOutside = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          onClickOutside()
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside)
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }, [ref, onClickOutside])
+  }
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -113,10 +125,9 @@ const AuthProvider = ({ children }) => {
     onLogout: handleLogout,
     onRegister: handleRegister,
     onCreateProfile: handleCreateProfile,
-    openMenus,
-    setOpenMenus,
     error,
     setError,
+    useClickOutside
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
