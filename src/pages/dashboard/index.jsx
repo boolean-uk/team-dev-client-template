@@ -35,8 +35,8 @@ const Dashboard = () => {
 
   const result = cohorts.filter(
     (cohort) =>
-      cohort.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
-      cohort.lastName.toLowerCase().includes(searchVal.toLowerCase())
+      cohort.firstName?.toLowerCase().includes(searchVal.toLowerCase()) ||
+      cohort.lastName?.toLowerCase().includes(searchVal.toLowerCase())
   )
 
   const handleClickOutside = (event) => {
