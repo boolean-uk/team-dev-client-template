@@ -14,7 +14,6 @@ import Menu from '../../components/menu'
 import MenuItem from '../../components/menu/menuItem'
 import ProfileIcon from '../../assets/icons/profileIcon'
 import UserProfileIcon from '../../components/UserProfileIcon'
-import AllSearchResults from '../../components/allSearchResults';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')

@@ -1,0 +1,13 @@
+main {
+  display: grid;
+  grid-template-columns: 151px 1fr;
+}
+
+.top {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 5px;
+  /* align-content: center; */
+  justify-content: center;
+
+}

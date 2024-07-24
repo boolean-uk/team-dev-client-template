@@ -50,61 +50,65 @@ const AllSearchResults = () => {
     <>
         <Header />
         <main>
-            <Navigation className="left-bar"/>
-            <div className='title'>
-            <ArrowLeftIcon onClick={() => navigate('/Dashboard')} />              
-            <h1>Search results</h1>                  
-            <Card name="search-bar">
-                <div id="input-wrapper-search-bar">
-                    <SearchIcon />
-                    <input
-                    type="search"
-                    name="Search"
-                    value={searchVal}
-                    onChange={onChange}
-                    placeholder="Search for people"
-                    />
-                </div>
-            </Card>
-            </div>
-
-            <div className='search-results'>
-                <Card name="results">
-                    <h2>Search Results for "{searchVal}"</h2>
-                    {results.length === 0 ? (
-                        <p>No results found.</p>
-                    ) : (
-                        <ul>
-                        {results.map((cohort) => (
-                            <li key={cohort.id} className="user-search-card">
-                            <ProfileCircle
-                                initials={[
-                                cohort.firstName?.split(' ')[0],
-                                cohort.lastName?.split(' ')[0],
-                                ]}
-                                hasCascadingMenu={false}
-                            />
-
-                            {isStudentModalVisible && selectedProfileId === cohort.id && (
-                                <Menu className="profile-circle-menu" ref={menuRef}>
-                                <MenuItem icon={<ProfileIcon />} text="Profile" />
-                                </Menu>
-                            )}
-
-                            <div>
-                                <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
-                                <p>Software Developer</p>
+            <Navigation className="left-bar" />
+            <div>
+                  <div className='top'>
+                      <div className='title'>
+                        <ArrowLeftIcon onClick={() => navigate('/')} />              
+                        <h2>Search results</h2>                  
+                          
+                      </div>
+                        <Card name="search-bar">
+                            <div id="input-wrapper-search-bar">
+                                <SearchIcon />
+                                <input
+                                type="search"
+                                name="Search"
+                                value={searchVal}
+                                onChange={onChange}
+                                placeholder="Search for people"
+                                />
                             </div>
+                        </Card>
+                </div>
 
-                            <figure onClick={() => onClickStudent(cohort.id)}>
-                                <EllipsisIcon />
-                            </figure>
-                            </li>
-                        ))}
-                        </ul>
-                    )}
-                </Card>  
+                <div className='search-results'>
+                    <Card name="results">
+                        <h2>Search Results for "{searchVal}"</h2>
+                        {results.length === 0 ? (
+                            <p>No results found.</p>
+                        ) : (
+                            <ul>
+                            {results.map((cohort) => (
+                                <li key={cohort.id} className="user-search-card">
+                                <ProfileCircle
+                                    initials={[
+                                    cohort.firstName?.split(' ')[0],
+                                    cohort.lastName?.split(' ')[0],
+                                    ]}
+                                    hasCascadingMenu={false}
+                                />
 
+                                {isStudentModalVisible && selectedProfileId === cohort.id && (
+                                    <Menu className="profile-circle-menu" ref={menuRef}>
+                                    <MenuItem icon={<ProfileIcon />} text="Profile" />
+                                    </Menu>
+                                )}
+
+                                <div>
+                                    <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                                    <p>Software Developer</p>
+                                </div>
+
+                                <figure onClick={() => onClickStudent(cohort.id)}>
+                                    <EllipsisIcon />
+                                </figure>
+                                </li>
+                            ))}
+                            </ul>
+                        )}
+                    </Card>
+                </div>
             </div>
               
 
