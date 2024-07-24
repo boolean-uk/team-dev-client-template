@@ -12,6 +12,7 @@ import EllipsisIcon from '../../assets/icons/ellipsisIcon'
 import Menu from '../../components/menu'
 import MenuItem from '../../components/menu/menuItem'
 import ProfileIcon from '../../assets/icons/profileIcon'
+import UserProfileIcon from '../../components/UserProfileIcon'
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')
@@ -74,9 +75,7 @@ const Dashboard = () => {
       <main>
         <Card name='create-post'>
           <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p>
-            </div>
+            <UserProfileIcon/>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
