@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -13,6 +14,7 @@ import Menu from '../../components/menu'
 import MenuItem from '../../components/menu/menuItem'
 import ProfileIcon from '../../assets/icons/profileIcon'
 import UserProfileIcon from '../../components/UserProfileIcon'
+import AllSearchResults from '../../components/allSearchResults';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')
@@ -21,6 +23,7 @@ const Dashboard = () => {
   const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
   const [selectedProfileId, setSelectedProfileId] = useState(null)
   const menuRef = useRef(null)
+  const history = useHistory()
 
   useEffect(() => {
     getUsers().then(setCohorts)
@@ -72,6 +75,8 @@ const Dashboard = () => {
     setModal('Create a post', <CreatePostModal />)
     openModal()
   }
+
+  const allSearchResults = history.push('/all-results', {results: result, searchVal})
 
   return (
     <>
@@ -152,7 +157,7 @@ const Dashboard = () => {
               ))}
             </ul>
 
-            {result.length >= 10 && <button>All results</button>}
+            {result.length >= 10 && <button onClick={allSearchResults}>All results</button>}
           </article>
         )}
 
