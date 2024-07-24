@@ -21,9 +21,9 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.pathname ||  "/");
+      navigate(location?.pathname ||  "/");
     }
-  }, [location.pathname]);
+  }, [location?.pathname]);
 
   const handleLogin = async (email, password) => {
     try {
