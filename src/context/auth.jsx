@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import useAuth from "../hooks/useAuth";
@@ -15,6 +15,23 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
+
+  const useClickOutside = (ref, onClickOutside) => {
+    useEffect(() => {
+
+      const handleClickOutside = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          onClickOutside()
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside)
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }, [ref, onClickOutside])
+  }
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -110,6 +127,7 @@ const AuthProvider = ({ children }) => {
     onCreateProfile: handleCreateProfile,
     error,
     setError,
+    useClickOutside
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

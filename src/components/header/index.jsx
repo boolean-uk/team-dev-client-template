@@ -6,17 +6,18 @@ import ProfileIcon from '../../assets/icons/profileIcon'
 import CogIcon from '../../assets/icons/cogIcon'
 import LogoutIcon from '../../assets/icons/logoutIcon'
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 
 const Header = () => {
-    const { token, onLogout } = useAuth()
+    const { token, onLogout, useClickOutside } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const profileIconRef = useRef(null)
 
-    const onClickProfileIcon = () => {
-        setIsMenuVisible(!isMenuVisible)
-    }
+    useClickOutside(profileIconRef, () => {
+      setIsMenuVisible(false)
+    })
 
     if (!token) {
         return null
@@ -26,39 +27,41 @@ const Header = () => {
         <header>
             <FullLogo textColour="white" />
 
-            <UserProfileIcon onClick={onClickProfileIcon} />
+            <div ref={profileIconRef}>
+              <UserProfileIcon onClick={() => setIsMenuVisible(!isMenuVisible)} />
 
-            {isMenuVisible && (
-                <div className="user-panel">
-                    <Card>
-                        <section className="post-details">
-                            <UserProfileIcon />
-                            <UserDetails header={true} />
-                        </section>
+              {isMenuVisible && (
+                  <div className="user-panel">
+                      <Card>
+                          <section className="post-details">
+                              <UserProfileIcon />
+                              <UserDetails header={true} />
+                          </section>
 
-                        <section className="user-panel-options border-top">
-                            <ul>
-                                <li>
-                                    <NavLink to="/">
-                                        <ProfileIcon /> <p>Profile</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/">
-                                        <CogIcon />{' '}
-                                        <p>Settings &amp; Privacy</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="#" onClick={onLogout}>
-                                        <LogoutIcon /> <p>Log out</p>
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </section>
-                    </Card>
-                </div>
-            )}
+                          <section className="user-panel-options border-top">
+                              <ul>
+                                  <li>
+                                      <NavLink to="/">
+                                          <ProfileIcon /> <p>Profile</p>
+                                      </NavLink>
+                                  </li>
+                                  <li>
+                                      <NavLink to="/">
+                                          <CogIcon />{' '}
+                                          <p>Settings &amp; Privacy</p>
+                                      </NavLink>
+                                  </li>
+                                  <li>
+                                      <NavLink to="#" onClick={onLogout}>
+                                          <LogoutIcon /> <p>Log out</p>
+                                      </NavLink>
+                                  </li>
+                              </ul>
+                          </section>
+                      </Card>
+                  </div>
+              )}
+            </div>
         </header>
     )
 }
