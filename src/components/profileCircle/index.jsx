@@ -12,9 +12,9 @@ import './style.css'
 
 const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const uppercaseInitals = initials.map((element) => {
-    return element.toUpperCase()
-  })
+  const uppercaseInitials = initials
+    .filter(Boolean)
+    .map((element) => element?.[0]?.toUpperCase() || '')
 
   const cursor = hasCascadingMenu ? 'pointer' : 'default'
 
@@ -35,7 +35,7 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
       {renderCascadingMenu()}
 
       <div className="profile-icon">
-        <p>{uppercaseInitals}</p>
+        <p>{uppercaseInitials}</p>
       </div>
     </div>
   )
