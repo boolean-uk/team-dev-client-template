@@ -14,6 +14,11 @@ const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
+  const [openMenus, setOpenMenus] = useState(false)
+
+  useEffect(() => {
+    document.body.addEventListener("click", () => {setOpenMenus(false)})
+  }, [openMenus])
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -79,6 +84,8 @@ const AuthProvider = ({ children }) => {
     onCreateProfile: handleCreateProfile,
     error: error,
     setError: setError,
+    openMenus,
+    setOpenMenus
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

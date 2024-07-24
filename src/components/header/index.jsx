@@ -9,11 +9,15 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const Header = () => {
+  const { openMenus, setOpenMenus } = useAuth();
+
   const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
-  const onClickProfileIcon = () => {
-    setIsMenuVisible(!isMenuVisible);
+  const onClickProfileIcon = (e) => {
+    e.stopPropagation()
+    setOpenMenus(true)
+    setIsMenuVisible(true)
   };
 
   if (!token) {
@@ -28,7 +32,7 @@ const Header = () => {
         <p>AJ</p>
       </div>
 
-      {isMenuVisible && (
+      {isMenuVisible && openMenus && (
         <div className="user-panel">
           <Card>
             <section className="post-details">
