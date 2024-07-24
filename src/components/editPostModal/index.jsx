@@ -1,7 +1,9 @@
-import { useState } from "react"
-import useModal from "../../hooks/useModal"
+import { useState } from 'react'
+import useModal from '../../hooks/useModal'
 import './style.css'
-import Button from '../button'
+import UserProfileIcon from '../UserProfileIcon'
+import UserDetails from '../UserDetails'
+import PostModalActions from '../PostModalActions'
 
 const EditPostModal = () => {
     const { closeModal } = useModal()
@@ -24,22 +26,19 @@ const EditPostModal = () => {
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
+                <UserProfileIcon/>
+                <UserDetails/>
             </section>
 
             <section>
-                <textarea onChange={onChange} value={text} placeholder="Edit your post"></textarea>
+                <textarea
+                    onChange={onChange}
+                    value={text}
+                    placeholder="Edit your post"
+                ></textarea>
             </section>
 
-            <section className="create-post-actions">
-                <Button
-                    onClick={onSubmit}
-                    text='Post'
-                    classes={`${text.length ? 'blue' : 'offwhite' } width-full`}
-                    disabled={!text.length}
-                />
-            </section>
+            <PostModalActions onSubmit={onSubmit} text={text}/>
 
             {message && <p>{message}</p>}
         </>

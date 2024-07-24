@@ -1,65 +1,161 @@
-import { useState } from "react";
-import SearchIcon from "../../assets/icons/searchIcon";
-import Button from "../../components/button";
-import Card from "../../components/card";
-import CreatePostModal from "../../components/createPostModal";
-import TextInput from "../../components/form/textInput";
-import Posts from "../../components/posts";
-import useModal from "../../hooks/useModal";
-import "./style.css";
+import { useEffect, useState, useRef } from 'react'
+import SearchIcon from '../../assets/icons/searchIcon'
+import Button from '../../components/button'
+import Card from '../../components/card'
+import CreatePostModal from '../../components/createPostModal'
+import Posts from '../../components/posts'
+import useModal from '../../hooks/useModal'
+import './style.css'
+import { getUsers } from '../../service/apiClient'
+import ProfileCircle from '../../components/profileCircle'
+import EllipsisIcon from '../../assets/icons/ellipsisIcon'
+import Menu from '../../components/menu'
+import MenuItem from '../../components/menu/menuItem'
+import ProfileIcon from '../../assets/icons/profileIcon'
+import UserProfileIcon from '../../components/UserProfileIcon'
 
 const Dashboard = () => {
-	const [searchVal, setSearchVal] = useState('');
+  const [searchVal, setSearchVal] = useState('')
+  const [isSearchResVisible, setIsSearchResVisible] = useState(false)
+  const [cohorts, setCohorts] = useState([])
+  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
+  const [selectedProfileId, setSelectedProfileId] = useState(null)
+  const menuRef = useRef(null)
 
-	const onChange = (e) => {
-		setSearchVal(e.target.value);
-	};
+  useEffect(() => {
+    getUsers().then(setCohorts)
+  }, [])
 
-	// Use the useModal hook to get the openModal and setModal functions
-	const { openModal, setModal } = useModal();
+  const onClickSearchBar = () => {
+    setIsSearchResVisible(true)
+  }
 
-	// Create a function to run on user interaction
-	const showModal = () => {
-		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+  const onChange = (e) => {
+    setSearchVal(e.target.value)
+  }
 
-		// Open the modal!
-		openModal();
-	};
+  const result = cohorts.filter(
+    (cohort) =>
+      cohort.firstName?.toLowerCase().includes(searchVal.toLowerCase()) ||
+      cohort.lastName?.toLowerCase().includes(searchVal.toLowerCase())
+  )
 
-	return (
-		<>
-			<main>
-				<Card>
-					<div className="create-post-input">
-						<div className="profile-icon">
-							<p>AJ</p>
-						</div>
-						<Button text="What's on your mind?" onClick={showModal} />
-					</div>
-				</Card>
+  const handleClickOutside = (event) => {
+    if (
+      !event.target.closest('.search-cohorts-results') &&
+      !event.target.closest('#input-wrapper-search-bar')
+    ) {
+      setIsSearchResVisible(false)
+      setIsStudentModalVisible(false)
+      setSelectedProfileId(null)
+    }
+  }
 
-				<Posts />
-			</main>
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
-			<aside>
-				<Card>
-					<form onSubmit={(e) => e.preventDefault()}>
-						<TextInput
-							icon={<SearchIcon />}
-							value={searchVal}
-							name="Search"
-							onChange={onChange}
-						/>
-					</form>
-				</Card>
+  const onClickStudent = (id) => {
+    setSelectedProfileId(id)
+    setIsStudentModalVisible(true)
+  }
 
-				<Card>
-					<h4>My Cohort</h4>
-				</Card>
-			</aside>
-		</>
-	);
-};
+  const { openModal, setModal } = useModal()
 
-export default Dashboard;
+  const showModal = () => {
+    setModal('Create a post', <CreatePostModal />)
+    openModal()
+  }
+
+  return (
+    <>
+      <main>
+        <Card name='create-post'>
+          <div className="create-post-input">
+            <UserProfileIcon/>
+            <Button text="What's on your mind?" onClick={showModal} />
+          </div>
+        </Card>
+
+        <Posts />
+      </main>
+
+      <aside>
+        <Card>
+          <form onSubmit={(e) => e.preventDefault()} onClick={onClickSearchBar}>
+            <div id="input-wrapper-search-bar">
+              <SearchIcon />
+
+              <input
+                type="search"
+                name="Search"
+                value={searchVal}
+                onChange={onChange}
+                placeholder="Search for people"
+              />
+            </div>
+          </form>
+        </Card>
+
+        {isSearchResVisible && result.length === 0 && (
+          <article className="search-cohorts-results">
+            <p>People</p>
+
+            <div className="divider-search-bar"></div>
+
+            <p>Sorry, no results found.</p>
+
+            <p>Try changing your search term.</p>
+
+            <button>Edit search</button>
+          </article>
+        )}
+
+        {isSearchResVisible && result.length >= 1 && (
+          <article className="search-cohorts-results">
+            <p>People</p>
+
+            <div className="divider-search-bar"></div>
+
+            <ul>
+              {result.map((cohort) => (
+                <li className="user-search-card" key={cohort.id}>
+                  <ProfileCircle
+                    initials={[cohort.firstName[0], cohort.lastName[0]]}
+                    hasCascadingMenu={false}
+                  />
+
+                  {isStudentModalVisible && selectedProfileId === cohort.id && (
+                    <Menu className="profile-circle-menu" ref={menuRef}>
+                      <MenuItem icon={<ProfileIcon />} text="Profile" />
+                    </Menu>
+                  )}
+
+                  <div>
+                    <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                    <p>Software Developer</p>
+                  </div>
+
+                  <figure onClick={() => onClickStudent(cohort.id)}>
+                    <EllipsisIcon />
+                  </figure>
+                </li>
+              ))}
+            </ul>
+
+            {result.length >= 10 && <button>All results</button>}
+          </article>
+        )}
+
+        <Card name={'cohorts'}>
+          <h4>My Cohort</h4>
+        </Card>
+      </aside>
+    </>
+  )
+}
+
+export default Dashboard
