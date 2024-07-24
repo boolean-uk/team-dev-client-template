@@ -28,7 +28,9 @@ export const CurrentUserProvider = ({ children }) => {
             setCurrentUser(null)
             return
         }
-        getUserFromToken()
+        if (!currentUser) {
+            getUserFromToken()
+        }
         return
     }, [token, user])
 
