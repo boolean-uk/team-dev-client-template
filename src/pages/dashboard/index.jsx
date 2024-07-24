@@ -34,11 +34,14 @@ const Dashboard = () => {
     setSearchVal(e.target.value)
   }
 
-  const result = cohorts.filter(
-    (cohort) =>
-      cohort.firstName?.toLowerCase().includes(searchVal.toLowerCase()) ||
-      cohort.lastName?.toLowerCase().includes(searchVal.toLowerCase())
-  )
+  const result = cohorts.filter((cohort) => {
+    if (cohort.firstName && cohort.lastName) {
+      const fullName = `${cohort.firstName || ''} ${
+        cohort.lastName || ''
+      }`.toLowerCase()
+      return fullName.includes(searchVal.toLowerCase())
+    }
+  })
 
   const handleClickOutside = (event) => {
     if (
@@ -73,9 +76,9 @@ const Dashboard = () => {
   return (
     <>
       <main>
-        <Card name='create-post'>
+        <Card name="create-post">
           <div className="create-post-input">
-            <UserProfileIcon/>
+            <UserProfileIcon />
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
@@ -124,7 +127,10 @@ const Dashboard = () => {
               {result.map((cohort) => (
                 <li className="user-search-card" key={cohort.id}>
                   <ProfileCircle
-                    initials={[cohort.firstName[0], cohort.lastName[0]]}
+                    initials={[
+                      cohort.firstName?.split(' ')[0],
+                      cohort.lastName?.split(' ')[0],
+                    ]}
                     hasCascadingMenu={false}
                   />
 
