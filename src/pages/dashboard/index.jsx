@@ -35,8 +35,12 @@ const Dashboard = () => {
   }
 
   const result = cohorts.filter((cohort) => {
-    const fullName = `${cohort.firstName || ''} ${cohort.lastName || ''}`.toLowerCase()
-    return fullName.includes(searchVal.toLowerCase())
+    if (cohort.firstName && cohort.lastName) {
+      const fullName = `${cohort.firstName || ''} ${
+        cohort.lastName || ''
+      }`.toLowerCase()
+      return fullName.includes(searchVal.toLowerCase())
+    }
   })
 
   const handleClickOutside = (event) => {
