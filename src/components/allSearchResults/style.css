@@ -1,13 +1,73 @@
-main {
+.container {
   display: grid;
   grid-template-columns: 151px 1fr;
+  grid-template-rows: 96px auto;
+  background-color: #F0F5FA;
 }
 
-.top {
-  display: grid;
-  grid-template-rows: 1fr;
-  gap: 5px;
-  /* align-content: center; */
-  justify-content: center;
+.search-results-container {
+  display: inline;
+  width: 70%;
+  /* align-items: center;
+  justify-content: center; */
+}
 
+.title {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  justify-items: start;
+  align-items: center;
+}
+
+.search-bar-container {
+  margin-bottom: 0.70rem;
+}
+
+.search-page-search-bar {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.search-page-input {
+  height: 100%;
+  align-items: center;
+  background-color: #e6ebf5;
+  padding: 0 1rem 0 1rem;
+  border-radius: 0.5rem;
+}
+
+.search-list-title {
+  margin: 10px 10px 20px 10px;
+}
+
+.search-results-list {
+  display: grid;
+  gap: 10px;
+  grid-template-rows: auto;
+}
+
+
+.found-user-card {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 5fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.found-user-details p {
+  color: #64648c
+}
+
+.link-to-profile {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
 }

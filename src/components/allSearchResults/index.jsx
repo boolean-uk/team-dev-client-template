@@ -6,7 +6,6 @@ import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import ProfileCircle from '../../components/profileCircle';
 import Header from '../header';
 import Navigation from '../navigation';
-import Dashboard from '../../pages/dashboard';
 import Card from '../../components/card';
 import Menu from '../../components/menu';
 import MenuItem from '../../components/menu/menuItem';
@@ -47,72 +46,80 @@ const AllSearchResults = () => {
   };
 
   return (
-    <>
-        <Header />
-        <main>
+      <>
+        <div className='container'>              
+            <Header />
             <Navigation className="left-bar" />
-            <div>
-                  <div className='top'>
-                      <div className='title'>
-                        <ArrowLeftIcon onClick={() => navigate('/')} />              
-                        <h2>Search results</h2>                  
-                          
-                      </div>
-                        <Card name="search-bar">
-                            <div id="input-wrapper-search-bar">
-                                <SearchIcon />
-                                <input
-                                type="search"
-                                name="Search"
-                                value={searchVal}
-                                onChange={onChange}
-                                placeholder="Search for people"
-                                />
-                            </div>
-                        </Card>
-                </div>
-
-                <div className='search-results'>
-                    <Card name="results">
-                        <h2>Search Results for "{searchVal}"</h2>
-                        {results.length === 0 ? (
-                            <p>No results found.</p>
-                        ) : (
-                            <ul>
-                            {results.map((cohort) => (
-                                <li key={cohort.id} className="user-search-card">
-                                <ProfileCircle
-                                    initials={[
-                                    cohort.firstName?.split(' ')[0],
-                                    cohort.lastName?.split(' ')[0],
-                                    ]}
-                                    hasCascadingMenu={false}
-                                />
-
-                                {isStudentModalVisible && selectedProfileId === cohort.id && (
-                                    <Menu className="profile-circle-menu" ref={menuRef}>
-                                    <MenuItem icon={<ProfileIcon />} text="Profile" />
-                                    </Menu>
-                                )}
-
-                                <div>
-                                    <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
-                                    <p>Software Developer</p>
+            <main className='search-results-container'>
+                <div>
+                    <div className='top'>
+                        <div className='title'>
+                            <ArrowLeftIcon onClick={() => navigate('/')} />              
+                            <h2>Search results</h2>      
+                        </div>
+                        <div className='search-bar-container'>
+                            <Card name="search-bar">
+                                <div className='search-page-search-bar'>
+                                    <SearchIcon />
+                                    <input className="search-page-input"
+                                    type="search"
+                                    name="Search"
+                                    value={searchVal}
+                                    onChange={onChange}
+                                    placeholder="Search for people"
+                                    />
                                 </div>
+                            </Card>                              
+                        </div>
+                    </div>
 
-                                <figure onClick={() => onClickStudent(cohort.id)}>
-                                    <EllipsisIcon />
-                                </figure>
-                                </li>
-                            ))}
-                            </ul>
-                        )}
-                    </Card>
+                    <div className='search-results'>
+                        <Card className='search-results-card' name="results">
+                            <h4 className='search-list-title'>Search Results for "{searchVal}"</h4>
+                            {results.length === 0 ? (
+                                <p>No results found.</p>
+                            ) : (
+                                <ul className='search-results-list'>
+                                {results.map((cohort) => (
+                                    <li key={cohort.id} className="found-user-card">
+                                    <ProfileCircle
+                                        initials={[
+                                        cohort.firstName?.split(' ')[0],
+                                        cohort.lastName?.split(' ')[0],
+                                        ]}
+                                        hasCascadingMenu={false}
+                                    />
+
+                                    {/* {isStudentModalVisible && selectedProfileId === cohort.id && (
+                                        <Menu className="profile-circle-menu" ref={menuRef}>
+                                        <MenuItem icon={<ProfileIcon />} text="Profile" />
+                                        </Menu>
+                                    )} */}
+
+                                    <div className='found-user-details'>
+                                        <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                                        <p>Software Developer</p>
+                                    </div>
+
+                                    <div>
+                                        <p>Profile</p>
+                                    </div>    
+
+
+                                    <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
+                                        <EllipsisIcon classNam />
+                                    </figure>
+                                    </li>
+                                ))}
+                                </ul>
+                            )}
+                        </Card>
+                    </div>
                 </div>
-            </div>
-              
+                
 
-        </main>
+            </main>
+        </div>
     </>
   );
 };
