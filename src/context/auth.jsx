@@ -38,9 +38,9 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || "/");
+      navigate(location?.pathname ||  "/");
     }
-  }, [location.state?.from?.pathname, navigate]);
+  }, [location?.pathname]);
 
   const handleLogin = async (email, password) => {
     try {
@@ -58,6 +58,7 @@ const AuthProvider = ({ children }) => {
         setError("");
         return;
       }
+      setUser({...res.data.user})
       setError("Login failed");
       navigate("/login");
     } catch (error) {
@@ -68,6 +69,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    setUser(null)
     setError("");
   };
 
