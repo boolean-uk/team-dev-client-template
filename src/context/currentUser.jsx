@@ -21,7 +21,7 @@ export const CurrentUserProvider = ({ children }) => {
                 const userDetails = await getUser(userId)
 
                 if (userDetails.status === 'success') {
-                    setCurrentUser({ ...userDetails.data.user.user })
+                    setCurrentUser({ ...userDetails.data.user })
                     return
                 }
             }
