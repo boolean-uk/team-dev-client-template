@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from './context/auth'
 import { ModalProvider } from './context/modal'
 import { CurrentUserProvider } from './context/currentUser'
 import Welcome from './pages/welcome'
+import AllSearchResults from './components/allSearchResults'
 
 const App = () => {
     return (
@@ -41,6 +42,7 @@ const App = () => {
                                     </ProtectedRoute>
                                 }
                             />
+                            <Route path="/all-search-results" element={<AllSearchResults />} />
                         </Routes>
                     </ModalProvider>
                 </CurrentUserProvider>

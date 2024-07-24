@@ -1,18 +1,29 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import ProfileCircle from '../../components/profileCircle';
+import EllipsisIcon from '../../assets/icons/ellipsisIcon'
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
+import ProfileCircle from '../../components/profileCircle';
+import Header from '../header';
+import Navigation from '../navigation';
+import Dashboard from '../../pages/dashboard';
+import Card from '../../components/card';
+import Menu from '../../components/menu';
+import MenuItem from '../../components/menu/menuItem';
+import ProfileIcon from '../../assets/icons/profileIcon';
 import { getUsers } from '../../service/apiClient';
-// import './style.css';
+import './style.css';
 
 const AllSearchResults = () => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
   const [cohorts, setCohorts] = useState([]);
+  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
+  const [selectedProfileId, setSelectedProfileId] = useState(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     getUsers().then(setCohorts);
@@ -30,49 +41,77 @@ const AllSearchResults = () => {
     setResults(filteredResults);
   };
 
+  const onClickStudent = (id) => {
+    setSelectedProfileId(id);
+    setIsStudentModalVisible(true);
+  };
+
   return (
-    <div className="all-results-page">
-      <header className="all-results-header">
-        <ArrowLeftIcon onClick={() => history.push('/')} />
-        <h1>Search results</h1>
-      </header>
-
-      <div className="search-bar">
-        <SearchIcon />
-        <input
-          type="search"
-          value={searchVal}
-          onChange={onChange}
-          placeholder="Search for people"
-        />
-      </div>
-
-      <div>
-        <h2>Search Results for "{searchVal}"</h2>
-        {results.length === 0 ? (
-          <p>No results found.</p>
-        ) : (
-          <ul>
-            {results.map((cohort) => (
-              <li key={cohort.id} className="user-search-card">
-                <ProfileCircle
-                  initials={[
-                    cohort.firstName?.split(' ')[0],
-                    cohort.lastName?.split(' ')[0],
-                  ]}
-                  hasCascadingMenu={false}
-                />
-                <div>
-                  <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
-                  <p>Software Developer</p>
+    <>
+        <Header />
+        <main>
+            <Navigation className="left-bar"/>
+            <div className='title'>
+            <ArrowLeftIcon onClick={() => navigate('/Dashboard')} />              
+            <h1>Search results</h1>                  
+            <Card name="search-bar">
+                <div id="input-wrapper-search-bar">
+                    <SearchIcon />
+                    <input
+                    type="search"
+                    name="Search"
+                    value={searchVal}
+                    onChange={onChange}
+                    placeholder="Search for people"
+                    />
                 </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+            </Card>
+            </div>
+
+            <div className='search-results'>
+                <Card name="results">
+                    <h2>Search Results for "{searchVal}"</h2>
+                    {results.length === 0 ? (
+                        <p>No results found.</p>
+                    ) : (
+                        <ul>
+                        {results.map((cohort) => (
+                            <li key={cohort.id} className="user-search-card">
+                            <ProfileCircle
+                                initials={[
+                                cohort.firstName?.split(' ')[0],
+                                cohort.lastName?.split(' ')[0],
+                                ]}
+                                hasCascadingMenu={false}
+                            />
+
+                            {isStudentModalVisible && selectedProfileId === cohort.id && (
+                                <Menu className="profile-circle-menu" ref={menuRef}>
+                                <MenuItem icon={<ProfileIcon />} text="Profile" />
+                                </Menu>
+                            )}
+
+                            <div>
+                                <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                                <p>Software Developer</p>
+                            </div>
+
+                            <figure onClick={() => onClickStudent(cohort.id)}>
+                                <EllipsisIcon />
+                            </figure>
+                            </li>
+                        ))}
+                        </ul>
+                    )}
+                </Card>  
+
+            </div>
+              
+
+        </main>
+    </>
   );
 };
 
 export default AllSearchResults;
+

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -23,7 +23,7 @@ const Dashboard = () => {
   const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
   const [selectedProfileId, setSelectedProfileId] = useState(null)
   const menuRef = useRef(null)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getUsers().then(setCohorts)
@@ -76,7 +76,7 @@ const Dashboard = () => {
     openModal()
   }
 
-  const allSearchResults = history.push('/all-results', {results: result, searchVal})
+  const allSearchResults = () => navigate('/all-search-results', { state: { results: result, searchVal } })
 
   return (
     <>
