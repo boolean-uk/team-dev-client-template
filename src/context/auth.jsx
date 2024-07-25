@@ -6,6 +6,7 @@ import { createProfile, login, register } from '../service/apiClient'
 import Navigation from '../components/navigation'
 import Header from '../components/header'
 import Modal from '../components/modal'
+import ERR from '../service/errors.js'
 
 const AuthContext = createContext()
 
@@ -58,10 +59,10 @@ const AuthProvider = ({ children }) => {
                 return
             }
             setUser({ ...res.data.user })
-            setError('Login failed')
+            setError(ERR.LOGIN_FAILED)
             navigate('/login')
         } catch (error) {
-            setError('An error occurred during login')
+            setError(ERR.LOGIN_FAILED)
         }
     }
 
@@ -83,9 +84,9 @@ const AuthProvider = ({ children }) => {
             setUser({ ...res.data.user })
             setToken(res.data.token)
             navigate('/verification')
-            setError('')
+            setError(ERR.REGISTRATION_FAILED)
         } catch (error) {
-            setError('An error occurred during registration')
+            setError(ERR.REGISTRATION_FAILED)
         }
     }
 
@@ -114,9 +115,9 @@ const AuthProvider = ({ children }) => {
                 navigate('/')
                 return
             }
-            setError('Failed to create profile')
+            setError(ERR.PROFILE_CREATION_FAILED)
         } catch (error) {
-            setError('An error occurred during profile creation')
+            setError(ERR.PROFILE_CREATION_FAILED)
         }
     }
 
