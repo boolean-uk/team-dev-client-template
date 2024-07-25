@@ -4,12 +4,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import ProfileCircle from '../../components/profileCircle';
-import Header from '../header';
-import Navigation from '../navigation';
+import Header from '../../components/header';
+import Navigation from '../../components/navigation';
 import Card from '../../components/card';
-import Menu from '../../components/menu';
-import MenuItem from '../../components/menu/menuItem';
-import ProfileIcon from '../../assets/icons/profileIcon';
 import { getUsers } from '../../service/apiClient';
 import './style.css';
 
@@ -20,9 +17,9 @@ const AllSearchResults = () => {
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
   const [cohorts, setCohorts] = useState([]);
-  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState(null);
-  const menuRef = useRef(null);
+//   const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
+//   const [selectedProfileId, setSelectedProfileId] = useState(null);
+//   const menuRef = useRef(null);
 
   useEffect(() => {
     getUsers().then(setCohorts);
@@ -74,8 +71,7 @@ const AllSearchResults = () => {
                     </div>
 
                     <div className='search-results'>
-                        <Card className='search-results-card' name="results">
-                            <h4 className='search-list-title'>Search Results for "{searchVal}"</h4>
+                          <Card className='search-results-card' name="results">
                             {results.length === 0 ? (
                                 <p>No results found.</p>
                             ) : (

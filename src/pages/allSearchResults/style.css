@@ -1,15 +1,14 @@
-.container {
+/* .container {
   display: grid;
   grid-template-columns: 151px 1fr;
   grid-template-rows: 96px auto;
   background-color: #F0F5FA;
-}
+} */
 
 .search-results-container {
   display: inline;
-  width: 70%;
-  /* align-items: center;
-  justify-content: center; */
+  margin-left: 7rem;
+  width: 75%;
 }
 
 .title {
@@ -25,17 +24,18 @@
 
 .search-page-search-bar {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  height: 3rem;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem;
   align-items: center;
+  background-color: #e6ebf5;
+  padding: 0 1rem 0 0.5rem;
   border-radius: 0.5rem;
 }
 
-.search-page-input {
-  height: 100%;
-  align-items: center;
+.search-page-input{
+  font-size: large;
   background-color: #e6ebf5;
-  padding: 0 1rem 0 1rem;
-  border-radius: 0.5rem;
 }
 
 .search-list-title {
@@ -44,14 +44,14 @@
 
 .search-results-list {
   display: grid;
-  gap: 10px;
+  gap: 2rem;
   grid-template-rows: auto;
 }
 
 
 .found-user-card {
   display: grid;
-  gap: 5px;
+  gap: 1rem;
   grid-template-columns: 1fr 5fr 1fr 1fr;
   align-items: center;
   justify-content: center;

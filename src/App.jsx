@@ -9,7 +9,7 @@ import { AuthProvider, ProtectedRoute } from './context/auth'
 import { ModalProvider } from './context/modal'
 import { CurrentUserProvider } from './context/currentUser'
 import Welcome from './pages/welcome'
-import AllSearchResults from './components/allSearchResults'
+import AllSearchResults from './pages/allSearchResults'
 
 const App = () => {
     return (
