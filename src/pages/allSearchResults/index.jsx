@@ -86,12 +86,6 @@ const AllSearchResults = () => {
                                         hasCascadingMenu={false}
                                     />
 
-                                    {/* {isStudentModalVisible && selectedProfileId === cohort.id && (
-                                        <Menu className="profile-circle-menu" ref={menuRef}>
-                                        <MenuItem icon={<ProfileIcon />} text="Profile" />
-                                        </Menu>
-                                    )} */}
-
                                     <div className='found-user-details'>
                                         <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
                                         <p>Software Developer</p>
