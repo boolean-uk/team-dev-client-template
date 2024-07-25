@@ -5,25 +5,29 @@ import Button from '../button'
 import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 import PostModalActions from '../PostModalActions'
+import { createPost } from '../../service/apiClient'
 
 const CreatePostModal = () => {
-    // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
     const [message, setMessage] = useState(null)
-    const [text, setText] = useState('')
+    const [content, setContent] = useState('')
 
     const onChange = (e) => {
-        setText(e.target.value)
+        setContent(e.target.value)
     }
 
-    const onSubmit = () => {
-        setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+    const onSubmit = async () => {
+        const res = await createPost(content)
 
-        setTimeout(() => {
-            setMessage(null)
-            closeModal()
-        }, 2000)
+        if (res.status === "success") {
+            setMessage('Submit button was clicked! Closing modal in 2 seconds...')
+    
+            setTimeout(() => {
+                setMessage(null)
+                closeModal()
+            }, 2000)
+        }
     }
 
     return (
@@ -36,12 +40,12 @@ const CreatePostModal = () => {
             <section>
                 <textarea
                     onChange={onChange}
-                    value={text}
+                    value={content}
                     placeholder="What's on your mind?"
                 ></textarea>
             </section>
 
-            <PostModalActions onSubmit={onSubmit}/>
+            <PostModalActions onSubmit={onSubmit} text={content}/>
 
             {message && <p>{message}</p>}
         </>
