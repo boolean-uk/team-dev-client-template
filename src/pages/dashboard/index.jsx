@@ -156,7 +156,10 @@ const Dashboard = () => {
               ))}
             </ul>
 
-            {result.length >= 10 && <button onClick={allSearchResults}>All results</button>}
+            {result.length >= 10 &&
+              <button onClick={allSearchResults}>
+                All results
+              </button>}
           </article>
         )}
 

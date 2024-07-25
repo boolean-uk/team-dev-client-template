@@ -1,6 +1,6 @@
 import EllipsisIcon from '../../assets/icons/ellipsisIcon'
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import {useLocation, Link } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import ProfileCircle from '../../components/profileCircle';
@@ -12,17 +12,15 @@ import './style.css';
 
 const AllSearchResults = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
-  const [cohorts, setCohorts] = useState([]);
-//   const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
-//   const [selectedProfileId, setSelectedProfileId] = useState(null);
-//   const menuRef = useRef(null);
+  const [cohorts, setCohorts] = useState([]);    
+
 
   useEffect(() => {
-    getUsers().then(setCohorts);
+      getUsers().then(setCohorts);
+      window.scrollTo(0, 0);
   }, []);
 
   const onChange = (e) => {
@@ -42,6 +40,7 @@ const AllSearchResults = () => {
     setIsStudentModalVisible(true);
   };
 
+
   return (
       <>
         <div className='container'>              
@@ -50,8 +49,10 @@ const AllSearchResults = () => {
             <main className='search-results-container'>
                 <div>
                     <div className='top'>
-                        <div className='title'>
-                            <ArrowLeftIcon onClick={() => navigate('/')} />              
+                          <div className='title'>
+                              <Link to='/'>
+                                <ArrowLeftIcon />              
+                              </Link>
                             <h2>Search results</h2>      
                         </div>
                         <div className='search-bar-container'>
@@ -78,27 +79,27 @@ const AllSearchResults = () => {
                                 <ul className='search-results-list'>
                                 {results.map((cohort) => (
                                     <li key={cohort.id} className="found-user-card">
-                                    <ProfileCircle
-                                        initials={[
-                                        cohort.firstName?.split(' ')[0],
-                                        cohort.lastName?.split(' ')[0],
-                                        ]}
-                                        hasCascadingMenu={false}
-                                    />
+                                        <ProfileCircle
+                                            initials={[
+                                            cohort.firstName?.split(' ')[0],
+                                            cohort.lastName?.split(' ')[0],
+                                            ]}
+                                            hasCascadingMenu={false}
+                                        />
 
-                                    <div className='found-user-details'>
-                                        <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
-                                        <p>Software Developer</p>
-                                    </div>
+                                        <div className='found-user-details'>
+                                            <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                                            <p>Software Developer</p>
+                                        </div>
 
-                                    <div>
-                                        <p>Profile</p>
-                                    </div>    
+                                        <div>
+                                            <p>Profile</p>
+                                        </div>   
 
 
-                                    <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
-                                        <EllipsisIcon classNam />
-                                    </figure>
+                                        <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
+                                            <EllipsisIcon classNam />
+                                        </figure>
                                     </li>
                                 ))}
                                 </ul>
