@@ -4,3 +4,7 @@
     grid-template-rows: 96px auto;
     background-color: #F0F5FA;
   }
+
+h2 {
+    margin-bottom: 30px;
+}
