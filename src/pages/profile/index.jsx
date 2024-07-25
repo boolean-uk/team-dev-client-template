@@ -1,6 +1,7 @@
 import Card from "../../components/card";
 import UserDetails from "../../components/UserDetails";
 import UserProfileIcon from "../../components/UserProfileIcon";
+import TextInput from "../../components/form/textInput";
 import "./profile.css";
 
 const Profile = () => {
