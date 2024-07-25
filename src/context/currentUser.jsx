@@ -14,7 +14,7 @@ export const CurrentUserProvider = ({ children }) => {
 
     useEffect(() => {
         if (user) {
-            setCurrentUser({ ...user.user })
+            setCurrentUser({ ...user })
             return
         }
 
@@ -23,7 +23,7 @@ export const CurrentUserProvider = ({ children }) => {
             const userDetails = await getUser(userId)
 
             if (userDetails.status === 'success') {
-                setCurrentUser({ ...userDetails.data.user.user })
+                setCurrentUser({ ...userDetails.data.user })
                 return
             }
 
