@@ -1,11 +1,12 @@
-import Header from "../../components/header";
-import Navigation from "../../components/navigation";
+import Card from '../../components/card'
+import './profile.css'
 
 const Profile = () => {
   return (
-    <>
-<p>Profile</p>
-    </>
+    <main>
+    <Card />
+    </main>
+    
   );
 };
 
