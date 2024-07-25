@@ -45,6 +45,12 @@ const AllSearchResults = () => {
     setIsStudentModalVisible(true);
   };
 
+  const getInitials = (firstName, lastName) => {
+    const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
+    const secondInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
+    return [firstInitial, secondInitial]
+  };
+
   return (
       <>
         <div className='container'>              
@@ -82,18 +88,15 @@ const AllSearchResults = () => {
                               )} 
                               {results.length > 0 && (
                                 <ul className='search-results-list'>
-                                {results.map((cohort) => (
-                                    <li key={cohort.id} className="found-user-card">
+                                {results.map((user) => (
+                                    <li key={user.id} className="found-user-card">
                                         <ProfileCircle
-                                            initials={[
-                                            cohort.firstName?.split(' ')[0],
-                                            cohort.lastName?.split(' ')[0],
-                                            ]}
+                                            initials={getInitials(user.firstName, user.lastName)}
                                             hasCascadingMenu={false}
                                         />
 
                                         <div className='found-user-details'>
-                                            <span>{`${cohort.firstName} ${cohort.lastName}`}</span>
+                                            <span>{`${user.firstName} ${user.lastName}`}</span>
                                             <p>Software Developer</p>
                                         </div>
 
@@ -102,7 +105,7 @@ const AllSearchResults = () => {
                                         </div>   
 
                                         <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
-                                            <EllipsisIcon classNam />
+                                            <EllipsisIcon />
                                         </figure>
                                     </li>
                                 ))}
