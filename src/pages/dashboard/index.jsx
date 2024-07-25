@@ -75,7 +75,7 @@ const Dashboard = () => {
     openModal()
   }
 
-  const allSearchResults = () => navigate('/all-search-results', { state: { results: result, searchVal } })
+  const allSearchResults = () => navigate('/search-results', { state: { results: result, searchVal } })
 
   return (
     <>

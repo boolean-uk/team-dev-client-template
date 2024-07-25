@@ -15,8 +15,7 @@ const AllSearchResults = () => {
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
-  const [cohorts, setCohorts] = useState([]);    
-
+  const [cohorts, setCohorts] = useState([]);   
 
   useEffect(() => {
       getUsers().then(setCohorts);
@@ -39,7 +38,6 @@ const AllSearchResults = () => {
     setSelectedProfileId(id);
     setIsStudentModalVisible(true);
   };
-
 
   return (
       <>
@@ -73,9 +71,10 @@ const AllSearchResults = () => {
 
                     <div className='search-results'>
                           <Card className='search-results-card' name="results">
-                            {results.length === 0 ? (
-                                <p>No results found.</p>
-                            ) : (
+                              {results.length === 0 && (
+                                  <p>No results found.</p>
+                              )} 
+                              {results.length > 0 && (
                                 <ul className='search-results-list'>
                                 {results.map((cohort) => (
                                     <li key={cohort.id} className="found-user-card">
@@ -96,7 +95,6 @@ const AllSearchResults = () => {
                                             <p>Profile</p>
                                         </div>   
 
-
                                         <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
                                             <EllipsisIcon classNam />
                                         </figure>
@@ -106,10 +104,8 @@ const AllSearchResults = () => {
                             )}
                         </Card>
                     </div>
-                </div>
-                
-
-            </main>
+                  </div>
+              </main>
         </div>
     </>
   );

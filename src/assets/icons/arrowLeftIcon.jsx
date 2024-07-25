@@ -1,5 +1,4 @@
 const ArrowLeftIcon = ({onClick = null}) => {
-
     return (
         <svg
             width="2.1rem"

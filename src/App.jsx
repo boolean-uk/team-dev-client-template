@@ -42,7 +42,7 @@ const App = () => {
                                     </ProtectedRoute>
                                 }
                             />
-                            <Route path="/all-search-results" element={<AllSearchResults />} />
+                            <Route path="/search-results" element={<AllSearchResults />} />
                         </Routes>
                     </ModalProvider>
                 </CurrentUserProvider>
