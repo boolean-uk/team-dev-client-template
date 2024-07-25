@@ -40,7 +40,7 @@ export const CurrentUserProvider = ({ children }) => {
             token &&
             currentUser &&
             !currentUser?.firstName &&
-            (location.pathname !== '/welcome' || location.pathname !== 'verification')
+            (location.pathname !== '/welcome' || location.pathname !== '/verification')
         ) {
             navigate('/welcome')
         }
