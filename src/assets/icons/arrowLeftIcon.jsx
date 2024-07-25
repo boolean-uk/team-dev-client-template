@@ -2,7 +2,7 @@ const ArrowLeftIcon = ({onClick = null}) => {
 
     return (
         <svg
-            width="2.3rem"
+            width="2.1rem"
             height="2.3rem"
             viewBox="0 0 20 20"    
             xmlns="http://www.w3.org/2000/svg"

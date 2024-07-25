@@ -1,6 +1,6 @@
 .search-results-container {
   display: inline;
-  margin-left: 7rem;
+  margin-left: 6rem;
   width: 75%;
 }
 
@@ -12,18 +12,23 @@
   margin-bottom: 2rem;
 }
 
+.title h2{
+  padding-left: 0.7rem;
+}
+
 .search-bar-container {
   margin-bottom: 2rem;
+  margin-left: 3rem;
 }
 
 .search-page-search-bar {
   display: grid;
-  height: 3rem;
+  height: 4rem;
   grid-template-columns: max-content 1fr;
   gap: 0.5rem;
   align-items: center;
   background-color: #e6ebf5;
-  padding: 0 1rem 0 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 0.5rem;
 }
 
@@ -32,8 +37,8 @@
   background-color: #e6ebf5;
 }
 
-.search-list-title {
-  margin: 10px 10px 20px 10px;
+.search-results {
+  margin-left: 3rem;
 }
 
 .search-results-list {
