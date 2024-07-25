@@ -15,23 +15,29 @@ const AllSearchResults = () => {
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
-  const [cohorts, setCohorts] = useState([]);   
 
   useEffect(() => {
-      getUsers().then(setCohorts);
+      getUsers()
       window.scrollTo(0, 0);
   }, []);
 
-  const onChange = (e) => {
-    setSearchVal(e.target.value);
-    const filteredResults = cohorts.filter((cohort) => {
-      if (cohort.firstName && cohort.lastName) {
-        const fullName = `${cohort.firstName || ''} ${cohort.lastName || ''}`.toLowerCase();
-        return fullName.includes(e.target.value.toLowerCase());
-      }
-      return false;
-    });
-    setResults(filteredResults);
+  const onChange = async (e) => {
+    const searchValue = e.target.value;
+    setSearchVal(searchValue);
+
+    try {
+      const allUsers = await getUsers();
+      const filteredResults = allUsers.filter((user) => {
+        if (user.firstName && user.lastName) {
+          const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+          return fullName.includes(searchValue.toLowerCase());
+        }
+        return false;
+      });
+      setResults(filteredResults);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   };
 
   const onClickStudent = (id) => {
@@ -112,4 +118,3 @@ const AllSearchResults = () => {
 };
 
 export default AllSearchResults;
-

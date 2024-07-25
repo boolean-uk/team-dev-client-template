@@ -36,6 +36,8 @@ const Dashboard = () => {
     setSearchVal(e.target.value)
   }
 
+  // console.log(cohorts);
+
   const result = cohorts.filter((cohort) => {
     if (cohort.firstName && cohort.lastName) {
       const fullName = `${cohort.firstName || ''} ${
