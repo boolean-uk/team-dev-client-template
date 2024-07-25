@@ -19,15 +19,14 @@ export const CurrentUserProvider = ({ children }) => {
         }
 
         async function getUserFromToken() {
-            if (token) {
-                const { userId } = jwt_decode(token)
-                const userDetails = await getUser(userId)
+            const { userId } = jwt_decode(token)
+            const userDetails = await getUser(userId)
 
-                if (userDetails.status === 'success') {
-                    setCurrentUser({ ...userDetails.data.user.user })
-                    return
-                }
+            if (userDetails.status === 'success') {
+                setCurrentUser({ ...userDetails.data.user.user })
+                return
             }
+
             setCurrentUser(null)
             return
         }
@@ -41,7 +40,7 @@ export const CurrentUserProvider = ({ children }) => {
             token &&
             currentUser &&
             !currentUser?.firstName &&
-                (location.pathname !== '/welcome' || location.pathname !== 'verification')
+            (location.pathname !== '/welcome' || location.pathname !== 'verification')
         ) {
             navigate('/welcome')
         }
