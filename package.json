@@ -16,7 +16,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "node --experimental-vm-modules ./node_modules/.bin/jest -- -i ./App.test.jsx"
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest -- -i ./src/tests"
   },
   "eslintConfig": {
     "extends": [
