@@ -13,11 +13,6 @@ export const CurrentUserProvider = ({ children }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (user) {
-            setCurrentUser({ ...user })
-            return
-        }
-
         async function getUserFromToken() {
             const { userId } = jwt_decode(token)
             const userDetails = await getUser(userId)
@@ -42,7 +37,7 @@ export const CurrentUserProvider = ({ children }) => {
             !currentUser?.firstName &&
             (location.pathname !== '/welcome' || location.pathname !== '/verification')
         ) {
-            navigate('/welcome')
+            redirect('/welcome')
         }
 
         if (location.pathname === '/welcome' && currentUser?.firstName) {
