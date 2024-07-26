@@ -91,7 +91,6 @@ const AuthProvider = ({ children }) => {
         throw new Error(ERR.EMAIL_ERROR_MESSAGE);
       }
       if (!validatePassword(password)) {
-        console.log(!validatePassword(password))
         throw new Error(ERR.PASSWORD_REQUIRMENTS);
       }
       const res = await register(email, password);
@@ -195,16 +194,7 @@ function validatePassword(password) {
   const hasUppercase = /[A-Z]/.test(password);
   const hasNumber = /\d/.test(password);
   const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-  if (
-    password.length < minLength ||
-    !hasUppercase ||
-    !hasNumber ||
-    !hasSpecialCharacter
-  ) {
-    return false;
-  }
-  return true;
+  return password.length >= minLength && hasUppercase && hasNumber && hasSpecialCharacter
 }
 
 export { AuthContext, AuthProvider, ProtectedRoute };
