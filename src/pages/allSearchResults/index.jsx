@@ -76,77 +76,77 @@ const AllSearchResults = () => {
           <Header />
           <Navigation className="left-bar" />
           <main className='search-results-container'>
-              <div>
-                  <div className='top'>
-                        <div className='title'>
-                            <Link to='/'>
-                              <ArrowLeftIcon />              
-                            </Link>
-                          <h2>Search results</h2>      
-                      </div>
-                      <div className='search-bar-container'>
-                          <Card name="search-bar">
-                              <div className='search-page-search-bar'>
-                                  <SearchIcon />
-                                  <input className="search-page-input"
-                                  type="search"
-                                  name="Search"
-                                  value={searchVal}
-                                  onChange={onChange}
-                                  placeholder="Search for people"
-                                  />
-                              </div>
-                          </Card>                              
-                      </div>                        
-                  </div>
-
-                  <div className='search-results'>
-                    <Card className='search-results-card' name="results">
-                      {results.length === 0 && (
-                          <p>No results found.</p>
-                      )} 
-                      {results.length > 0 && (
-                        <ul className='search-results-list'>
-                          {results.map((user) => (
-                            <li key={user.id} className="found-user-card">
-                                <ProfileCircle
-                                    initials={getInitials(user.firstName, user.lastName)}
-                                    hasCascadingMenu={false}
-                                />
-
-                                {currentUser.role === 'STUDENT' && (
-                                  <>
-                                    <div className='found-user-details'>
-                                        <span>{`${user.firstName} ${user.lastName}`}</span>
-                                        <p>Software Developer</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Profile</p>
-                                    </div>
-
-                                    <p>test</p>
-                                    <p>test2</p>
-                                  </>
-                                )}
-                            
-                                {selectedProfileId === user.id && (
-                                  <Menu className="profile-circle-menu" ref={menuRef}>
-                                    <MenuItem icon={<ProfileIcon />} text="Profile" />
-                                  </Menu>
-                                  )}
-                            
-                                <figure className='link-to-profile'
-                                  onClick={() => onClickStudentMenu(user.id)}>
-                                  <EllipsisIcon />
-                                </figure>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </Card>
-                  </div>
+            <div>
+              <div className='top'>
+                <div className='title'>
+                    <Link to='/'>
+                      <ArrowLeftIcon />              
+                    </Link>
+                  <h2>Search results</h2>      
               </div>
+                <div className='search-bar-container'>
+                  <Card name="search-bar">
+                    <div className='search-page-search-bar'>
+                        <SearchIcon />
+                        <input className="search-page-input"
+                        type="search"
+                        name="Search"
+                        value={searchVal}
+                        onChange={onChange}
+                        placeholder="Search for people"
+                        />
+                    </div>
+                  </Card>                              
+                </div>                        
+              </div>
+
+              <div className='search-results'>
+                <Card className='search-results-card' name="results">
+                  {results.length === 0 && (
+                      <p>No results found.</p>
+                  )} 
+                  {results.length > 0 && (
+                    <ul className='search-results-list'>
+                      {results.map((user) => (
+                        <li key={user.id} className="found-user-card">
+                            <ProfileCircle
+                                initials={getInitials(user.firstName, user.lastName)}
+                                hasCascadingMenu={false}
+                            />
+
+                            {currentUser.role === 'STUDENT' && (
+                              <>
+                                <div className='found-user-details'>
+                                    <span>{`${user.firstName} ${user.lastName}`}</span>
+                                    <p>Software Developer</p>
+                                </div>
+
+                                <div>
+                                    <p>Profile</p>
+                                </div>
+
+                                <p>test</p>
+                                <p>test2</p>
+                              </>
+                            )}
+                        
+                            {selectedProfileId === user.id && (
+                              <Menu className="profile-circle-menu" ref={menuRef}>
+                                <MenuItem icon={<ProfileIcon />} text="Profile" />
+                              </Menu>
+                              )}
+                        
+                            <figure className='link-to-profile'
+                              onClick={() => onClickStudentMenu(user.id)}>
+                              <EllipsisIcon />
+                            </figure>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </Card>
+              </div>
+            </div>
           </main>
         </div>
     </>
