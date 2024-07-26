@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
   const useClickOutside = (ref, onClickOutside) => {
@@ -79,7 +79,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
-    setError("");
+    setError(null);
   };
 
   const handleRegister = async (email, password) => {
@@ -91,6 +91,7 @@ const AuthProvider = ({ children }) => {
         throw new Error(ERR.EMAIL_ERROR_MESSAGE);
       }
       if (!validatePassword(password)) {
+        console.log(!validatePassword(password))
         throw new Error(ERR.PASSWORD_REQUIRMENTS);
       }
       const res = await register(email, password);
@@ -201,9 +202,9 @@ function validatePassword(password) {
     !hasNumber ||
     !hasSpecialCharacter
   ) {
-    return true;
+    return false;
   }
-  return false;
+  return true;
 }
 
 export { AuthContext, AuthProvider, ProtectedRoute };
