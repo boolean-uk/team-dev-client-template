@@ -44,6 +44,17 @@ const AuthProvider = ({ children }) => {
 
     const handleLogin = async (email, password) => {
         try {
+            if (!email || !password) {
+                throw new Error(ERR.ENTER_EMAIL_PASSWORD);
+              }
+              const validatedEmail = validationEmail(email);
+              if (!validatedEmail) {
+                throw new Error(ERR.EMAIL_ERROR_MESSAGE);
+              }
+              const validatedPassword = validationPassword(password);
+              if (!validatedPassword) {
+                throw new Error(ERR.PASSWORD_REQUIRMENTS);
+              }
             const res = await login(email, password)
 
             if (res.data.error) {
@@ -55,14 +66,14 @@ const AuthProvider = ({ children }) => {
                 localStorage.setItem('token', res.data.token)
                 setToken(res.data.token)
                 navigate(location.state?.from?.pathname || '/')
-                setError('')
+                setError(null)
                 return
             }
             setUser({ ...res.data.user })
             setError(ERR.LOGIN_FAILED)
             navigate('/login')
         } catch (error) {
-            setError(ERR.LOGIN_FAILED)
+            setError(error.message)
         }
     }
 
@@ -75,6 +86,17 @@ const AuthProvider = ({ children }) => {
 
     const handleRegister = async (email, password) => {
         try {
+            if (!email || !password) {
+                throw new Error(ERR.ENTER_EMAIL_PASSWORD);
+              }
+              const validatedEmail = validationEmail(email);
+              if (!validatedEmail) {
+                throw new Error(ERR.EMAIL_ERROR_MESSAGE);
+              }
+              const validatedPassword = validationPassword(password);
+              if (!validatedPassword) {
+                throw new Error(ERR.PASSWORD_REQUIRMENTS);
+              }
             const res = await register(email, password)
             if (res.data.error) {
                 setError(res.data.error)
@@ -86,7 +108,7 @@ const AuthProvider = ({ children }) => {
             navigate('/verification')
             setError(ERR.REGISTRATION_FAILED)
         } catch (error) {
-            setError(ERR.REGISTRATION_FAILED)
+            setError(error.message)
         }
     }
 
@@ -164,5 +186,25 @@ const ProtectedRoute = ({ children, disabledNav = false }) => {
         </div>
     )
 }
+
+function validationEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  
+    return !email || !emailPattern.test(email) ? false : true;
+  }
+  
+  function validationPassword(password) {
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  
+    return password.length < minLength ||
+      !hasUppercase ||
+      !hasNumber ||
+      !hasSpecialCharacter
+      ? false
+      : true;
+  }
 
 export { AuthContext, AuthProvider, ProtectedRoute }
