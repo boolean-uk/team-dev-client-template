@@ -51,9 +51,9 @@
 .found-user-card {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 5fr 1fr 1fr;
+  grid-template-columns: 1fr 5fr 1fr 1fr 1fr 1fr;  
   align-items: center;
-  justify-content: center;
+  justify-items: stretch
 }
 
 .found-user-details p {

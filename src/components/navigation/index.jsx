@@ -13,7 +13,6 @@ const Navigation = ({ disabledNav = false }) => {
     const { token } = useAuth()
     const { currentUser } = useUser()    
     const location = useLocation()
-    console.log(currentUser);
 
     if (!token) {
         return null

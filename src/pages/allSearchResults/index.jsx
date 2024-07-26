@@ -1,20 +1,27 @@
-import EllipsisIcon from '../../assets/icons/ellipsisIcon'
-import { useState, useEffect, useRef } from 'react';
 import {useLocation, Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import useUser from '../../hooks/useUser';
+import EllipsisIcon from '../../assets/icons/ellipsisIcon'
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import ProfileCircle from '../../components/profileCircle';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Card from '../../components/card';
+import ProfileIcon from '../../assets/icons/profileIcon'
+import Menu from '../../components/menu'
+import MenuItem from '../../components/menu/menuItem'
 import { getUsers } from '../../service/apiClient';
 import './style.css';
 
 const AllSearchResults = () => {
   const location = useLocation();
+  const menuRef = useRef(null)
+  const {currentUser} = useUser()
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
+  const [selectedProfileId, setSelectedProfileId] = useState(null)
 
   useEffect(() => {
       getUsers()
@@ -39,16 +46,28 @@ const AllSearchResults = () => {
       console.error('Error fetching users:', error);
     }
   };
-
-  const onClickStudent = (id) => {
-    setSelectedProfileId(id);
-    setIsStudentModalVisible(true);
-  };
-
+  
   const getInitials = (firstName, lastName) => {
     const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
     const secondInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
     return [firstInitial, secondInitial]
+  };
+
+  const handleClickOutside = (event) => {
+  if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.closest('.link-to-profile')) {
+    setSelectedProfileId(null);
+  }
+};
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+  
+  const onClickStudentMenu = (id) => {
+    setSelectedProfileId(prevId => prevId === id ? null : id);
   };
 
   return (
@@ -78,7 +97,7 @@ const AllSearchResults = () => {
                                     />
                                 </div>
                             </Card>                              
-                        </div>
+                        </div>                        
                     </div>
 
                     <div className='search-results'>
@@ -88,33 +107,47 @@ const AllSearchResults = () => {
                               )} 
                               {results.length > 0 && (
                                 <ul className='search-results-list'>
-                                {results.map((user) => (
+                                  {results.map((user) => (
                                     <li key={user.id} className="found-user-card">
                                         <ProfileCircle
                                             initials={getInitials(user.firstName, user.lastName)}
                                             hasCascadingMenu={false}
                                         />
 
-                                        <div className='found-user-details'>
-                                            <span>{`${user.firstName} ${user.lastName}`}</span>
-                                            <p>Software Developer</p>
-                                        </div>
+                                        {currentUser.role === 'STUDENT' && (
+                                          <>
+                                            <div className='found-user-details'>
+                                                <span>{`${user.firstName} ${user.lastName}`}</span>
+                                                <p>Software Developer</p>
+                                            </div>
 
-                                        <div>
-                                            <p>Profile</p>
-                                        </div>   
+                                            <div>
+                                                <p>Profile</p>
+                                            </div>
 
-                                        <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
-                                            <EllipsisIcon />
+                                            <p>test</p>
+                                            <p>test2</p>
+                                          </>
+                                      )}
+                                    
+                                        {selectedProfileId === user.id && (
+                                          <Menu className="profile-circle-menu" ref={menuRef}>
+                                            <MenuItem icon={<ProfileIcon />} text="Profile" />
+                                          </Menu>
+                                         )}
+                                    
+                                        <figure className='link-to-profile'
+                                          onClick={() => onClickStudentMenu(user.id)}>
+                                          <EllipsisIcon />
                                         </figure>
                                     </li>
                                 ))}
                                 </ul>
                             )}
-                        </Card>
+                          </Card>
                     </div>
-                  </div>
-              </main>
+                </div>
+            </main>
         </div>
     </>
   );
