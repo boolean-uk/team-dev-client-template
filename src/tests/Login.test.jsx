@@ -12,10 +12,10 @@ describe("Login", () => {
         app = render(<App />)
         loginForm = render(<Login />)
     })
-    test('the login form will render', () => {
+    it('will render the login form', () => {
         expect(loginForm).toBeInTheDocument()
     })
-    test('a users login request will be sent to the API', async () => {
+    it('will allow a users login request will be sent to the API', async () => {
         const mockRequest = {
             email: 'testuser@boolean.com',
             password: 'Password1!'
@@ -23,7 +23,7 @@ describe("Login", () => {
         const { email, password } = mockRequest
         await expect(login(email, password)).toHaveBeenCalled()
     })
-    test('an error will be displayed if a user is unsuccessful in logging in', () => {
+    it('will display an error if a user is unsuccessful in logging in', () => {
         const button = render(<Button />)
         act(() => {
             button.getByPlaceholderText('Log in')
