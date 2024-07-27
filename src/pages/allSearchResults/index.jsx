@@ -68,16 +68,16 @@ const AllSearchResults = () => {
     }
   }, [])
   
-  // const onClickStudentMenu = (id, event) => {
-  //   event.stopPropagation();
-  //   const rect = event.currentTarget.getBoundingClientRect();
-  //   setMenuPosition({
-  //     top: rect.top + window.scrollY,
-  //     right: window.innerWidth - rect.left,
-  //   });
-  //   setSelectedProfileId(prevId => prevId === id ? null : id);
-  //   console.log(id);
-  // };
+  const onClickStudentMenu = (id, event) => {
+    event.stopPropagation();
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMenuPosition({
+      top: rect.top + window.scrollY,
+      right: window.innerWidth - rect.left,
+    });
+    setSelectedProfileId(prevId => prevId === id ? null : id);
+    console.log(id);
+  };
 
   return (
       <>
@@ -134,29 +134,36 @@ const AllSearchResults = () => {
                           </div>                          
                         
                           {currentUser.role === 'TEACHER' && (
+                            <>
                             <div className='teacher-links'>
                               <NavLink to='/'><span>Add Note</span></NavLink>
                               <NavLink to='/'><span>Move to Cohort</span></NavLink>
                             </div>
+                            <div className='search-three-dots-menu'>
+                              <ThreeDotsMenu id= {user.id} hasCascadingMenu={true}/>
+                            </div>
+                            </>
                           )}
-                          <ThreeDotsMenu className='search-three-dots-menu' id= {user.id} hasCascadingMenu={true}/>
-                          {/* <figure className='asr-link-to-profile'
-                            onClick={(event) => onClickStudentMenu(user.id, event)}>
-                            <EllipsisIcon />
-                            {selectedProfileId === user.id && (
-                              <Menu 
-                                className="allSearchResults-profile-circle-menu" 
-                                ref={menuRef}
-                                style={{
-                                  position: 'fixed',
-                                  top: `${menuPosition.top}px`,
-                                  right: `${menuPosition.right}px`,
-                              }}
-                              >
-                                <MenuItem icon={<ProfileIcon />} text="Profile" />
-                              </Menu>
-                            )}
-                          </figure> */}
+
+                          {currentUser.role === 'STUDENT' && (
+                            <figure className='asr-link-to-profile'
+                              onClick={(event) => onClickStudentMenu(user.id, event)}>
+                              <EllipsisIcon />
+                              {selectedProfileId === user.id && (
+                                <Menu 
+                                  className="allSearchResults-profile-circle-menu" 
+                                  ref={menuRef}
+                                  style={{
+                                    position: 'fixed',
+                                    top: `${menuPosition.top}px`,
+                                    right: `${menuPosition.right}px`,
+                                }}
+                                >
+                                  <MenuItem icon={<ProfileIcon />} text="Profile" />
+                                </Menu>
+                              )}
+                            </figure>
+                          )}
                         </li>
                       ))}
                     </ul>

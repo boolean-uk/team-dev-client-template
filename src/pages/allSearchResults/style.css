@@ -27,7 +27,7 @@
 }
 
 .search-content {
-  width:70%
+  width: 70%
 }
 
 .title {
@@ -150,14 +150,16 @@ a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
+
 .search-three-dots-menu {
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 10px;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
 }

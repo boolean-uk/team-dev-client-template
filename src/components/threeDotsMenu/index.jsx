@@ -9,7 +9,7 @@ import ProfileIcon from '../../assets/icons/profileIcon'
 import SquareBracketsIcon from '../../assets/icons/squareBracketsIcon'
 import Menu from '../menu'
 import MenuItem from '../menu/menuItem'
-import './style.css'
+// import './style.css'
 import useAuth from '../../hooks/useAuth'
 
 const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
@@ -21,11 +21,11 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
     setIsMenuVisible(false)
   })
 
-  const cursor = hasCascadingMenu ? 'pointer' : 'default'
+  // const cursor = hasCascadingMenu ? 'pointer' : 'default'
 
   const renderCascadingMenu = () => {
-      if (isMenuVisible && hasCascadingMenu) {
-        return <CascadingMenu />
+    if (isMenuVisible && hasCascadingMenu) {
+      return <CascadingMenu />
     }
     return null
   }
@@ -33,15 +33,11 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
   return (
     <div ref={profileRef}>
       <div
-        className="profile-circle"
+        className="three-dots-menu"
         onClick={() => {setIsMenuVisible(!isMenuVisible)}}
-        style={{ cursor: cursor }}
       >
         {renderCascadingMenu()}
-
-        <div className="profile-icon">
-          <EllipsisIcon/>
-        </div>
+        <EllipsisIcon className= 'three-dots-icon'/>
       </div>
     </div>
   )
