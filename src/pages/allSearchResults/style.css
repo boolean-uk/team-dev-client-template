@@ -79,15 +79,25 @@
   color: #64648c;
 }
 
+.found-user-profile-link {
+  display: flex;
+  align-items: right;
+}
+
 .found-user-profile-link p {
-  display: block;
   color: #64648c;
   cursor: pointer;
+  margin-left: auto;
+  padding-right: 7rem;
 }
 
 .teacher-links span {
   color: #64648c;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 
 .link-to-profile {
