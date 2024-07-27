@@ -22,7 +22,7 @@ const AllSearchResults = () => {
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
   const [selectedProfileId, setSelectedProfileId] = useState(null)
-
+  
   useEffect(() => {
       getUsers()
       window.scrollTo(0, 0);
@@ -68,6 +68,7 @@ const AllSearchResults = () => {
   
   const onClickStudentMenu = (id) => {
     setSelectedProfileId(prevId => prevId === id ? null : id);
+    console.log(id);
   };
 
   return (
@@ -120,7 +121,7 @@ const AllSearchResults = () => {
                               <span>{`${user.firstName} ${user.lastName}`}</span>
                               <p>Software Developer</p>
                           </div>
-                          <div>
+                          <div className='found-user-profile-link'>
                               <p>Profile</p>
                           </div>                          
                         
@@ -131,10 +132,10 @@ const AllSearchResults = () => {
                           )}
                         
                           {currentUser.role === 'TEACHER' && (
-                            <>
-                              <NavLink to={'/' > <p>test</p>}></NavLink>
-                              <NavLink to={'/' > <p>test</p>}></NavLink>
-                            </>
+                            <div className='teacher-links'>
+                              <NavLink to='/'><span>Add Note</span></NavLink>
+                              <NavLink to='/'><span>Move to Cohort</span></NavLink>
+                            </div>
                           )}
                       
                           <figure className='link-to-profile'

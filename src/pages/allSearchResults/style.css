@@ -1,7 +1,7 @@
 .search-results-container {
   display: inline;
   margin-left: 6rem;
-  width: 75%;
+  /* width: full%; */
 }
 
 .title {
@@ -12,7 +12,7 @@
   margin-bottom: 2rem;
 }
 
-.title h2{
+.title h2 {
   padding-left: 0.7rem;
 }
 
@@ -32,7 +32,7 @@
   border-radius: 0.5rem;
 }
 
-.search-page-input{
+.search-page-input {
   font-size: large;
   background-color: #e6ebf5;
 }
@@ -50,25 +50,44 @@
 .found-user-card-stdnt {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 5fr 1fr 1fr;  
+  grid-template-columns: auto 5fr 1fr 1fr;
   align-items: center;
   justify-items: stretch;
 }
 
 .found-user-card-tchr {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr;  
+  grid-template-columns: auto 0.5fr 1fr 1fr 0.25fr;
   align-items: center;
-  justify-items: stretch;
+}
+
+.teacher-links {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: stretch;
+  cursor: pointer;
+}
+
+.found-user-details {
+  color: #64648c;
+  padding-left: 1rem;
 }
 
 .found-user-details p {
-  color: #64648c
+  color: #64648c;
 }
 
-.found-user-details p {
-  color: #64648c
+.found-user-profile-link p {
+  display: block;
+  color: #64648c;
+  cursor: pointer;
+}
+
+.teacher-links span {
+  color: #64648c;
+  cursor: pointer;
 }
 
 .link-to-profile {

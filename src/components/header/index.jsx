@@ -11,7 +11,7 @@ import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 
 const Header = () => {
-    const { token, onLogout,onLogin, useClickOutside } = useAuth()
+    const { token, onLogout, useClickOutside } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const profileIconRef = useRef(null)
 
