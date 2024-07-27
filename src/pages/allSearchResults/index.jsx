@@ -2,6 +2,7 @@ import {useLocation, Link, NavLink } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import useUser from '../../hooks/useUser';
 import EllipsisIcon from '../../assets/icons/ellipsisIcon'
+import ThreeDotsMenu from '../../components/threeDotsMenu';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import ProfileCircle from '../../components/profileCircle';
@@ -22,6 +23,7 @@ const AllSearchResults = () => {
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
   const [selectedProfileId, setSelectedProfileId] = useState(null)
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
   
   useEffect(() => {
       getUsers()
@@ -54,9 +56,9 @@ const AllSearchResults = () => {
   };
 
   const handleClickOutside = (event) => {
-  if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.closest('.link-to-profile')) {
-    setSelectedProfileId(null);
-  }
+    if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.closest('.link-to-profile')) {
+      setSelectedProfileId(null);
+    }
 };
 
   useEffect(() => {
@@ -66,18 +68,24 @@ const AllSearchResults = () => {
     }
   }, [])
   
-  const onClickStudentMenu = (id) => {
-    setSelectedProfileId(prevId => prevId === id ? null : id);
-    console.log(id);
-  };
+  // const onClickStudentMenu = (id, event) => {
+  //   event.stopPropagation();
+  //   const rect = event.currentTarget.getBoundingClientRect();
+  //   setMenuPosition({
+  //     top: rect.top + window.scrollY,
+  //     right: window.innerWidth - rect.left,
+  //   });
+  //   setSelectedProfileId(prevId => prevId === id ? null : id);
+  //   console.log(id);
+  // };
 
   return (
       <>
-        <div className='container'>              
-          <Header />
+        <div className='search-page-container'>              
+          <Header className='search-page-header' />
           <Navigation className="left-bar" />
           <main className='search-results-container'>
-            <div>
+            <div className='search-content'>
               <div className='top'>
                 <div className='title'>
                     <Link to='/'>
@@ -125,23 +133,30 @@ const AllSearchResults = () => {
                               <p>Profile</p>
                           </div>                          
                         
-                          {selectedProfileId === user.id && (
-                            <Menu className="profile-circle-menu" ref={menuRef}>
-                              <MenuItem icon={<ProfileIcon />} text="Profile" />
-                            </Menu>
-                          )}
-                        
                           {currentUser.role === 'TEACHER' && (
                             <div className='teacher-links'>
                               <NavLink to='/'><span>Add Note</span></NavLink>
                               <NavLink to='/'><span>Move to Cohort</span></NavLink>
                             </div>
                           )}
-                      
-                          <figure className='link-to-profile'
-                            onClick={() => onClickStudentMenu(user.id)}>
+                          <ThreeDotsMenu className='search-three-dots-menu' id= {user.id} hasCascadingMenu={true}/>
+                          {/* <figure className='asr-link-to-profile'
+                            onClick={(event) => onClickStudentMenu(user.id, event)}>
                             <EllipsisIcon />
-                          </figure>
+                            {selectedProfileId === user.id && (
+                              <Menu 
+                                className="allSearchResults-profile-circle-menu" 
+                                ref={menuRef}
+                                style={{
+                                  position: 'fixed',
+                                  top: `${menuPosition.top}px`,
+                                  right: `${menuPosition.right}px`,
+                              }}
+                              >
+                                <MenuItem icon={<ProfileIcon />} text="Profile" />
+                              </Menu>
+                            )}
+                          </figure> */}
                         </li>
                       ))}
                     </ul>
