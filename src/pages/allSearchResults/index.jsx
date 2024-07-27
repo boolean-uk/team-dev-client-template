@@ -1,4 +1,4 @@
-import {useLocation, Link } from 'react-router-dom';
+import {useLocation, Link, NavLink } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import useUser from '../../hooks/useUser';
 import EllipsisIcon from '../../assets/icons/ellipsisIcon'
@@ -110,7 +110,7 @@ const AllSearchResults = () => {
                       {results.map((user) => (
                         <li key={user.id} className={`found-user-card ${
                         currentUser.role === 'TEACHER' ? 'found-user-card-tchr' : 'found-user-card-stdnt'
-                      }`}>
+                        }`}>
                           <ProfileCircle
                               initials={getInitials(user.firstName, user.lastName)}
                               hasCascadingMenu={false}
@@ -124,23 +124,23 @@ const AllSearchResults = () => {
                               <p>Profile</p>
                           </div>                          
                         
-                            {selectedProfileId === user.id && (
-                              <Menu className="profile-circle-menu" ref={menuRef}>
-                                <MenuItem icon={<ProfileIcon />} text="Profile" />
-                              </Menu>
-                              )}
+                          {selectedProfileId === user.id && (
+                            <Menu className="profile-circle-menu" ref={menuRef}>
+                              <MenuItem icon={<ProfileIcon />} text="Profile" />
+                            </Menu>
+                          )}
                         
-                              {currentUser.role === 'TEACHER' && (
-                                <>
-                                  <p>test</p>
-                                  <p>test2</p>
-                                </>
-                              )}
-                          
-                            <figure className='link-to-profile'
-                              onClick={() => onClickStudentMenu(user.id)}>
-                              <EllipsisIcon />
-                            </figure>
+                          {currentUser.role === 'TEACHER' && (
+                            <>
+                              <NavLink to={'/' > <p>test</p>}></NavLink>
+                              <NavLink to={'/' > <p>test</p>}></NavLink>
+                            </>
+                          )}
+                      
+                          <figure className='link-to-profile'
+                            onClick={() => onClickStudentMenu(user.id)}>
+                            <EllipsisIcon />
+                          </figure>
                         </li>
                       ))}
                     </ul>

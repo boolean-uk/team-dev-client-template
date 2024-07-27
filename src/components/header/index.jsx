@@ -11,7 +11,7 @@ import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 
 const Header = () => {
-    const { token, onLogout, useClickOutside } = useAuth()
+    const { token, onLogout,onLogin, useClickOutside } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const profileIconRef = useRef(null)
 
@@ -52,7 +52,7 @@ const Header = () => {
                                       </NavLink>
                                   </li>
                                   <li>
-                                      <NavLink to="#" onClick={onLogout}>
+                                      <NavLink to="/login" onClick={onLogout}>
                                           <LogoutIcon /> <p>Log out</p>
                                       </NavLink>
                                   </li>
