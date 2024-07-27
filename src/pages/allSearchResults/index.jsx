@@ -108,27 +108,21 @@ const AllSearchResults = () => {
                   {results.length > 0 && (
                     <ul className='search-results-list'>
                       {results.map((user) => (
-                        <li key={user.id} className="found-user-card">
-                            <ProfileCircle
-                                initials={getInitials(user.firstName, user.lastName)}
-                                hasCascadingMenu={false}
-                            />
+                        <li key={user.id} className={`found-user-card ${
+                        currentUser.role === 'TEACHER' ? 'found-user-card-tchr' : 'found-user-card-stdnt'
+                      }`}>
+                          <ProfileCircle
+                              initials={getInitials(user.firstName, user.lastName)}
+                              hasCascadingMenu={false}
+                          />
 
-                            {currentUser.role === 'STUDENT' && (
-                              <>
-                                <div className='found-user-details'>
-                                    <span>{`${user.firstName} ${user.lastName}`}</span>
-                                    <p>Software Developer</p>
-                                </div>
-
-                                <div>
-                                    <p>Profile</p>
-                                </div>
-
-                                <p>test</p>
-                                <p>test2</p>
-                              </>
-                            )}
+                          <div className='found-user-details'>
+                              <span>{`${user.firstName} ${user.lastName}`}</span>
+                              <p>Software Developer</p>
+                          </div>
+                          <div>
+                              <p>Profile</p>
+                          </div>                          
                         
                             {selectedProfileId === user.id && (
                               <Menu className="profile-circle-menu" ref={menuRef}>
@@ -136,6 +130,13 @@ const AllSearchResults = () => {
                               </Menu>
                               )}
                         
+                              {currentUser.role === 'TEACHER' && (
+                                <>
+                                  <p>test</p>
+                                  <p>test2</p>
+                                </>
+                              )}
+                          
                             <figure className='link-to-profile'
                               onClick={() => onClickStudentMenu(user.id)}>
                               <EllipsisIcon />
