@@ -9,9 +9,6 @@ import ProfileCircle from '../../components/profileCircle';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Card from '../../components/card';
-import ProfileIcon from '../../assets/icons/profileIcon';
-import Menu from '../../components/menu';
-import MenuItem from '../../components/menu/menuItem';
 import { getUsers } from '../../service/apiClient';
 import './style.css';
 
@@ -82,6 +79,7 @@ const AllSearchResults = () => {
   const renderTeacherContent = (user) => (
     <>
       <div className='teacher-links'>
+        {/* <NavLink to='/'><span>Profile</span></NavLink> */}
         <NavLink to='/'><span>Add Note</span></NavLink>
         <NavLink to='/'><span>Move to Cohort</span></NavLink>
       </div>
@@ -92,9 +90,14 @@ const AllSearchResults = () => {
   );
 
   const renderStudentContent = (user) => (
+    <>
+    <div className='found-user-profile-link'>
+      <NavLink to='/'><p>Profile</p></NavLink>
+    </div>
     <div className='asr-link-to-profile'>
       <SimpleThreeDotsMenu onClick={(event) => onClickMenu(user.id, event)} id={user.id}/>
     </div>
+    </>
   );
 
   return (
@@ -149,9 +152,9 @@ const AllSearchResults = () => {
                           <span>{`${user.firstName} ${user.lastName}`}</span>
                           <p>{`Software Developer, Cohort ${user.cohortId}`}</p>
                         </div>
-                        <div className='found-user-profile-link'>
+                        {/* <div className='found-user-profile-link'>
                           <p>Profile</p>
-                        </div>
+                        </div> */}
                         {currentUser.role === 'TEACHER'
                           ? renderTeacherContent(user)
                           : renderStudentContent(user)}
