@@ -152,9 +152,6 @@ const AllSearchResults = () => {
                           <span>{`${user.firstName} ${user.lastName}`}</span>
                           <p>{`Software Developer, Cohort ${user.cohortId}`}</p>
                         </div>
-                        {/* <div className='found-user-profile-link'>
-                          <p>Profile</p>
-                        </div> */}
                         {currentUser.role === 'TEACHER'
                           ? renderTeacherContent(user)
                           : renderStudentContent(user)}
