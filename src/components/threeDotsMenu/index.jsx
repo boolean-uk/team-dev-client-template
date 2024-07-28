@@ -9,10 +9,9 @@ import ProfileIcon from '../../assets/icons/profileIcon'
 import SquareBracketsIcon from '../../assets/icons/squareBracketsIcon'
 import Menu from '../menu'
 import MenuItem from '../menu/menuItem'
-// import './style.css'
 import useAuth from '../../hooks/useAuth'
 
-const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
+const ThreeDotsMenu = ({ id, hasCascadingMenu = true, position }) => {
   const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const profileRef = useRef(null)
@@ -21,11 +20,9 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
     setIsMenuVisible(false)
   })
 
-  // const cursor = hasCascadingMenu ? 'pointer' : 'default'
-
   const renderCascadingMenu = () => {
     if (isMenuVisible && hasCascadingMenu) {
-      return <CascadingMenu />
+      return <CascadingMenu position={position} />
     }
     return null
   }
@@ -33,19 +30,23 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true }) => {
   return (
     <div ref={profileRef}>
       <div
-        className="three-dots-menu"
         onClick={() => {setIsMenuVisible(!isMenuVisible)}}
       >
         {renderCascadingMenu()}
-        <EllipsisIcon className= 'three-dots-icon'/>
+        <EllipsisIcon/>
       </div>
     </div>
   )
 }
 
-const CascadingMenu = () => {
+const CascadingMenu = ({ position }) => {
   return (
-    <Menu className="profile-circle-menu">
+    <Menu className="profile-circle-menu"
+    style={{ 
+        position: 'fixed',
+        top: `${position.top}px`,
+        left: `${position.left}px`
+      }}>
       <MenuItem icon={<ProfileIcon />} text="Profile" />
       <MenuItem icon={<AddIcon />} text="Add note" />
 
