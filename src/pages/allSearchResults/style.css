@@ -83,7 +83,7 @@
 
 .found-user-card-tchr {
   display: grid;
-  grid-template-columns: auto 0.5fr 1fr 1fr 0.25fr;
+  grid-template-columns: auto 1fr 1fr 1fr 0.25fr;
   align-items: center;
 }
 
@@ -97,6 +97,8 @@
 }
 
 .found-user-details {
+  /* display: grid;
+  grid-template-rows: 1fr 1fr; */
   color: #64648c;
   padding-left: 1rem;
 }

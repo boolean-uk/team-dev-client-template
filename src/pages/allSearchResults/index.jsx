@@ -127,10 +127,10 @@ const AllSearchResults = () => {
 
                           <div className='found-user-details'>
                               <span>{`${user.firstName} ${user.lastName}`}</span>
-                              <p>Software Developer</p>
+                            <p>{`Software Developer, Cohort ${user.cohortId}`}</p>
                           </div>
                           <div className='found-user-profile-link'>
-                              <p>Profile</p>
+                            <p>Profile</p>
                           </div>                          
                         
                           {currentUser.role === 'TEACHER' && (
