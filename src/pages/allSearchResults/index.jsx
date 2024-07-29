@@ -79,7 +79,7 @@ const AllSearchResults = () => {
   const renderTeacherContent = (user) => (
     <>
       <div className='teacher-links'>
-        {/* <NavLink to='/'><span>Profile</span></NavLink> */}
+        <NavLink to='/'><span>Profile</span></NavLink>
         <NavLink to='/'><span>Add Note</span></NavLink>
         <NavLink to='/'><span>Move to Cohort</span></NavLink>
       </div>
