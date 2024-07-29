@@ -2,9 +2,39 @@ import Card from "../../components/card";
 import UserDetails from "../../components/UserDetails";
 import UserProfileIcon from "../../components/UserProfileIcon";
 import TextInput from "../../components/form/textInput";
+import Form from "../../components/form";
+import Button from "../../components/button";
 import "./profile.css";
+import useUser from "../../hooks/useUser";
+import { useState, useEffect } from "react";
 
 const Profile = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    githubUsername: "",
+    role: "",
+    cohortId: "",
+    email: "",
+    bio: "",
+  });
+
+  const { currentUser } = useUser();
+  // let inputsToMap = Object.keys(formData);
+
+  useEffect(() => {
+    setFormData(currentUser)
+  }, []) 
+ 
+  
+
+  console.log(inputsToMap);
+
+  const handleSubmit = (e) => {};
+
+  const handleChange = (e) => {};
+
   return (
     <main>
       <h2>Profile</h2>
@@ -13,6 +43,20 @@ const Profile = () => {
           <UserProfileIcon />
           <UserDetails header={true} />
         </div>
+        <Form onSubmit={handleSubmit}>
+          {inputsToMap.map((input, index) => {
+            return (
+              <TextInput
+                onChange={handleChange}
+                className="profile-input"
+                key={`${index}`}
+                name={input}
+                label={input}
+              />
+            );
+          })}
+          <Button type={"submit"} text={"Save"} />
+        </Form>
       </Card>
     </main>
   );
