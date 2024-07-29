@@ -3,7 +3,6 @@ import UserDetails from "../../components/UserDetails";
 import UserProfileIcon from "../../components/UserProfileIcon";
 import TextInput from "../../components/form/textInput";
 import Form from "../../components/form";
-import Button from "../../components/button";
 import "./profile.css";
 import useUser from "../../hooks/useUser";
 import { useState, useEffect } from "react";
@@ -26,11 +25,39 @@ const Profile = () => {
     setFormData(currentUser);
   }, [currentUser]);
 
-
-
   const handleSubmit = (e) => {};
 
   const handleChange = (e) => {};
+
+  const labelMaker = (string) => {
+    let result;
+    switch (string) {
+      case "cohortId":
+        result = "Cohort ID";
+        break;
+      case "role":
+        result = "Role";
+        break;
+      case "email":
+        result = "Email";
+        break;
+      case "firstName":
+        result = "First Name";
+        break;
+      case "lastName":
+        result = "Last Name";
+        break;
+      case "bio":
+        result = "Bio";
+        break;
+      case "githubUsername":
+        result = "GitHub Username";
+        break;
+      default:
+        result = "Something went wrong";
+    }
+    return result;
+  };
 
   return (
     <main>
@@ -40,21 +67,24 @@ const Profile = () => {
           <UserProfileIcon />
           <UserDetails header={true} />
         </div>
-        <Form onSubmit={handleSubmit}>
+        <Form className="user-details-form" onSubmit={handleSubmit}>
           {formData &&
             Object.keys(formData).map((input, index) => {
+              if (input === "id") {
+                return;
+              }
               return (
                 <TextInput
                   onChange={handleChange}
                   className="profile-input"
                   key={index}
                   name={input}
-                  label={input}
+                  label={labelMaker(input)}
                   value={formData[input]}
                 />
               );
             })}
-          <Button type={"submit"} text={"Save"} />
+  
         </Form>
       </Card>
     </main>

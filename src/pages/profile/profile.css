@@ -13,4 +13,11 @@ h2 {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px;
+    margin-bottom: 15px;
+}
+
+.user-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
