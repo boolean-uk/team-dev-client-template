@@ -50,7 +50,7 @@ const Navigation = ({ disabledNav = false }) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/">
+                    <NavLink to="/profile">
                         <ProfileIcon />
                         <p>Profile</p>
                     </NavLink>

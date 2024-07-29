@@ -9,31 +9,41 @@ export const CurrentUserContext = createContext();
 export const CurrentUserProvider = ({ children }) => {
     const { token, user } = useAuth()
     const [currentUser, setCurrentUser] = useState(null)
+    const location = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (user) {
-            setCurrentUser({ ...user })
-            return
-        }
-
         async function getUserFromToken() {
-            if (token) {
-                const { userId } = jwt_decode(token)
-                const userDetails = await getUser(userId)
+            const { userId } = jwt_decode(token)
+            const userDetails = await getUser(userId)
 
-                if (userDetails.status === 'success') {
-                    setCurrentUser({ ...userDetails.data.user })
-                    return
-                }
+            if (userDetails.status === 'success') {
+                setCurrentUser({ ...userDetails.data.user })
+                return
             }
+
             setCurrentUser(null)
             return
         }
-        if (!currentUser) {
+        if (token) {
             getUserFromToken()
         }
-        return
-    }, [token, user])
+    }, [token, user, location.pathname])
+
+    useEffect(() => {
+        if (
+            token &&
+            currentUser &&
+            !currentUser?.firstName &&
+            (location.pathname !== '/welcome' || location.pathname !== '/verification')
+        ) {
+            redirect('/welcome')
+        }
+
+        if (location.pathname === '/welcome' && currentUser?.firstName) {
+            navigate('/')
+        }
+    }, [token, currentUser, location.pathname])
 
   return (
     <CurrentUserContext.Provider
