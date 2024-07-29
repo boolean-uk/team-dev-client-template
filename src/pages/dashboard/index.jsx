@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon'
 import Button from '../../components/button'
 import Card from '../../components/card'
@@ -21,6 +22,7 @@ const Dashboard = () => {
   const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
   const [selectedProfileId, setSelectedProfileId] = useState(null)
   const menuRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getUsers().then(setCohorts)
@@ -33,6 +35,8 @@ const Dashboard = () => {
   const onChange = (e) => {
     setSearchVal(e.target.value)
   }
+
+  // console.log(cohorts);
 
   const result = cohorts.filter((cohort) => {
     if (cohort.firstName && cohort.lastName) {
@@ -72,6 +76,8 @@ const Dashboard = () => {
     setModal('Create a post', <CreatePostModal />)
     openModal()
   }
+
+  const allSearchResults = () => navigate('/search-results', { state: { results: result, searchVal } })
 
   return (
     <>
@@ -152,7 +158,10 @@ const Dashboard = () => {
               ))}
             </ul>
 
-            {result.length >= 10 && <button>All results</button>}
+            {result.length >= 10 &&
+              <button onClick={allSearchResults}>
+                All results
+              </button>}
           </article>
         )}
 

@@ -5,11 +5,11 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Loading from "./pages/loading";
 import Verification from "./pages/verification";
-import Profile from "./pages/profile";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import { CurrentUserProvider } from "./context/currentUser";
 import Welcome from "./pages/welcome";
+import AllSearchResults from "./pages/allSearchResults";
 
 const App = () => {
   return (
@@ -22,8 +22,7 @@ const App = () => {
               <Route path="register" element={<Register />} />
               <Route path="loading" element={<Loading />} />
               <Route path="verification" element={<Verification />} />
-              <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-             
+
               <Route
                 index
                 element={
