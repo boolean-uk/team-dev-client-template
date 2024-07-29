@@ -46,6 +46,10 @@ const getPosts = async () => {
   return res.data.posts
 }
 
+async function createPost(content) {
+  return await post('posts', { content })
+}
+
 async function post(endpoint, data, auth = true) {
   return await request('POST', endpoint, data, auth)
 }
@@ -79,4 +83,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
-export { login, getUsers, getPosts, register, createProfile, getUser }
+export { login, getUsers, getPosts, register, createProfile, getUser, createPost }
