@@ -19,8 +19,6 @@ const AllSearchResults = () => {
   const { results: initialResults, searchVal: initialSearchVal } = location.state || { results: [], searchVal: '' };
   const [searchVal, setSearchVal] = useState(initialSearchVal);
   const [results, setResults] = useState(initialResults);
-  const [selectedProfileId, setSelectedProfileId] = useState(null);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     getUsers();
@@ -67,12 +65,6 @@ const AllSearchResults = () => {
 
   const onClickMenu = (id, event) => {
     event.stopPropagation();
-    const rect = event.currentTarget.getBoundingClientRect();
-    const menuWidth = 308;
-    setMenuPosition({
-      top: rect.top + window.scrollY,
-      left: rect.left - menuWidth,
-    });
     setSelectedProfileId(prevId => (prevId === id ? null : id));
   };
 
@@ -84,7 +76,7 @@ const AllSearchResults = () => {
         <NavLink to='/'><span>Move to Cohort</span></NavLink>
       </div>
       <div className='search-three-dots-menu'>
-        <ThreeDotsMenu onClick={(event) => onClickMenu(user.id, event)} id={user.id} hasCascadingMenu={true} position={menuPosition}/>
+        <ThreeDotsMenu onClick={() => onClickMenu(user.id)} id={user.id} hasCascadingMenu={true} />
       </div>
     </>
   );
@@ -94,8 +86,8 @@ const AllSearchResults = () => {
     <div className='found-user-profile-link'>
       <NavLink to='/'><p>Profile</p></NavLink>
     </div>
-    <div className='asr-link-to-profile'>
-      <SimpleThreeDotsMenu onClick={(event) => onClickMenu(user.id, event)} id={user.id}/>
+    <div className='search-three-dots-menu'>
+      <SimpleThreeDotsMenu onClick={() => onClickMenu(user.id)} id={user.id} hasCascadingMenu={true}/>
     </div>
     </>
   );

@@ -11,7 +11,7 @@ import Menu from '../menu'
 import MenuItem from '../menu/menuItem'
 import useAuth from '../../hooks/useAuth'
 
-const ThreeDotsMenu = ({ id, hasCascadingMenu = true, position }) => {
+const ThreeDotsMenu = ({ id, hasCascadingMenu = true,  }) => {
   const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const profileRef = useRef(null)
@@ -22,7 +22,7 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true, position }) => {
 
   const renderCascadingMenu = () => {
     if (isMenuVisible && hasCascadingMenu) {
-      return <CascadingMenu position={position} />
+      return <CascadingMenu  />
     }
     return null
   }
@@ -39,14 +39,9 @@ const ThreeDotsMenu = ({ id, hasCascadingMenu = true, position }) => {
   )
 }
 
-const CascadingMenu = ({ position }) => {
+const CascadingMenu = () => {
   return (
-    <Menu className="profile-circle-menu"
-    style={{ 
-        position: 'fixed',
-        top: `${position.top}px`,
-        left: `${position.left}px`
-      }}>
+    <Menu className="profile-circle-menu">
       <MenuItem icon={<ProfileIcon />} text="Profile" />
       <MenuItem icon={<AddIcon />} text="Add note" />
 
