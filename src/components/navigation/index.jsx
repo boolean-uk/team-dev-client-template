@@ -14,13 +14,9 @@ const Navigation = ({ disabledNav = false }) => {
     const { currentUser } = useUser()    
     const location = useLocation()
 
-    if (!token) {
+    if (!token || !currentUser) {
         return null
     }
-    if (!currentUser) {
-        return null
-    }
-
 
     const navIcons = () => {
         const commonIcons = [
