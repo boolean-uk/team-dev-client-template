@@ -21,15 +21,12 @@ const Profile = () => {
   });
 
   const { currentUser } = useUser();
-  // let inputsToMap = Object.keys(formData);
 
   useEffect(() => {
-    setFormData(currentUser)
-  }, []) 
- 
-  
+    setFormData(currentUser);
+  }, [currentUser]);
 
-  console.log(inputsToMap);
+
 
   const handleSubmit = (e) => {};
 
@@ -44,17 +41,19 @@ const Profile = () => {
           <UserDetails header={true} />
         </div>
         <Form onSubmit={handleSubmit}>
-          {inputsToMap.map((input, index) => {
-            return (
-              <TextInput
-                onChange={handleChange}
-                className="profile-input"
-                key={`${index}`}
-                name={input}
-                label={input}
-              />
-            );
-          })}
+          {formData &&
+            Object.keys(formData).map((input, index) => {
+              return (
+                <TextInput
+                  onChange={handleChange}
+                  className="profile-input"
+                  key={index}
+                  name={input}
+                  label={input}
+                  value={formData[input]}
+                />
+              );
+            })}
           <Button type={"submit"} text={"Save"} />
         </Form>
       </Card>
