@@ -29,35 +29,15 @@ const Profile = () => {
 
   const handleChange = (e) => {};
 
-  const labelMaker = (string) => {
-    let result;
-    switch (string) {
-      case "cohortId":
-        result = "Cohort ID";
-        break;
-      case "role":
-        result = "Role";
-        break;
-      case "email":
-        result = "Email";
-        break;
-      case "firstName":
-        result = "First Name";
-        break;
-      case "lastName":
-        result = "Last Name";
-        break;
-      case "bio":
-        result = "Bio";
-        break;
-      case "githubUsername":
-        result = "GitHub Username";
-        break;
-      default:
-        result = "Something went wrong";
-    }
-    return result;
-  };
+  const labelMap = {
+    cohortId: 'Cohort ID',
+    role: 'Role',
+    email: 'Email',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    bio: 'Bio',
+    githubUsername: 'GitHub Username',
+  }
 
   return (
     <main>
@@ -79,7 +59,7 @@ const Profile = () => {
                   className="profile-input"
                   key={index}
                   name={input}
-                  label={labelMaker(input)}
+                  label={labelMap[input]}
                   value={formData[input]}
                 />
               );
