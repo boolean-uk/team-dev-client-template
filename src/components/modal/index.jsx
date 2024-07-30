@@ -1,5 +1,5 @@
 import ReactModal from "react-modal"
-import useModal from "../../hooks/useModal"
+import useModal from "../../hooks/useModal.jsx"
 import style from './style.js'
 import './style.css'
 
