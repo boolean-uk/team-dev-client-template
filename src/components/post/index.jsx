@@ -5,8 +5,9 @@ import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
+import HeartButton from "../heartLikesButton/heartButton";
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({post, name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal();
 
   const userInitials = name.match(/\b(\w)/g);
@@ -40,7 +41,10 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
           }`}
         >
           <div className="post-interactions">
-            <div>Like</div>
+            <div className='like-button'>
+              <HeartButton postId={post.id}/>
+              Like
+            </div>
             <div>Comment</div>
           </div>
 

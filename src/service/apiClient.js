@@ -51,11 +51,11 @@ async function createPost(content) {
 }
 
 async function togglePostLike (postId) {
-  return await get(`GET/reactions/${postId}`)
+  return await get(`reactions/${postId}`)
 }
 
 async function getUserPostReaction (postId) {
-  return await get(`GET/reactions/${postId}`)
+  return await get(`reactions/${postId}`)
 } 
 
 async function post(endpoint, data, auth = true) {

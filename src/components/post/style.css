@@ -45,7 +45,14 @@
 
 .post-interactions {
   display: grid;
+  align-items: center;
+  gap: 40px;
   grid-template-columns: 1fr 1fr;
+  .like-button{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
 }
 
 .post-interactions-container p {
