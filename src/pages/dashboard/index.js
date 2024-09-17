@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
@@ -7,59 +7,83 @@ import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
+import { getPosts, getUserByName, getUsers } from "../../service/apiClient";
+import UsersList from "../../components/usersList";
 
 const Dashboard = () => {
-	const [searchVal, setSearchVal] = useState('');
+  const [searchVal, setSearchVal] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
-	const onChange = (e) => {
-		setSearchVal(e.target.value);
-	};
+  const getAllPosts = () => {
+    getPosts().then(setPosts);
+  };
+  
+  const getAllUsers = () => {
+    getUsers().then(setUsers)
+  }
 
-	// Use the useModal hook to get the openModal and setModal functions
-	const { openModal, setModal } = useModal();
+  useEffect(getAllPosts, []);
+  useEffect(getAllUsers, [])
 
-	// Create a function to run on user interaction
-	const showModal = () => {
-		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
 
-		// Open the modal!
-		openModal();
-	};
+  const onChange = (e) => {
+    setSearchVal(e.target.value);
+  };
 
-	return (
-		<>
-			<main>
-				<Card>
-					<div className="create-post-input">
-						<div className="profile-icon">
-							<p>AJ</p>
-						</div>
-						<Button text="What's on your mind?" onClick={showModal} />
-					</div>
-				</Card>
+  const onSubmit = (e) => {
+    e && e.preventDefault();
+    try {
+      getUserByName(searchVal).then(setUsers);
+    } catch (e) {
+      console.log('error getting username', e)
+    }
+  };
 
-				<Posts />
-			</main>
+  // Use the useModal hook to get the openModal and setModal functions
+  const { openModal, setModal } = useModal();
 
-			<aside>
-				<Card>
-					<form onSubmit={(e) => e.preventDefault()}>
-						<TextInput
-							icon={<SearchIcon />}
-							value={searchVal}
-							name="Search"
-							onChange={onChange}
-						/>
-					</form>
-				</Card>
+  // Create a function to run on user interaction
+  const showModal = () => {
+    // Use setModal to set the header of the modal and the component the modal should render
+    setModal("Create a post", <CreatePostModal getAllPosts={getAllPosts} />); // CreatePostModal is just a standard React component, nothing special
 
-				<Card>
-					<h4>My Cohort</h4>
-				</Card>
-			</aside>
-		</>
-	);
+    // Open the modal!
+    openModal();
+  };
+  
+  return (
+    <>
+      <main>
+        <Card>
+          <div className="create-post-input">
+            <div className="profile-icon">
+              <p>AJ</p>
+            </div>
+            <Button text="What's on your mind?" onClick={showModal} />
+          </div>
+        </Card>
+
+        <Posts posts={posts} />
+      </main>
+      <aside>
+        <Card>
+          <form onSubmit={onSubmit}>
+            <TextInput
+              icon={<SearchIcon />}
+              value={searchVal}
+              name="Search"
+              onChange={onChange}
+            />
+          </form>
+        </Card>
+        <Card>
+          <h4>My Cohort</h4>
+          <UsersList users={users} />
+        </Card>
+      </aside>
+    </>
+  );
 };
 
 export default Dashboard;
