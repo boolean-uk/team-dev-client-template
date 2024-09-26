@@ -5,6 +5,8 @@ nav {
 nav ul {
     display: grid;
     grid-auto-rows: 136px;
+    position: sticky;
+    top: 96px;
 }
 
 nav li {

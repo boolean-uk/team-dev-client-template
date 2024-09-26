@@ -1,57 +1,110 @@
-import { useState } from "react";
-import Stepper from "../../components/stepper";
-import useAuth from "../../hooks/useAuth";
-import StepOne from "./stepOne";
-import StepTwo from "./stepTwo";
-import "./style.css";
+import { useState } from "react"
+import Stepper from "../../components/stepper"
+import useAuth from "../../hooks/useAuth"
+import StepOne from "./stepOne"
+import StepTwo from "./stepTwo"
+import StepThree from "./stepThree"
+import StepFour from "./stepFour"
+import "./style.css"
 
 const Welcome = () => {
-	const { onCreateProfile } = useAuth();
+  const [canProgress, setCanProgress] = useState(false)
+  const [message, setMessage] = useState("")
 
-	const [profile, setProfile] = useState({
-		firstName: "",
-		lastName: "",
-		githubUsername: "",
-		bio: "",
-	});
+  const { onCreateProfile } = useAuth()
 
-	const onChange = (event) => {
-		const { name, value } = event.target;
+  const [profile, setProfile] = useState({
+    firstName: "",
+    lastName: "",
+    githubUsername: "",
+    bio: "",
+    email: "",
+    mobile: "",
+    password: "",
+    role: "",
+    specialism: "",
+    cohort: "",
+    startDate: "",
+    endDate: "",
+  })
 
-		setProfile({
-			...profile,
-			[name]: value,
-		});
-	};
+  const onChange = (event) => {
+    const { name, value } = event.target
 
-	const onComplete = () => {
-		onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
-	};
+    setProfile({
+      ...profile,
+      [name]: value,
+    })
+  }
 
-	return (
-		<main className="welcome">
-			<div className="welcome-titleblock">
-				<h1 className="h2">Welcome to Cohort Manager</h1>
-				<p className="text-blue1">Create your profile to get started</p>
-			</div>
+  const onComplete = () => {
+    onCreateProfile(
+      profile.photoUrl,
+      profile.firstName,
+      profile.lastName,
+      profile.githubUsername,
+      profile.bio,
+      profile.mobile,
+      profile.email,
+      profile.password,
+      profile.role,
+      profile.specialism,
+      profile.cohort,
+      profile.startDate,
+      profile.endDate
+    )
+  }
 
-			<Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-				<StepOne data={profile} setData={onChange} />
-				<StepTwo data={profile} setData={onChange} />
-			</Stepper>
-		</main>
-	);
-};
+  return (
+    <main className="welcome">
+      <div className="welcome-titleblock">
+        <h1 className="h2">Welcome to Cohort Manager</h1>
+        <p className="text-blue1">Create your profile to get started</p>
+      </div>
+
+      <Stepper
+        setMessage={setMessage}
+        header={<WelcomeHeader />}
+        onComplete={onComplete}
+        canProgress={canProgress}
+        setCanProgress={setCanProgress}
+      >
+        <StepOne
+          setMessage={setMessage}
+          message={message}
+          data={profile}
+          setData={onChange}
+          setCanProgress={setCanProgress}
+        />
+        <StepTwo
+        setMessage={setMessage}
+          message={message}
+          data={profile}
+          setData={onChange}
+          setCanProgress={setCanProgress}
+        />
+        <StepThree
+        setMessage={setMessage}
+          message={message}
+          data={profile}
+          setData={onChange}
+          setCanProgress={setCanProgress}
+        />
+        <StepFour data={profile} setData={onChange} />
+      </Stepper>
+    </main>
+  )
+}
 
 const WelcomeHeader = () => {
-	return (
-		<div className="welcome-cardheader">
-			<h2>Create profile</h2>
-			<p className="text-blue1">
-				Tell us about yourself to create your profile
-			</p>
-		</div>
-	);
-};
+  return (
+    <div className="welcome-cardheader">
+      <h2>Create profile</h2>
+      <p className="text-blue1">
+        Tell us about yourself to create your profile
+      </p>
+    </div>
+  )
+}
 
-export default Welcome;
+export default Welcome

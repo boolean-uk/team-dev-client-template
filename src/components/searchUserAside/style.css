@@ -1,0 +1,13 @@
+
+.search-user-menu {
+  position: absolute;
+  cursor: pointer;
+  top: 100px;
+  left: 50%;
+  margin-left: -196px;
+}
+
+.spacing {
+  margin: 15px 27px ;
+  padding-bottom: 10px;
+}

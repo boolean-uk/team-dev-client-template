@@ -1,110 +1,113 @@
 /* variables */
 :root {
-	--color-blue: #000046;
-	--color-blue1: #64648c;
-	--color-blue2: #96a0be;
-	--color-blue5: #e6ebf5;
-	--color-blue7: #f5faff;
-	--color-green: #64dc78;
-	--color-offwhite: #f0f5fa;
-	--color-lightgrey: #f5f5f5;
+  --color-blue: #000046;
+  --color-blue1: #64648c;
+  --color-blue2: #96a0be;
+  --color-blue5: #e6ebf5;
+  --color-blue7: #f5faff;
+  --color-green: #64dc78;
+  --color-offwhite: #f0f5fa;
+  --color-lightgrey: #f5f5f5;
 }
 
 /* global settings here, resetting a lot of defaults */
 html {
-	font-size: 16px;
+  font-size: 16px;
 }
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 body {
-	font-family: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 .bg-blue {
-	background-color: var(--color-blue);
+  background-color: var(--color-blue);
 }
 .bg-blue1 {
-	background-color: var(--color-blue1);
+  background-color: var(--color-blue1);
 }
 .bg-green {
-	background-color: var(--color-green);
+  background-color: var(--color-green);
 }
 .bg-offwhite {
-	background-color: var(--color-offwhite);
+  background-color: var(--color-offwhite);
 }
 .bg-blue5 {
-	background-color: var(--color-blue5);
+  background-color: var(--color-blue5);
 }
 .bg-lightgrey {
-	background-color: var(--color-lightgrey);
+  background-color: var(--color-lightgrey);
 }
 .bg-white {
-	background-color: white;
+  background-color: white;
 }
 
 .text-blue {
-	color: var(--color-blue);
+  color: var(--color-blue);
 }
 .text-blue1 {
-	color: var(--color-blue1);
+  color: var(--color-blue1);
 }
 .text-green {
-	color: var(--color-green);
+  color: var(--color-green);
 }
 .text-offwhite {
-	color: var(--color-offwhite);
+  color: var(--color-offwhite);
 }
 .text-blue5 {
-	color: var(--color-blue5);
+  color: var(--color-blue5);
 }
 .text-white {
-	color: white;
+  color: white;
 }
 
 /* global classes to reuse */
 .mx-auto {
-	margin: 0 auto;
+  margin: 0 auto;
 }
 .boxshadow {
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 .font-normal {
-	font-weight: normal;
+  font-weight: normal;
 }
 .width-full {
-	width: 100%;
-	max-width: none;
+  width: 100%;
+  max-width: none;
 }
 .border-bottom {
-	border-bottom: 1px solid var(--color-blue5);
+  border-bottom: 1px solid var(--color-blue5);
 }
 .border-top {
-	border-top: 1px solid var(--color-blue5);
+  border-top: 1px solid var(--color-blue5);
 }
 .profile-icon {
-	border-radius: 50%;
-	width: 56px;
-	height: 56px;
-	text-align: center;
-	background: #5abedc;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  text-align: center;
+  background: #5abedc;
 }
 .profile-icon p {
-	line-height: 56px;
-	font-size: 1.2rem;
-	font-weight: 400;
+  line-height: 56px;
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 .visibility-none {
-	visibility: hidden;
+  visibility: hidden;
+}
+.relative{
+  position: relative;
 }

@@ -1,10 +1,30 @@
-const Comment = ({ name, content }) => {
-    return (
-        <>
-            <h6>{name}</h6>
-            <p>{content}</p>
-        </>
-    )
-}
 
-export default Comment
+import { useState } from 'react';
+import "../comment/comment.css";
+import ProfileCircle from "../profileCircle";
+import OptionsIcon from "../optionsIcon";
+import ProfileContextMenu from "../ProfileContextMenu";
+
+const Comment = ({ user, content }) => { 
+  const [triggerContextMenu, setTriggerContextMenu] = useState(false);
+
+  const fullName = user && user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : "Anonymous";
+  const initials = user && user.firstName && user.lastName ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : "A";
+
+  return (
+    <div className="comment-container">
+      <ProfileCircle initials={initials} />
+      <div className="comment-sub-container">
+        <h6 className="name">{fullName}</h6>
+        <p className="comment-content">{content}</p>
+      </div>
+      <div>
+        <OptionsIcon trigger={() => setTriggerContextMenu(!triggerContextMenu)} />
+        {triggerContextMenu && <ProfileContextMenu user={user} />}
+      </div>
+    </div>
+  );
+};
+
+export default Comment;
+

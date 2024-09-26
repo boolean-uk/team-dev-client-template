@@ -1,27 +1,22 @@
-import { useEffect, useState } from "react";
-import Post from "../post";
-import { getPosts } from "../../service/apiClient";
+import Post from '../post'
 
-const Posts = () => {
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        getPosts().then(setPosts)
-    }, [])
-
-    return (
-        <>
-            {posts.map(post => {
-                    return <Post
-                        key={post.id}
-                        name={`${post.author.firstName} ${post.author.lastName}`}
-                        date={post.createdAt}
-                        content={post.content}
-                        comments={post.comments}
-                    />
-            })}
-        </>
-    )
+const Posts = ({ posts, getAllPosts }) => {
+  return (
+    <>
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          postId={post.id}
+          name={`${post.author.firstName} ${post.author.lastName}`}
+          date={post.createdAt}
+          content={post.content}
+          comments={post.comments}
+          likes={post.likes}
+          getAllPosts={getAllPosts}
+        />
+      ))}
+    </>
+  )
 }
 
 export default Posts
