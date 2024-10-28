@@ -21,19 +21,7 @@ const AuthProvider = ({ children }) => {
     if (storedToken) {
       setToken(storedToken);
     }
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      const redirectPath = localStorage.getItem('redirectPath');
-      if (redirectPath) {
-        localStorage.removeItem('redirectPath');
-        navigate(redirectPath);
-      } else {
-        navigate('/');
-      }
-    }
-  }, [token]);
+  }, [location.state?.from?.pathname]);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
