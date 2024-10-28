@@ -31,6 +31,20 @@ form label {
   padding-right: 10px;
 }
 
+.placeholder-style {
+  color: #64648c;
+}
+
+.lockicon-container {
+  position: absolute;
+  bottom: 28px;
+  right: 16px;
+  z-index: 2;
+  background: none;
+  transform: translateY(19px);
+  transition: all 0.2s ease;
+}
+
 .showpasswordbutton {
   position: absolute;
   bottom: 28px;
