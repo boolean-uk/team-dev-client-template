@@ -16,6 +16,11 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
   // Stack overflow email validation regex
   const validateEmail = (email) => {
     return String(email)
