@@ -12,6 +12,9 @@ const Welcome = () => {
     firstName: '',
     lastName: '',
     githubUsername: '',
+    email: '',
+    mobile: '',
+    password: '',
     bio: ''
   });
 
@@ -25,7 +28,15 @@ const Welcome = () => {
   };
 
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    onCreateProfile(
+      profile.firstName,
+      profile.lastName,
+      profile.githubUsername,
+      profile.bio,
+      profile.email,
+      profile.mobile,
+      profile.password
+    );
   };
 
   return (
