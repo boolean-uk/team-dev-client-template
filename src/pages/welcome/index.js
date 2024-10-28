@@ -5,7 +5,7 @@ import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
 
-const Welcome = () => {
+const WelcomeSignupForm = () => {
   const { onCreateProfile } = useAuth();
 
   const [profile, setProfile] = useState({
@@ -52,4 +52,4 @@ const WelcomeHeader = () => {
   );
 };
 
-export default Welcome;
+export default WelcomeSignupForm;
