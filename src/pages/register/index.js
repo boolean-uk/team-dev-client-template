@@ -40,8 +40,8 @@ const Register = () => {
       onRegister(email, password);
     }
     if (!validateEmail(email)) {
-      setShowEmailError(true);
       setErrorMsg('Email needs to be a valid email (asd@asd.com)');
+      setShowEmailError(true);
     }
     if (!validatePassword(password)) {
       setShowPasswordError(true);
@@ -65,6 +65,7 @@ const Register = () => {
               type="email"
               name="email"
               label={'Email *'}
+              placeholder="Email*"
             />
             {showEmailError && <ErrorFeedback error={errorMsg} />}
             <TextInput
@@ -73,6 +74,7 @@ const Register = () => {
               name="password"
               label={'Password *'}
               type={'password'}
+              placeholder="Password*"
             />
             {showPasswordError && (
               <ErrorFeedback
