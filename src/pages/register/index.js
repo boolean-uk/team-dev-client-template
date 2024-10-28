@@ -29,8 +29,9 @@ const Register = () => {
   const validateAndRegister = (email, password) => {
     if (validateEmail(email)) {
       onRegister(email, password);
+    } else {
+      setShowEmailError(true);
     }
-    setShowEmailError(true);
   };
 
   return (
