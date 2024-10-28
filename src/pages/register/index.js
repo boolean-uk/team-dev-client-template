@@ -16,6 +16,7 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Copilot suggested this regex for password validation
   const validatePassword = (password) => {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
