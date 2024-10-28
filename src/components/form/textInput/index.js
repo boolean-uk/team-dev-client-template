@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-const TextInput = ({ value, onChange, name, label, icon, placeholder, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type = 'text' }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+
   if (type === 'password') {
     return (
       <div className="inputwrapper">
@@ -11,6 +12,7 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder, type = 'te
           type={type}
           name={name}
           value={value}
+          placeholder={placeholder}
           onChange={(e) => {
             onChange(e);
             setInput(e.target.value);
