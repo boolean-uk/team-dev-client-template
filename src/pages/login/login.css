@@ -7,3 +7,14 @@
   gap: 24px;
   margin-bottom: 40px;
 }
+
+.forgot-password {
+  text-align: right;
+  text-decoration: none;
+  color: #00004673;
+  transition: color 0.2s ease-in-out;
+}
+
+.forgot-password:hover {
+  color: #000046;
+}

@@ -3,6 +3,7 @@ import Button from '../../components/button';
 import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
+import { Link } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
@@ -33,6 +34,10 @@ const Login = () => {
               label={'Password *'}
               type={'password'}
             />
+            {/* TODO: Implement forgot password page. */}
+            <Link to="/forgot-password" className="forgot-password">
+              Forgot password?
+            </Link>
           </form>
           <Button
             text="Log in"
