@@ -10,6 +10,7 @@ const Register = () => {
   const { onRegister } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showEmailError, setShowEmailError] = useState(false);
+  const [showPasswordError, setShowPasswordError] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +19,8 @@ const Register = () => {
 
   // Copilot suggested this regex for password validation
   const validatePassword = (password) => {
-    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const regex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{8,}$/;
     return regex.test(password);
   };
 
@@ -33,10 +35,14 @@ const Register = () => {
 
   // Should also validate password
   const validateAndRegister = (email, password) => {
-    if (validateEmail(email)) {
+    if (validateEmail(email) && validatePassword(password)) {
       onRegister(email, password);
-    } else {
+    }
+    if (!validateEmail(email)) {
       setShowEmailError(true);
+    }
+    if (!validatePassword(password)) {
+      setShowPasswordError(true);
     }
   };
 
@@ -66,6 +72,13 @@ const Register = () => {
               label={'Password *'}
               type={'password'}
             />
+            {showPasswordError && (
+              <ErrorFeedback
+                error={
+                  'Password must contain at least eight characters, including at least one capital letter, one number and one special character'
+                }
+              />
+            )}
           </form>
           <Button
             text="Sign up"
