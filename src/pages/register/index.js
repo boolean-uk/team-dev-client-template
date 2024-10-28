@@ -15,6 +15,15 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Stack overflow email validation regex
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   return (
     <div className="bg-blue register credentialpage">
       <CredentialsCard
@@ -33,7 +42,7 @@ const Register = () => {
               name="email"
               label={'Email *'}
             />
-            <ErrorFeedback error={'email is wrong'} />
+            <ErrorFeedback error={'Email needs to be a valid email'} />
             <TextInput
               value={formData.password}
               onChange={onChange}
