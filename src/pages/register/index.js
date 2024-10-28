@@ -11,10 +11,10 @@ const Register = () => {
   const [emailIsValid, setEmailIsValid] = useState(false);
 
   const isValidEmail = () => {
-    // validates abc@de.f as email. must be 3 characters on both sides of @
-    const validRegex = /^[a-zA-Z]{3,}@[a-zA-Z.]{3,}$/;
+    // validates abc@de.fh as email. must be 3 characters on both sides of @ and no trailing dot const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailIsValid(validRegex.test(formData.email));
-    console.log('emailIsValid', validRegex.test(formData.email));
+    console.log('Valid: ', validRegex.test(formData.email), '. Email: ', formData.email);
     return validRegex.test(formData.email);
   };
 

@@ -14,7 +14,7 @@ const Login = () => {
     // validates abc@de.fh as email. must be 3 characters on both sides of @ and no trailing dot
     const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailIsValid(validRegex.test(formData.email));
-    console.log('emailIsValid', validRegex.test(formData.email));
+    console.log('Valid: ', validRegex.test(formData.email), '. Email: ', formData.email);
     return validRegex.test(formData.email);
   };
 
