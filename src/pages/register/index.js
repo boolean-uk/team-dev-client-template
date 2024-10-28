@@ -3,6 +3,7 @@ import Button from '../../components/button';
 import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
+import ErrorFeedback from '../../components/errorFeedback/ErrorFeedback';
 import './register.css';
 
 const Register = () => {
@@ -32,6 +33,7 @@ const Register = () => {
               name="email"
               label={'Email *'}
             />
+            <ErrorFeedback error={'email is wrong'} />
             <TextInput
               value={formData.password}
               onChange={onChange}
