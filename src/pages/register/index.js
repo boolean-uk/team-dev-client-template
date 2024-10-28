@@ -10,6 +10,7 @@ const Register = () => {
   const { onRegister } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showEmailError, setShowEmailError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +32,7 @@ const Register = () => {
       onRegister(email, password);
     } else {
       setShowEmailError(true);
+      setErrorMsg('Email needs to be a valid email (asd@asd.com)');
     }
   };
 
@@ -52,7 +54,7 @@ const Register = () => {
               name="email"
               label={'Email *'}
             />
-            {showEmailError && <ErrorFeedback error={'Email needs to be a valid email'} />}
+            {showEmailError && <ErrorFeedback error={errorMsg} />}
             <TextInput
               value={formData.password}
               onChange={onChange}
