@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LockIcon from '../../../assets/icons/lockIcon';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, placeholder, type = 'text' }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
 
@@ -55,6 +55,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           type={type}
           name={name}
           value={value}
+          placeholder={placeholder}
           onChange={onChange}
           className={icon && 'input-has-icon'}
         />
