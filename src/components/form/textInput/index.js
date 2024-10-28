@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, type, style = 'text' }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
   if (type === 'password') {
@@ -15,6 +15,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
             onChange(e);
             setInput(e.target.value);
           }}
+          style={style}
         />
         {showpassword && <input type="text" name={name} value={input} className="passwordreveal" />}
         <button

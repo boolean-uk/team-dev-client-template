@@ -4,43 +4,39 @@ import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './register.css';
+import { isValidEmail, isValidPassword } from '../../validation/validation';
 
 const Register = () => {
   const { onRegister } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [emailIsValid, setEmailIsValid] = useState(false);
-  const [passwordIsValid, setPassordIsValid] = useState(false);
-
-  const isValidEmail = () => {
-    // validates abc@de.fh as email. must be 3 characters on both sides of @ and no trailing dot const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailIsValid(validRegex.test(formData.email));
-    console.log('Email Valid: ', validRegex.test(formData.email), '. Email: ', formData.email);
-    return validRegex.test(formData.email);
-  };
-
-  const isValidPassword = () => {
-    /* The password should not be less than 8 characters in length
-    The password should contain at least one uppercase character
-    The password should contain at least one number
-    The password should contain at least one special character
-    */
-    const validRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    setPassordIsValid(validRegex.test(formData.password));
-    console.log(
-      'Password Valid: ',
-      validRegex.test(formData.password),
-      '. Password: ',
-      formData.password
-    );
-    return validRegex.test(formData.password);
-  };
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    isValidEmail(formData.email);
-    isValidPassword(formData.password);
+  };
+
+  const handleRegister = (email, password) => {
+    const emailValid = isValidEmail(email);
+    const passwordValid = isValidPassword(password);
+
+    setEmailError(!emailValid);
+    setPasswordError(!passwordValid);
+
+    if (!emailValid) {
+      alert('Invalid email address.');
+    }
+
+    if (!passwordValid) {
+      alert(
+        'Invalid password. It must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character.'
+      );
+    }
+
+    if (emailValid && passwordValid) {
+      onRegister(email, password);
+    }
   };
 
   return (
@@ -60,6 +56,7 @@ const Register = () => {
               type="email"
               name="email"
               label={'Email *'}
+              style={{ borderColor: emailError ? 'red' : '' }}
             />
             <TextInput
               value={formData.password}
@@ -67,12 +64,12 @@ const Register = () => {
               name="password"
               label={'Password *'}
               type={'password'}
+              style={{ borderColor: passwordError ? 'red' : '' }}
             />
           </form>
           <Button
             text="Sign up"
-            onClick={() => onRegister(formData.email, formData.password)}
-            disabled={!emailIsValid && !passwordIsValid}
+            onClick={() => handleRegister(formData.email, formData.password)}
             classes="green width-full"
           />
         </div>
