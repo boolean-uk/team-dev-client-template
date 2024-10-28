@@ -4,7 +4,6 @@ import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './register.css';
-import { log } from 'react-modal/lib/helpers/ariaAppHider';
 
 const Register = () => {
   const { onRegister } = useAuth();
@@ -15,7 +14,7 @@ const Register = () => {
     // validates abc@de.f as email. must be 3 characters on both sides of @
     const validRegex = /^[a-zA-Z]{3,}@[a-zA-Z.]{3,}$/;
     setEmailIsValid(validRegex.test(formData.email));
-    log('emailIsValid', validRegex.test(formData.email));
+    console.log('emailIsValid', validRegex.test(formData.email));
     return validRegex.test(formData.email);
   };
 
