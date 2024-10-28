@@ -8,6 +8,7 @@ import Verification from './pages/verification';
 import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
+import Cohort from './pages/cohort';
 
 const App = () => {
   return (
@@ -28,6 +29,16 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/cohort"
+              element={
+                <ProtectedRoute>
+                  <Cohort />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="welcome"
               element={

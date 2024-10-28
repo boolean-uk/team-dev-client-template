@@ -1,0 +1,22 @@
+.cohort-title {
+    height: 56px;
+    border-bottom: 1px solid #DCE1F0;
+    margin-bottom: 1rem;
+}
+
+.cohort-div {
+    border-bottom: 1px solid #DCE1F0;
+    height: 72px;
+}
+
+.student-card {
+    height: 72px;
+    width: 365px;
+}
+
+
+.user-list {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(365px, 1fr));
+}
