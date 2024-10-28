@@ -9,6 +9,7 @@ import './register.css';
 const Register = () => {
   const { onRegister } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [showEmailError, setShowEmailError] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +23,14 @@ const Register = () => {
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
+  };
+
+  // Should also validate password
+  const validateAndRegister = (email, password) => {
+    if (validateEmail(email)) {
+      onRegister(email, password);
+    }
+    setShowEmailError(true);
   };
 
   return (
@@ -42,7 +51,7 @@ const Register = () => {
               name="email"
               label={'Email *'}
             />
-            <ErrorFeedback error={'Email needs to be a valid email'} />
+            {showEmailError && <ErrorFeedback error={'Email needs to be a valid email'} />}
             <TextInput
               value={formData.password}
               onChange={onChange}
@@ -53,7 +62,7 @@ const Register = () => {
           </form>
           <Button
             text="Sign up"
-            onClick={() => onRegister(formData.email, formData.password)}
+            onClick={() => validateAndRegister(formData.email, formData.password)}
             classes="green width-full"
           />
         </div>
