@@ -55,6 +55,7 @@ const Login = () => {
               onChange={onChange}
               name="email"
               label={'Email *'}
+              type={'email'}
               style={{ borderColor: emailError ? 'red' : '' }}
             />
             <TextInput
