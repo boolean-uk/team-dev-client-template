@@ -52,16 +52,30 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleRegister = async (email, password) => {
-    const res = await register(email, password);
-    setToken(res.data.token);
+    const res = await register(email, password).then(function (response) {
+      return response;
+    });
 
+    if (res.status === 'fail') {
+      return res;
+    }
+
+    setToken(res.data.token);
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+  const handleCreateProfile = async (
+    firstName,
+    lastName,
+    githubUrl,
+    bio,
+    email,
+    mobile,
+    password
+  ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
+    await createProfile(userId, firstName, lastName, githubUrl, bio, email, mobile, password);
 
     localStorage.setItem('token', token);
     navigate('/');

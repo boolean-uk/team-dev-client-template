@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import LockIcon from '../../../assets/icons/lockIcon';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type = 'text' }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+
   if (type === 'password') {
     return (
       <div className="inputwrapper">
@@ -11,6 +13,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           type={type}
           name={name}
           value={value}
+          placeholder={placeholder}
           onChange={(e) => {
             onChange(e);
             setInput(e.target.value);
@@ -28,6 +31,23 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
         </button>
       </div>
     );
+  } else if (type === 'readOnly') {
+    return (
+      <div className="inputwrapper">
+        {<label htmlFor={name}>{label}</label>}
+        <input
+          type={'text'}
+          name={name}
+          value={value}
+          onChange={onChange}
+          readOnly={true}
+          className={'input-field placeholder-style'}
+        />
+        <div className="lockicon-container">
+          <LockIcon />
+        </div>
+      </div>
+    );
   } else {
     return (
       <div className="inputwrapper">
@@ -36,6 +56,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           type={type}
           name={name}
           value={value}
+          placeholder={placeholder}
           onChange={onChange}
           className={icon && 'input-has-icon'}
         />
