@@ -8,15 +8,23 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
   if (type === 'password') {
     return (
       <div className="inputwrapper">
-        <label htmlFor={name}>{label}</label>
+        {(isHighlighted || value) && <label htmlFor={name}>{label}</label>}
         <input
           type={type}
           name={name}
           value={value}
-          placeholder={placeholder}
+          placeholder={label}
           onChange={(e) => {
             onChange(e);
             setInput(e.target.value);
+          }}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = label;
+            setIsHighlighted(false);
           }}
         />
         {showpassword && <input type="text" name={name} value={input} className="passwordreveal" />}
@@ -51,14 +59,26 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
   } else {
     return (
       <div className="inputwrapper">
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && (isHighlighted || value) && (
+          <label className="input-label" htmlFor={name}>
+            {label}
+          </label>
+        )}
         <input
           type={type}
           name={name}
           value={value}
-          placeholder={placeholder}
+          placeholder={label}
           onChange={onChange}
           className={icon && 'input-has-icon'}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = label;
+            setIsHighlighted(false);
+          }}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>
