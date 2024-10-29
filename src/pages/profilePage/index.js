@@ -8,6 +8,7 @@ import BasicInfoForm from './components/BasicInfoForm';
 import TrainingInfoForm from './components/TrainingInfoForm';
 import ContactInfoForm from './components/ContactInfoForm';
 import BioForm from './components/BioForm';
+import Button from '../../components/button';
 
 // eslint-disable-next-line camelcase
 // import jwt_decode from 'jwt-decode';
@@ -96,6 +97,14 @@ const UserProfile = () => {
             <ContactInfoForm />
             <BioForm />
             <p className="info-text required-text">*Required</p>
+            <Button
+              text="Edit"
+              type="button"
+              classes="edit-button"
+              onClick={() => {
+                console.log('Clicked edit button');
+              }}
+            />
           </section>
         </Card>
       </ProfileContext.Provider>

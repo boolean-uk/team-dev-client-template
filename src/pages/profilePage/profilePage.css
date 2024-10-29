@@ -130,3 +130,26 @@ textarea {
 .required-text {
   margin-left: 0;
 }
+
+.edit-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+  padding: 14px 24px;
+  gap: 8px;
+
+  background: var(--color-blue);
+  border-radius: 8px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+  color: #ffffff;
+
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
