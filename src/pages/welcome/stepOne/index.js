@@ -5,7 +5,7 @@ import UploadPhotoModal from '../../../components/uploadPhotoModal';
 import useModal from '../../../hooks/useModal';
 import './style.css';
 
-const StepOne = ({ data, setData, setPhoto }) => {
+const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
   const { openModal, setModal } = useModal();
 
   const setPhotoData = (photoData) => {
@@ -47,24 +47,36 @@ const StepOne = ({ data, setData, setPhoto }) => {
             name="firstName"
             label={'First name*'}
           />
+          {validating && !data.firstName && (
+            <p className="welcome-form-error">Please enter a first name</p>
+          )}
           <TextInput
             onChange={setData}
             value={data.lastName}
             name="lastName"
             label={'Last name*'}
           />
+          {validating && !data.lastName && (
+            <p className="welcome-form-error">Please enter a last name</p>
+          )}
           <TextInput
             onChange={setData}
             value={data.userName}
             name="userName"
-            label={'Last name*'}
+            label={'User name*'}
           />
+          {validating && !data.userName && (
+            <p className="welcome-form-error">Please enter a user name</p>
+          )}
           <TextInput
             onChange={setData}
             value={data.githubUsername}
             name="githubUsername"
             label={'Github Username*'}
           />
+          {validating && !data.githubUsername && (
+            <p className="welcome-form-error">Please enter a github username</p>
+          )}
           <p className="text-blue1">*Required</p>
         </div>
       </Form>

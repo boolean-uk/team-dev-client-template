@@ -3,3 +3,8 @@
   height: 50px;
   border-radius: 50%;
 }
+.welcome-form-error {
+  color: red;
+  line-height: 0;
+  margin-bottom: 20px;
+}

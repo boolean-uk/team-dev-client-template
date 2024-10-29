@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Stepper from '../../components/stepper';
-import useAuth from '../../hooks/useAuth';
+// import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
@@ -8,15 +8,17 @@ import StepThree from './stepThree';
 import StepFour from './stepFour';
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth();
+  // const { onCreateProfile } = useAuth();
+  const location = useLocation();
+  const data = location.state; // Access the passed data
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
     githubUsername: '',
-    email: '',
+    email: data.email,
     mobile: '',
-    password: '',
+    password: data.password,
     bio: '',
     userName: '',
     photo: ''
@@ -39,6 +41,7 @@ const Welcome = () => {
   };
 
   const onComplete = () => {
+    /*
     onCreateProfile(
       profile.firstName,
       profile.lastName,
@@ -48,6 +51,9 @@ const Welcome = () => {
       profile.mobile,
       profile.password
     );
+    */
+
+    console.log(profile);
   };
 
   return (
@@ -57,7 +63,7 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper data={profile} header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} setPhoto={onPhotoChange} />
         <StepTwo data={profile} setData={onChange} />
         <StepThree data={profile} setData={onChange} />
