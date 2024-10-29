@@ -23,6 +23,11 @@
 }
 
 .cohort-student-name {
-    padding: 4px;
-    margin-top: 15px;
+    
+    margin-top: 10px;
+}
+
+.cohort-action-button {
+    padding: 0px 0px !important;
+    margin-top: 5px;
 }
