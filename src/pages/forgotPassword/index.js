@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const onChange = (e) => {
     setEmail(e.target.value);
 
-    // TODO: Add validation for email.
+    // TODO: Add validation for email, e.g. check if email exists in database.
   };
 
   const onSubmit = (e) => {
