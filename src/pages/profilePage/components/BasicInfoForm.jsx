@@ -49,7 +49,6 @@ const BasicInfoForm = () => {
             type="text"
           />
         </div>
-        <hr className="section-divider" />
       </Form>
     </div>
   );
