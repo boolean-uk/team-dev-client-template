@@ -18,6 +18,7 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
             onChange(e);
             setInput(e.target.value);
           }}
+          placeholder={placeholder}
         />
         {showpassword && <input type="text" name={name} value={input} className="passwordreveal" />}
         <button
