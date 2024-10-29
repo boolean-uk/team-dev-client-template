@@ -13,7 +13,9 @@ const Welcome = () => {
     firstName: '',
     lastName: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    userName: '',
+    photo: ''
   });
 
   const onPhotoChange = (photoData) => {
