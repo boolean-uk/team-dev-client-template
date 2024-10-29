@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Stepper from '../../components/stepper';
-// import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
@@ -9,9 +9,9 @@ import StepFour from './stepFour';
 import { useLocation } from 'react-router-dom';
 
 const Welcome = () => {
-  // const { onCreateProfile } = useAuth();
+  const { onCreateProfile } = useAuth();
   const location = useLocation();
-  const data = location.state; // Access the passed data
+  const data = location.state;
 
   const [profile, setProfile] = useState({
     firstName: '',
@@ -42,7 +42,6 @@ const Welcome = () => {
   };
 
   const onComplete = () => {
-    /*
     onCreateProfile(
       profile.firstName,
       profile.lastName,
@@ -52,7 +51,6 @@ const Welcome = () => {
       profile.mobile,
       profile.password
     );
-    */
 
     console.log(profile);
   };

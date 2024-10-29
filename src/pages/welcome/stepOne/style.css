@@ -8,3 +8,11 @@
   line-height: 0;
   margin-bottom: 20px;
 }
+.welcome-form-profileimg-selections {
+  display: flex;
+  gap: 16px;
+}
+
+.text-blue1 {
+  cursor: pointer;
+}

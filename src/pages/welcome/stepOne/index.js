@@ -34,9 +34,14 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
             ) : (
               <ProfileIcon colour="#28C846" background="#64DC78" />
             )}
-            <p onClick={showModal} className="text-blue1">
-              {data.photo ? 'Change headshot' : 'Add headshot'}
-            </p>
+            <div className="welcome-form-profileimg-selections">
+              <p onClick={showModal} className="text-blue1">
+                {data.photo ? 'Change headshot' : 'Add headshot'}
+              </p>
+              <p onClick={() => setPhotoData('')} className="text-blue1">
+                {data.photo && 'Remove headshot'}
+              </p>
+            </div>
           </div>
           <p className="welcome-form-profileimg-error">Please upload a valid image file</p>
         </div>

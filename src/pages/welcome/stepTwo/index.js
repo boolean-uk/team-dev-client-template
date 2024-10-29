@@ -11,7 +11,7 @@ const StepTwo = ({ data, setData, validating }) => {
         <div className="welcome-form-inputs">
           <TextInput
             onChange={setData}
-            type="text"
+            type="readOnly"
             placeholder="Email"
             value={data.email}
             name="email"
@@ -33,7 +33,7 @@ const StepTwo = ({ data, setData, validating }) => {
             : null}
           <TextInput
             onChange={setData}
-            type="password"
+            type="passwordReadOnly"
             placeholder="Password"
             value={data.password}
             name="password"

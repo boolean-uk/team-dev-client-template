@@ -50,6 +50,23 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
         </button>
       </div>
     );
+  } else if (type === 'passwordReadOnly') {
+    return (
+      <div className="inputwrapper">
+        {<label htmlFor={name}>{label}</label>}
+        <input
+          type={'password'}
+          name={name}
+          value={value}
+          onChange={onChange}
+          readOnly={true}
+          className={'input-field placeholder-style'}
+        />
+        <div className="lockicon-container">
+          <LockIcon />
+        </div>
+      </div>
+    );
   } else if (type === 'readOnly') {
     return (
       <div className="inputwrapper">
