@@ -1,6 +1,7 @@
 import useModal from '../../hooks/useModal';
 import Card from '../card';
 import Comment from '../comment';
+import DeletePostModal from '../deletePostModal';
 import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
@@ -8,16 +9,19 @@ import './style.css';
 
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal();
-
   const userInitials = name.match(/\b(\w)/g);
+  const modalsMap = {
+    'Edit post': <EditPostModal />,
+    'Delete post': <DeletePostModal />
+  };
 
-  const showModal = () => {
-    setModal('Edit post', <EditPostModal />);
+  const handleDecisionClick = (decision) => {
+    setModal(decision, modalsMap[decision]);
     openModal();
   };
 
   const pickModalDecision = () => {
-    setModal('Edit decision', <EditDecisionModal onClick={showModal} />);
+    setModal('Edit decision', <EditDecisionModal onClick={handleDecisionClick} />);
     openModal();
   };
 
