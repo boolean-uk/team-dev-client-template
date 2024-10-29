@@ -19,7 +19,7 @@ const UserProfile = () => {
   const [profile, setProfile] = useState(null);
   const [initials, setInitials] = useState('');
   const [bioLength, setBioLength] = useState(0);
-  // const storedToken = localStorage.getItem('token');
+  // const { token } = useAuth();
   // const { userId } = jwt_decode(storedToken);
 
   const fetchProfile = () => {
