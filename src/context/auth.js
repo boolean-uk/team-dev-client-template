@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [location.state?.from?.pathname, navigate]);
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (email, password, rememberMe) => {
     try {
       const res = await login(email, password);
 
@@ -34,8 +34,12 @@ const AuthProvider = ({ children }) => {
       }
 
       localStorage.setItem('token', res.data.token);
-
       setToken(res.token);
+
+      if (rememberMe) {
+        // TODO: Implement remember me functionality, extend token expiration.
+      }
+
       navigate(location.state?.from?.pathname || '/');
     } catch (error) {
       return error.message;
