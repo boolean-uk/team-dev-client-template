@@ -1,6 +1,15 @@
 .edit-decision-container {
     display: flex;
     flex-direction: column;
+    background: #fff;
+    width: 300px;
+    height: auto;
+    border: 1px solid #e3e8ec;
+    z-index: 1;
+    position: absolute;
+    top: calc(100% - 8px);
+    left: 102.1%;
+    transform: translateX(-100%);
 }
 
 .decision-icon-container {
@@ -19,5 +28,4 @@
 
 .decision-icon-container p {
     color: #64648C;
-
 }
