@@ -9,11 +9,22 @@ import './login.css';
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleLogin = async () => {
+    const errorMessage = await onLogin(formData.email, formData.password, rememberMe);
+    if (errorMessage) {
+      setError(errorMessage);
+    }
+  };
+
+  const handleCheckboxChange = () => setRememberMe(!rememberMe);
 
   return (
     <div className="bg-blue login credentialpage">
@@ -34,16 +45,25 @@ const Login = () => {
               label={'Password *'}
               type={'password'}
             />
-            {/* TODO: Implement forgot password page. */}
-            <Link to="/forgot-password" className="forgot-password">
-              Forgot password?
-            </Link>
+            <div className="remember-forgot-container">
+              <div className="remember-me">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  name="remember-me"
+                  value="remember-me"
+                  checked={rememberMe}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="remember-me">Remember me?</label>
+              </div>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot password?
+              </Link>
+            </div>
           </form>
-          <Button
-            text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
-            classes="green width-full"
-          />
+          {error && <p className="error-message">{error}</p>}
+          <Button text="Log in" onClick={handleLogin} classes="green width-full" />
         </div>
       </CredentialsCard>
     </div>
