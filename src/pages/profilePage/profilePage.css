@@ -23,7 +23,18 @@
 .profile-info-header {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+}
+
+.profile-info-header .profile-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.profile-info-header .profile-icon p {
+  line-height: 77px;
+  font-size: 32px;
+  font-weight: 400;
+  align-items: center;
 }
 
 .profile-info {
@@ -55,8 +66,14 @@
   width: 100%;
 }
 
-.profile-grid-section input {
-  margin-bottom: 36px; /* Add vertical space between inputs */
+.profile-grid-section h3 {
+  margin-bottom: 32px; /* Add space below section headers */
+}
+
+.profile-grid-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .profile-grid-section.read-only input {
@@ -66,15 +83,14 @@
 .photo-section {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px; /* Add space below the photo section */
 }
 
 .photo-label {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
-  color: #000046;
-  margin-bottom: 8px; /* Add space between label and profile circle */
+  color: #64648c;
+  margin-left: 2px;
 }
 
 .profile-circle-wrapper {
@@ -90,8 +106,29 @@
   margin-left: 16px; /* Add space between profile circle and add headshot text */
 }
 
+.profile-grid-section-bio .profile-grid-section {
+  gap: 0;
+}
+
 .section-divider {
   border: none;
   border-top: 1px solid #e6ebf5;
   margin: 32px 0; /* Add vertical space around the divider */
+}
+
+textarea {
+  height: 287px; /* Set the height of the textarea */
+  resize: none; /* Förhindrar användaren från att ändra storlek på textarea */
+  margin: 0;
+}
+
+.info-text {
+  color: #64648c;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 10px;
+}
+
+.required-text {
+  margin-left: 0;
 }
