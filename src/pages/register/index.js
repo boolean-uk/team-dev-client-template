@@ -3,11 +3,13 @@ import Button from '../../components/button';
 import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
+import ErrorMessage from '../../components/errorMessage';
 import './register.css';
 
 const Register = () => {
   const { onRegister } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -40,9 +42,10 @@ const Register = () => {
               type={'password'}
             />
           </form>
+          {errorMessage && <ErrorMessage message={errorMessage} />}
           <Button
             text="Sign up"
-            onClick={() => onRegister(formData.email, formData.password)}
+            onClick={() => onRegister(formData.email, formData.password, setErrorMessage)}
             classes="green width-full"
           />
         </div>
