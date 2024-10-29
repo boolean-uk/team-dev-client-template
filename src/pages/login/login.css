@@ -6,7 +6,7 @@
   display: grid;
   grid-template-rows: repeat(2, auto);
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .remember-forgot-container {
@@ -81,4 +81,9 @@
   color: #F00000;
   margin-bottom: 0.5rem;
   text-align: center;
+}
+
+.required-indicator {
+  color: #00004673;
+  margin-bottom: 30px;
 }

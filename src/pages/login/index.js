@@ -62,6 +62,7 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <p className="required-indicator">*Required</p>
           {error && <p className="error-message">{error}</p>}
           <Button text="Log in" onClick={handleLogin} classes="green width-full" />
         </div>
