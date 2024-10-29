@@ -45,9 +45,13 @@ const Register = () => {
     if (!validateEmail(email)) {
       setErrorMsg('Email needs to be a valid email (asd@asd.com)');
       setShowEmailError(true);
+    } else {
+      setShowEmailError(false);
     }
     if (!validatePassword(password)) {
       setShowPasswordError(true);
+    } else {
+      setShowPasswordError(false);
     }
   };
 
