@@ -1,8 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({
+  value,
+  onChange,
+  name,
+  label,
+  icon,
+  type = 'text',
+  isRequired = false,
+  validChars = 'A-Za-z0-9@_-',
+  maxLength = 50
+}) => {
   const [input, setInput] = useState('');
+  const [error, setError] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+
+  useEffect(() => {
+    if (isRequired && value.length === 0) {
+      setError(`${label.slice(0, -1)} is required`);
+    }
+  }, [isRequired]);
+
+  const validateInput = (value, event) => {
+    const regex = new RegExp(`^[${validChars}]+$`);
+    const isValid = regex.test(value) && value.length <= maxLength;
+    if (value.length === 0 && isRequired) {
+      setError(`${label.slice(0, -1)} is required`);
+      onChange(event);
+    } else if (!isValid) {
+      setError(
+        `Input must be up to ${maxLength} characters long and contain only: ${validChars.split('').join(', ')}`
+      );
+    } else {
+      setError('');
+    }
+    return isValid;
+  };
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (validateInput(value, event)) {
+      onChange(event);
+    }
+    setInput(value);
+  };
+
   if (type === 'password') {
     return (
       <div className="inputwrapper">
@@ -12,7 +54,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           name={name}
           value={value}
           onChange={(e) => {
-            onChange(e);
+            handleChange(e);
             setInput(e.target.value);
           }}
         />
@@ -26,6 +68,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
         >
           <EyeLogo />
         </button>
+        {error && <span className="error-message">{error}</span>}
       </div>
     );
   } else {
@@ -36,10 +79,11 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           type={type}
           name={name}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           className={icon && 'input-has-icon'}
         />
         {icon && <span className="input-icon">{icon}</span>}
+        {error && <span className="error-message">{error}</span>}
       </div>
     );
   }

@@ -11,8 +11,10 @@ const Welcome = () => {
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
+    username: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    profilePicture: ''
   });
 
   const onChange = (event) => {
@@ -24,8 +26,24 @@ const Welcome = () => {
     });
   };
 
+  const validate = () => {
+    if (!profile.firstName && !profile.lastName && !profile.username && !profile.githubUsername) {
+      return false;
+    }
+    return true;
+  };
+
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    if (validate()) {
+      onCreateProfile(
+        profile.firstName,
+        profile.lastName,
+        profile.username,
+        profile.githubUsername,
+        profile.bio,
+        profile.profilePicture
+      );
+    }
   };
 
   return (
@@ -35,7 +53,7 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} validate={validate}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
       </Stepper>

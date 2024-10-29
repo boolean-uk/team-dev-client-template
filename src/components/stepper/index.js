@@ -2,9 +2,9 @@ import Steps from './steps';
 import Card from '../card';
 import Button from '../button';
 import './style.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const Stepper = ({ header, children, onComplete }) => {
+const Stepper = ({ header, children, onComplete, validate }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const onBackClick = () => {
@@ -16,10 +16,9 @@ const Stepper = ({ header, children, onComplete }) => {
   const onNextClick = () => {
     if (currentStep === children.length - 1) {
       onComplete();
-      return;
+    } else if (validate()) {
+      setCurrentStep(currentStep + 1);
     }
-
-    setCurrentStep(currentStep + 1);
   };
 
   return (
