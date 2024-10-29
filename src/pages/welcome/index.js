@@ -6,6 +6,7 @@ import StepTwo from './stepTwo';
 import './style.css';
 import StepThree from './stepThree';
 import StepFour from './stepFour';
+import { useLocation } from 'react-router-dom';
 
 const Welcome = () => {
   // const { onCreateProfile } = useAuth();

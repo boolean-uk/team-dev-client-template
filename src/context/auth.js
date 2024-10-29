@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     }
 
     setToken(res.data.token);
-    navigate('/verification');
+    navigate('/verification', { state: { email: email, password: password } });
   };
 
   const handleCreateProfile = async (
