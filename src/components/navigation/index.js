@@ -28,7 +28,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to="/cohort" replace state={{ pathname: '/cohort' }}>
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>
