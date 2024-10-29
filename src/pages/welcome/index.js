@@ -5,6 +5,7 @@ import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
 import StepThree from './stepThree';
+import StepFour from './stepFour';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
@@ -18,6 +19,13 @@ const Welcome = () => {
     password: '',
     bio: ''
   });
+
+  const onPhotoChange = (photoData) => {
+    setProfile({
+      ...profile,
+      photo: photoData
+    });
+  };
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -48,9 +56,10 @@ const Welcome = () => {
       </div>
 
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
+        <StepOne data={profile} setData={onChange} setPhoto={onPhotoChange} />
         <StepTwo data={profile} setData={onChange} />
         <StepThree data={profile} setData={onChange} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
