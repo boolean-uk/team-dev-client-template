@@ -1,3 +1,10 @@
+.welcome-form {
+  height: 30vh;
+  width: 80vw;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
 .welcome-titleblock {
   margin-bottom: 32px;
 }
