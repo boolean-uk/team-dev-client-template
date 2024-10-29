@@ -22,9 +22,11 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
+      navigate(location.pathname || '/');
+    } else {
+      navigate('/login');
     }
-  }, [location.state?.from?.pathname, navigate]);
+  }, []);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
@@ -35,9 +37,9 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
 
-    setToken(res.token);
+    setToken(res.data.token);
     setUserCredentials({ email, password });
-    navigate(location.state?.from?.pathname || '/');
+    navigate('/');
   };
 
   const handleLogout = () => {
@@ -85,7 +87,6 @@ const AuthProvider = ({ children }) => {
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   const location = useLocation();
-
   if (!token) {
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
