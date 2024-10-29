@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Header from '../components/header';
 import Modal from '../components/modal';
 import Navigation from '../components/navigation';
-import useAuth from '../hooks/useAuth';
+import useAuxth from '../hooks/useAuth';
 import { createProfile, login, register } from '../service/apiClient';
 
 // eslint-disable-next-line camelcase
@@ -21,7 +21,19 @@ const AuthProvider = ({ children }) => {
     if (storedToken) {
       setToken(storedToken);
     }
-  }, [location.state?.from?.pathname]);
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const redirectPath = localStorage.getItem('redirectPath');
+      if (redirectPath) {
+        localStorage.removeItem('redirectPath'); 
+        navigate(redirectPath);
+      } else {
+        navigate('/'); 
+      }
+    }
+  }, [token]);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
@@ -33,13 +45,13 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
 
-    setLoggedInUser(res.data.user);
-
+    localStorage.removeItem('redirectPath');
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('redirectPath');
     setToken(null);
     setLoggedInUser(null);
   };
