@@ -16,7 +16,7 @@ const Stepper = ({ header, children, onComplete, validate }) => {
   const onNextClick = () => {
     if (currentStep === children.length - 1) {
       onComplete();
-    } else if (validate()) {
+    } else if (validate(currentStep + 1)) {
       setCurrentStep(currentStep + 1);
     }
   };
