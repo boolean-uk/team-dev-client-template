@@ -1,0 +1,23 @@
+.edit-decision-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.decision-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.decision-icon-container:hover {
+    background: rgb(241, 241, 241);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.decision-icon-container p {
+    color: #64648C;
+
+}
