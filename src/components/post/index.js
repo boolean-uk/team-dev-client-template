@@ -1,6 +1,7 @@
 import useModal from '../../hooks/useModal';
 import Card from '../card';
 import Comment from '../comment';
+import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
@@ -12,6 +13,11 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
 
   const showModal = () => {
     setModal('Edit post', <EditPostModal />);
+    openModal();
+  };
+
+  const pickModalDecision = () => {
+    setModal('Edit decision', <EditDecisionModal onClick={showModal} />);
     openModal();
   };
 
@@ -27,7 +33,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
           </div>
 
           <div className="edit-icon">
-            <p onClick={showModal}>...</p>
+            <p onClick={pickModalDecision}>...</p>
           </div>
         </section>
 
