@@ -1,0 +1,97 @@
+.profile-page-main {
+  grid-column: 2 / span 2; /* Occupy the last two columns */
+  grid-row: 2; /* Occupy row 2 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.profile-header {
+  margin-top: 10px;
+  align-self: flex-start;
+  margin: 24px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: #000046;
+}
+
+.profile-info-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.profile-info {
+  margin-left: 16px;
+}
+
+.profile-info h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  color: #000046;
+  margin: 0;
+}
+
+.profile-info p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #64648c;
+  margin: 0;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.profile-grid-section input {
+  margin-bottom: 36px; /* Add vertical space between inputs */
+}
+
+.profile-grid-section.read-only input {
+  pointer-events: none; /* Disable all mouse events */
+}
+
+.photo-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px; /* Add space below the photo section */
+}
+
+.photo-label {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000046;
+  margin-bottom: 8px; /* Add space between label and profile circle */
+}
+
+.profile-circle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.add-headshot {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #888;
+  margin-left: 16px; /* Add space between profile circle and add headshot text */
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid #e6ebf5;
+  margin: 32px 0; /* Add vertical space around the divider */
+}
