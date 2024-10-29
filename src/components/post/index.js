@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useModal from '../../hooks/useModal';
 import Card from '../card';
 import Comment from '../comment';
@@ -9,6 +10,7 @@ import './style.css';
 
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal();
+  const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
   const modalsMap = {
     'Edit post': <EditPostModal />,
@@ -20,9 +22,8 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     openModal();
   };
 
-  const pickModalDecision = () => {
-    setModal('Edit decision', <EditDecisionModal onClick={handleDecisionClick} />);
-    openModal();
+  const openMenuOptions = () => {
+    setMenuOptionOpen(!menuOptionOpen);
   };
 
   return (
@@ -35,9 +36,9 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-
           <div className="edit-icon">
-            <p onClick={pickModalDecision}>...</p>
+            <p onClick={openMenuOptions}>...</p>
+            {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
           </div>
         </section>
 

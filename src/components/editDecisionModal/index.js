@@ -4,12 +4,12 @@ import './style.css';
 
 const EditDecisionModal = ({ onClick }) => {
   return (
-    <section className="edit-decision-container" onClick={onClick}>
-      <div className="decision-icon-container">
+    <section className="edit-decision-container">
+      <div className="decision-icon-container" onClick={() => onClick('Edit post')}>
         <AddIcon />
         <p>Edit post</p>
       </div>
-      <div className="decision-icon-container">
+      <div className="decision-icon-container" onClick={() => onClick('Delete post')}>
         <DeleteIcon />
         <p>Delete post</p>
       </div>
