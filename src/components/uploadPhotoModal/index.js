@@ -17,6 +17,7 @@ const UploadPhotoModal = ({ setPhotoData }) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         setPhotoData(e.target.result);
+        closeModal();
       };
       reader.readAsDataURL(file);
     } else {
