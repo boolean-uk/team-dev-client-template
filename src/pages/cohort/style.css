@@ -12,6 +12,7 @@
 .student-card {
     height: 72px;
     width: 365px;
+    padding-right: 1.5rem;
 }
 
 
@@ -19,4 +20,9 @@
     margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(365px, 1fr));
+}
+
+.cohort-student-name {
+    padding: 4px;
+    margin-top: 15px;
 }
