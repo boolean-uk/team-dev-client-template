@@ -1,6 +1,15 @@
 import ProfileCircle from '../profileCircle';
+import useModal from '../../hooks/useModal';
+import UserListModal from '../cohortListModal';
 
 const UserListItem = ({ user }) => {
+  const { openModal, setModal } = useModal();
+
+  const showModal = () => {
+    setModal(<UserListModal />);
+    openModal();
+  };
+
   return (
     <section className="cohort-list-user" key={user.id}>
       <ProfileCircle
@@ -12,7 +21,7 @@ const UserListItem = ({ user }) => {
         </p>
       </div>
       <div className="edit-icon">
-        <p>...</p>
+        <p onClick={showModal}>...</p>
       </div>
     </section>
   );

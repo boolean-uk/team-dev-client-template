@@ -22,3 +22,12 @@
 .edit-icon {
     margin-top: 5px;
 }
+
+.edit-icon p {
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.edit-icon p:hover {
+    cursor: pointer;
+}

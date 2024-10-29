@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../../service/apiClient';
-import UserListItem from '../myCohortListItem';
+import UserListItem from '../userListItem';
 import './style.css';
 
-const MyCohortList = () => {
+const CohortList = () => {
   const [cohort, setCohort] = useState([]);
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const MyCohortList = () => {
   );
 };
 
-export default MyCohortList;
+export default CohortList;

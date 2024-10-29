@@ -6,7 +6,7 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-import MyCohortList from '../../components/myCohortList';
+import CohortList from '../../components/cohortList';
 import './style.css';
 
 const Dashboard = () => {
@@ -51,7 +51,7 @@ const Dashboard = () => {
         </Card>
 
         <Card>
-          <MyCohortList />
+          <CohortList />
         </Card>
       </aside>
     </>
