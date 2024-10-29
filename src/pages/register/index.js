@@ -37,7 +37,10 @@ const Register = () => {
   // Should also validate password
   const validateAndRegister = (email, password) => {
     if (validateEmail(email) && validatePassword(password)) {
-      onRegister(email, password);
+      onRegister(email, password).then(function () {
+        setErrorMsg('Email already in use');
+        setShowEmailError(true);
+      });
     }
     if (!validateEmail(email)) {
       setErrorMsg('Email needs to be a valid email (asd@asd.com)');
