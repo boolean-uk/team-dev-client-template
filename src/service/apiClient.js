@@ -5,8 +5,11 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  await post('users', { email, password }, false);
-  return await login(email, password);
+  const response = await post('users', { email, password }, false);
+  if (response.status !== 'fail') {
+    return await login(email, password);
+  }
+  return response;
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {
