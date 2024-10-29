@@ -24,21 +24,6 @@
   height: 40px;
   border-radius: 20px;
 }
-.welcome-form-profileimg-upload-button[type='file']::file-selector-button {
-  background-color: #000046;
-  color: #ffffff;
-  border-radius: 4px;
-  padding: 2px 4px;
-  border-width: 0;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-}
-.welcome-form-profileimg-upload-button[type='file']::file-selector-button:hover {
-  background-color: #f0f5fa;
-  color: #64648c;
-  border-radius: 4px;
-}
 .welcome-form-profileimg-error {
   color: transparent;
 }
@@ -61,4 +46,90 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+.welcome-form-profileimg-addimg-button {
+  background-color: #f0f5fa;
+  color: #64648c;
+  border-radius: 4px;
+  padding: 2px 4px;
+  border-width: 0;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  white-space: nowrap;
+}
+.welcome-form-profileimg-addimg-button:hover {
+  background-color: #000046;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  height: 15rem;
+}
+
+.popup-content h3 {
+  text-align: left;
+}
+.popup-content p {
+  text-align: left;
+}
+
+.popup-options {
+  display: flex;
+  gap: 10px;
+}
+
+.popup-options button {
+  flex: 1;
+  background-color: #f0f5fa;
+  color: #64648c;
+  border-radius: 4px;
+  padding: 2px 4px;
+  border-width: 0;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+.popup-options button:hover {
+  background-color: #000046;
+  color: #ffffff;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  flex: 1;
+  font-size: larger;
+  padding: 14px 24px;
+  cursor: pointer;
+  background-color: #000046;
+  color: #ffffff;
+  border-radius: 4px;
+  border-width: 0;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+.custom-file-upload:hover {
+  background-color: #f0f5fa;
+  color: #64648c;
 }

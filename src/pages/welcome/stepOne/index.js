@@ -5,6 +5,7 @@ import TextInput from '../../../components/form/textInput';
 
 const StepOne = ({ data, setData, errors }) => {
   const [uploadedImageHex, setUploadedImageHex] = useState(data.profilePicture);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -14,9 +15,18 @@ const StepOne = ({ data, setData, errors }) => {
         const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
         setUploadedImageHex(base64String);
         setData({ target: { name: 'profilePicture', value: base64String } });
+        setIsPopupVisible(false);
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleUploadPressed = () => {
+    setIsPopupVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsPopupVisible(false);
   };
 
   return (
@@ -37,15 +47,39 @@ const StepOne = ({ data, setData, errors }) => {
             ) : (
               <ProfileIcon colour="#28C846" background="#64DC78" />
             )}
-            <input
-              className="welcome-form-profileimg-upload-button"
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={handleImageUpload}
-            />
+            <button
+              className="welcome-form-profileimg-addimg-button"
+              type="button"
+              onClick={handleUploadPressed}
+            >
+              Add Photo
+            </button>
           </div>
           <p className="welcome-form-profileimg-error">Please upload a valid image file</p>
         </div>
+        {isPopupVisible && (
+          <div className="popup">
+            <div className="popup-content">
+              <h3>Upload photo</h3>
+              <p>Choose a file to upload as your profile picture.</p>
+              <div className="popup-options">
+                <button type="button" onClick={handleCancel}>
+                  Cancel
+                </button>
+                <label htmlFor="file-upload" className="custom-file-upload">
+                  Choose file
+                </label>
+                <input
+                  id="file-upload"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={handleImageUpload}
+                  style={{ display: 'none' }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
         <div className="welcome-form-inputs">
           <TextInput
             onChange={setData}
