@@ -17,7 +17,9 @@ const Welcome = () => {
     email: '',
     mobile: '',
     password: '',
-    bio: ''
+    bio: '',
+    userName: '',
+    photo: ''
   });
 
   const onPhotoChange = (photoData) => {
