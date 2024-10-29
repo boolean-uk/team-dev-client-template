@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './login.css';
 import { isValidEmail, isValidPassword } from '../../validation/validation';
+import ErrorBox from '../../validation/ErrorBox';
 
 const Login = () => {
   const { onLogin } = useAuth();
@@ -23,16 +24,6 @@ const Login = () => {
 
     setEmailError(!emailValid);
     setPasswordError(!passwordValid);
-
-    if (!emailValid) {
-      alert('Invalid email address.');
-    }
-
-    if (!passwordValid) {
-      alert(
-        'Invalid password. It must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character.'
-      );
-    }
 
     if (emailValid && passwordValid) {
       onLogin(email, password);
@@ -56,16 +47,18 @@ const Login = () => {
               name="email"
               label={'Email *'}
               type={'email'}
-              style={{ borderColor: emailError ? 'red' : '' }}
             />
+            {emailError && <ErrorBox message="Invalid email address." />}
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
               label={'Password *'}
               type={'password'}
-              style={{ borderColor: passwordError ? 'red' : '' }}
             />
+            {passwordError && (
+              <ErrorBox message="Invalid password. It must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character." />
+            )}
           </form>
           <Button
             text="Log in"
