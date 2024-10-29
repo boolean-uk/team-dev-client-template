@@ -27,10 +27,10 @@ const AuthProvider = ({ children }) => {
     if (token) {
       const redirectPath = localStorage.getItem('redirectPath');
       if (redirectPath) {
-        localStorage.removeItem('redirectPath'); 
+        localStorage.removeItem('redirectPath');
         navigate(redirectPath);
       } else {
-        navigate('/'); 
+        navigate('/');
       }
     }
   }, [token]);
