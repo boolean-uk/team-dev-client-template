@@ -21,7 +21,9 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
+      navigate(location.pathname || '/');
+    } else {
+      navigate('/login');
     }
   }, []);
 
@@ -34,8 +36,8 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
 
-    setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
+    setToken(res.data.token);
+    navigate('/');
   };
 
   const handleLogout = () => {
@@ -73,7 +75,6 @@ const AuthProvider = ({ children }) => {
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   const location = useLocation();
-
   if (!token) {
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
