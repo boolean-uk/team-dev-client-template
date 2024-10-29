@@ -1,7 +1,7 @@
-import './style.css';
+import './_errorMessage.css';
 
 const ErrorMessage = ({ message }) => {
-  return <div className={`error-message`}>{message}</div>;
+  return <div className={`simple-error-message`}>{message}</div>;
 };
 
 export default ErrorMessage;
