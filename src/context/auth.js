@@ -26,16 +26,20 @@ const AuthProvider = ({ children }) => {
   }, [location.state?.from?.pathname, navigate]);
 
   const handleLogin = async (email, password) => {
-    const res = await login(email, password);
+    try {
+      const res = await login(email, password);
 
-    if (!res.data.token) {
-      return navigate('/login');
+      if (!res.data.token) {
+        throw new Error('Invalid credentials, please try again.');
+      }
+
+      localStorage.setItem('token', res.data.token);
+
+      setToken(res.token);
+      navigate(location.state?.from?.pathname || '/');
+    } catch (error) {
+      return error.message;
     }
-
-    localStorage.setItem('token', res.data.token);
-
-    setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
   };
 
   const handleLogout = () => {
