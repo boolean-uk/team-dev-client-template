@@ -48,7 +48,6 @@ const TrainingInfoForm = () => {
             type="text"
           />
         </div>
-        <hr className="section-divider" />
       </Form>
     </div>
   );
