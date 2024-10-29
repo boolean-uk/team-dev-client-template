@@ -59,6 +59,7 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
           placeholder={placeholder}
           onChange={onChange}
           className={icon && 'input-has-icon'}
+          placeholder={placeholder}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>

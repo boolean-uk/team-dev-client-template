@@ -44,9 +44,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleRegister = async (email, password) => {
-    const res = await register(email, password);
-    setToken(res.data.token);
+    const res = await register(email, password).then(function (response) {
+      return response;
+    });
 
+    if (res.status === 'fail') {
+      return res;
+    }
+
+    setToken(res.data.token);
     navigate('/verification');
   };
 
