@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../../service/apiClient';
-import MyCohortListItem from '../myCohortListItem';
+import UserListItem from '../myCohortListItem';
 import './style.css';
 
 const MyCohortList = () => {
@@ -18,7 +18,7 @@ const MyCohortList = () => {
       </section>
       <section className="cohort-list border-top">
         {cohort.map((user) => (
-          <MyCohortListItem user={user} key={user.id} />
+          <UserListItem user={user} key={user.id} />
         ))}
       </section>
     </article>

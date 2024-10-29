@@ -1,6 +1,6 @@
 import ProfileCircle from '../profileCircle';
 
-const MyCohortListItem = ({ user }) => {
+const UserListItem = ({ user }) => {
   return (
     <section className="cohort-list-user" key={user.id}>
       <ProfileCircle
@@ -18,4 +18,4 @@ const MyCohortListItem = ({ user }) => {
   );
 };
 
-export default MyCohortListItem;
+export default UserListItem;
