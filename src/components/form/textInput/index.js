@@ -5,6 +5,7 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
 
+
   if (type === 'password') {
     return (
       <div className="inputwrapper">
