@@ -3,6 +3,7 @@ import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
 import UploadPhotoModal from '../../../components/uploadPhotoModal';
 import useModal from '../../../hooks/useModal';
+import './style.css';
 
 const StepOne = ({ data, setData, setPhoto }) => {
   const { openModal, setModal } = useModal();
@@ -26,9 +27,15 @@ const StepOne = ({ data, setData, setPhoto }) => {
         <div className="welcome-form-profileimg">
           <p className="text-blue1">Photo</p>
           <div className="welcome-form-profileimg-input">
-            <ProfileIcon colour="#28C846" background="#64DC78" />
+            {data.photo ? (
+              <>
+                <img src={data.photo} className="welcome-form-profileimg-icon" />
+              </>
+            ) : (
+              <ProfileIcon colour="#28C846" background="#64DC78" />
+            )}
             <p onClick={showModal} className="text-blue1">
-              Add headshot
+              {data.photo ? 'Change headshot' : 'Add headshot'}
             </p>
           </div>
           <p className="welcome-form-profileimg-error">Please upload a valid image file</p>
