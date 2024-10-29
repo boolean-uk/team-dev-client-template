@@ -27,6 +27,12 @@
   width: 40px;
   height: 40px;
   background: #f0f5fa;
+  transition: 0.2s ease-in-out;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+  background: #e3e8ec;
 }
 
 .edit-icon p {
