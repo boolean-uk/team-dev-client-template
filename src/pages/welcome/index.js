@@ -45,11 +45,13 @@ const Welcome = () => {
     onCreateProfile(
       profile.firstName,
       profile.lastName,
+      profile.userName,
       profile.githubUsername,
       profile.bio,
       profile.email,
       profile.mobile,
-      profile.password
+      profile.password,
+      profile.photo
     );
 
     console.log(profile);

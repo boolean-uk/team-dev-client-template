@@ -59,11 +59,13 @@ const AuthProvider = ({ children }) => {
   const handleCreateProfile = async (
     firstName,
     lastName,
+    userName,
     githubUrl,
     bio,
     email,
     mobile,
-    password
+    password,
+    photo
   ) => {
     const { userId } = jwt_decode(token);
 
