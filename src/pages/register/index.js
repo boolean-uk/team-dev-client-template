@@ -11,6 +11,7 @@ const Register = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showEmailError, setShowEmailError] = useState(false);
   const [showPasswordError, setShowPasswordError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -36,9 +37,13 @@ const Register = () => {
   // Should also validate password
   const validateAndRegister = (email, password) => {
     if (validateEmail(email) && validatePassword(password)) {
-      onRegister(email, password);
+      onRegister(email, password).then(function () {
+        setErrorMsg('Email already in use');
+        setShowEmailError(true);
+      });
     }
     if (!validateEmail(email)) {
+      setErrorMsg('Email needs to be a valid email (asd@asd.com)');
       setShowEmailError(true);
     }
     if (!validatePassword(password)) {
@@ -63,14 +68,16 @@ const Register = () => {
               type="email"
               name="email"
               label={'Email *'}
+              placeholder="Email*"
             />
-            {showEmailError && <ErrorFeedback error={'Email needs to be a valid email'} />}
+            {showEmailError && <ErrorFeedback error={errorMsg} />}
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
               label={'Password *'}
               type={'password'}
+              placeholder="Password*"
             />
             {showPasswordError && (
               <ErrorFeedback

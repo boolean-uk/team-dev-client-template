@@ -1,4 +1,4 @@
-import './errorFeedBack.css';
+import './errorFeedback.css';
 
 const ErrorFeedback = ({ error }) => {
   return (
