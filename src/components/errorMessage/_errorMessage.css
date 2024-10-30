@@ -1,0 +1,12 @@
+.simple-error-message {
+  background: var(--color-offwhite);
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 25px;
+  /* 
+    The value for red color below is taken from the style guide in the Figma Design Document.
+    It could be implemented as a global CSS variable in the _globals.css file instead.
+  */
+  border: 1px #f00000 solid;
+}

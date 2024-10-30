@@ -15,6 +15,7 @@ const TextInput = ({
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   useEffect(() => {
     if (isRequired && value.length === 0) {
@@ -99,6 +100,22 @@ const TextInput = ({
         >
           <EyeLogo />
         </button>
+        {error && <span className="error-message">{error}</span>}
+      </div>
+    );
+  } else if (type === 'email') {
+    return (
+      <div className="inputwrapper">
+        {label && <label htmlFor={name}>{label}</label>}
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={handleChange}
+          pattern={emailPattern}
+          className={icon && 'input-has-icon'}
+        />
+        {icon && <span className="input-icon">{icon}</span>}
         {error && <span className="error-message">{error}</span>}
       </div>
     );
