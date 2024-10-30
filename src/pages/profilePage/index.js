@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { user } from '../../service/mockData';
 import Card from '../../components/card';
 import './profilePage.css';
@@ -17,6 +17,7 @@ import useAuth from '../../hooks/useAuth';
 export const ProfileContext = createContext();
 
 const UserProfile = ({ isEditMode }) => {
+  const navigate = useNavigate();
   const { profileId } = useParams();
   const [profile, setProfile] = useState(null);
   const [rollbackProfile, setRoolbackProfile] = useState(null);
@@ -54,6 +55,7 @@ const UserProfile = ({ isEditMode }) => {
   const handleSubmit = (e) => {
     // Handle form submission
     e.preventDefault();
+    navigate(`/profile/${userId}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -71,6 +73,7 @@ const UserProfile = ({ isEditMode }) => {
 
   const handleCancel = () => {
     setProfile(rollbackProfile);
+    navigate(`/profile/${userId}`);
   };
 
   const formatRole = (role) => {
@@ -114,36 +117,31 @@ const UserProfile = ({ isEditMode }) => {
             {isEditMode ? (
               <>
                 <div className="button-group">
-                  <NavLink to={`/profile/${userId}`}>
-                    <Button
-                      text="Cancel"
-                      type="button"
-                      classes="button cancel-button"
-                      onClick={handleCancel}
-                    />
-                  </NavLink>
-                  <NavLink to={`/profile/${userId}`}></NavLink>
+                  <Button
+                    text="Cancel"
+                    type="button"
+                    classes="button cancel-button"
+                    onClick={handleCancel}
+                  />
+
                   <Button
                     text="Submit"
                     type="submit"
                     classes="button submit-button"
                     onClick={handleSubmit}
                   />
-                  <NavLink to={`/profile/${userId}`}></NavLink>
                 </div>
               </>
             ) : (
               (isCurrentUserProfile || isCurrentUserTeacher) && (
-                <NavLink to={`/profile/${userId}/edit`}>
-                  <Button
-                    text="Edit"
-                    type="button"
-                    classes="button edit-button"
-                    onClick={() => {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                  />
-                </NavLink>
+                <Button
+                  text="Edit"
+                  type="button"
+                  classes="button edit-button"
+                  onClick={() => {
+                    navigate(`/profile/${profileId}/edit`);
+                  }}
+                />
               )
             )}
           </section>
