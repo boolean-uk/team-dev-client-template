@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     localStorage.setItem('loggedInUser', JSON.stringify(res.data.user));
-    console.log('stringify', JSON.stringify(res.data.user));
+
     setToken(res.data.token);
     setLoggedInUser(res.data.user);
 
@@ -59,6 +59,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('loggedInUser');
+
     setToken(null);
     setLoggedInUser(null);
   };
@@ -73,10 +74,28 @@ const AuthProvider = ({ children }) => {
     navigate('/verification');
   };
 
+  // TODO: Update me with correct fields when Create Profile Page is done
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
     const { userId } = jwt_decode(token);
 
     await createProfile(userId, firstName, lastName, githubUrl, bio);
+
+    const existingUserString = localStorage.getItem('loggedInUser');
+    let existingUser = {};
+    if (existingUserString) {
+      existingUser = JSON.parse(existingUserString);
+    }
+
+    const updatedUser = {
+      ...existingUser,
+      firstName,
+      lastName,
+      githubUrl,
+      bio
+    };
+
+    localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+    setLoggedInUser(updatedUser);
 
     localStorage.setItem('token', token);
     navigate('/');
