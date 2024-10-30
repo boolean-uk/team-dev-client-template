@@ -6,9 +6,8 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-// import CohortList from '../../components/lists/cohortList/index';
+import CohortList from '../../components/lists/cohortList/index';
 import './style.css';
-import ListOfCohorts from '../../components/lists/listOfCohorts';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
@@ -52,7 +51,7 @@ const Dashboard = () => {
         </Card>
 
         <Card>
-          <ListOfCohorts />
+          <CohortList />
         </Card>
       </aside>
     </>
