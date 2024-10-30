@@ -15,12 +15,15 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
 
-    if (storedToken) {
+    if (storedToken && storedUser) {
       setToken(storedToken);
+      setUser(JSON.parse(storedUser));
       navigate(location.pathname || '/');
     } else {
       navigate('/login');
@@ -30,25 +33,37 @@ const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
 
-    if (!res.data.token) {
+    if (!res.data.token || !res.data.user) {
       return navigate('/login');
     }
 
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('user', JSON.stringify(res.data.user));
 
     setToken(res.data.token);
+    setUser(res.data.user);
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken(null);
+    setUser(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
-    setToken(res.data.token);
 
+    if (!res.data.token || !res.data.user) {
+      return navigate('/login');
+    }
+
+    localStorage.setItem('token', res.data.token);
+    localStorage.setItem('user', JSON.stringify(res.data.user));
+
+    setToken(res.data.token);
+    setUser(res.data.user);
     navigate('/verification');
   };
 
@@ -58,11 +73,13 @@ const AuthProvider = ({ children }) => {
     await createProfile(userId, firstName, lastName, githubUrl, bio);
 
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     navigate('/');
   };
 
   const value = {
     token,
+    user,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
