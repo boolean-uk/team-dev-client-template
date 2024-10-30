@@ -23,6 +23,7 @@ const TrainingInfoForm = () => {
             type="text"
             isLocked={isEditMode && !isCurrentUserTeacher}
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
           <TextInput
             name="specialism"
@@ -32,24 +33,27 @@ const TrainingInfoForm = () => {
             type="text"
             isLocked={isEditMode && !isCurrentUserTeacher}
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
           <TextInput
-            name="cohort"
+            name="cohortId"
             label="Cohort*"
             value={profile.cohortId}
             onChange={handleInputChange}
             type="text"
             isLocked={isEditMode && !isCurrentUserTeacher}
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
           <TextInput
-            name="StartDate"
+            name="startDate"
             label="Start Date*"
             value={profile.startDate}
             onChange={handleInputChange}
             type="text"
             isLocked={isEditMode && !isCurrentUserTeacher}
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
           <TextInput
             name="endDate"
@@ -59,6 +63,7 @@ const TrainingInfoForm = () => {
             type="text"
             isLocked={isEditMode && !isCurrentUserTeacher}
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
         </div>
       </Form>
