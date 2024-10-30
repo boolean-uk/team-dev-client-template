@@ -9,6 +9,7 @@ const TextInput = ({
   type = 'text',
   isRequired = false,
   validChars = 'A-Za-z0-9@_-',
+  minLength = 0,
   maxLength = 50,
   isLocked = false
 }) => {
@@ -35,6 +36,9 @@ const TextInput = ({
       setError(
         `Input must be up to ${maxLength} characters long and contain only: ${validChars.split('').join(', ')}`
       );
+    } else if (value.length < minLength) {
+      setError(`Input must be at least ${minLength} characters long`);
+      onChange(event);
     } else {
       setError('');
     }
