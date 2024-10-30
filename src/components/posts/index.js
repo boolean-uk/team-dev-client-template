@@ -15,7 +15,73 @@ const Posts = () => {
         return (
           <Post
             key={post.id}
-            name={`${post.author.firstName} ${post.author.lastName}`}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        );
+      })}
+
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        );
+      })}
+
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        );
+      })}
+
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        );
+      })}
+
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+          />
+        );
+      })}
+
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            // name={`${post.author.firstName} ${post.author.lastName}`}
+            name={'Meow meow'}
             date={post.createdAt}
             content={post.content}
             comments={post.comments}

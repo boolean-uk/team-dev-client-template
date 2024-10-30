@@ -76,11 +76,30 @@ const AuthProvider = ({ children }) => {
     photo
   ) => {
     const { userId } = jwt_decode(token);
+    console.log('Patching for user: ' + userId);
+    console.log(
+      lastName +
+        ' ' +
+        userName +
+        ' ' +
+        githubUrl +
+        ' ' +
+        bio +
+        ' ' +
+        email +
+        ' ' +
+        mobile +
+        ' ' +
+        password +
+        ' ' +
+        photo
+    );
 
     await createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile);
 
-    localStorage.setItem('token', token);
-    navigate('/');
+    // localStorage.setItem('token', token);
+    console.log('Token: ' + token);
+    // navigate('/');
   };
 
   const value = {

@@ -13,6 +13,7 @@ async function register(email, password) {
 }
 
 async function createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile) {
+  console.log('Patching profile');
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
