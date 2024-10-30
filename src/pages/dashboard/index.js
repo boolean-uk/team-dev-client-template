@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -7,10 +7,19 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import CohortList from '../../components/cohortList';
+import useAuth from '../../hooks/useAuth';
+import { get } from '../../service/apiClient';
 import './style.css';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const [user, setUser] = useState(null);
+  const { getLoggedInUserId } = useAuth();
+  const userId = getLoggedInUserId();
+
+  useEffect(() => {
+    get(`users/${userId}`).then((response) => setUser(response.data.user));
+  }, [userId]);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -26,6 +35,17 @@ const Dashboard = () => {
 
     // Open the modal!
     openModal();
+  };
+
+  const renderComponentBasedOnRole = (role) => {
+    switch (role) {
+      case 'TEACHER':
+        return <div>Components not implemented yet.</div>;
+      case 'STUDENT':
+        return <CohortList />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -50,9 +70,7 @@ const Dashboard = () => {
           </form>
         </Card>
 
-        <Card>
-          <CohortList />
-        </Card>
+        <Card>{renderComponentBasedOnRole(user && user.role)}</Card>
       </aside>
     </>
   );
