@@ -18,6 +18,7 @@ const ContactInfoForm = () => {
             value={profile.email}
             onChange={handleInputChange}
             type="email"
+            validChars="A-Za-z0-9@.-_"
             isRequired={true}
           />
           <TextInput
