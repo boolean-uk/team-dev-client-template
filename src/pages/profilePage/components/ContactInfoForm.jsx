@@ -19,6 +19,7 @@ const ContactInfoForm = () => {
             onChange={handleInputChange}
             type="email"
             isRequired={true}
+            validChars="A-Za-z0-9@."
           />
           <TextInput
             name="mobile"
@@ -36,6 +37,7 @@ const ContactInfoForm = () => {
             onChange={handleInputChange}
             type="password"
             isRequired={true}
+            validChars="A-Za-z0-9 -"
           />
         </div>
       </Form>
