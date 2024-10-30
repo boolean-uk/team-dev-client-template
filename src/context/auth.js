@@ -14,6 +14,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
+
+  // not saved when page is refreshed
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
-
+    setLoggedInUser(res.data.user);
     localStorage.removeItem('redirectPath');
     navigate('/');
   };

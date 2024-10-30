@@ -13,6 +13,7 @@ const Navigation = () => {
 
   useEffect(() => {
     setUserID(jwtDecode(token).userId);
+    console.log('decode', jwtDecode(token));
   }, []);
 
   if (!token) {

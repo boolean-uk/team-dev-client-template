@@ -2,33 +2,42 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
 import { get } from '../../service/apiClient';
+import useAuth from '../../hooks/useAuth';
+import jwtDecode from 'jwt-decode';
 
 const ProfilePage = () => {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const [profileUser, setUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async (profileid, setter) => {
       try {
-        const response = await get(`users/${id}`);
-        setUser(response.data.user);
+        const response = await get(`users/${profileid}`);
+        setter(response.data.user);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
+    const { token } = useAuth();
+    const loggedInId = jwtDecode(token).userId;
 
-    fetchUserData();
+    fetchUserData(id, setUser);
+    fetchUserData(loggedInId, setLoggedInUser);
+
+    console.log('profileUser', profileUser);
+    console.log('loggedInUser', loggedInUser);
   }, [id]);
 
   return (
     <div>
       <h1>Profile Page</h1>
-      {user ? (
+      {profileUser ? (
         <div>
-          <Avatar user={user} />
-          <p>ID: {user.id}</p>
-          <p>Role: {user.role}</p>
-          <p>Email: {user.email}</p>
+          <Avatar user={profileUser} />
+          <p>ID: {profileUser.id}</p>
+          <p>Role: {profileUser.role}</p>
+          <p>Email: {profileUser.email}</p>
         </div>
       ) : (
         <p>Loading...</p>
