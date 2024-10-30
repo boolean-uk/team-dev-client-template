@@ -14,7 +14,7 @@ const ListOfCohorts = () => {
   return (
     <article className="cohort">
       <section className="cohort-header">
-        <h4>Cohorts</h4>
+        <h3>Cohorts</h3>
       </section>
       <section className="cohort-list border-top">
         {cohort.map((cohort, i) => (
