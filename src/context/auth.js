@@ -16,12 +16,15 @@ const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [token, setToken] = useState(null);
   const [userCredentials, setUserCredentials] = useState({ email: '', password: '' });
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedRole = localStorage.getItem('role');
 
-    if (storedToken) {
+    if (storedToken && storedRole) {
       setToken(storedToken);
+      setRole(storedRole);
       navigate(location.pathname || '/');
     } else {
       navigate('/login');
@@ -31,20 +34,24 @@ const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
 
-    if (!res.data.token) {
+    if (!res.data.token || !res.data.user.role) {
       return navigate('/login');
     }
 
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('role', res.data.user.role);
 
     setToken(res.data.token);
+    setRole(res.data.user.role);
     setUserCredentials({ email, password });
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     setToken(null);
+    setRole(null);
     setUserCredentials({ email: '', password: '' });
   };
 
@@ -58,7 +65,11 @@ const AuthProvider = ({ children }) => {
       return navigate('/register');
     }
 
+    localStorage.setItem('token', res.data.token);
+    localStorage.setItem('role', res.data.user.role);
+
     setToken(res.data.token);
+    setRole(res.data.user.role);
     setUserCredentials({ email, password });
 
     navigate('/verification');
@@ -77,12 +88,14 @@ const AuthProvider = ({ children }) => {
     await createProfile(userId, firstName, lastName, username, githubUrl, bio, profilePicture);
 
     localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
     navigate('/');
   };
 
   const value = {
     token,
     userCredentials,
+    role,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
