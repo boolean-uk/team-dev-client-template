@@ -60,4 +60,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers };
+export { login, getPosts, register, createProfile, getUsers, get };
