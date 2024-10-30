@@ -3,11 +3,11 @@ import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Header from '../components/header';
 import Modal from '../components/modal';
 import Navigation from '../components/navigation';
-import useAuxth from '../hooks/useAuth';
 import { createProfile, login, register } from '../service/apiClient';
 
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import useAuth from '../hooks/useAuth';
 
 const AuthContext = createContext();
 
