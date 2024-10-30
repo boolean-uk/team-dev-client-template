@@ -8,15 +8,7 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({
-  name,
-  date,
-  content,
-  comments = [],
-  likes = 0,
-  isLoggedIn = false,
-  isTeacher = false
-}) => {
+const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = false, userRole }) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
@@ -35,6 +27,8 @@ const Post = ({
     setMenuOptionOpen(!menuOptionOpen);
   };
 
+  const canEditPost = isLoggedIn || userRole === 'TEACHER';
+
   return (
     <Card>
       <article className="post">
@@ -45,8 +39,7 @@ const Post = ({
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          {/* TODO: This logic isnt right, need to fix it */}
-          {(isLoggedIn || isTeacher) && (
+          {canEditPost && (
             <div className="edit-icon" onClick={openMenuOptions}>
               <p>...</p>
               {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
