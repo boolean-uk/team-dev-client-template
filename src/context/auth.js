@@ -52,11 +52,14 @@ const AuthProvider = ({ children }) => {
     setRole(null);
   };
 
-  const handleRegister = async (email, password) => {
+  const handleRegister = async (email, password, setErrorMessage) => {
     const res = await register(email, password);
 
-    if (!res.data.token || !res.data.user.role) {
-      return navigate('/login');
+    if (res.status === 'fail') {
+      if (res.data.email) {
+        setErrorMessage(res.data.email);
+      }
+      return navigate('/register');
     }
 
     localStorage.setItem('token', res.data.token);

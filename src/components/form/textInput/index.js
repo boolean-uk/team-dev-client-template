@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, type = 'text', isRequired = false }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
   if (type === 'password') {
     return (
       <div className="inputwrapper">
@@ -26,6 +28,22 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
         >
           <EyeLogo />
         </button>
+      </div>
+    );
+  } else if (type === 'email') {
+    return (
+      <div className="inputwrapper">
+        {label && <label htmlFor={name}>{label}</label>}
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          required={isRequired}
+          pattern={emailPattern}
+          className={icon && 'input-has-icon'}
+        />
+        {icon && <span className="input-icon">{icon}</span>}
       </div>
     );
   } else {
