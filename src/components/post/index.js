@@ -14,12 +14,13 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const userInitials = name.match(/\b(\w)/g);
   const modalsMap = {
     'Edit post': <EditPostModal />,
-    'Delete post': <DeletePostModal />
+    'Delete post?': <DeletePostModal />
   };
 
   const handleDecisionClick = (decision) => {
     setModal(decision, modalsMap[decision]);
     openModal();
+    setMenuOptionOpen(false);
   };
 
   const openMenuOptions = () => {
@@ -36,8 +37,8 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <div className="edit-icon">
-            <p onClick={openMenuOptions}>...</p>
+          <div className="edit-icon" onClick={openMenuOptions}>
+            <p>...</p>
             {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
           </div>
         </section>
