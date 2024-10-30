@@ -1,6 +1,6 @@
 .search-list-header p {
     color: #64648C;
-    margin: 15px 0;
+    margin: 10px 15px 20px 0;
 }
 
 button {
@@ -9,3 +9,19 @@ button {
     margin: 15px 0;
 }
 
+.search-list {
+    position: fixed;
+    top: 230px;
+    right: 45px;
+    width: 550px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px lightgray;
+    padding: 20px;
+    z-index: 2;
+}
+
+.search-list-no-results p {
+    color: #64648C;
+    margin: 15px 0;
+}

@@ -17,7 +17,6 @@ const Dashboard = () => {
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [isListVisible, setIsListVisible] = useState(false);
 
-  // Needs to collect right data
   useEffect(() => {
     getUsers().then(setUsers);
   }, []);
@@ -75,8 +74,8 @@ const Dashboard = () => {
               placeholder="Search for people"
             />
           </form>
-          {isListVisible && <SearchList users={filteredUsers} />}
         </Card>
+        {isListVisible && <SearchList users={filteredUsers} />}
 
         <Card>
           <CohortList />
