@@ -53,8 +53,6 @@ const Welcome = () => {
       profile.password,
       profile.photo
     );
-
-    console.log(profile);
   };
 
   return (
