@@ -26,7 +26,6 @@ const UserProfile = ({ isEditMode }) => {
 
   const { token, role } = useAuth();
   const { userId } = jwt_decode(token);
-  console.log('role:', role);
 
   const fetchProfile = () => {
     setProfile(user.user);
@@ -42,25 +41,19 @@ const UserProfile = ({ isEditMode }) => {
     } */
   };
 
-  console.log('profileId:', profileId);
-
   useEffect(() => {
     fetchProfile();
-    if (Number(userId) === profileId) {
+    if (userId === Number(profileId)) {
       setIsCurrentUserProfile(true);
     }
-    if (role === 'STUDENT') {
+    if (role === 'TEACHER') {
       setIsCurrentUserTeacher(true);
     }
-
-    console.log('isCurrentUserProfile:', isCurrentUserProfile);
-    console.log('isCurrentUserTeacher:', isCurrentUserTeacher);
   }, [profileId]);
 
   const handleSubmit = (e) => {
     // Handle form submission
     e.preventDefault();
-    console.log(profile);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -140,16 +133,18 @@ const UserProfile = ({ isEditMode }) => {
                 </div>
               </>
             ) : (
-              <NavLink to={`/profile/${userId}/edit`}>
-                <Button
-                  text="Edit"
-                  type="button"
-                  classes="button edit-button"
-                  onClick={() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                />
-              </NavLink>
+              (isCurrentUserProfile || isCurrentUserTeacher) && (
+                <NavLink to={`/profile/${userId}/edit`}>
+                  <Button
+                    text="Edit"
+                    type="button"
+                    classes="button edit-button"
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                  />
+                </NavLink>
+              )
             )}
           </section>
         </Card>
