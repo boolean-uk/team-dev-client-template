@@ -8,7 +8,15 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = false }) => {
+const Post = ({
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  isLoggedIn = false,
+  isTeacher = false
+}) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
@@ -16,6 +24,8 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
     'Edit post': <EditPostModal />,
     'Delete post?': <DeletePostModal />
   };
+
+  console.log(isTeacher);
 
   const handleDecisionClick = (decision) => {
     setModal(decision, modalsMap[decision]);
@@ -37,13 +47,12 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          {isLoggedIn ? (
+          {/* Only render the menu option for the logged in user or if the user is a teacher. */}
+          {(isLoggedIn || isTeacher) && (
             <div className="edit-icon" onClick={openMenuOptions}>
               <p>...</p>
               {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
             </div>
-          ) : (
-            <button disabled>...</button>
           )}
         </section>
         <section className="post-content">
