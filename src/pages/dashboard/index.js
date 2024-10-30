@@ -56,7 +56,6 @@ const Dashboard = () => {
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
-
         <Posts />
       </main>
 
@@ -67,6 +66,7 @@ const Dashboard = () => {
             onSubmit={(e) => e.preventDefault()}
           >
             <TextInput
+              type="search"
               icon={<SearchIcon />}
               value={searchVal}
               name="Search"
