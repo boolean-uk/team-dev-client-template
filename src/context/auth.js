@@ -15,15 +15,15 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
+    const storedRole = localStorage.getItem('role');
 
-    if (storedToken && storedUser) {
+    if (storedToken && storedRole) {
       setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+      setRole(storedRole);
       navigate(location.pathname || '/');
     } else {
       navigate('/login');
@@ -33,37 +33,37 @@ const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
 
-    if (!res.data.token || !res.data.user) {
+    if (!res.data.token || !res.data.user || !res.data.user.role) {
       return navigate('/login');
     }
 
     localStorage.setItem('token', res.data.token);
-    localStorage.setItem('user', JSON.stringify(res.data.user));
+    localStorage.setItem('role', res.data.user.role);
 
     setToken(res.data.token);
-    setUser(res.data.user);
+    setRole(res.data.user.role);
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('role');
     setToken(null);
-    setUser(null);
+    setRole(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
 
-    if (!res.data.token || !res.data.user) {
+    if (!res.data.token || !res.data.user || !res.data.user.role) {
       return navigate('/login');
     }
 
     localStorage.setItem('token', res.data.token);
-    localStorage.setItem('user', JSON.stringify(res.data.user));
+    localStorage.setItem('role', res.data.user.role);
 
     setToken(res.data.token);
-    setUser(res.data.user);
+    setRole(res.data.user.role);
     navigate('/verification');
   };
 
@@ -73,13 +73,13 @@ const AuthProvider = ({ children }) => {
     await createProfile(userId, firstName, lastName, githubUrl, bio);
 
     localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('role', role);
     navigate('/');
   };
 
   const value = {
     token,
-    user,
+    role,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
