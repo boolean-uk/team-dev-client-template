@@ -1,6 +1,6 @@
-import ProfileCircle from '../profileCircle';
-import useModal from '../../hooks/useModal';
-import UserListModal from '../cohortListModal';
+import ProfileCircle from '../../profileCircle';
+import useModal from '../../../hooks/useModal';
+import UserListModal from '../../cohortListModal';
 import './userListItemSpecialism.css';
 
 const UserListItemSpecialism = ({ user }) => {

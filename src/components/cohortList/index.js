@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../../service/apiClient';
-// import UserListItem from '../userListItem';
+import UserListItem from '../userListComponents/userListItem';
 import './style.css';
-import UserListItemRole from '../userListItemSpecialism/UserListItemSpecialism';
 
 const CohortList = () => {
   const [cohort, setCohort] = useState([]);
@@ -19,7 +18,7 @@ const CohortList = () => {
       </section>
       <section className="cohort-list border-top">
         {cohort.map((user) => (
-          <UserListItemRole user={user} key={user.id} />
+          <UserListItem user={user} key={user.id} />
         ))}
       </section>
     </article>
