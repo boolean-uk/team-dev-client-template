@@ -1,12 +1,23 @@
 import { useEffect, useState } from 'react';
+import jwtDecode from 'jwt-decode';
+import useAuth from '../../hooks/useAuth';
 import Post from '../post';
-import { getPosts } from '../../service/apiClient';
+import { getPosts, getUsers } from '../../service/apiClient';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const { token } = useAuth();
+  const userID = jwtDecode(token).userId;
+
+  console.log(JSON.stringify(posts, null, 2));
 
   useEffect(() => {
     getPosts().then(setPosts);
+  }, []);
+
+  useEffect(() => {
+    getUsers().then(setUsers);
   }, []);
 
   return (
@@ -19,6 +30,7 @@ const Posts = () => {
             date={post.createdAt}
             content={post.content}
             comments={post.comments}
+            isLoggedIn={users.filter((user) => user.id === userID)}
           />
         );
       })}
