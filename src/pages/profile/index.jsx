@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom';
 const Profile = () => {
   // const { onCreateProfile } = useAuth();
   const { id } = useParams();
-  console.log(id);
   return (
     <div>
-      <p>Hello World</p>
+      <p>Hello World {id}!!</p>
     </div>
   );
 };
