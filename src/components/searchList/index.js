@@ -1,16 +1,9 @@
-import { useState, useEffect } from 'react';
-import { getUsers } from '../../service/apiClient';
+import { useState } from 'react';
 import UserListItem from '../userListItem';
 import './style.css';
 
-const SearchList = () => {
-  const [users, setUsers] = useState([]);
+const SearchList = ({ users }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  // Needs to collect right data
-  useEffect(() => {
-    getUsers().then(setUsers);
-  }, []);
 
   const toggleExpand = () => {
     setIsExpanded((prev) => !prev);
@@ -30,15 +23,13 @@ const SearchList = () => {
           ))}
 
         {users.length > 0 && users.length < 9 && (
-          <button className="" onClick={toggleExpand}>
-            {isExpanded ? 'See less results' : 'All results'}
-          </button>
+          <button onClick={toggleExpand}>{isExpanded ? 'See less results' : 'All results'}</button>
         )}
 
         {users.length === 0 && (
-          <div>
-            <p>Sorry, no results found</p>
-            <p>Try changing your search term</p>
+          <div className="search-list-no-results">
+            <p>Sorry, no results found.</p>
+            <p>Try changing your search term.</p>
             {/* Must add button functionality  */}
             <button>Edit search</button>
           </div>

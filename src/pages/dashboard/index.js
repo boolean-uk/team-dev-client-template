@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getUsers } from '../../service/apiClient';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -12,7 +13,22 @@ import './style.css';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(users);
   const [isListVisible, setIsListVisible] = useState(false);
+
+  // Needs to collect right data
+  useEffect(() => {
+    getUsers().then(setUsers);
+  }, []);
+
+  useEffect(() => {
+    setFilteredUsers(
+      users.filter((user) =>
+        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchVal.toLowerCase())
+      )
+    );
+  }, [searchVal, users]);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -59,7 +75,7 @@ const Dashboard = () => {
               placeholder="Search for people"
             />
           </form>
-          {isListVisible && <SearchList />}
+          {isListVisible && <SearchList users={filteredUsers} />}
         </Card>
 
         <Card>
