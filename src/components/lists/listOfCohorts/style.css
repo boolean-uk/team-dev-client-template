@@ -19,6 +19,21 @@
     margin-top: 15px;
 }
 
+.cohort-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.cohort-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.cohort-list::-webkit-scrollbar-thumb {
+    background-color: #c8d2e6;
+    border-radius: 8px;
+}
+
 .edit-icon {
     margin-top: 5px;
 }

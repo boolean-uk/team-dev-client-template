@@ -6,9 +6,8 @@ import UserListItemCohort from '../../listComponents/listItemCohort/listItemCoho
 const ListOfCohorts = () => {
   // TODO: get the cohorts from the backend
   const [cohort, setCohort] = useState([]);
-
   useEffect(() => {
-    getUsers().then(setCohort);
+    getUsers().then(setCohort([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]));
   }, []);
 
   return (
@@ -16,7 +15,7 @@ const ListOfCohorts = () => {
       <section className="cohort-header">
         <h3>Cohorts</h3>
       </section>
-      <section className="cohort-list border-top">
+      <section className="cohort-list">
         {cohort.map((cohort, i) => (
           <UserListItemCohort cohort={cohort} key={i} />
         ))}
