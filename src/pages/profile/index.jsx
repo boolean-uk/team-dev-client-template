@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 // import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StepOne from '../welcome/stepOne';
 import StepTwo from '../welcome/stepTwo';
 import StepThree from '../welcome/stepThree';
@@ -8,17 +8,18 @@ import StepFour from '../welcome/stepFour';
 import './profile.css'; // Import the CSS file
 import Card from '../../components/card';
 import ProfileCircle from '../../components/profileCircle';
-// import { get } from '../../service/apiClient';
+import { get } from '../../service/apiClient';
 
 const Profile = () => {
   // const { onCreateProfile } = useAuth();
   const { id } = useParams();
+  let user = {};
   console.log(id); // Debug
-  /* const setUser = () => {
+  const setUser = () => {
     get(`users/${id}`).then((response) => {
-      setProfile(response.data.user);
+      user = response.data.user;
     });
-  }; */
+  };
   // setUser();
   const [profile, setProfile] = useState({
     firstName: 'Daniel',
@@ -32,6 +33,9 @@ const Profile = () => {
     photo: ''
   });
 
+  useEffect(() => {
+    setUser();
+  }, [user]);
   const onPhotoChange = (photoData) => {
     setProfile({
       ...profile,
