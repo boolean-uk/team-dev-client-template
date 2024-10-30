@@ -19,7 +19,10 @@ const Register = () => {
   // The password should contain at least one uppercase character: /(?=.*[A-Z])/
   // The password should contain at least one number: /(?=.*[0-9])/
   // The password should contain at least one special character: /(?=.*[!@#$%^&*])/
+  const patternDescription =
+    'Password must contain at least one uppercase letter, one number, and one special character';
   const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  const passwordRegexValidChars = 'A-Za-z0-9@._\\-!@#\\$%\\^&\\*';
   const hasValidLength = formData.password.length >= 8;
   const isValidPassword = passwordRegex.test(formData.password) && hasValidLength;
 
@@ -59,7 +62,9 @@ const Register = () => {
               label={'Password *'}
               type={'password'}
               isRequired={true}
-              validChars={'A-Za-z0-9@._-'}
+              validChars={passwordRegexValidChars}
+              pattern={passwordRegex}
+              patternDescription={patternDescription}
               minLength={8}
             />
           </form>
