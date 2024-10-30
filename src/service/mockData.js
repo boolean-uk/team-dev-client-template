@@ -8,7 +8,14 @@ const user = {
     firstName: 'Joe',
     lastName: 'Bloggs',
     bio: 'Lorem ipsum dolor sit amet.',
-    githubUrl: 'https://github.com/vherus'
+    githubUrl: 'https://github.com/vherus',
+    githubUsername: 'vherus',
+    specialism: 'Full Stack',
+    startDate: 'January 2020',
+    endDate: 'June 2020',
+    username: 'test-user',
+    mobile: '0123456789',
+    password: 'password'
   }
 };
 
