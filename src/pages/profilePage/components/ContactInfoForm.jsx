@@ -4,20 +4,21 @@ import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
 
 const ContactInfoForm = () => {
-  const { profile, handleInputChange } = useContext(ProfileContext);
+  const { profile, handleInputChange, isEditMode } = useContext(ProfileContext);
 
   return (
     <div className="profile-grid-section">
       <Form>
         <hr className="section-divider" />
         <h3 className="profile-info-header">Contact Info</h3>
-        <div className="profile-grid-section read-only">
+        <div className={`profile-grid-section ${isEditMode ? '' : 'read-only'}`}>
           <TextInput
             name="email"
             label="Email*"
             value={profile.email}
             onChange={handleInputChange}
             type="email"
+            isRequired={true}
           />
           <TextInput
             name="mobile"
@@ -25,6 +26,7 @@ const ContactInfoForm = () => {
             value={profile.mobile}
             onChange={handleInputChange}
             type="number"
+            isRequired={true}
           />
           <TextInput
             name="password"
@@ -32,6 +34,7 @@ const ContactInfoForm = () => {
             value={profile.password}
             onChange={handleInputChange}
             type="password"
+            isRequired={true}
           />
         </div>
       </Form>

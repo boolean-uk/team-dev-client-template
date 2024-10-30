@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { user } from '../../service/mockData';
 import Card from '../../components/card';
 import './profilePage.css';
@@ -11,22 +11,27 @@ import BioForm from './components/BioForm';
 import Button from '../../components/button';
 
 // eslint-disable-next-line camelcase
-// import jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
+import useAuth from '../../hooks/useAuth';
 
 export const ProfileContext = createContext();
 
-const UserProfile = () => {
+const UserProfile = ({ isEditMode }) => {
   const { profileId } = useParams();
   const [profile, setProfile] = useState(null);
+  const [rollbackProfile, setRoolbackProfile] = useState(null);
   const [initials, setInitials] = useState('');
-  const [bioLength, setBioLength] = useState(0);
-  // const { token } = useAuth();
-  // const { userId } = jwt_decode(storedToken);
+  const [isCurrentUserProfile, setIsCurrentUserProfile] = useState(false);
+  const [isCurrentUserTeacher, setIsCurrentUserTeacher] = useState(false);
+
+  const { token, role } = useAuth();
+  const { userId } = jwt_decode(token);
+  console.log('role:', role);
 
   const fetchProfile = () => {
     setProfile(user.user);
+    setRoolbackProfile(user.user);
     setInitials(user.user.firstName[0] + user.user.lastName[0]);
-    setBioLength(user.user.bio.length);
     /*     try {
       const data = await get(`profiles/${profileId}`);
       setProfile(data);
@@ -37,14 +42,26 @@ const UserProfile = () => {
     } */
   };
 
+  console.log('profileId:', profileId);
+
   useEffect(() => {
     fetchProfile();
+    if (Number(userId) === profileId) {
+      setIsCurrentUserProfile(true);
+    }
+    if (role === 'STUDENT') {
+      setIsCurrentUserTeacher(true);
+    }
+
+    console.log('isCurrentUserProfile:', isCurrentUserProfile);
+    console.log('isCurrentUserTeacher:', isCurrentUserTeacher);
   }, [profileId]);
 
   const handleSubmit = (e) => {
     // Handle form submission
     e.preventDefault();
-    console.log('Form submitted');
+    console.log(profile);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleInputChange = (e) => {
@@ -57,8 +74,10 @@ const UserProfile = () => {
 
   const handleBioChange = (event) => {
     handleInputChange(event);
-    console.log(event.target.value.length);
-    setBioLength(event.target.value.length);
+  };
+
+  const handleCancel = () => {
+    setProfile(rollbackProfile);
   };
 
   const formatRole = (role) => {
@@ -82,7 +101,9 @@ const UserProfile = () => {
     handleInputChange,
     formatRole,
     handleBioChange,
-    bioLength
+    isEditMode,
+    isCurrentUserProfile,
+    isCurrentUserTeacher
   };
 
   return (
@@ -97,14 +118,39 @@ const UserProfile = () => {
             <ContactInfoForm />
             <BioForm />
             <p className="info-text required-text">*Required</p>
-            <Button
-              text="Edit"
-              type="button"
-              classes="edit-button"
-              onClick={() => {
-                console.log('Clicked edit button');
-              }}
-            />
+            {isEditMode ? (
+              <>
+                <div className="button-group">
+                  <NavLink to={`/profile/${userId}`}>
+                    <Button
+                      text="Cancel"
+                      type="button"
+                      classes="button cancel-button"
+                      onClick={handleCancel}
+                    />
+                  </NavLink>
+                  <NavLink to={`/profile/${userId}`}></NavLink>
+                  <Button
+                    text="Submit"
+                    type="submit"
+                    classes="button submit-button"
+                    onClick={handleSubmit}
+                  />
+                  <NavLink to={`/profile/${userId}`}></NavLink>
+                </div>
+              </>
+            ) : (
+              <NavLink to={`/profile/${userId}/edit`}>
+                <Button
+                  text="Edit"
+                  type="button"
+                  classes="button edit-button"
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+              </NavLink>
+            )}
           </section>
         </Card>
       </ProfileContext.Provider>
