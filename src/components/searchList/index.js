@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import UserListItem from '../userListItem';
+import UserListItemSpecialism from '../userListComponents/userListItemSpecialism/UserListItemSpecialism';
 import './style.css';
 
 const SearchList = ({ users }) => {
@@ -17,10 +17,9 @@ const SearchList = ({ users }) => {
       <section className="search-list-results">
         {users.length > 0 &&
           users.length < 9 &&
-          users.slice(0, isExpanded ? users.length : 3).map((user) => (
-            // Need to update to right component
-            <UserListItem user={user} key={user.id} />
-          ))}
+          users
+            .slice(0, isExpanded ? users.length : 3)
+            .map((user) => <UserListItemSpecialism user={user} key={user.id} />)}
 
         {users.length > 0 && users.length < 9 && (
           <button onClick={toggleExpand}>{isExpanded ? 'See less results' : 'All results'}</button>
