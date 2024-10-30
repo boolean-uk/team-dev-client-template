@@ -8,7 +8,7 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = false }) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
@@ -37,12 +37,15 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <div className="edit-icon" onClick={openMenuOptions}>
-            <p>...</p>
-            {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
-          </div>
+          {isLoggedIn ? (
+            <div className="edit-icon" onClick={openMenuOptions}>
+              <p>...</p>
+              {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
+            </div>
+          ) : (
+            <button disabled>...</button>
+          )}
         </section>
-
         <section className="post-content">
           <p>{content}</p>
         </section>
