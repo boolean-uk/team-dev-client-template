@@ -1,5 +1,5 @@
 import SquareBracketsIcon from '../../../assets/icons/squareBracketsIcon';
-import './userListItemCohort.css';
+import './listItemCohort.css';
 
 const UserListItemCohort = ({ cohort }) => {
   // TODO change the cohort to align with the backend

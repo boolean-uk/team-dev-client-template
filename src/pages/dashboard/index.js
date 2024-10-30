@@ -6,7 +6,7 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-import CohortList from '../../components/cohortList';
+import CohortList from '../../components/lists/cohortList/index';
 import './style.css';
 
 const Dashboard = () => {
