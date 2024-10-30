@@ -22,7 +22,7 @@ const TextInput = ({
       <div className="inputwrapper">
         {(isHighlighted || value) && <label htmlFor={name}>{label}</label>}
         <input
-          type={type}
+          type={showpassword ? 'text' : 'password'}
           name={name}
           value={value}
           placeholder={label}
