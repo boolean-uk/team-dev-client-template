@@ -94,6 +94,34 @@ const TextInput = ({
         </div>
       </div>
     );
+  } else if (type === 'search') {
+    return (
+      <div className="inputwrapper">
+        {label && (isHighlighted || value) && (
+          <label className="input-label" htmlFor={name}>
+            {label}
+          </label>
+        )}
+        <input
+          type={type}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          className={icon && 'input-has-icon'}
+          onFocus={(e) => {
+            e.target.placeholder = '';
+            setIsHighlighted(true);
+          }}
+          onBlur={(e) => {
+            e.target.placeholder = 'Search for people';
+            setIsHighlighted(false);
+          }}
+          autoFocus={focused}
+        />
+        {icon && <span className="input-icon">{icon}</span>}
+      </div>
+    );
   } else {
     return (
       <div className="inputwrapper">
