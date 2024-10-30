@@ -25,7 +25,8 @@ const ContactInfoForm = () => {
             label="Mobile*"
             value={profile.mobile}
             onChange={handleInputChange}
-            type="number"
+            type="text"
+            validChars="0-9()+-"
             isRequired={true}
           />
           <TextInput
