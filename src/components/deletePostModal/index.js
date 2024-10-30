@@ -7,7 +7,7 @@ const DeletePostModal = () => {
 
   return (
     <section className="delete-post-container">
-      <p>Are you sure you want to delete this post?</p>
+      <p className="delete-post-text">Are you sure you want to delete this post?</p>
       <div className="button-container">
         <Button
           text={'Cancel'}
