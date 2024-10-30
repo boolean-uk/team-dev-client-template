@@ -45,8 +45,7 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
 
-    const user = JSON.stringify(res.data.user);
-    setLoggedInUser(user);
+    setLoggedInUser(res.data.user);
 
     navigate('/');
   };
@@ -61,8 +60,7 @@ const AuthProvider = ({ children }) => {
     const res = await register(email, password);
     setToken(res.data.token);
 
-    const user = JSON.stringify(res.data.user);
-    setLoggedInUser(user);
+    setLoggedInUser(res.data.user);
 
     navigate('/verification');
   };
