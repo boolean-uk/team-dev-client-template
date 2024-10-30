@@ -9,8 +9,6 @@ const Posts = () => {
   const { token } = useAuth();
   const userID = jwtDecode(token).userId;
 
-  console.log(userID);
-
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
