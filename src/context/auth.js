@@ -45,10 +45,17 @@ const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
-  const handleRegister = async (email, password) => {
+  const handleRegister = async (email, password, setErrorMessage) => {
     const res = await register(email, password);
-    setToken(res.data.token);
 
+    if (res.status === 'fail') {
+      if (res.data.email) {
+        setErrorMessage(res.data.email);
+      }
+      return navigate('/register');
+    }
+
+    setToken(res.data.token);
     navigate('/verification');
   };
 
