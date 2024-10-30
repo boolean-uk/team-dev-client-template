@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
+  const [userCredentials, setUserCredentials] = useState({ email: '', password: '' });
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -37,12 +38,14 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token);
 
     setToken(res.data.token);
+    setUserCredentials({ email, password });
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
+    setUserCredentials({ email: '', password: '' });
   };
 
   const handleRegister = async (email, password, setErrorMessage) => {
@@ -56,13 +59,22 @@ const AuthProvider = ({ children }) => {
     }
 
     setToken(res.data.token);
+    setUserCredentials({ email, password });
+
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+  const handleCreateProfile = async (
+    firstName,
+    lastName,
+    username,
+    githubUrl,
+    bio,
+    profilePicture
+  ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
+    await createProfile(userId, firstName, lastName, username, githubUrl, bio, profilePicture);
 
     localStorage.setItem('token', token);
     navigate('/');
@@ -70,6 +82,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
+    userCredentials,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,

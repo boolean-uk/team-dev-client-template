@@ -2,17 +2,29 @@ import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
-import StepTwo from './stepTwo';
+import StepFour from './stepFour';
 import './style.css';
+import StepTwo from './stepTwo';
+import StepThree from './stepThree';
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth();
+  const { onCreateProfile, userCredentials } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
+    username: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    profilePicture: '',
+    email: userCredentials.email,
+    mobile: '',
+    password: userCredentials.password,
+    role: 'Student',
+    specialism: 'Software Developer',
+    cohort: 'Cohort 4',
+    startDate: 'January 2023',
+    endDate: 'June 2023'
   });
 
   const onChange = (event) => {
@@ -24,8 +36,65 @@ const Welcome = () => {
     });
   };
 
+  const validate = (step) => {
+    switch (step) {
+      case 0:
+        if (
+          !profile.firstName ||
+          !profile.lastName ||
+          !profile.username ||
+          !profile.githubUsername ||
+          !profile.mobile ||
+          !profile.role ||
+          !profile.specialism ||
+          !profile.cohort ||
+          !profile.startDate ||
+          !profile.endDate
+        ) {
+          return false;
+        }
+        break;
+      case 1:
+        if (
+          !profile.firstName ||
+          !profile.lastName ||
+          !profile.username ||
+          !profile.githubUsername
+        ) {
+          return false;
+        }
+        break;
+      case 2:
+        if (!profile.mobile) {
+          return false;
+        }
+        break;
+      case 3:
+        if (
+          !profile.role ||
+          !profile.specialism ||
+          !profile.cohort ||
+          !profile.startDate ||
+          !profile.endDate
+        ) {
+          return false;
+        }
+        break;
+    }
+    return true;
+  };
+
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    if (validate(0)) {
+      onCreateProfile(
+        profile.firstName,
+        profile.lastName,
+        profile.username,
+        profile.githubUsername,
+        profile.bio,
+        profile.profilePicture
+      );
+    }
   };
 
   return (
@@ -35,9 +104,11 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} validate={validate}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
+        <StepThree data={profile} setData={onChange} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
