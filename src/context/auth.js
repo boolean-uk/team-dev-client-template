@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
 
-    if (!res.data.token || !res.data.user || !res.data.user.role) {
+    if (!res.data.token || !res.data.user.role) {
       return navigate('/login');
     }
 
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
 
-    if (!res.data.token || !res.data.user || !res.data.user.role) {
+    if (!res.data.token || !res.data.user.role) {
       return navigate('/login');
     }
 
