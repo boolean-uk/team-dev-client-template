@@ -47,6 +47,7 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
         </div>
         <div className="welcome-form-inputs">
           <TextInput
+            focused={true}
             onChange={setData}
             value={data.firstName}
             name="firstName"

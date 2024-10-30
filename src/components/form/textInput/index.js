@@ -2,7 +2,16 @@ import { useState } from 'react';
 import LockIcon from '../../../assets/icons/lockIcon';
 import './style.css';
 
-const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type = 'text' }) => {
+const TextInput = ({
+  focused,
+  value,
+  onChange,
+  name,
+  label,
+  icon,
+  placeholder = '',
+  type = 'text'
+}) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
 
@@ -107,6 +116,7 @@ const TextInput = ({ value, onChange, name, label, icon, placeholder = '', type 
             e.target.placeholder = label;
             setIsHighlighted(false);
           }}
+          autoFocus={focused}
         />
         {icon && <span className="input-icon">{icon}</span>}
       </div>

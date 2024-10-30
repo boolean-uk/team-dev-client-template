@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
   ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio, email, mobile, password);
+    await createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile);
 
     localStorage.setItem('token', token);
     navigate('/');

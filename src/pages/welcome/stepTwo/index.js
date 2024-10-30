@@ -21,6 +21,7 @@ const StepTwo = ({ data, setData, validating }) => {
             ? !data.email && <p className="welcome-form-error">Please enter an email</p>
             : null}
           <TextInput
+            focused={true}
             onChange={setData}
             type="text"
             placeholder="Mobile"
