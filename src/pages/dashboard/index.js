@@ -7,10 +7,12 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import CohortList from '../../components/cohortList';
+import SearchList from '../../components/searchList';
 import './style.css';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const [isListVisible, setIsListVisible] = useState(false);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -45,9 +47,19 @@ const Dashboard = () => {
 
       <aside>
         <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <TextInput icon={<SearchIcon />} value={searchVal} name="Search" onChange={onChange} />
+          <form
+            onClick={() => setIsListVisible(!isListVisible)}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <TextInput
+              icon={<SearchIcon />}
+              value={searchVal}
+              name="Search"
+              onChange={onChange}
+              placeholder="Search for people"
+            />
           </form>
+          {isListVisible && <SearchList />}
         </Card>
 
         <Card>
