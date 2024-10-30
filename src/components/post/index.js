@@ -25,8 +25,6 @@ const Post = ({
     'Delete post?': <DeletePostModal />
   };
 
-  console.log(isTeacher);
-
   const handleDecisionClick = (decision) => {
     setModal(decision, modalsMap[decision]);
     openModal();
@@ -47,7 +45,7 @@ const Post = ({
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          {/* Only render the menu option for the logged in user or if the user is a teacher. */}
+          {/* TODO: This logic isnt right, need to fix it */}
           {(isLoggedIn || isTeacher) && (
             <div className="edit-icon" onClick={openMenuOptions}>
               <p>...</p>
