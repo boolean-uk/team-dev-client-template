@@ -39,10 +39,25 @@ const Dashboard = () => {
 
   const renderComponentBasedOnRole = (role) => {
     switch (role) {
-      case 'TEACHER':
-        return <div>Components not implemented yet.</div>;
+      case 'TEACHER': {
+        // TODO: Add the correct sidebar items for teachers when component is ready.
+        const teacherSidebarItems = ['Cohorts', 'Students', 'Teachers'];
+        return (
+          <>
+            {teacherSidebarItems.map((item) => (
+              <Card key={item}>
+                <h4>{item}</h4>
+              </Card>
+            ))}
+          </>
+        );
+      }
       case 'STUDENT':
-        return <CohortList />;
+        return (
+          <Card>
+            <CohortList />
+          </Card>
+        );
       default:
         return null;
     }
@@ -59,7 +74,6 @@ const Dashboard = () => {
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
-
         <Posts />
       </main>
 
@@ -69,8 +83,7 @@ const Dashboard = () => {
             <TextInput icon={<SearchIcon />} value={searchVal} name="Search" onChange={onChange} />
           </form>
         </Card>
-
-        <Card>{renderComponentBasedOnRole(user && user.role)}</Card>
+        {renderComponentBasedOnRole(user && user.role)}
       </aside>
     </>
   );

@@ -16,6 +16,7 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
     'Edit post': <EditPostModal />,
     'Delete post?': <DeletePostModal />
   };
+  const canEditPost = isLoggedIn || userRole === 'TEACHER';
 
   const handleDecisionClick = (decision) => {
     setModal(decision, modalsMap[decision]);
@@ -26,8 +27,6 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
   const openMenuOptions = () => {
     setMenuOptionOpen(!menuOptionOpen);
   };
-
-  const canEditPost = isLoggedIn || userRole === 'TEACHER';
 
   return (
     <Card>
