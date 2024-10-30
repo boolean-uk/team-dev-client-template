@@ -21,15 +21,12 @@ const Post = ({ name, date, content, initialComments = [], initialLikes = 0 }) =
   };
 
   const handleSubmit = (event) => {
-    console.log('ooooo');
     const newCommentObj = {
       commentName: name,
       content: comment
     };
-    console.log(newCommentObj);
-
     setComments([...comments, newCommentObj]);
-    console.log(comments);
+    setComment('');
   };
 
   const toggleLike = () => {
@@ -86,9 +83,9 @@ const Post = ({ name, date, content, initialComments = [], initialLikes = 0 }) =
         <section>
           {comments.map((comment, index) => (
             <div className="comment-item" key={index}>
-              <ProfileCircle initials={userInitials} />
+              <ProfileCircle initials={'AJ'} />
               <div className="comment-box">
-                <p className="comment-name">{comment.commentName}</p>
+                <p className="comment-name">{'Alex Jameson'}</p>
                 <p className="comment-text">{comment.content}</p>
               </div>
             </div>
@@ -96,7 +93,7 @@ const Post = ({ name, date, content, initialComments = [], initialLikes = 0 }) =
         </section>
         <section className="comment-section">
           <div className="user-name">
-            <ProfileCircle initials={userInitials} />
+            <ProfileCircle initials={'AJ'} />
           </div>
           <div className="comment-input">
             <input
