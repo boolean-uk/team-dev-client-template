@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { getUsers } from '../../service/apiClient';
+import { getUsers, get } from '../../service/apiClient';
 
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
@@ -13,7 +12,6 @@ import useModal from '../../hooks/useModal';
 import SearchList from '../../components/searchList';
 
 import useAuth from '../../hooks/useAuth';
-import { get } from '../../service/apiClient';
 
 import CohortList from '../../components/lists/cohortList/index';
 
