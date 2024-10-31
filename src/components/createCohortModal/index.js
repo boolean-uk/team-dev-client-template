@@ -25,6 +25,8 @@ const CreateCohortModal = () => {
     }, 2000);
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <div>
       <section>
@@ -43,6 +45,7 @@ const CreateCohortModal = () => {
           value={startDate}
           onChange={onChange}
           placeholder="Start Date"
+          min={today}
         />
       </section>
       <section>
@@ -52,6 +55,7 @@ const CreateCohortModal = () => {
           value={endDate}
           onChange={onChange}
           placeholder="End Date"
+          min={today}
         />
       </section>
 
