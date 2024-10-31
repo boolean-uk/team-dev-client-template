@@ -69,6 +69,7 @@ const Register = () => {
             />
           </form>
           {errorMessage && <ErrorMessage message={errorMessage} />}
+          <div className={`text-register-info`}>*Required</div>
           <Button
             text="Sign up"
             onClick={() => onRegister(formData.email, formData.password, setErrorMessage)}
