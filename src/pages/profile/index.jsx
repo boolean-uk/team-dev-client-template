@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-// import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useState, useEffect } from 'react';
 import StepOne from '../welcome/stepOne';
 import StepTwo from '../welcome/stepTwo';
@@ -11,7 +11,7 @@ import ProfileCircle from '../../components/profileCircle';
 import { get } from '../../service/apiClient';
 
 const Profile = () => {
-  // const { onCreateProfile } = useAuth();
+  const { onCreateProfile } = useAuth();
   const { id } = useParams();
   let user = {};
   const setUser = () => {
@@ -54,7 +54,8 @@ const Profile = () => {
     });
   };
 
-  /* const onComplete = () => {
+  const onComplete = () => {
+    console.log(profile);
     onCreateProfile(
       profile.firstName,
       profile.lastName,
@@ -63,10 +64,9 @@ const Profile = () => {
       profile.bio,
       profile.email,
       profile.mobile,
-      profile.password,
       profile.photo
     );
-  }; */
+  };
 
   return (
     <main className="profile">
@@ -92,6 +92,9 @@ const Profile = () => {
             <StepFour data={profile} setData={onChange} />
           </div>
         </div>
+        <button onClick={onComplete} className="profile-button">
+          Press Me
+        </button>
       </Card>
     </main>
   );
