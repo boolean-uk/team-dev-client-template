@@ -39,6 +39,7 @@ form {
 .training-info-form,
 .contact-info-form,
 .additional-info-form {
+  align-self: start;
   flex: 1;
   min-width: 300px;
 }
@@ -85,7 +86,7 @@ Avatar {
   opacity: 0.9; /* Slight transparency on hover for feedback */
 }
 
-.r {
+.required {
   flex: 1;
   min-width: 300px;
   display: flex;

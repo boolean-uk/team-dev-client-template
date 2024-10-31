@@ -242,7 +242,7 @@ const ProfilePage = () => {
 
           {/* Bottom Line */}
           <div className="divider">
-            <div className="r">
+            <div className="required">
               <span>Required *</span>
             </div>
             <div>
