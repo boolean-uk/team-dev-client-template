@@ -6,6 +6,7 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
+import NotificationPopup from '../../components/notificationPopup';
 
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../service/apiClient';
@@ -17,6 +18,7 @@ import './style.css';
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [user, setUser] = useState(null);
+  const [notification, setNotification] = useState(null);
   const { getLoggedInUserId } = useAuth();
   const userId = getLoggedInUserId();
 
@@ -34,7 +36,7 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal setNotification={setNotification} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
@@ -78,6 +80,15 @@ const Dashboard = () => {
           </div>
         </Card>
         <Posts />
+        <div className="notification-container">
+          {notification && (
+            <NotificationPopup
+              actionText="Edit"
+              message={notification}
+              className="delete-notification"
+            />
+          )}
+        </div>
       </main>
 
       <aside>
