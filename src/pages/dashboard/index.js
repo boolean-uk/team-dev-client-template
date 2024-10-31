@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { getUsers, get } from '../../service/apiClient';
 
 import SearchIcon from '../../assets/icons/searchIcon';
@@ -16,6 +16,8 @@ import useAuth from '../../hooks/useAuth';
 import CohortList from '../../components/lists/cohortList/index';
 
 import './style.css';
+
+export const UserContext = createContext();
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
@@ -86,39 +88,41 @@ const Dashboard = () => {
 
   return (
     <>
-      <main>
-        <Card>
-          <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p>
+      <UserContext.Provider value={{ user }}>
+        <main>
+          <Card>
+            <div className="create-post-input">
+              <div className="profile-icon">
+                <p>AJ</p>
+              </div>
+              <Button text="What's on your mind?" onClick={showModal} />
             </div>
-            <Button text="What's on your mind?" onClick={showModal} />
-          </div>
-        </Card>
-        <Posts />
-      </main>
+          </Card>
+          <Posts />
+        </main>
 
-      <aside>
-        <Card>
-          <form
-            onClick={() => setIsListVisible(!isListVisible)}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <TextInput
-              type="search"
-              icon={<SearchIcon />}
-              value={searchVal}
-              name="Search"
-              onChange={onChange}
-              placeholder="Search for people"
-            />
-          </form>
-        </Card>
+        <aside>
+          <Card>
+            <form
+              onClick={() => setIsListVisible(!isListVisible)}
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <TextInput
+                type="search"
+                icon={<SearchIcon />}
+                value={searchVal}
+                name="Search"
+                onChange={onChange}
+                placeholder="Search for people"
+              />
+            </form>
+          </Card>
 
-        {isListVisible && <SearchList users={filteredUsers} />}
+          {isListVisible && <SearchList users={filteredUsers} />}
 
-        {renderComponentBasedOnRole(user && user.role)}
-      </aside>
+          {renderComponentBasedOnRole(user && user.role)}
+        </aside>
+      </UserContext.Provider>
     </>
   );
 };

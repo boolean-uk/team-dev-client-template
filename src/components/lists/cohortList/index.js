@@ -9,6 +9,7 @@ const CohortList = () => {
 
   useEffect(() => {
     getUsers().then(setCohort);
+    console.log(cohort);
   }, []);
 
   return (
