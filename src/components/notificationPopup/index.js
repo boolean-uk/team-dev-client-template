@@ -2,9 +2,9 @@ import React from 'react';
 import './style.css';
 import CheckmarkIcon from '../../assets/icons/checkmarkIcon';
 
-const NotificationPopup = ({ message, actionText, onAction }) => {
+const NotificationPopup = ({ message, actionText, className, onAction }) => {
   return (
-    <div className="snackbar">
+    <div className={`snackbar ${className}`}>
       <div className="snackbar-icon">
         <CheckmarkIcon />
       </div>
