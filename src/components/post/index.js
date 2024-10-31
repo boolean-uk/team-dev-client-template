@@ -23,7 +23,7 @@ const Post = ({
   const userInitials = name.match(/\b(\w)/g);
   const modalsMap = {
     'Edit post': <EditPostModal postId={postId} />,
-    'Delete post?': <DeletePostModal />
+    'Delete post?': <DeletePostModal postId={postId} />
   };
   const canEditPost = isLoggedIn || userRole === 'TEACHER';
 

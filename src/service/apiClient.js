@@ -46,12 +46,8 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
-async function deleteRequest(endpoint, auth = true) {
+async function deletePost(endpoint, auth = true) {
   return await request('DELETE', endpoint, null, auth);
-}
-
-async function deletePost(postId) {
-  return await deleteRequest(`posts/${postId}`);
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -62,7 +58,8 @@ async function request(method, endpoint, data, auth = true) {
     method
   };
 
-  if (method.toUpperCase() !== 'GET') {
+  // Only add body for POST and PATCH requests
+  if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PATCH') {
     opts.body = JSON.stringify(data);
   }
 
