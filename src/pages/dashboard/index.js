@@ -9,6 +9,7 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import NotificationPopup from '../../components/notificationPopup';
+import { transformUsernameToInitials } from '../../service/utils';
 
 import SearchList from '../../components/searchList';
 
@@ -92,7 +93,7 @@ const Dashboard = () => {
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{user && transformUsernameToInitials(`${user.firstName} ${user.lastName}`)}</p>
             </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>

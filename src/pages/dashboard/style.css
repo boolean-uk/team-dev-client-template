@@ -9,6 +9,7 @@ aside {
 .create-post-input {
   display: grid;
   grid-template-columns: 70px auto;
+  align-items: center;
 }
 
 .create-post-input button {
