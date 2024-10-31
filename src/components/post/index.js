@@ -18,7 +18,8 @@ const Post = ({
   comments = [],
   likes = 0,
   isLoggedIn = false,
-  userRole
+  userRole,
+  author
 }) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
@@ -56,6 +57,7 @@ const Post = ({
 
   const openMenuOptions = () => {
     setMenuOptionOpen(!menuOptionOpen);
+    setMenuOptionOpen(false);
   };
 
   return (
