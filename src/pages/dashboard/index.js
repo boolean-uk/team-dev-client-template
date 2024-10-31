@@ -117,9 +117,6 @@ const Dashboard = () => {
 
         {isListVisible && <SearchList users={filteredUsers} />}
 
-        <Card>
-          <CohortList />
-        </Card>
         {renderComponentBasedOnRole(user && user.role)}
       </aside>
     </>
