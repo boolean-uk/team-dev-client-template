@@ -22,7 +22,7 @@ const ProfilePage = () => {
     const fetchUserData = async (profileId, setter) => {
       try {
         const response = await get(`users/${profileId}`);
-        setter(response.data.user);
+        setter(response.data);
       } catch (error) {
         console.error(`Error fetching user data for ID ${profileId}:`, error);
       }
