@@ -7,7 +7,6 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 
-import CohortList from '../../components/cohortList';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../service/apiClient';
 
