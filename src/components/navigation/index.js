@@ -5,8 +5,12 @@ import ProfileIcon from '../../assets/icons/profileIcon';
 import useAuth from '../../hooks/useAuth';
 import './style.css';
 
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
+
 const Navigation = () => {
   const { token } = useAuth();
+  const { userId } = jwt_decode(token);
 
   if (!token) {
     return null;
@@ -22,13 +26,13 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to={`/profile/${userId}`}>
             <ProfileIcon />
             <p>Profile</p>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <NavLink to="/cohort" replace state={{ pathname: '/cohort' }}>
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>

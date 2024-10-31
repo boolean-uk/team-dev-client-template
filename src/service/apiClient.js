@@ -5,17 +5,54 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  await post('users', { email, password }, false);
+  const res = await post('users', { email, password }, false);
+
+  if (res.status === 'fail') {
+    return res;
+  }
+
   return await login(email, password);
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, { firstName, lastName, githubUrl, bio });
+async function updateProfile(
+  userId,
+  firstName,
+  lastName,
+  bio,
+  username,
+  githubUsername,
+  profilePicture,
+  mobile
+) {
+  return await patch(`users/${userId}`, {
+    firstName,
+    lastName,
+    bio,
+    username,
+    githubUsername,
+    profilePicture,
+    mobile
+  });
+}
+
+async function getUserData(userId) {
+  const res = await get(`users/${userId}`);
+  return res.data.user;
+}
+
+async function getUsers() {
+  const res = await get(`users`);
+  return res.data.users;
 }
 
 async function getPosts() {
   const res = await get('posts');
   return res.data.posts;
+}
+
+async function getCohorts() {
+  const res = await get('cohorts');
+  return res.data.cohorts;
 }
 
 async function post(endpoint, data, auth = true) {
@@ -52,4 +89,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile };
+export { login, getPosts, register, updateProfile, getCohorts, getUserData, getUsers };

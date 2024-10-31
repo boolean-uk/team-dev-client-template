@@ -1,0 +1,58 @@
+.cohort-title {
+  height: 56px;
+  border-bottom: 1px solid #dce1f0;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cohort-div {
+  border-bottom: 1px solid #dce1f0;
+  height: 72px;
+}
+
+.student-card {
+  height: 72px;
+  width: 365px;
+  padding-right: 1.5rem;
+}
+
+.user-list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(365px, 1fr));
+}
+
+.cohort-student-name {
+  margin-top: 10px;
+}
+
+.cohort-action-button {
+  padding: 0px 0px !important;
+  margin-top: 5px;
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cohort-option {
+    font-size: 1rem;
+}
+
+.cohort-select {
+    font-size: 24px;
+}
+
+.cohort-dropdown {
+    margin-right: 2rem;
+}
+
+.start-and-end-date{
+    margin-left: 5px !important;
+}

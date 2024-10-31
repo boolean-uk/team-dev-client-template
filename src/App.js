@@ -8,6 +8,9 @@ import Verification from './pages/verification';
 import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
+import UserProfile from './pages/profilePage';
+import Cohort from './pages/cohort';
+import Search from './pages/search';
 
 const App = () => {
   return (
@@ -21,6 +24,24 @@ const App = () => {
             <Route path="verification" element={<Verification />} />
 
             <Route
+              path="dashboard/search/:searchQuery"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="dashboard/search/"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               index
               element={
                 <ProtectedRoute>
@@ -28,11 +49,37 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/cohort"
+              element={
+                <ProtectedRoute>
+                  <Cohort />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="welcome"
               element={
                 <ProtectedRoute disabledNav={true}>
                   <Welcome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/:profileId"
+              element={
+                <ProtectedRoute>
+                  <UserProfile isEditMode={false} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/:profileId/edit"
+              element={
+                <ProtectedRoute>
+                  <UserProfile isEditMode={true} />
                 </ProtectedRoute>
               }
             />

@@ -21,6 +21,20 @@ form label {
   position: relative;
 }
 
+.input-error {
+  border: 1px solid red;
+}
+.input-error:focus {
+  border: 1px solid red;
+}
+
+.passwordreveal-error {
+  border: 1px solid red;
+}
+.passwordreveal-error:focus {
+  border: 1px solid red;
+}
+
 .input-icon {
   position: absolute;
   left: 16px;
@@ -31,9 +45,19 @@ form label {
   padding-right: 10px;
 }
 
-.showpasswordbutton {
+.lockbutton {
   position: absolute;
   bottom: 28px;
+  right: 16px;
+  z-index: 2;
+  background: none;
+  transform: translateY(19px);
+  transition: all 0.2s ease;
+}
+
+.showpasswordbutton {
+  position: absolute;
+  top: 20px;
   right: 16px;
   z-index: 2;
   background: none;
@@ -47,9 +71,25 @@ form label {
   opacity: 0.4;
 }
 
+.showpasswordbutton-duo {
+  position: absolute;
+  bottom: 28px;
+  right: 50px;
+  z-index: 2;
+  background: none;
+  transform: translateY(19px);
+  transition: all 0.2s ease;
+}
+.showpasswordbutton-duo:hover {
+  opacity: 0.7;
+}
+.showpasswordbutton-duo.__faded {
+  opacity: 0.4;
+}
+
 .passwordreveal {
   position: absolute;
-  bottom: 0;
+  /* bottom: 0; */
   right: 0;
   width: 100%;
   z-index: 1;

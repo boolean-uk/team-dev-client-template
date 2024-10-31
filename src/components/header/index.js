@@ -5,16 +5,25 @@ import Card from '../card';
 import ProfileIcon from '../../assets/icons/profileIcon';
 import CogIcon from '../../assets/icons/cogIcon';
 import LogoutIcon from '../../assets/icons/logoutIcon';
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 
 const Header = () => {
   const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const location = useLocation();
+  const { userId } = jwt_decode(token);
 
   const onClickProfileIcon = () => {
     setIsMenuVisible(!isMenuVisible);
   };
+
+  useEffect(() => {
+    setIsMenuVisible(false);
+  }, [location]);
 
   if (!token) {
     return null;
@@ -45,7 +54,7 @@ const Header = () => {
             <section className="user-panel-options border-top">
               <ul>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to={`/profile/${userId}`}>
                     <ProfileIcon /> <p>Profile</p>
                   </NavLink>
                 </li>
