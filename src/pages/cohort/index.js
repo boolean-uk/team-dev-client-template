@@ -2,19 +2,33 @@ import { useEffect, useState } from 'react';
 import Card from '../../components/card';
 import './style.css';
 import { getCohorts } from '../../service/apiClient';
+import useAuth from '../../hooks/useAuth';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 
 const Cohort = () => {
+  const { token } = useAuth();
   const [cohort, setCohort] = useState([]);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [selectedCohort, setSelectedCohort] = useState({});
 
   useEffect(() => {
     const fetchCohorts = async () => {
-      const cohorts = await getCohorts();
+      const allCohorts = await getCohorts();
+      const cohortToAdd = [];
+      const { userId } = jwt_decode(token);
       // Divert the teacher and students into separate arrays for easy access. Later, this would be not using cohort[0] but depending on which cohort is selected.
-      setStudents(cohorts[0].users.filter((user) => user.role === 'STUDENT'));
-      setTeachers(cohorts[0].users.filter((user) => user.role === 'TEACHER'));
-      setCohort(cohorts);
+      allCohorts.forEach((cohort) => {
+        if (cohort.users.some((user) => user.id === userId)) {
+          cohortToAdd.push(cohort);
+        }
+      });
+      // SET STARTING POINT OF THE COHORT TO THE FIRST COHORT IN THE ARRAY
+      setSelectedCohort(cohortToAdd[0]);
+      setStudents(cohortToAdd[0].users.filter((user) => user.role === 'STUDENT'));
+      setTeachers(cohortToAdd[0].users.filter((user) => user.role === 'TEACHER'));
+      setCohort(cohortToAdd);
     };
     fetchCohorts();
   }, []);
@@ -29,6 +43,14 @@ const Cohort = () => {
       </div>
     );
   }
+
+  const handleCohortChange = (event) => {
+    const selectedCohortId = event.target.value;
+    const selectedCohort = cohort.find((c) => c.id === parseInt(selectedCohortId));
+    setSelectedCohort(selectedCohort);
+    setStudents(selectedCohort.users.filter((user) => user.role === 'STUDENT'));
+    setTeachers(selectedCohort.users.filter((user) => user.role === 'TEACHER'));
+  };
 
   /* This is the main component for the cohort page. 
     For future use, there will be a dropdown to select the cohort depending on the current user that is logged in.
@@ -47,17 +69,24 @@ const Cohort = () => {
             </div>
             <div className="post-user-name">
               {/* Need to only fetch the cohort from current user that is logged in. Then maybe create a drop down to see a specific cohort. */}
-              <p>
-                {cohort[0].name}, Cohort {cohort[0].id}
-              </p>
-              <small>
-                {new Date(cohort[0].startDate).toLocaleString('default', {
+              <div className="cohort-dropdown">
+                <select id="cohort-select" onChange={handleCohortChange} className="cohort-select">
+                  {cohort.map((c) => (
+                    <option key={c.id} value={c.id} className="cohort-option">
+                      {c.name}, Cohort {c.id}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <small className="start-and-end-date">
+                {new Date(selectedCohort.startDate).toLocaleString('default', {
                   month: 'long',
                   year: 'numeric'
                 })}{' '}
                 -{' '}
                 {/* ADD space between the dash, ESLINT removs it, therefore I Added {' '}  and {' '} */}
-                {new Date(cohort[0].endDate).toLocaleString('default', {
+                {new Date(selectedCohort.endDate).toLocaleString('default', {
                   month: 'long',
                   year: 'numeric'
                 })}
