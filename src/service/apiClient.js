@@ -14,23 +14,30 @@ async function register(email, password) {
   return await login(email, password);
 }
 
-async function createProfile(
+async function updateProfile(
   userId,
   firstName,
   lastName,
-  username,
-  githubUrl,
   bio,
-  profilePicture
+  username,
+  githubUsername,
+  profilePicture,
+  mobile
 ) {
   return await patch(`users/${userId}`, {
     firstName,
     lastName,
-    username,
-    githubUrl,
     bio,
-    profilePicture
+    username,
+    githubUsername,
+    profilePicture,
+    mobile
   });
+}
+
+async function getUserData(userId) {
+  const res = await get(`users/${userId}`);
+  return res.data.user;
 }
 
 async function getPosts() {
@@ -77,4 +84,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getCohorts };
+export { login, getPosts, register, updateProfile, getCohorts, getUserData };
