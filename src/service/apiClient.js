@@ -58,7 +58,6 @@ async function request(method, endpoint, data, auth = true) {
     method
   };
 
-  // Only add body for POST and PATCH requests
   if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PATCH') {
     opts.body = JSON.stringify(data);
   }
