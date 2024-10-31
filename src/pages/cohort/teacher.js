@@ -14,6 +14,19 @@ const TeacherView = ({ cohort, handleCohortChange, selectedCohort, students, tea
     // Open the modal!
     openModal();
   };
+
+  if (cohort.length === 0) {
+    return (
+      <div className="loading">
+        <div>
+          <h3>Cohorts cannot be found</h3>
+          <button className="cohort-action-button" onClick={showModal}>
+            Create a new Cohort
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <main>

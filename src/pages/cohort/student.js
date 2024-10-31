@@ -1,6 +1,17 @@
 import Card from '../../components/card';
 
 const StudentView = ({ cohort, handleCohortChange, selectedCohort, students, teachers }) => {
+  if (cohort.length === 0) {
+    return (
+      <div className="loading">
+        <h4>Fetching Cohorts</h4>
+        <div className="loadingscreen-loader">
+          <span></span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <main>
