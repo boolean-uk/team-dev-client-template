@@ -29,7 +29,7 @@ const Posts = () => {
             date={post.createdAt}
             content={post.content}
             comments={post.comments}
-            /* post.author.id need to be changed to post.userId when post API is updated. */
+            /* post.author.id need to be changed to post.userId when post API is updated.  */
             isLoggedIn={post.author.id === userID}
             userRole={user?.role}
           />
