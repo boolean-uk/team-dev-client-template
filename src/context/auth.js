@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    console.log(storedToken); // Debug
     if (storedToken) {
       setToken(storedToken);
       console.log(location.state?.from);

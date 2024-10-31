@@ -36,6 +36,7 @@ const Profile = () => {
   useEffect(() => {
     setUser();
   }, [user]);
+
   const onPhotoChange = (photoData) => {
     setProfile({
       ...profile,
