@@ -27,10 +27,16 @@ const TextInput = ({
   const [showpassword, setShowpassword] = useState(false);
 
   useEffect(() => {
-    if (isRequired && value.length === 0) {
-      setError(`${label.slice(0, -1)} is required`);
+    if (isRequired) {
+      if (value != null) {
+        if (value.length === 0) {
+          setError(`${label.slice(0, -1)} is required`);
+        } else {
+          setError('');
+        }
+      }
     }
-  }, [isRequired]);
+  }, [isRequired, value]);
 
   const validateInput = (value, event) => {
     const regex = new RegExp(`^[${validChars}]+$`);
