@@ -58,7 +58,7 @@ const CreateCohortModal = () => {
       <section className="create-port-actions">
         <Button
           onClick={onSubmit}
-          text="Post"
+          text="Create Cohort"
           classes={`${title.length ? 'blue' : 'offwhite'} width-full`}
           disabled={!title.length}
         />
