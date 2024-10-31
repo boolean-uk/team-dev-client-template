@@ -12,7 +12,10 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   // Email validation
-  const isValidEmail = formData.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/);
+  const emailPatternDescription = 'Please enter a valid email address';
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  const emailRegexValidChars = 'A-Za-z0-9@._-';
+  const isValidEmail = formData.email.match(emailRegex);
 
   // Password validation
   // The password should not be less than 8 characters in length
@@ -53,7 +56,9 @@ const Register = () => {
               name="email"
               label={'Email *'}
               isRequired={true}
-              validChars={'A-Za-z0-9@._-'}
+              validChars={emailRegexValidChars}
+              pattern={emailRegex}
+              patternDescription={emailPatternDescription}
             />
             <TextInput
               value={formData.password}
