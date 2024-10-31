@@ -46,6 +46,14 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
+async function deleteRequest(endpoint, auth = true) {
+  return await request('DELETE', endpoint, null, auth);
+}
+
+async function deletePost(postId) {
+  return await deleteRequest(`posts/${postId}`);
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -68,4 +76,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getUsers, get, post, patch };
+export { login, getPosts, register, createProfile, getUsers, get, post, patch, deletePost };
