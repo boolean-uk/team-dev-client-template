@@ -1,11 +1,7 @@
 .search-results-header-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .search-results-header {
-    margin-left: 1px;
-  }
+  display: flex;
+  align-items: center;
+}
 .search-results-page {
     margin : 20;
     justify-content: center;

@@ -9,7 +9,7 @@ import './style.css';
 
 const Search = () => {
   const { searchQuery } = useParams();
-  const [searchVal, setSearchVal] = useState('');
+  const [searchVal, setSearchVal] = useState(searchQuery);
   const [searchUsers, setSearchUsers] = useState([]);
   const navigate = useNavigate();
 
@@ -144,7 +144,7 @@ const Search = () => {
         <Card>
           <p>People</p>
           <hr className="search-results-line" />
-          {searchUsers.length > 0 ? (
+          {searchUsers.length > 0 && searchQuery !== undefined ? (
             <div className="search-results-list">
               {searchUsers.map((user) => (
                 <div key={user.id} className="search-user">
@@ -161,7 +161,11 @@ const Search = () => {
               ))}
             </div>
           ) : (
-            <p className="no-results-message">No results found for {searchQuery}</p>
+            <p className="no-results-message">
+              Sorry, no results found
+              <br />
+              Try changing your search term
+            </p>
           )}
         </Card>
       </div>

@@ -33,6 +33,15 @@ const App = () => {
             />
 
             <Route
+              path="dashboard/search/"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               index
               element={
                 <ProtectedRoute>
