@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { post } from '../../service/apiClient';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
 
-const CreatePostModal = () => {
+const CreatePostModal = ({ setNotification }) => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
   const { closeModal } = useModal();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState(null);
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,14 +23,12 @@ const CreatePostModal = () => {
         throw new Error(response.message || 'Failed to create post');
       }
 
-      setMessage('Post created successfully!');
       setTimeout(() => {
-        setMessage(null);
         closeModal();
-        navigate(0); // Refresh current page after success
+        setNotification('Posted');
       }, 2000);
     } catch (error) {
-      setMessage('Error creating post: ' + error.message);
+      setNotification(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -62,8 +57,6 @@ const CreatePostModal = () => {
           disabled={!text.length}
         />
       </section>
-
-      {message && <p>{message}</p>}
     </>
   );
 };
