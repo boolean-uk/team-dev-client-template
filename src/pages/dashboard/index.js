@@ -57,12 +57,12 @@ const Dashboard = () => {
               placeholder="Search for people"
             />
           </form>
+          {role === 'teacher' ? (
+            <p className="teacher-view-message">Teacher-specific view goes here</p>
+          ) : (
+            <StudentSearchResults searchVal={searchVal} />
+          )}
         </Card>
-        {role === 'teacher' ? (
-          <p className="teacher-view-message">Teacher-specific view goes here</p>
-        ) : (
-          <StudentSearchResults searchVal={searchVal} />
-        )}
         <Card>
           <h4>My Cohort</h4>
         </Card>
