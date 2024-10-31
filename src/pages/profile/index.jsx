@@ -31,7 +31,12 @@ const Profile = () => {
     password: '',
     bio: '',
     username: '',
-    photo: ''
+    profileImage: '',
+    cohortId: '',
+    startDate: '',
+    endDate: '',
+    role: '',
+    specialism: ''
   });
 
   useEffect(() => {
@@ -41,7 +46,7 @@ const Profile = () => {
   const onPhotoChange = (photoData) => {
     setProfile({
       ...profile,
-      photo: photoData
+      profileImage: photoData
     });
   };
 
@@ -60,11 +65,17 @@ const Profile = () => {
       profile.firstName,
       profile.lastName,
       profile.username,
-      profile.githubUsername,
+      profile.githubUrl,
       profile.bio,
       profile.email,
       profile.mobile,
-      profile.photo
+      profile.password,
+      profile.profileImage,
+      profile.cohortId,
+      profile.startDate,
+      profile.endDate,
+      profile.role,
+      profile.specialism
     );
   };
 
