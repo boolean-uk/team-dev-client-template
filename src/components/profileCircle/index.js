@@ -69,7 +69,7 @@ const CascadingMenu = ({ userData, initials }) => {
           </p>
         </div>
       </div>
-      <MenuItem icon={<ProfileIcon />} text="Profile" />
+      <MenuItem linkTo={`/profile/${userData.id}`} icon={<ProfileIcon />} text="Profile" />
       <MenuItem icon={<AddIcon />} text="Add note" />
 
       <MenuItem icon={<CohortIcon />} text="Move to cohort">
@@ -86,7 +86,7 @@ const CascadingMenu = ({ userData, initials }) => {
         </MenuItem>
       </MenuItem>
 
-      <MenuItem linkTo={`/profile/${userData.id}`} icon={<DeleteIcon />} text="Delete student" />
+      <MenuItem icon={<DeleteIcon />} text="Delete student" />
     </Menu>
   );
 };
