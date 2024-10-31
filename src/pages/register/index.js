@@ -11,10 +11,23 @@ const Register = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
 
-  const isRequiredFieldsProvided = formData.email && formData.password;
+  // Email validation
   const isValidEmail = formData.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/);
-  const isValidPassword = formData.password.length >= 8;
 
+  // Password validation
+  // The password should not be less than 8 characters in length
+  // The password should contain at least one uppercase character: /(?=.*[A-Z])/
+  // The password should contain at least one number: /(?=.*[0-9])/
+  // The password should contain at least one special character: /(?=.*[!@#$%^&*])/
+  const patternDescription =
+    'Password must contain at least one uppercase letter, one number, and one special character';
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+  const passwordRegexValidChars = 'A-Za-z0-9@._\\-!@#\\$%\\^&\\*';
+  const hasValidLength = formData.password.length >= 8;
+  const isValidPassword = passwordRegex.test(formData.password) && hasValidLength;
+
+  // Form validation
+  const isRequiredFieldsProvided = formData.email && formData.password;
   const isFormDataValid = isRequiredFieldsProvided && isValidEmail && isValidPassword;
 
   const onChange = (e) => {
@@ -49,9 +62,14 @@ const Register = () => {
               label={'Password *'}
               type={'password'}
               isRequired={true}
+              validChars={passwordRegexValidChars}
+              pattern={passwordRegex}
+              patternDescription={patternDescription}
+              minLength={8}
             />
           </form>
           {errorMessage && <ErrorMessage message={errorMessage} />}
+          <div className={`text-register-info`}>*Required</div>
           <Button
             text="Sign up"
             onClick={() => onRegister(formData.email, formData.password, setErrorMessage)}
