@@ -9,7 +9,7 @@ const TeacherView = ({ cohort, handleCohortChange, selectedCohort, students, tea
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreateCohortModal />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a Cohort', <CreateCohortModal />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
