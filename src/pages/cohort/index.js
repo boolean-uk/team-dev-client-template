@@ -47,17 +47,6 @@ const Cohort = () => {
     fetchCohorts(cohortId);
   }, [location.state]);
 
-  if (cohort.length === 0) {
-    return (
-      <div className="loading">
-        <h4>Fetching Cohorts</h4>
-        <div className="loadingscreen-loader">
-          <span></span>
-        </div>
-      </div>
-    );
-  }
-
   const handleCohortChange = (event) => {
     const selectedCohortId = event.target.value;
     const selectedCohort = cohort.find((c) => c.id === parseInt(selectedCohortId));
