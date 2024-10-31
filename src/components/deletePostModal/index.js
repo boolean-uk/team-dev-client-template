@@ -1,16 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { deletePost } from '../../service/apiClient';
 import useModal from '../../hooks/useModal';
 import Button from '../button';
 import './style.css';
 
-const DeletePostModal = ({ postId }) => {
+const DeletePostModal = ({ postId, setNotification }) => {
   const { closeModal } = useModal();
-  const navigate = useNavigate();
   const [activeBtn, setActiveBtn] = useState('Cancel');
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState(null);
 
   console.log(`Post ID: ${postId}`);
 
@@ -23,13 +20,12 @@ const DeletePostModal = ({ postId }) => {
         throw new Error(response.message || 'Failed to delete post');
       }
 
-      setMessage('Post deleted successfully!');
       setTimeout(() => {
         closeModal();
-        navigate(0);
+        setNotification('Post deleted');
       }, 2000);
     } catch (error) {
-      setMessage('Error deleting post: ' + error.message);
+      setNotification(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +51,6 @@ const DeletePostModal = ({ postId }) => {
           disabled={isLoading}
         />
       </div>
-      {message && <p>{message}</p>}
     </section>
   );
 };
