@@ -1,5 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { getUsers } from '../../service/apiClient';
+
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -7,8 +9,14 @@ import CreatePostModal from '../../components/createPostModal';
 import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
-import CohortList from '../../components/cohortList';
+
 import SearchList from '../../components/searchList';
+
+import useAuth from '../../hooks/useAuth';
+import { get } from '../../service/apiClient';
+
+import CohortList from '../../components/lists/cohortList/index';
+
 import './style.css';
 
 const Dashboard = () => {
@@ -16,6 +24,9 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [isListVisible, setIsListVisible] = useState(false);
+  const [user, setUser] = useState(null);
+  const { getLoggedInUserId } = useAuth();
+  const userId = getLoggedInUserId();
 
   useEffect(() => {
     getUsers().then(setUsers);
@@ -28,6 +39,10 @@ const Dashboard = () => {
       )
     );
   }, [searchVal, users]);
+
+  useEffect(() => {
+    get(`users/${userId}`).then((response) => setUser(response.data.user));
+  }, [userId]);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -43,6 +58,32 @@ const Dashboard = () => {
 
     // Open the modal!
     openModal();
+  };
+
+  const renderComponentBasedOnRole = (role) => {
+    switch (role) {
+      case 'TEACHER': {
+        // TODO: Add the correct sidebar items for teachers when component is ready.
+        const teacherSidebarItems = ['Cohorts', 'Students', 'Teachers'];
+        return (
+          <>
+            {teacherSidebarItems.map((item) => (
+              <Card key={item}>
+                <h4>{item}</h4>
+              </Card>
+            ))}
+          </>
+        );
+      }
+      case 'STUDENT':
+        return (
+          <Card>
+            <CohortList />
+          </Card>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -75,11 +116,13 @@ const Dashboard = () => {
             />
           </form>
         </Card>
+
         {isListVisible && <SearchList users={filteredUsers} />}
 
         <Card>
           <CohortList />
         </Card>
+        {renderComponentBasedOnRole(user && user.role)}
       </aside>
     </>
   );

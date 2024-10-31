@@ -12,7 +12,10 @@ const TextInput = ({
   placeholder = '',
   type = 'text'
 }) => {
+<<<<<<< HEAD
   const [input, setInput] = useState('');
+=======
+>>>>>>> main
   const [showpassword, setShowpassword] = useState(false);
 
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -28,7 +31,10 @@ const TextInput = ({
           placeholder={label}
           onChange={(e) => {
             onChange(e);
+<<<<<<< HEAD
             setInput(e.target.value);
+=======
+>>>>>>> main
           }}
           onFocus={(e) => {
             e.target.placeholder = '';
@@ -106,7 +112,7 @@ const TextInput = ({
           type={type}
           name={name}
           value={value}
-          placeholder={placeholder}
+          placeholder={label}
           onChange={onChange}
           className={icon && 'input-has-icon'}
           onFocus={(e) => {
@@ -114,6 +120,7 @@ const TextInput = ({
             setIsHighlighted(true);
           }}
           onBlur={(e) => {
+<<<<<<< HEAD
             e.target.placeholder = 'Search for people';
             setIsHighlighted(false);
           }}
@@ -142,6 +149,8 @@ const TextInput = ({
             setIsHighlighted(true);
           }}
           onBlur={(e) => {
+=======
+>>>>>>> main
             e.target.placeholder = label;
             setIsHighlighted(false);
           }}
