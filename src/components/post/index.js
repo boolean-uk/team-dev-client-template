@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import useModal from '../../hooks/useModal';
 import Card from '../card';
 import Comment from '../comment';
@@ -6,8 +6,6 @@ import DeletePostModal from '../deletePostModal';
 import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
-import NotificationPopup from '../notificationPopup';
-import { formatDate, transformUsernameToInitials } from '../../service/utils';
 import './style.css';
 
 const Post = ({
@@ -22,31 +20,12 @@ const Post = ({
 }) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
-  const userInitials = transformUsernameToInitials(name);
-  const [notification, setNotification] = useState(null);
+  const userInitials = name.match(/\b(\w)/g);
   const modalsMap = {
-    'Edit post': <EditPostModal username={name} postId={postId} exisitingContent={content} />,
-    'Delete post?': <DeletePostModal postId={postId} setNotification={setNotification} />
+    'Edit post': <EditPostModal />,
+    'Delete post?': <DeletePostModal />
   };
   const canEditPost = isLoggedIn || userRole === 'TEACHER';
-  const modalRef = useRef(null);
-  const buttonRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        menuOptionOpen &&
-        modalRef.current &&
-        !modalRef.current.contains(event.target) &&
-        !buttonRef.current.contains(event.target)
-      ) {
-        setMenuOptionOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [menuOptionOpen]);
 
   const handleDecisionClick = (decision) => {
     setModal(decision, modalsMap[decision]);
@@ -66,19 +45,12 @@ const Post = ({
 
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{formatDate(date).replace(',', '')}</small>
+            <small>{date}</small>
           </div>
           {canEditPost && (
-            <div className="edit-icon" ref={buttonRef} onClick={openMenuOptions}>
+            <div className="edit-icon" onClick={openMenuOptions}>
               <p>...</p>
-              {menuOptionOpen && (
-                <div ref={modalRef}>
-                  <EditDecisionModal
-                    onClick={handleDecisionClick}
-                    onClose={() => setMenuOptionOpen(false)}
-                  />
-                </div>
-              )}
+              {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
             </div>
           )}
         </section>
@@ -103,15 +75,6 @@ const Post = ({
           ))}
         </section>
       </article>
-      <div className="notification-container">
-        {notification && (
-          <NotificationPopup
-            actionText="Undo"
-            message={notification}
-            className="delete-notification"
-          />
-        )}
-      </div>
     </Card>
   );
 };
