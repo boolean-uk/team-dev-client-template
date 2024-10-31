@@ -8,12 +8,21 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = false, userRole }) => {
+const Post = ({
+  postId,
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  isLoggedIn = false,
+  userRole
+}) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
   const modalsMap = {
-    'Edit post': <EditPostModal />,
+    'Edit post': <EditPostModal postId={postId} />,
     'Delete post?': <DeletePostModal />
   };
   const canEditPost = isLoggedIn || userRole === 'TEACHER';
