@@ -14,8 +14,6 @@ import { UserContext } from '../../pages/dashboard';
 const ProfileCircle = ({ userData, initials }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const { user } = useContext(UserContext);
-  console.log(userData);
-  console.log(user);
   return (
     <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
       {isMenuVisible && (
@@ -50,7 +48,7 @@ const StudentViewMenu = ({ userData, initials }) => {
         </div>
       </div>
 
-      <MenuItem icon={<ProfileIcon />} text="Profile" />
+      <MenuItem linkTo={`/profile/${userData.id}`} icon={<ProfileIcon />} text="Profile" />
     </Menu>
   );
 };
@@ -88,7 +86,7 @@ const CascadingMenu = ({ userData, initials }) => {
         </MenuItem>
       </MenuItem>
 
-      <MenuItem icon={<DeleteIcon />} text="Delete student" />
+      <MenuItem linkTo={`/profile/${userData.id}`} icon={<DeleteIcon />} text="Delete student" />
     </Menu>
   );
 };

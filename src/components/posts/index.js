@@ -24,6 +24,7 @@ const Posts = () => {
         return (
           <Post
             key={post.id}
+            author={post.author}
             name={`${post.author.firstName} ${post.author.lastName}`}
             date={post.createdAt}
             content={post.content}

@@ -8,7 +8,16 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
 
-const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = false, userRole }) => {
+const Post = ({
+  name,
+  date,
+  content,
+  comments = [],
+  likes = 0,
+  isLoggedIn = false,
+  userRole,
+  author
+}) => {
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
@@ -32,7 +41,7 @@ const Post = ({ name, date, content, comments = [], likes = 0, isLoggedIn = fals
     <Card>
       <article className="post">
         <section className="post-details">
-          <ProfileCircle initials={userInitials} />
+          <ProfileCircle userData={author} initials={userInitials} />
 
           <div className="post-user-name">
             <p>{name}</p>
