@@ -77,11 +77,8 @@ const UserProfile = ({ isEditMode }) => {
   };
 
   const formatRole = (role) => {
-    if (role === 'STUDENT') {
-      return 'Student';
-    } else {
-      return 'Teacher';
-    }
+    if (!role) return '';
+    return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
   };
 
   if (!profile) {
