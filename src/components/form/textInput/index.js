@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 /**
  * validChars: Characters that are allowed in the input, the user can't type characters that are not included in validChars
  * -
- * pattern: Required pattern/format for e.g. email and password.
+ * pattern: Required pattern/format for email or password.
  * patternDescription: Requirements can be passed in via patternDescription, it will be displayed as help messages to the user if the input doesn't match the pattern
  */
 const TextInput = ({
@@ -25,7 +25,6 @@ const TextInput = ({
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [showpassword, setShowpassword] = useState(false);
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   useEffect(() => {
     if (isRequired && value.length === 0) {
@@ -132,8 +131,8 @@ const TextInput = ({
           name={name}
           value={value}
           onChange={handleChange}
-          pattern={emailPattern}
-          className={icon && 'input-has-icon'}
+          pattern={pattern}
+          className={(error && 'input-error') || (icon && 'input-has-icon')}
         />
         {icon && <span className="input-icon">{icon}</span>}
         {error && <span className="error-message">{error}</span>}
