@@ -6,13 +6,15 @@ import StepTwo from './stepTwo';
 import './style.css';
 import StepThree from './stepThree';
 import StepFour from './stepFour';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NotificationPopup from '../../components/notificationPopup';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
   const location = useLocation();
   const data = location.state;
+
+  const navigate = useNavigate();
 
   const [showSuccess, setShowSucess] = useState(false);
 
@@ -36,7 +38,7 @@ const Welcome = () => {
   const onPhotoChange = (photoData) => {
     setProfile({
       ...profile,
-      photo: photoData
+      profileImage: photoData
     });
   };
 
@@ -59,7 +61,7 @@ const Welcome = () => {
       profile.email,
       profile.mobile,
       profile.password,
-      profile.photo,
+      profile.profileImage,
       profile.cohortId,
       profile.startDate,
       profile.endDate,
@@ -73,6 +75,7 @@ const Welcome = () => {
       }, 3000);
       return () => clearTimeout(timer);
     }
+    console.log(profile);
   };
 
   return (
@@ -89,7 +92,13 @@ const Welcome = () => {
         <StepFour data={profile} setData={onChange} />
       </Stepper>
 
-      {showSuccess && <NotificationPopup message="Profile created" actionText={'Edit'} />}
+      {showSuccess && (
+        <NotificationPopup
+          message="Profile created"
+          actionText={'Edit'}
+          onAction={() => navigate(`profile/${data.id}`)}
+        />
+      )}
     </main>
   );
 };
