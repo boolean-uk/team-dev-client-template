@@ -21,7 +21,6 @@ const Profile = () => {
   const setUser = () => {
     get(`users/${id}`).then((response) => {
       user = response.data.user;
-      console.log(user);
       setProfile({ ...profile, ...user });
     });
   };
@@ -64,7 +63,6 @@ const Profile = () => {
   };
 
   const onComplete = () => {
-    console.log(profile);
     onCreateProfile(
       profile.firstName,
       profile.lastName,
