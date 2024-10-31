@@ -1,7 +1,10 @@
 import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
+import { useLocation } from 'react-router-dom';
 
 const StepThree = ({ data, setData }) => {
+  const location = useLocation();
+  const focus = location.pathname === '/welcome';
   return (
     <>
       <div className="welcome-formheader">
@@ -10,7 +13,7 @@ const StepThree = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
           <TextInput
-            focused={true}
+            focused={focus}
             onChange={setData}
             value={data.role}
             name="role"

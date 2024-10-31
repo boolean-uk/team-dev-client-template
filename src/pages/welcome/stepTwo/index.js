@@ -1,7 +1,10 @@
 import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
+import { useLocation } from 'react-router-dom';
 
 const StepTwo = ({ data, setData, validating }) => {
+  const location = useLocation();
+  const focus = location.pathname === '/welcome';
   return (
     <>
       <div className="welcome-formheader">
@@ -21,7 +24,7 @@ const StepTwo = ({ data, setData, validating }) => {
             ? !data.email && <p className="welcome-form-error">Please enter an email</p>
             : null}
           <TextInput
-            focused={true}
+            focused={focus}
             onChange={setData}
             type="text"
             placeholder="Mobile"

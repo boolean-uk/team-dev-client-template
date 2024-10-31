@@ -34,10 +34,15 @@
     gap: 20px;
     padding: 20px;
     width: 100%;
-    max-width: 800px;
 }
 
 .grid-item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding: 20px 0;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

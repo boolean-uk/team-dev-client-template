@@ -4,10 +4,12 @@ import TextInput from '../../../components/form/textInput';
 import UploadPhotoModal from '../../../components/uploadPhotoModal';
 import useModal from '../../../hooks/useModal';
 import './style.css';
+import { useLocation } from 'react-router-dom';
 
 const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
   const { openModal, setModal } = useModal();
-
+  const location = useLocation();
+  const focus = location.pathname === '/welcome';
   const setPhotoData = (photoData) => {
     setPhoto(photoData);
   };
@@ -46,7 +48,7 @@ const StepOne = ({ data, setData, setPhoto, validating, setValidating }) => {
         </div>
         <div className="welcome-form-inputs">
           <TextInput
-            focused={true}
+            focused={focus}
             onChange={setData}
             value={data.firstName}
             name="firstName"

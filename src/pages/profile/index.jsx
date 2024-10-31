@@ -91,16 +91,16 @@ const Profile = () => {
         </div>
         <div className="grid-container">
           <div className="grid-item">
-            <StepOne data={profile} setData={onChange} setPhoto={onPhotoChange} />
+            <StepOne className="step" data={profile} setData={onChange} setPhoto={onPhotoChange} />
           </div>
           <div className="grid-item">
-            <StepThree data={profile} setData={onChange} />
+            <StepThree className="step" data={profile} setData={onChange} />
           </div>
           <div className="grid-item">
-            <StepTwo data={profile} setData={onChange} />
+            <StepTwo className="step" data={profile} setData={onChange} />
           </div>
           <div className="grid-item">
-            <StepFour data={profile} setData={onChange} />
+            <StepFour className="step" data={profile} setData={onChange} />
           </div>
         </div>
         <button onClick={onComplete} className="profile-button">
