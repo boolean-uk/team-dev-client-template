@@ -5,6 +5,7 @@ import SearchIcon from '../../assets/icons/searchIcon';
 import TextInput from '../../components/form/textInput';
 import Card from '../../components/card';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
+import { getUsers } from '../../service/apiClient';
 import './style.css';
 
 const Search = () => {
@@ -12,98 +13,28 @@ const Search = () => {
   const [searchVal, setSearchVal] = useState(searchQuery);
   const [searchUsers, setSearchUsers] = useState([]);
   const navigate = useNavigate();
-
-  const profiles = [
-    {
-      id: 1,
-      userId: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      specialism: 'Full-stack developer',
-      githubUrl: 'https://github.com/johndoe'
-    },
-    {
-      id: 2,
-      userId: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      specialism: 'Frontend engineer',
-      githubUrl: 'https://github.com/janesmith'
-    },
-    {
-      id: 3,
-      userId: 3,
-      firstName: 'Michael',
-      lastName: 'Johnson',
-      specialism: 'Backend developer',
-      githubUrl: 'https://github.com/michaeljohnson'
-    },
-    {
-      id: 4,
-      userId: 4,
-      firstName: 'Emily',
-      lastName: 'Davis',
-      specialism: 'DevOps engineer',
-      githubUrl: 'https://github.com/emilydavis'
-    },
-    {
-      id: 5,
-      userId: 5,
-      firstName: 'Chris',
-      lastName: 'Brown',
-      specialism: 'Data scientist',
-      githubUrl: 'https://github.com/chrisbrown'
-    },
-    {
-      id: 6,
-      userId: 6,
-      firstName: 'Sophia',
-      lastName: 'Wilson',
-      specialism: 'UI/UX designer',
-      githubUrl: 'https://github.com/sophiawilson'
-    },
-    {
-      id: 7,
-      userId: 7,
-      firstName: 'Daniel',
-      lastName: 'Martinez',
-      specialism: 'Software engineer',
-      githubUrl: 'https://github.com/danielmartinez'
-    },
-    {
-      id: 8,
-      userId: 8,
-      firstName: 'Olivia',
-      lastName: 'Garcia',
-      specialism: 'Product manager',
-      githubUrl: 'https://github.com/oliviagarcia'
-    },
-    {
-      id: 9,
-      userId: 9,
-      firstName: 'Liam',
-      lastName: 'Taylor',
-      specialism: 'Security analyst',
-      githubUrl: 'https://github.com/liamtaylor'
-    },
-    {
-      id: 10,
-      userId: 10,
-      firstName: 'Emma',
-      lastName: 'Andersson',
-      specialism: 'Backend developer',
-      githubUrl: 'https://github.com/emmaanderson'
-    }
-  ];
+  const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
-    if (searchQuery) {
+    if (searchQuery.length > 0) {
       const filteredUsers = profiles.filter((user) =>
-        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchQuery.toLowerCase())
+        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchVal.toLowerCase())
       );
       setSearchUsers(filteredUsers);
+    } else {
+      setSearchUsers([]); // Clear search results if input is empty
     }
-  }, [searchQuery]);
+  }, [profiles]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const allUsers = await getUsers();
+      setProfiles(allUsers);
+    };
+    fetchUsers();
+  }, []); // Add an empty dependency array to run only once
+
+  console.log(profiles);
 
   const onSearch = (e) => {
     e.preventDefault();

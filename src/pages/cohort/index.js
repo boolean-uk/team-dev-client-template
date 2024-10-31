@@ -5,6 +5,7 @@ import { getCohorts } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
 const Cohort = () => {
   const { token } = useAuth();
@@ -12,26 +13,37 @@ const Cohort = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [selectedCohort, setSelectedCohort] = useState({});
+  const location = useLocation();
+
+  const fetchCohorts = async (cohortId) => {
+    const allCohorts = await getCohorts();
+    const userCohorts = [];
+    const { userId } = jwt_decode(token);
+
+    // Filter cohorts to include only those the user belongs to
+    allCohorts.forEach((cohort) => {
+      if (cohort.users.some((user) => user.id === userId)) {
+        userCohorts.push(cohort);
+      }
+    });
+
+    setCohort(userCohorts);
+
+    // Find the cohort by ID if specified; otherwise, default to the first cohort
+    const initialCohort = userCohorts.find((cohort) => cohort.id === cohortId) || userCohorts[0];
+
+    if (initialCohort) {
+      setSelectedCohort(initialCohort);
+      setStudents(initialCohort.users.filter((user) => user.role === 'STUDENT'));
+      setTeachers(initialCohort.users.filter((user) => user.role === 'TEACHER'));
+    }
+  };
 
   useEffect(() => {
-    const fetchCohorts = async () => {
-      const allCohorts = await getCohorts();
-      const cohortToAdd = [];
-      const { userId } = jwt_decode(token);
-      // Map out the cohorts to check if the user is in the cohort
-      allCohorts.forEach((cohort) => {
-        if (cohort.users.some((user) => user.id === userId)) {
-          cohortToAdd.push(cohort);
-        }
-      });
-      // SET STARTING POINT OF THE COHORT TO THE FIRST COHORT IN THE ARRAY
-      setSelectedCohort(cohortToAdd[0]);
-      setStudents(cohortToAdd[0].users.filter((user) => user.role === 'STUDENT'));
-      setTeachers(cohortToAdd[0].users.filter((user) => user.role === 'TEACHER'));
-      setCohort(cohortToAdd);
-    };
-    fetchCohorts();
-  }, []);
+    const cohortId = location.state?.cohortId;
+    console.log(cohortId);
+    fetchCohorts(cohortId);
+  }, [location.state]);
 
   if (cohort.length === 0) {
     return (
@@ -66,7 +78,12 @@ const Cohort = () => {
             <div className="post-user-name">
               {/* This is a drop down menu so the user can change which cohort to view. */}
               <div className="cohort-dropdown">
-                <select id="cohort-select" onChange={handleCohortChange} className="cohort-select">
+                <select
+                  id="cohort-select"
+                  onChange={handleCohortChange}
+                  className="cohort-select"
+                  value={selectedCohort?.id || ''}
+                >
                   {cohort.map((c) => (
                     <option key={c.id} value={c.id} className="cohort-option">
                       {c.name}, Cohort {c.id}
