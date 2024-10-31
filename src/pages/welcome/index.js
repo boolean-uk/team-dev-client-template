@@ -28,6 +28,12 @@ const Welcome = () => {
   });
 
   useEffect(() => {
+    const setData = (data) => {
+      if (data !== '') {
+        return data;
+      }
+      return '';
+    };
     const fetchUserData = async () => {
       try {
         const userData = await onGetUser();
@@ -35,15 +41,15 @@ const Welcome = () => {
         // Set the profile to the user data given.
         setProfile((prevProfile) => ({
           ...prevProfile,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          username: userData.username,
-          githubUsername: userData.githubUsername,
-          bio: userData.bio,
-          profilePicture: userData.profilePicture,
-          mobile: userData.mobile,
-          role: userData.role,
-          specialism: userData.specialism
+          firstName: setData(userData.firstName),
+          lastName: setData(userData.lastName),
+          username: setData(userData.username),
+          githubUsername: setData(userData.githubUsername),
+          bio: setData(userData.biography),
+          profilePicture: setData(userData.profilePicture),
+          mobile: setData(userData.mobile),
+          role: setData(userData.role),
+          specialism: setData(userData.specialism)
         }));
       } catch (error) {
         console.error('Failed to fetch user data:', error);
