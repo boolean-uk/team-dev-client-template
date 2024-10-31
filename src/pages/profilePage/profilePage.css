@@ -74,7 +74,8 @@
   gap: 32px;
 }
 
-.profile-grid-section.read-only input {
+.profile-grid-section.read-only input,
+.profile-grid-section.read-only textarea {
   pointer-events: none; /* Disable all mouse events */
 }
 
@@ -120,26 +121,42 @@ textarea {
   margin: 0;
 }
 
-.info-text {
+.info-container {
+  display: flex;
+  align-items: center; /* Justera avståndet mellan texten och felmeddelandet */
+}
+
+.info-text,
+.error-text {
   color: var(--color-blue1);
   font-size: 16px;
   line-height: 24px;
   margin-left: 10px;
 }
 
+.error-text {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
 .required-text {
   margin-left: 0;
 }
 
-.edit-button {
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  gap: 16px;
+}
+
+.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-left: auto;
-  padding: 14px 24px;
-  gap: 8px;
 
-  background: var(--color-blue);
+  padding: 14px 24px;
+
   border-radius: 8px;
 
   font-style: normal;
@@ -147,9 +164,19 @@ textarea {
   font-size: 20px;
   line-height: 28px;
   text-align: center;
-  color: #ffffff;
 
   flex: none;
   order: 0;
   flex-grow: 1;
+}
+
+.edit-button,
+.submit-button {
+  background: var(--color-blue);
+  color: #ffffff;
+}
+
+.cancel-button {
+  background: var(--color-offwhite);
+  color: var(--color-blue1);
 }

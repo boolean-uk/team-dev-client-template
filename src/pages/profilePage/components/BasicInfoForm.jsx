@@ -5,14 +5,14 @@ import TextInput from '../../../components/form/textInput';
 import ProfileCircle from '../../../components/profileCircle';
 
 const BasicInfoForm = () => {
-  const { handleInputChange, profile, initials } = useContext(ProfileContext);
+  const { handleInputChange, profile, initials, isEditMode } = useContext(ProfileContext);
 
   return (
     <div className="profile-grid-section">
       <Form>
         <hr className="section-divider" />
         <h3 className="profile-info-header">Basic Info</h3>
-        <div className="profile-grid-section read-only">
+        <div className={`profile-grid-section ${isEditMode ? '' : 'read-only'}`}>
           <div className="photo-section">
             <span className="photo-label">Photo</span>
             <div className="profile-circle-wrapper">
@@ -26,6 +26,7 @@ const BasicInfoForm = () => {
             value={profile.firstName}
             onChange={handleInputChange}
             type="text"
+            isRequired={true}
           />
           <TextInput
             name="lastName"
@@ -33,6 +34,7 @@ const BasicInfoForm = () => {
             value={profile.lastName}
             onChange={handleInputChange}
             type="text"
+            isRequired={true}
           />
           <TextInput
             name="username"
@@ -40,6 +42,7 @@ const BasicInfoForm = () => {
             value={profile.username}
             onChange={handleInputChange}
             type="text"
+            isRequired={true}
           />
           <TextInput
             name="githubUsername"
@@ -47,6 +50,7 @@ const BasicInfoForm = () => {
             value={profile.githubUsername}
             onChange={handleInputChange}
             type="text"
+            isRequired={true}
           />
         </div>
       </Form>
