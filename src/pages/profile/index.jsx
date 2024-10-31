@@ -132,7 +132,8 @@ const Profile = () => {
           <div className="profile-titleblock">
             <ProfileCircle initials={profile.firstName[0] + profile.lastName[0]} />
             <div className="profile-name">
-              <p>{`${profile.firstName} ${profile.lastName}`}</p>
+              <p className="profile-name-tag">{`${profile.firstName} ${profile.lastName}`}</p>
+              <p className="profile-specialism-tag">{profile.specialism}</p>
             </div>
           </div>
           <div className="grid-container">

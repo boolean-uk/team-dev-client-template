@@ -22,9 +22,14 @@
     padding-top: 4px;
 }
 
-.profile-name p {
+.profile-name-tag {
     font-weight: 600;
     font-size: 1.6rem;
+}
+
+.profile-specialism-tag {
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .grid-container {
