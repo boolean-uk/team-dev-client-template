@@ -4,7 +4,7 @@ import Header from '../components/header';
 import Modal from '../components/modal';
 import Navigation from '../components/navigation';
 import useAuth from '../hooks/useAuth';
-import { createProfile, login, register } from '../service/apiClient';
+import { updateProfile, getUserData, login, register } from '../service/apiClient';
 
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
@@ -22,9 +22,12 @@ const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem('token');
     const storedRole = localStorage.getItem('role');
 
-    if (storedToken && storedRole) {
+    const storedUserCredentials = JSON.parse(localStorage.getItem('userCredentials'));
+
+    if (storedToken && storedRole && storedUserCredentials) {
       setToken(storedToken);
       setRole(storedRole);
+      setUserCredentials(storedUserCredentials);
       navigate(location.pathname || '/');
     } else {
       navigate('/login');
@@ -40,6 +43,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     localStorage.setItem('role', res.data.user.role);
+    localStorage.setItem('userCredentials', JSON.stringify({ email, password }));
 
     setToken(res.data.token);
     setRole(res.data.user.role);
@@ -50,6 +54,7 @@ const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userCredentials');
     setToken(null);
     setRole(null);
     setUserCredentials({ email: '', password: '' });
@@ -67,6 +72,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     localStorage.setItem('role', res.data.user.role);
+    localStorage.setItem('userCredentials', JSON.stringify({ email, password }));
 
     setToken(res.data.token);
     setRole(res.data.user.role);
@@ -75,21 +81,41 @@ const AuthProvider = ({ children }) => {
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (
+  const handleUpdateProfile = async (
     firstName,
     lastName,
-    username,
-    githubUrl,
     bio,
-    profilePicture
+    username,
+    githubUsername,
+    profilePicture,
+    mobile
   ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, username, githubUrl, bio, profilePicture);
+    await updateProfile(
+      userId,
+      firstName,
+      lastName,
+      bio,
+      username,
+      githubUsername,
+      profilePicture,
+      mobile
+    );
 
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
-    navigate('/');
+    navigate('/'); // Comment this out to test update on the same user until it works
+  };
+
+  const handleGetUserById = async (id) => {
+    if (id == null) {
+      const { userId } = jwt_decode(token);
+
+      return await getUserData(userId);
+    } else {
+      return await getUserData(id);
+    }
   };
 
   const value = {
@@ -99,7 +125,8 @@ const AuthProvider = ({ children }) => {
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
-    onCreateProfile: handleCreateProfile
+    onUpdateProfile: handleUpdateProfile,
+    onGetUser: handleGetUserById
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

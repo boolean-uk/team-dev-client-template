@@ -18,10 +18,10 @@ const TextInput = ({
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   useEffect(() => {
-    if (isRequired && value.length === 0) {
+    if (value == null && isRequired) {
       setError(`${label.slice(0, -1)} is required`);
     }
-  }, [isRequired]);
+  }, [isRequired, value]);
 
   const validateInput = (value, event) => {
     const regex = new RegExp(`^[${validChars}]+$`);

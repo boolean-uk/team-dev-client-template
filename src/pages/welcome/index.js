@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
@@ -8,7 +8,7 @@ import StepTwo from './stepTwo';
 import StepThree from './stepThree';
 
 const Welcome = () => {
-  const { onCreateProfile, userCredentials } = useAuth();
+  const { onUpdateProfile, onGetUser, userCredentials } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
@@ -26,6 +26,32 @@ const Welcome = () => {
     startDate: 'January 2023',
     endDate: 'June 2023'
   });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await onGetUser();
+        console.log(userData);
+        // Set the profile to the user data given.
+        setProfile((prevProfile) => ({
+          ...prevProfile,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          username: userData.username,
+          githubUsername: userData.githubUsername,
+          bio: userData.bio,
+          profilePicture: userData.profilePicture,
+          mobile: userData.mobile,
+          role: userData.role,
+          specialism: userData.specialism
+        }));
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -86,13 +112,14 @@ const Welcome = () => {
 
   const onComplete = () => {
     if (validate(0)) {
-      onCreateProfile(
+      onUpdateProfile(
         profile.firstName,
         profile.lastName,
+        profile.bio,
         profile.username,
         profile.githubUsername,
-        profile.bio,
-        profile.profilePicture
+        profile.profilePicture,
+        profile.mobile
       );
     }
   };
