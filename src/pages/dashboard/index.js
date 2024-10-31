@@ -23,9 +23,7 @@ const Dashboard = () => {
 
   const onSearch = (e) => {
     e.preventDefault();
-    if (searchVal.trim()) {
-      navigate(`/dashboard/search/${searchVal}`);
-    }
+    navigate(`/dashboard/search/${searchVal}`);
   };
 
   const { openModal, setModal } = useModal();
