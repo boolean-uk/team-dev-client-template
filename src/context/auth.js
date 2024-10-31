@@ -61,7 +61,13 @@ const AuthProvider = ({ children }) => {
     }
 
     setToken(res.data.token);
-    navigate('/verification', { state: { email: email, password: password } });
+    navigate('/verification', {
+      state: {
+        ...res.data.user,
+        email: email,
+        password: password
+      }
+    });
   };
 
   const handleLoggedInUserId = () => {
@@ -78,14 +84,42 @@ const AuthProvider = ({ children }) => {
     email,
     mobile,
     password,
-    photo
+    photo,
+    cohortId,
+    startDate,
+    endDate,
+    role,
+    specialism
   ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, userName, githubUrl, bio, photo, mobile);
-
     localStorage.setItem('token', token);
-    navigate('/');
+
+    const response = await createProfile(
+      userId,
+      firstName,
+      lastName,
+      userName,
+      githubUrl,
+      bio,
+      email,
+      mobile,
+      password,
+      photo,
+      cohortId,
+      startDate,
+      endDate,
+      role,
+      specialism
+    );
+    if (response.status === 'success') {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+      return 'success';
+    } else {
+      return 'fail';
+    }
   };
 
   const value = {

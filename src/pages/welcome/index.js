@@ -7,22 +7,30 @@ import './style.css';
 import StepThree from './stepThree';
 import StepFour from './stepFour';
 import { useLocation } from 'react-router-dom';
+import NotificationPopup from '../../components/notificationPopup';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
   const location = useLocation();
   const data = location.state;
 
+  const [showSuccess, setShowSucess] = useState(false);
+
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
-    githubUsername: '',
+    githubUrl: '',
     email: data.email,
     mobile: '',
     password: data.password,
     bio: '',
     userName: '',
-    photo: ''
+    photo: '',
+    cohortId: data.cohort_id,
+    endDate: data.endDate,
+    startDate: data.startDate,
+    role: data.role,
+    specialism: data.specialism
   });
 
   const onPhotoChange = (photoData) => {
@@ -41,18 +49,30 @@ const Welcome = () => {
     });
   };
 
-  const onComplete = () => {
-    onCreateProfile(
+  const onComplete = async () => {
+    const res = await onCreateProfile(
       profile.firstName,
       profile.lastName,
       profile.userName,
-      profile.githubUsername,
+      profile.githubUrl,
       profile.bio,
       profile.email,
       profile.mobile,
       profile.password,
-      profile.photo
+      profile.photo,
+      profile.cohortId,
+      profile.startDate,
+      profile.endDate,
+      profile.role,
+      profile.specialism
     );
+    if (res === 'success') {
+      setShowSucess(true);
+      const timer = setTimeout(() => {
+        setShowSucess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
   };
 
   return (
@@ -68,6 +88,8 @@ const Welcome = () => {
         <StepThree data={profile} setData={onChange} />
         <StepFour data={profile} setData={onChange} />
       </Stepper>
+
+      {showSuccess && <NotificationPopup message="Profile created" actionText={'Edit'} />}
     </main>
   );
 };
