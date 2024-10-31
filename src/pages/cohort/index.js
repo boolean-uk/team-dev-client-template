@@ -18,7 +18,7 @@ const Cohort = () => {
       const allCohorts = await getCohorts();
       const cohortToAdd = [];
       const { userId } = jwt_decode(token);
-      // Divert the teacher and students into separate arrays for easy access. Later, this would be not using cohort[0] but depending on which cohort is selected.
+      // Map out the cohorts to check if the user is in the cohort
       allCohorts.forEach((cohort) => {
         if (cohort.users.some((user) => user.id === userId)) {
           cohortToAdd.push(cohort);
@@ -52,10 +52,6 @@ const Cohort = () => {
     setTeachers(selectedCohort.users.filter((user) => user.role === 'TEACHER'));
   };
 
-  /* This is the main component for the cohort page. 
-    For future use, there will be a dropdown to select the cohort depending on the current user that is logged in.
-    As of now, the data is showing the first cohort in the database. Does not matter who is logged in.
-  */
   return (
     <>
       <main>
@@ -68,7 +64,7 @@ const Cohort = () => {
               <p>&lt; &gt;</p>
             </div>
             <div className="post-user-name">
-              {/* Need to only fetch the cohort from current user that is logged in. Then maybe create a drop down to see a specific cohort. */}
+              {/* This is a drop down menu so the user can change which cohort to view. */}
               <div className="cohort-dropdown">
                 <select id="cohort-select" onChange={handleCohortChange} className="cohort-select">
                   {cohort.map((c) => (
