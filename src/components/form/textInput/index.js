@@ -18,8 +18,14 @@ const TextInput = ({
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   useEffect(() => {
-    if (value == null && isRequired) {
-      setError(`${label.slice(0, -1)} is required`);
+    if (isRequired) {
+      if (value != null) {
+        if (value.length === 0) {
+          setError(`${label.slice(0, -1)} is required`);
+        } else {
+          setError('');
+        }
+      }
     }
   }, [isRequired, value]);
 

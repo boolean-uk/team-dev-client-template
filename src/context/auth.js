@@ -88,24 +88,37 @@ const AuthProvider = ({ children }) => {
     username,
     githubUsername,
     profilePicture,
-    mobile
+    mobile,
+    id
   ) => {
-    const { userId } = jwt_decode(token);
-
-    await updateProfile(
-      userId,
-      firstName,
-      lastName,
-      bio,
-      username,
-      githubUsername,
-      profilePicture,
-      mobile
-    );
+    if (id == null) {
+      const { userId } = jwt_decode(token);
+      await updateProfile(
+        userId,
+        firstName,
+        lastName,
+        bio,
+        username,
+        githubUsername,
+        profilePicture,
+        mobile
+      );
+    } else {
+      await updateProfile(
+        id,
+        firstName,
+        lastName,
+        bio,
+        username,
+        githubUsername,
+        profilePicture,
+        mobile
+      );
+    }
 
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
-    navigate('/'); // Comment this out to test update on the same user until it works
+    navigate('/');
   };
 
   const handleGetUserById = async (id) => {
