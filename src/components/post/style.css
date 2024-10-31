@@ -29,6 +29,14 @@
   background: #f0f5fa;
 }
 
+.edit-icon:hover {
+  background-color: #3068a5;
+}
+
+.edit-icon:active {
+  background-color: #052e5a;
+}
+
 .edit-icon p {
   text-align: center;
   font-size: 20px;
@@ -40,11 +48,106 @@
   padding: 20px 10px;
 }
 
-.post-interactions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
 .post-interactions-container p {
   text-align: right;
 }
+
+#comment-field {
+  background-color: rgb(219, 208, 192);
+  display: flex;
+  padding-left: 100px;
+
+
+  border-top: 1px solid #ccc; 
+}
+
+.comment-section {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #ccc; 
+}
+ 
+.comment-section .user-name {
+  margin-right: 10px; 
+}
+ 
+.comment-section .comment-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+ 
+.comment-section .comment-input input {
+  width: 100%;
+  padding: 8px;
+  margin-right: 10px;
+  background-color: #f0f0f0; 
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+ 
+.comment-section .comment-input button {
+  padding: 8px 16px;
+}
+
+.user-name .comment-section {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #ccc; 
+}
+
+#like-button {
+  background-color: transparent;
+  border: none;
+  color: #3068a5;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+ 
+#like-button.liked {
+  color: #10c756; 
+  font-weight: bold;
+}
+ 
+#like-button:hover {
+  text-decoration: underline;
+}
+ 
+.post-interactions {
+  display: flex;
+  align-items: center;
+}
+ 
+.post-interactions button {
+  margin-right: 10px;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.comment-item .profile-circle {
+  margin-right: 10px;
+}
+
+.comment-box {
+  background-color: #f0f0f0; 
+  padding: 10px;
+  border-radius: 8px;
+  flex: 1; 
+}
+ 
+.comment-name {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+ 
+.comment-text {
+  margin: 0;
+}
+ 
