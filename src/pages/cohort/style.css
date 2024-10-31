@@ -31,3 +31,11 @@
     padding: 0px 0px !important;
     margin-top: 5px;
 }
+
+.loading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
