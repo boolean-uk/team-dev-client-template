@@ -16,22 +16,21 @@ const Profile = () => {
   let user = {};
   const setUser = () => {
     get(`users/${id}`).then((response) => {
-      console.log(response); // Debug
       user = response.data.user;
+      console.log(user);
       setProfile({ ...profile, ...user });
-      console.log(profile); // Debug
     });
   };
   // setUser();
   const [profile, setProfile] = useState({
     firstName: 'A',
     lastName: 'A',
-    githubUsername: '',
+    githubUrl: '',
     email: '',
     mobile: '',
     password: '',
     bio: '',
-    userName: '',
+    username: '',
     photo: ''
   });
 
@@ -59,7 +58,7 @@ const Profile = () => {
     onCreateProfile(
       profile.firstName,
       profile.lastName,
-      profile.userName,
+      profile.username,
       profile.githubUsername,
       profile.bio,
       profile.email,
