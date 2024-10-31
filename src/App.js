@@ -22,7 +22,6 @@ const App = () => {
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
 
             <Route
               index
