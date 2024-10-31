@@ -2,7 +2,7 @@ import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
 import { useLocation } from 'react-router-dom';
 
-const StepTwo = ({ data, setData, validating }) => {
+const StepTwo = ({ data, setData, validating, setNotification }) => {
   const location = useLocation();
   const focus = location.pathname === '/welcome';
   return (
@@ -12,14 +12,16 @@ const StepTwo = ({ data, setData, validating }) => {
       </div>
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
-          <TextInput
-            onChange={setData}
-            type="readOnly"
-            placeholder="Email"
-            value={data.email}
-            name="email"
-            label={'Email*'}
-          />
+          <div onClick={setNotification}>
+            <TextInput
+              onChange={setData}
+              type="readOnly"
+              placeholder="Email"
+              value={data.email}
+              name="email"
+              label={'Email*'}
+            />
+          </div>
           {validating
             ? !data.email && <p className="welcome-form-error">Please enter an email</p>
             : null}
@@ -35,14 +37,16 @@ const StepTwo = ({ data, setData, validating }) => {
           {validating
             ? !data.mobile && <p className="welcome-form-error">Please enter a mobile number</p>
             : null}
-          <TextInput
-            onChange={setData}
-            type="passwordReadOnly"
-            placeholder="Password"
-            value={data.password}
-            name="password"
-            label={'Password*'}
-          />
+          <div onClick={setNotification}>
+            <TextInput
+              onChange={setData}
+              type="passwordReadOnly"
+              placeholder="Password"
+              value={data.password}
+              name="password"
+              label={'Password*'}
+            />
+          </div>
           {validating
             ? !data.password && <p className="welcome-form-error">Please enter a password</p>
             : null}

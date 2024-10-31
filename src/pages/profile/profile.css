@@ -46,3 +46,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.grid-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.grid-buttons button {
+    margin-right: 10px;
+}
