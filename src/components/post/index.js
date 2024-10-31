@@ -6,6 +6,7 @@ import DeletePostModal from '../deletePostModal';
 import EditDecisionModal from '../editDecisionModal';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
+import NotificationPopup from '../notificationPopup';
 import './style.css';
 
 const Post = ({
@@ -21,9 +22,10 @@ const Post = ({
   const { openModal, setModal } = useModal();
   const [menuOptionOpen, setMenuOptionOpen] = useState(false);
   const userInitials = name.match(/\b(\w)/g);
+  const [notification, setNotification] = useState(null);
   const modalsMap = {
     'Edit post': <EditPostModal postId={postId} />,
-    'Delete post?': <DeletePostModal postId={postId} />
+    'Delete post?': <DeletePostModal postId={postId} setNotification={setNotification} />
   };
   const canEditPost = isLoggedIn || userRole === 'TEACHER';
 
@@ -38,44 +40,55 @@ const Post = ({
   };
 
   return (
-    <Card>
-      <article className="post">
-        <section className="post-details">
-          <ProfileCircle initials={userInitials} />
+    <>
+      <Card>
+        <article className="post">
+          <section className="post-details">
+            <ProfileCircle initials={userInitials} />
 
-          <div className="post-user-name">
-            <p>{name}</p>
-            <small>{date}</small>
-          </div>
-          {canEditPost && (
-            <div className="edit-icon" onClick={openMenuOptions}>
-              <p>...</p>
-              {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
+            <div className="post-user-name">
+              <p>{name}</p>
+              <small>{date}</small>
             </div>
+            {canEditPost && (
+              <div className="edit-icon" onClick={openMenuOptions}>
+                <p>...</p>
+                {menuOptionOpen && <EditDecisionModal onClick={handleDecisionClick} />}
+              </div>
+            )}
+          </section>
+          <section className="post-content">
+            <p>{content}</p>
+          </section>
+
+          <section
+            className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
+          >
+            <div className="post-interactions">
+              <div>Like</div>
+              <div>Comment</div>
+            </div>
+
+            <p>{!likes && 'Be the first to like this'}</p>
+          </section>
+
+          <section>
+            {comments.map((comment) => (
+              <Comment key={comment.id} name={comment.name} content={comment.content} />
+            ))}
+          </section>
+        </article>
+        <div className="notification-container">
+          {notification && (
+            <NotificationPopup
+              actionText="Undo"
+              message={notification}
+              className="delete-notification"
+            />
           )}
-        </section>
-        <section className="post-content">
-          <p>{content}</p>
-        </section>
-
-        <section
-          className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
-        >
-          <div className="post-interactions">
-            <div>Like</div>
-            <div>Comment</div>
-          </div>
-
-          <p>{!likes && 'Be the first to like this'}</p>
-        </section>
-
-        <section>
-          {comments.map((comment) => (
-            <Comment key={comment.id} name={comment.name} content={comment.content} />
-          ))}
-        </section>
-      </article>
-    </Card>
+        </div>
+      </Card>
+    </>
   );
 };
 
