@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import ProfileCircle from '../profileCircle';
 
+import './styles.css';
+
 const Avatar = ({ user }) => {
   const [userInitials, setUserInitials] = useState('');
   const [name, setName] = useState('');
