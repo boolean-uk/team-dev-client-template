@@ -3,7 +3,8 @@
 .info {
   background-color: white;
   margin: 20px auto; /* Centers the info box horizontally */
-  width: 90vw; /* 90% of the viewport width */
+  margin-left: 20px;
+  width: 89vw; /* 90% of the viewport width */
   height: 71vh; /* 90% of the viewport height */
   box-sizing: border-box; /* Includes padding and border in the total width and height */
   padding: 20px; /* Adds internal padding */
