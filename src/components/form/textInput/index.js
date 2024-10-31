@@ -113,7 +113,7 @@ const TextInput = ({
           value={value}
           onChange={handleChange}
           pattern={emailPattern}
-          className={icon && 'input-has-icon'}
+          className={(error && 'input-error') || (icon && 'input-has-icon')}
         />
         {icon && <span className="input-icon">{icon}</span>}
         {error && <span className="error-message">{error}</span>}
