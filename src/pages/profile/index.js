@@ -60,24 +60,40 @@ const ProfilePage = () => {
   };
 
   const handleSave = async () => {
-    // Implement the API call to save the updated data
-    // create the data from formdata
-    console.log('Save form:', formData);
+    const changeData = {};
+    const excludedFields = ['id', 'password']; // Fields to exclude
 
-    // changed data from profile to form:
-    const changeData = {
-    }
-    
-  
-    patch(`users/${profileUser.id}`, formData)
-      .then((response) => {
-        console.log('response', response);
-      })
-      .catch((error) => {
+    Object.keys(formData).forEach((key) => {
+      if (!excludedFields.includes(key) && formData[key] !== profileUser[key]) {
+        changeData[key] = formData[key];
+      }
+    });
+
+    if (Object.keys(changeData).length > 0) {
+      try {
+        const response = await patch(`users/${profileUser.id}`, changeData);
+        console.log('Response:', response);
+
+        // Update profileUser and formData with the new data
+        setProfileUser((prevData) => ({
+          ...prevData,
+          ...changeData
+        }));
+
+        setFormData((prevData) => ({
+          ...prevData,
+          ...changeData
+        }));
+
+        alert('Profile updated successfully!');
+      } catch (error) {
         console.error('Error saving user data:', error);
-      });
-    // Example PATCH request:
-    // await patch(`users/${profileUser.id}`, formData);
+        alert('Failed to update profile. Please try again.');
+      }
+    } else {
+      console.log('No changes detected.');
+      alert('No changes to save.');
+    }
   };
 
   return (
