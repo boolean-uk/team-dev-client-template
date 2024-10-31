@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD:src/components/cohortList/index.js
-import { getUsers } from '../../service/apiClient';
-import UserListItem from '../userListComponents/userListItem';
-=======
 import { getUsers } from '../../../service/apiClient';
 import UserListItem from '../../listComponents/userListItem';
->>>>>>> main:src/components/lists/cohortList/index.js
+
 import './style.css';
 
 const CohortList = () => {
