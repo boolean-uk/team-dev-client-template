@@ -10,6 +10,7 @@ import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
 import UserProfile from './pages/profilePage';
 import Cohort from './pages/cohort';
+import Search from './pages/search';
 
 const App = () => {
   return (
@@ -21,6 +22,15 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
+
+            <Route
+              path="dashboard/search/:searchQuery"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
 
             <Route
               index

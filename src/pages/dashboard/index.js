@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -13,15 +14,18 @@ import './style.css';
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const { role } = useAuth();
+  const navigate = useNavigate(); // Added this line
 
   const onChange = (e) => {
     const value = e.target.value;
     setSearchVal(value);
   };
 
-  const onSubmit = (e) => {
+  const onSearch = (e) => {
     e.preventDefault();
-    console.log(searchVal);
+    if (searchVal.trim()) {
+      navigate(`/dashboard/search/${searchVal}`);
+    }
   };
 
   const { openModal, setModal } = useModal();
@@ -48,7 +52,7 @@ const Dashboard = () => {
 
       <aside>
         <Card>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSearch}>
             <TextInput
               icon={<SearchIcon />}
               value={searchVal}
