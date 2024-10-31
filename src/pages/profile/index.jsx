@@ -14,16 +14,18 @@ const Profile = () => {
   // const { onCreateProfile } = useAuth();
   const { id } = useParams();
   let user = {};
-  console.log(id); // Debug
   const setUser = () => {
     get(`users/${id}`).then((response) => {
+      console.log(response); // Debug
       user = response.data.user;
+      setProfile({ ...profile, ...user });
+      console.log(profile); // Debug
     });
   };
   // setUser();
   const [profile, setProfile] = useState({
-    firstName: 'Daniel',
-    lastName: 'Roli',
+    firstName: 'A',
+    lastName: 'A',
     githubUsername: '',
     email: '',
     mobile: '',
@@ -35,7 +37,7 @@ const Profile = () => {
 
   useEffect(() => {
     setUser();
-  }, [user]);
+  }, []);
 
   const onPhotoChange = (photoData) => {
     setProfile({
